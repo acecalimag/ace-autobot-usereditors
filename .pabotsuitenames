@@ -1,0 +1,6 @@
+datasources:bfeead75859fcedd8dab2d3f677dee994626077e
+commandlineoptions:5f43b5a375b06c25943db908f072b8d561f93abe
+suitesfrom:no-suites-from-option
+file:775020d7a867af200365be4868222e5f9b470c60
+--test Autobot-Usereditors.06CallRestrictions.TestSuites.CallRestrictionsTests.CallRestrictions00010 - Verify webelements are visibile in Call Restrictions page
+--test Autobot-Usereditors.06CallRestrictions.TestSuites.CallRestrictionsTests.CallRestrictions00020 - Verify sorting columns feature is working in Call Restrictions

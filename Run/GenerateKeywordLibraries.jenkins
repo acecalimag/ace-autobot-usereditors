@@ -1,0 +1,153 @@
+pipeline {
+
+    agent {
+        label "master"
+    }
+
+    options {
+        skipDefaultCheckout()
+    }
+
+    environment {
+        MAIN_DIR = "var/www/html/aut/rf/keywords/usereditor"
+        STASH_NAME = "stash_name"
+    }
+
+    stages {
+
+         stage("Clean"){
+            when {
+                expression {
+                    return params.Clean
+                }
+            }
+            steps {
+                sh "rm -rf /${MAIN_DIR}/*"
+            }
+        }
+
+        stage("Checkout to gee") {
+            agent {
+                label "lin-gee"
+            }
+
+            steps {
+                script {
+                    checkout scm
+               }
+            }
+        }
+
+        stage("Generate keywords"){
+
+            agent {
+                label "lin-gee"
+            }
+
+            steps {
+                script {
+                    def RESOURCE_FILES = [
+                            [
+                                title: 'Common Commands',
+                                file: './Shared/Keywords/Commands.robot',
+                                output: 'CommonCommands.html'
+                            ],
+                            [
+                                title: 'User Configuration',
+                                file: './01UserConfiguration/Resources/Keywords/UiPages/UserConfigurationPage.robot',
+                                output: 'UserConfiguration.html'
+                            ],
+                            [
+                                title: 'Aux Configuration',
+                                file: './02AuxConfiguration/Resources/Keywords/UiPages/AuxConfigurationKeywords.robot',
+                                output: 'AuxConfiguration.html'
+                            ],
+                            [
+                                title: 'Restaurant Configuration',
+                                file: './03RestaurantConfiguration/Resources/Keywords/UiPages/RestaurantConfigurationKeywords.robot',
+                                output: 'RestaurantConfiguration.html'
+                            ],
+                            [
+                                title: 'Auto Assign Configuration',
+                                file: './04AutoAssignConfiguration/Resources/Keywords/UiPages/AutoAssignKeywords.robot',
+                                output: 'AutoAssignConfiguration.html'
+                            ],
+                            [
+                                title: 'Agent Ranking',
+                                file: './05AgentRanking/Resources/Keywords/UiPages/AgentRankingKeywords.robot',
+                                output: 'AgentRanking.html'
+                            ],
+                            [
+                                title: 'Training Groups',
+                                file: './06TrainingGroups/Resources/Keywords/UiPages/TrainingGroupsPage.robot',
+                                output: 'TrainingGroups.html'
+                            ],
+                            [
+                                title: 'Restaurant Group Name',
+                                file: './07RestaurantGroupName/Resources/Keywords/UiPages/RestaurantGroupNamePage.robot',
+                                output: 'RestaurantGroupName.html'
+                            ],
+                            [
+                                title: 'Team Assignment',
+                                file: './08TeamAssignment/Resources/Keywords/UiPages/TeamAssignmentPage.robot',
+                                output: 'TeamAssignment.html'
+                            ],
+                            [
+                                title: 'User Teams',
+                                file: './09UserTeams/Resources/Keywords/UiPages/UserTeamsPage.robot',
+                                output: 'UserTeams.html'
+                            ],
+
+
+
+                        ];
+
+                    sh "pwd"
+                    sh "rm -rf ../${MAIN_DIR}/*"
+
+                    for(resource in RESOURCE_FILES){
+                        sh "libdoc --name  '${resource.title}' ${resource.file}  ../${MAIN_DIR}/${resource.output}"
+                    }
+                }
+            }
+        }
+
+        stage("Update homepage"){
+
+            agent {
+                label "lin-gee"
+            }
+
+            steps {
+                script {
+                    sh "cp ./KeywordsLibrariesIndex.html ../${MAIN_DIR}/index.html"
+                }
+            }
+        }
+
+        stage("Stash files"){
+            agent {
+                label "lin-gee"
+            }
+
+            steps {
+                script {
+                    dir(".."){
+                        // doesn't work when '..' is in the 'includes'
+                        stash name: "${STASH_NAME}", includes: "${MAIN_DIR}/**/*", allowEmpty: true
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            script {
+                dir("/"){
+                    unstash "${STASH_NAME}"
+                }
+            }        
+        }
+    }
+}

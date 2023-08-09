@@ -1,0 +1,196 @@
+pipeline {
+
+    agent {
+        label "master"
+    }
+
+    environment {
+        JAVA_HOME = "${env.NODE_JAVA_HOME}"
+        TEST_RESULT = "SUCCESS"
+        BATCH_COUNT = 3
+        REPORTS_MAIN_DIR_NAME = "usereditor"
+        NODE_WORKSPACE = "/home/wonders/jenkins/workspace/Run-User-Editors-Tests/"
+        RERUNS = 2
+    }
+
+    stages {
+        stage("Clear existing reports") {
+            when {
+                expression {
+                    return params.Clean
+                }
+            }
+            steps {
+                sh "rm -rf /var/www/html/aut/${REPORTS_MAIN_DIR_NAME}"
+            }
+        }
+
+        stage("Setup Test Machine"){
+            steps {
+                script {
+                    def groups = Test_Group.split(",")
+                    def Group_Tags
+
+                        for(xx = 0; xx < groups.size(); xx++){
+                            if(Group_Tags == null) {
+                                Group_Tags = groups[xx].replace(' ', '-').toLowerCase()
+                            }else{
+                                Group_Tags = Group_Tags + 'OR' + groups[xx].replace(' ', '-').toLowerCase()
+                            }
+                        }
+                        env.TestGroup = Group_Tags
+
+                    if(params.Tags == null || params.Tags.isEmpty()){
+                        echo 'params.Tags is empty()'
+                        echo Group_Tags
+                        env.TAGS_GEE = "testType:daily_gee and (" + Group_Tags + ")";
+                    } else {
+                        env.TAGS_GEE = "testType:daily_gee and (" + params.Tags + ")";
+                    }
+
+                }
+            }
+        }
+
+        stage("Setup Tags parameters") {
+             steps {
+
+                 script {
+                    env.Tags = params.Tags;
+                    env.Test_Type = params.Test_Type;
+                    env.Test_Group = params.Test_Group;
+                    env.Run_Type = params.Run_Type;
+                 }
+             }
+        }
+
+        stage("Choosing run type"){
+            steps{
+                script{
+                    def Run_Type
+
+
+                        if(params.Run_Type == 'robot'){
+                            Run_Type = "robot";
+                            echo Run_Type
+                        } else if(params.Run_Type == 'pabot-suite') {
+                            Run_Type = "pabot --verbose";
+                            echo Run_Type
+                        } else if (params.Run_Type == 'pabot-tc') {
+                            Run_Type = "pabot --verbose --testlevelsplit";
+                            echo Run_Type
+                        }
+
+                    env.Run_Type = Run_Type
+                    }
+                }
+            }
+
+        stage("Start Tests") {
+
+            agent {
+                label "lin-gee"
+            }
+
+            environment {
+                JAVA_HOME = "${env.NODE_JAVA_HOME}"
+                BATCH_TARGET_DIR_NAME = "regression"
+                BATCH_NUMBER = 1
+            }
+
+            steps {
+                script {
+                    dir("${NODE_WORKSPACE}") {
+                        try {
+                            sh "rm -rf ../${BATCH_TARGET_DIR_NAME}"
+
+                            def exitCode;
+
+                            if(params.Tags == null || params.Tags.isEmpty())
+                            {
+                                exitCode = sh script: "${Run_Type} -d ../${BATCH_TARGET_DIR_NAME}/var/www/html/aut/${REPORTS_MAIN_DIR_NAME}/ui/report/latest -v browser:headlesschrome  -v webdriver.chrome.driver:chromedriver -i ${TestGroup} . ", returnStatus: true
+                            }
+                            else
+                            {
+                                exitCode = sh script: "${Run_Type} -d ../${BATCH_TARGET_DIR_NAME}/var/www/html/aut/${REPORTS_MAIN_DIR_NAME}/ui/report/latest -v browser:headlesschrome  -v webdriver.chrome.driver:chromedriver -i ${Tags} .", returnStatus: true
+                            }
+                            if (exitCode != 0) {
+                                TEST_RESULT = "FAILURE"
+                                throw new Exception("exitCode " + exitCode);
+                            }
+
+                        } catch (Throwable e) {
+                            throw e
+                        }
+                    }
+                }
+            }
+
+            post {
+                always {
+                    script {
+                        dir("../${BATCH_TARGET_DIR_NAME}") {
+                            echo "stashing batch-${BATCH_NUMBER}"
+                            stash name: "batch-${BATCH_NUMBER}", includes: "var/www/html/aut/${REPORTS_MAIN_DIR_NAME}/ui/report/latest/**/*", allowEmpty: true
+                        }
+                    }
+                }
+            }
+        }
+
+    }//stages
+
+
+    post {
+        always {
+            script {
+
+                String[] batchNames = ["batch-1"];
+
+                for (String batchName in batchNames) {
+                    try {
+                        dir("/") {
+                            unstash batchName
+                        }
+                    } catch (Throwable e) {
+                        echo "error unstashing for " + batchName
+                        echo "error: " + e
+                        continue
+                    }
+                }
+
+                if (params.Override_Test_Result_With != null && !params.Override_Test_Result_With.isEmpty()) {
+                    TEST_RESULT = params.Override_Test_Result_With;
+                }
+
+            }
+
+            build job: "Auto-User-Editor-Tests-Report",
+
+                     parameters: [
+                             [$class: "LabelParameterValue", name: "TARGET_NODE", label: "master"],
+                             string(name: "TARGET_OUTPUT_DIRECTORY", value: "/var/www/html/aut/${REPORTS_MAIN_DIR_NAME}/ui/report/latest/"),
+                             string(name: "REPORT_URL", value: "http://52.20.228.188/aut/${REPORTS_MAIN_DIR_NAME}/ui/report/latest/"),
+                             string(name: "EMAIL_REPORT_TITLE", value: "Wonders-User-Editor-Tests [QA]"),
+                             string(name: "BUILD_RESULT", value: TEST_RESULT),
+                             string(name: "EMAIL_RECIPIENTS", value: "${Email_Recipients}"),
+                             string(name: "LOGNAME", value: "auto-user-editor-test-report.log"),
+                             string(name: "CUSTOM_MESSAGE", value: "${CUSTOM_MESSAGE} Please click this link for the actual report: http://52.20.228.188/aut/${REPORTS_MAIN_DIR_NAME}/ui/report/latest/report.html")
+                             //string(name: "CUSTOM_MESSAGE", value: "${CUSTOM_MESSAGE} href="http://52.20.228.188/aut/${REPORTS_MAIN_DIR_NAME}/ui/report/latest/report.html" View full report")
+
+                     ],
+                     wait: true;
+
+            //build job: "Update-User-Editor-Task-Libraries",
+            //parameters: [
+            //[$class: "LabelParameterValue", name: "TARGET_NODE", label: "master"]
+            //],
+            //wait: true;
+        }
+
+
+
+
+    }
+
+}
