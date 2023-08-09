@@ -28,25 +28,46 @@ Team Assignment
     Log Dictionary                       ${result}
     Log To Console                       ${result}
 
+
     # Comparison between UI and DB
     Should Be Equal As Strings           ${team_details['Team Name']}        ${result['Team Name']}
     Should Be Equal As Strings           ${team_details['Team Lead']}        ${result['Team Lead']}
     Should Be Equal As Strings           ${team_details['Team Location']}    ${result['Team Location']}
 
-    
-    # ${team_name}                         Set Variable                        ${result['Team Name']} Roster
+
+    # Verify completeness of fields, labels, and buttons for Team Assignment Editor Page
+    ${result_uid}                        Get Agent Uid                       agent_name=kleo4 test
+    Select Agent                         agent_uid=${result_uid}
+                             
     ${team_editor}                       Check Team Editor                   exp_falbl=Free Agents             exp_trosterlbl=${result['Team Name']} Roster                       exp_fafltr=Filter Free Agents        exp_rosfltr=Filter Rostered Agents
     Log Dictionary                       ${team_editor}
     Log To Console                       ${team_editor}
+    
+    Unselect Agent                       agent_uid=${result_uid}
+    Sleep                                10s
 
     # Add Agent Team Assignment
     ${result_uid}                        Get Agent Uid                       agent_name=kleo4 test
-    Assign Agent                         agent_name=kleo4 test               agent_uid=${result_uid}
+    Select Agent                         agent_uid=${result_uid}
+    Assign Agent                         agent_uid=${result_uid}
+    Sleep    5s
 
 
     # Remove Agent Team Assignment
     ${result_uid}                        Get Agent Uid                       agent_name=kleo4 test
+    Unselect Agent                       agent_uid=${result_uid}
+    Sleep    5s
     Remove Agent                         agent_name=kleo4 test               agent_uid=${result_uid}
+
+
+    # # Add Agent Team Assignment by Input
+    # ${result_uid}                        Get Agent Uid                       agent_name=kleo4 test
+    # Assign Agent Input                   agent_name=kleo4 test               agent_uid=${result_uid}
+
+
+    # # Remove Agent Team Assignment
+    # ${result_uid}                        Get Agent Uid                       agent_name=kleo4 test
+    # Remove Agent                         agent_name=kleo4 test               agent_uid=${result_uid}
 
 
     # Sleep    10

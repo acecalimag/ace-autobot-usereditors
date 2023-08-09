@@ -3,30 +3,9 @@ from SeleniumLibrary import SeleniumLibrary
 from robot.api.deco import keyword
 from robot.api import logger
 from robot.api import TestSuite
-from asserts import assert_equal
+import  time
 
 from TeamAssignmentLibrary.locators import teamlocators
-
-
-# class TeamAssignmentEditor:
-    
-#     def __init__(self, ctx: SeleniumLibrary) -> None:
-#         self.__ctx = ctx
-
-#     @keyword 
-#     def check_team_editor(self):
-#         logger.info(f"Check the Team Assignment Editor page if fields, labels, and buttons are present")
-        
-#         # Create a dictionary to store the results of element checks
-#         team_assignment_content = {}
-        
-#         # Check if the FREE AGENTS label is present using the provided XPath locator
-#         if self.__ctx.driver.find_elements("xpath", teamlocators.FREEAGENTSLBL):
-#             logger.info("FREE AGENTS label is showing")
-#             team_assignment_content['Free Agents Label'] = 'Showing'
-#         else:
-#             logger.info("FREE AGENTS label is not showing")
-#             team_assignment_content['Free Agents Label'] = 'Not Showing'
 
 
 class TeamAssignmentEditor:
@@ -35,9 +14,37 @@ class TeamAssignmentEditor:
         self.__ctx = ctx
 
     @keyword 
+    def select_agent(self, agent_uid: str):
+        self.__ctx.wait_until_element_is_visible(locator=teamlocators.FREEAGENTSLIST)
+
+        option_locator = self.get_option_value(agent_uid)
+        self.__ctx.click_element(locator=option_locator)
+        self.__ctx.click_button(locator=teamlocators.MOVESLCBTN)
+
+    def get_option_value(self, agent_uid):
+        option_locator = f"xpath://option[@value='{agent_uid}']"
+        self.__ctx.find_element(option_locator)
+        return option_locator
+    
+
+    @keyword 
+    def unselect_agent(self, agent_uid: str):
+        self.__ctx.wait_until_element_is_visible(locator=teamlocators.TEAMROSTERLIST)
+
+        option_locator = self.get_option_value(agent_uid)
+        self.__ctx.click_element(locator=option_locator)
+        self.__ctx.click_button(locator=teamlocators.REMOVEALLBTN)
+
+    def get_option_value(self, agent_uid):
+        option_locator = f"xpath://option[@value='{agent_uid}']"
+        self.__ctx.find_element(option_locator)
+        return option_locator
+
+
+    @keyword 
     def check_team_editor(self, exp_falbl: str, exp_trosterlbl: str, exp_fafltr: str, exp_rosfltr: str):
         logger.info(f"Check the Team Assignment Editor page if fields, labels, and buttons are present")
-        
+
         team_assignment_content = {}
         
         elements = self.__ctx.driver.find_elements("xpath", teamlocators.FREEAGENTSLBL)
@@ -159,8 +166,7 @@ class TeamAssignmentEditor:
             logger.info("FREE AGENT LIST is not showing")
             team_assignment_content['FREE AGENT LIST'] = 'Not Showing'
 
-
-
+        
         if self.__ctx.driver.find_elements("xpath", teamlocators.TEAMROSTERLIST):
             logger.info("TEAM AGENT LIST is showing")
             team_assignment_content['TEAM AGENT LIST'] = 'Showing'
@@ -169,15 +175,44 @@ class TeamAssignmentEditor:
             team_assignment_content['TEAM AGENT LIST'] = 'Not Showing'
 
 
-        if self.__ctx.driver.find_elements("xpath", teamlocators.SAVEBTN):
-            logger.info("SAVE BUTTON is showing")
-            team_assignment_content['SAVE BUTTON LIST'] = 'Showing'
-        else:
-            logger.info("SAVE BUTTON LIST is not showing")
-            team_assignment_content['SAVE BUTTON LIST'] = 'Not Showing'
+        # if self.__ctx.driver.find_elements("xpath", teamlocators.SAVEBTN):
+        #     logger.info("SAVE BUTTON is showing")
+        #     team_assignment_content['SAVE BUTTON LIST'] = 'Showing'
+        # else:
+        #     logger.info("SAVE BUTTON LIST is not showing")
+        #     team_assignment_content['SAVE BUTTON LIST'] = 'Not Showing'
 
 
+        try:
+            self.__ctx.scroll_element_into_view(teamlocators.SAVEBTN)
+            if self.__ctx.find_element(teamlocators.SAVEBTN):
+                logger.info("SAVE BUTTON is showing")
+                team_assignment_content['SAVE BUTTON LIST'] = 'Showing'
+            else:
+                logger.info("SAVE BUTTON is not showing")
+                team_assignment_content['SAVE BUTTON LIST'] = 'Not Showing'
+        except Exception as e:
+            logger.error("An error occurred:", str(e))
+            team_assignment_content['SAVE BUTTON LIST'] = 'Error'
+        
+        time.sleep(5)
 
+
+        try:
+            self.__ctx.scroll_element_into_view(teamlocators.CANCELBTN)
+            if self.__ctx.find_elements(teamlocators.CANCELBTN):
+                logger.info("CANCEL BUTTON is showing")
+                team_assignment_content['CANCEL BUTTON LIST'] = 'Showing'
+            else:
+                logger.info("CANCEL BUTTON is not showing")
+                team_assignment_content['CANCEL BUTTON LIST'] = 'Not Showing'
+        except Exception as e:
+            logger.error("An error occurred:", str(e))
+            team_assignment_content['CANCEL BUTTON LIST'] = 'Error'
+        
+
+
+        return team_assignment_content
 
 
 
@@ -214,7 +249,6 @@ class TeamAssignmentEditor:
 
         
         # Return the dictionary containing the results of element checks
-        return team_assignment_content
 
 
 

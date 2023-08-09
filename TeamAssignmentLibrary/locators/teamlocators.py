@@ -20,4 +20,4 @@ FREEAGENTSLIST: str = "//select[@id='freeAgentsList']"
 TEAMROSTERLIST: str = "//select[@id='rosteredAgentsList']"
 
 SAVEBTN: str = "//button[@id='saveAgents']"
-
+CANCELBTN: str = "//button[@id='cancelAgents']"
