@@ -9,7 +9,7 @@ from TeamAssignmentLibrary.keywords.selectteam import SelectTeam
 from TeamAssignmentLibrary.keywords.teamdetails import TeamDetails
 from TeamAssignmentLibrary.keywords.teamassignmenteditor import TeamAssignmentEditor
 from TeamAssignmentLibrary.keywords.assignagenttoteam import AssignAgenttoTeam
-
+from TeamAssignmentLibrary.keywords.removeagenttoteam import RemoveAgenttoTeam
 
 
 @library(scope='GLOBAL')
@@ -24,8 +24,8 @@ class TeamAssignmentLibrary(DynamicCore):
             SelectTeam(ctx=ctx), 
             TeamDetails(ctx=ctx), 
             TeamAssignmentEditor(ctx=ctx),
-            AssignAgenttoTeam(ctx=ctx)
-            
+            AssignAgenttoTeam(ctx=ctx),
+            RemoveAgenttoTeam(ctx=ctx)
 
         ]
         DynamicCore.__init__(self,library_components=components)

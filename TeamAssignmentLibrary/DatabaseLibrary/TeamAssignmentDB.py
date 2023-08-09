@@ -14,7 +14,7 @@ class TeamAssignmentDB:
     @keyword
     def get_teamassignment_db(self, tname: str):
         """ TODO: Create a database query to retrieve the Team Assignment Details."""
-        query = "SELECT  ut.name as Team_Name, u.name as Team_Lead, ul.code as Team_Location FROM kjt.userteam AS ut JOIN kjt.user AS u ON ut.teamLead = u.uid JOIN kjt.userlocation AS ul ON ut.location = ul.lid WHERE ut.name = %s;"
+        query = "SELECT  ut.name as Team_Name, ut.utid as Team_ID, u.name as Team_Lead, ul.code as Team_Location FROM kjt.userteam AS ut JOIN kjt.user AS u ON ut.teamLead = u.uid JOIN kjt.userlocation AS ul ON ut.location = ul.lid WHERE ut.name = %s;"
         
     
         result = self.__db.execute(query, (tname,))
@@ -22,6 +22,7 @@ class TeamAssignmentDB:
             row = result[0]
             return {
                 'Team Name': row['Team_Name'],
+                'Team ID': row['Team_ID'],
                 'Team Lead': row['Team_Lead'],
                 'Team Location': row['Team_Location']
             }

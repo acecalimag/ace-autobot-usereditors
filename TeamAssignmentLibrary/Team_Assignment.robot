@@ -35,25 +35,34 @@ Team Assignment
 
     
     # ${team_name}                         Set Variable                        ${result['Team Name']} Roster
-    ${team_editor}                       Check Team Editor                   exp_falbl=Free Agents            exp_trosterlbl=${result['Team Name']} Roster        exp_fafltr=Filter Free Agents        exp_rosfltr=Filter Rostered Agents
+    ${team_editor}                       Check Team Editor                   exp_falbl=Free Agents             exp_trosterlbl=${result['Team Name']} Roster                       exp_fafltr=Filter Free Agents        exp_rosfltr=Filter Rostered Agents
     Log Dictionary                       ${team_editor}
     Log To Console                       ${team_editor}
 
+    # Add Agent Team Assignment
     ${result_uid}                        Get Agent Uid                       agent_name=kleo4 test
     Assign Agent                         agent_name=kleo4 test               agent_uid=${result_uid}
+
+
+    # Remove Agent Team Assignment
+    ${result_uid}                        Get Agent Uid                       agent_name=kleo4 test
+    Remove Agent                         agent_name=kleo4 test               agent_uid=${result_uid}
 
 
     # Sleep    10
 
 
 Add Agent Team Assignment API
-    ${response}                          Add Agent Api                uid=8f5ac28b-b9af-11e2-b3e7-80ee733c5b56          teamId=53447587-455a-4713-827c-79fd4f43f70c
+    ${result_uid}                        Get Agent Uid                       agent_name=kleo4 test
+    ${result}                            Get Teamassignment Db               tname=Xrp
+    ${response}                          Add Agent Api                       uid=${result_uid}          teamId=${result['Team ID']}          
     Log                                  ${response}
     Log To Console                       ${response}
 
 
 Remove Agent Team Assignment API
-    ${response}                          Remove Agent Api             uid=8f5ac28b-b9af-11e2-b3e7-80ee733c5b56
+    ${result_uid}                        Get Agent Uid                       agent_name=kleo4 test
+    ${response}                          Remove Agent Api                    uid=${result_uid}        
     Log                                  ${response}
     Log To Console                       ${response}
 
