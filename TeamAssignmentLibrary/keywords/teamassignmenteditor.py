@@ -14,11 +14,16 @@ class TeamAssignmentEditor:
         self.__ctx = ctx
 
     @keyword 
-    def select_agent(self, agent_uid: str):
+    def select_agent(self, agent_name: str, agent_uid: str):
         self.__ctx.wait_until_element_is_visible(locator=teamlocators.FREEAGENTSLIST)
-
+        self.__ctx.click_element(locator=teamlocators.FREEAGENTSFLTR)
+        self.__ctx.input_text(locator=teamlocators.FREEAGENTSFLTR, text=agent_name)  
+        
         option_locator = self.get_option_value(agent_uid)
+        self.__ctx.wait_until_element_is_visible(locator=option_locator)
         self.__ctx.click_element(locator=option_locator)
+        selected = self.__ctx.get_element_attribute(locator=option_locator, attribute="selected")
+        logger.info(f"{selected}")
         self.__ctx.click_button(locator=teamlocators.MOVESLCBTN)
 
     def get_option_value(self, agent_uid):

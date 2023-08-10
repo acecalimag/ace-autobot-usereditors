@@ -1,4 +1,5 @@
  
+from robot.api import logger
 from SeleniumLibrary import SeleniumLibrary
 from robot.api.deco import keyword
 
@@ -18,7 +19,7 @@ class AssignAgenttoTeam:
         option_locator = self.get_option_value(agent_uid)
         self.__ctx.click_element(locator=option_locator)
         self.__ctx.click_button(locator=teamlocators.MOVESLCBTN)
-        time.sleep(5)
+        
         self.__ctx.scroll_element_into_view(locator=teamlocators.SAVEBTN)
         self.__ctx.click_button(locator=teamlocators.SAVEBTN)
 
@@ -36,9 +37,12 @@ class AssignAgenttoTeam:
         self.__ctx.input_text(locator=teamlocators.FREEAGENTSFLTR, text=agent_name)  
 
         option_locator = self.get_option_value(agent_uid)
+        self.__ctx.wait_until_element_is_visible(locator=option_locator)
         self.__ctx.click_element(locator=option_locator)
+        selected = self.__ctx.get_element_attribute(locator=option_locator, attribute="selected")
+        logger.info(f"{selected}")
         self.__ctx.click_button(locator=teamlocators.MOVESLCBTN)
-        time.sleep(5)
+        
         self.__ctx.scroll_element_into_view(locator=teamlocators.SAVEBTN)
         self.__ctx.click_button(locator=teamlocators.SAVEBTN)
 

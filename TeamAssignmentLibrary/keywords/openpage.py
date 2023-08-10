@@ -10,7 +10,7 @@ class OpenPage:
         self.__ctx = ctx
         
     @keyword 
-    def open_page(self):
+    def open_team_assignment(self):
         logger.info(f"Select configuration for Team Assignment")
         self.__ctx.wait_until_element_is_visible(locator=pagelocators.CONFNAV)
         self.__ctx.click_element(locator=pagelocators.EDITORDROPDOWN)

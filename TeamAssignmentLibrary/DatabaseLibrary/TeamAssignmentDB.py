@@ -29,7 +29,8 @@ class TeamAssignmentDB:
         else:
             return None
         
-    
+
+
     @keyword
     def get_agent_uid(self, agent_name: str):
         """ TODO: Create a database query to retrieve the Agent's UID."""
@@ -37,6 +38,28 @@ class TeamAssignmentDB:
          
         return self.__db.execute(query, (agent_name,))[0]['uid']
 
+
+
+    @keyword
+    def get_agent_team(self, agent_name: str):
+        """ TODO: Create a database query to retrieve the Agent's Team Assignment Details."""
+        query = "SELECT  u.uid as Agent_UID, u.name as Agent_Name, ut.utid as Team_ID, ut.name as Team_Name FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userteam AS ut ON um.teamId = ut.utid WHERE u.name = %s; "
+        
+    
+        result = self.__db.execute(query, (agent_name,))
+        if result and len(result) > 0:
+            row = result[0]
+            return {
+                'Agent UID': row['Agent_UID'],
+                'Agent Name': row['Agent_Name'],
+                'Team ID': row['Team_ID'],
+                'Team Name': row['Team_Name']
+            }
+        else:
+            return {
+                'message': "Agent is not assigned to a team."
+            }
+        
 
 
 # QA_DB_CREDS = {
