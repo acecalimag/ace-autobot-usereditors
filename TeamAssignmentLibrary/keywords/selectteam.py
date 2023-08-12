@@ -1,9 +1,6 @@
  
 from SeleniumLibrary import SeleniumLibrary
 from robot.api.deco import keyword
-from robot.api import logger
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC

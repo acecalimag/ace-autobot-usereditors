@@ -7,8 +7,8 @@ Library    SeleniumLibrary
 Library    Collections
 Variables  resource/variables.py
 
-Test Setup        Team Assignment
-Test Teardown     Logout
+# Test Setup        Team Assignment
+# Test Teardown     Logout
 
 
 *** Keywords ***
@@ -25,6 +25,8 @@ Logout
 *** Test Cases ***
 
 Verify completeness of fields, labels, and buttons for Team Assignment Editor Page
+    [Setup]        Team Assignment
+    [Teardown]     Logout
     
     Select Team                          team_name=${TEAMNAME}
     ${team_details}                      Check Team Details                   exp_name=${TEAMNAME}             exp_lead=${EXP_NAME}             exp_loc=${EXP_LOC}
@@ -52,7 +54,11 @@ Verify completeness of fields, labels, and buttons for Team Assignment Editor Pa
     Unselect Agent                       agent_uid=${result_uid}
 
 
+
 Verify Saving of Agent to Team
+    [Setup]        Team Assignment
+    [Teardown]     Logout
+
     Select Team                          team_name=${TEAMNAME}
 
     ${result_uid}                        Get Agent Uid                       agent_name=${AGENT_NAME} 
@@ -63,7 +69,7 @@ Verify Saving of Agent to Team
     Log To Console                       ${result}
 
     Unselect Agent                       agent_uid=${result_uid}
-    Remove Agent                         agent_name=${AGENT_NAME}                agent_uid=${result_uid}
+    Remove Agent                         agent_name=${AGENT_NAME}            agent_uid=${result_uid}
     ${result}                            Get Agent Team                      agent_name=${AGENT_NAME} 
     Log Dictionary                       ${result}
     Log To Console                       ${result}
@@ -71,50 +77,32 @@ Verify Saving of Agent to Team
 
 
 
+Add Agent Team Assignment API
+    ${result_uid}                        Get Agent Uid                       agent_name=${AGENT_NAME}
+    ${result}                            Get Teamassignment Db               tname=${TEAMNAME}
+    ${response}                          Add Agent Api                       uid=${result_uid}                  teamId=${result['Team ID']}          
+    Log                                  ${response}
+    Log To Console                       ${response}
+    
+    ${result}                            Get Agent Team                      agent_name=${AGENT_NAME} 
+    Log Dictionary                       ${result}
+    Log To Console                       ${result}
 
 
-    # # Add Agent Team Assignment
 
-    # Sleep    5s
-
-
-    # # Remove Agent Team Assignment
-    # ${result_uid}                        Get Agent Uid                       agent_name=kleo4 test
-    # Unselect Agent                       agent_uid=${result_uid}
-    # Sleep    5s
-    # Remove Agent                         agent_name=kleo4 test               agent_uid=${result_uid}
-
-
-    # Add Agent Team Assignment by Input
-    # ${result_uid}                        Get Agent Uid                       agent_name=kleo4 test
-    # Assign Agent Input                   agent_name=kleo4 test               agent_uid=${result_uid}
-
-
-    # # Remove Agent Team Assignment
-    # ${result_uid}                        Get Agent Uid                       agent_name=kleo4 test
-    # Remove Agent                         agent_name=kleo4 test               agent_uid=${result_uid}
-
-
-    # Sleep    10
-
-
-# Add Agent Team Assignment API
-#     ${result_uid}                        Get Agent Uid                       agent_name=kleo4 test
-#     ${result}                            Get Teamassignment Db               tname=Xrp
-#     ${response}                          Add Agent Api                       uid=${result_uid}          teamId=${result['Team ID']}          
-#     Log                                  ${response}
-#     Log To Console                       ${response}
-
-
-# Remove Agent Team Assignment API
-#     ${result_uid}                        Get Agent Uid                       agent_name=kleo4 test
-#     ${response}                          Remove Agent Api                    uid=${result_uid}        
-#     Log                                  ${response}
-#     Log To Console                       ${response}
+Remove Agent Team Assignment API
+    ${result_uid}                        Get Agent Uid                       agent_name=${AGENT_NAME}
+    ${response}                          Remove Agent Api                    uid=${result_uid}        
+    Log                                  ${response}
+    Log To Console                       ${response}
+    
+    ${result}                            Get Agent Team                      agent_name=${AGENT_NAME} 
+    Log Dictionary                       ${result}
+    Log To Console                       ${result}
 
 
 Database Query
-    ${result}                            Get Teamassignment Db        tname=${TEAMNAME}
+    ${result}                            Get Teamassignment Db               tname=${TEAMNAME}
     Log Dictionary                       ${result}
     Log To Console                       ${result}
     

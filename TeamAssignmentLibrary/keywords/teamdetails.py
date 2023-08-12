@@ -2,7 +2,6 @@
 from SeleniumLibrary import SeleniumLibrary
 from robot.api.deco import keyword
 from robot.api import logger
-from robot.api import TestSuite
 from asserts import assert_equal
 
 from TeamAssignmentLibrary.locators import teamlocators

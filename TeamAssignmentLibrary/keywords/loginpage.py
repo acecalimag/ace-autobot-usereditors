@@ -3,8 +3,7 @@ from SeleniumLibrary import SeleniumLibrary
 from robot.api.deco import keyword
 from TeamAssignmentLibrary.locators import loginlocators
 from robot.api import logger
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+
 
 class LoginPage:
     
