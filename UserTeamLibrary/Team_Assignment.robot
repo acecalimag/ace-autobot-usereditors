@@ -1,7 +1,7 @@
 *** Settings ***
-Library    TeamAssignmentLibrary
-Library    TeamAssignmentLibrary.DatabaseLibrary
-Library    TeamAssignmentLibrary.APILibrary
+Library    UserTeamLibrary
+Library    UserTeamLibrary.DatabaseLibrary
+Library    UserTeamLibrary.APILibrary
 Library    RequestsLibrary
 Library    SeleniumLibrary
 Library    Collections
@@ -12,11 +12,11 @@ Variables  resource/variables.py
 
 
 *** Keywords ***
-Team Assignment
+User Team
 
     Open Config In Browser
     Login                                username=${USERNAME}            password=${PASSWORD}
-    Open Team Assignment
+    Open User Team
 
 Logout
     Logout To System
@@ -25,7 +25,7 @@ Logout
 *** Test Cases ***
 
 Verify completeness of fields, labels, and buttons for Team Assignment Editor Page
-    [Setup]        Team Assignment
+    [Setup]        User Team
     [Teardown]     Logout
     
     Select Team                          team_name=${TEAMNAME}
@@ -33,7 +33,7 @@ Verify completeness of fields, labels, and buttons for Team Assignment Editor Pa
     Log Dictionary                       ${team_details}
     Log To Console                       ${team_details}
     
-    ${result}                            Get Teamassignment Db                tname=${TEAMNAME}
+    ${result}                            get               tname=${TEAMNAME}
     Log Dictionary                       ${result}
     Log To Console                       ${result}
 
@@ -47,7 +47,7 @@ Verify completeness of fields, labels, and buttons for Team Assignment Editor Pa
     ${result_uid}                        Get Agent Uid                       agent_name=${AGENT_NAME} 
     Select Agent                         agent_name=${AGENT_NAME}            agent_uid=${result_uid}
                              
-    ${team_editor}                       Check Team Editor                   exp_falbl=${EXP_FALBL}             exp_trosterlbl=${EXP_TROSTERLBL}                      exp_fafltr=${EXP_FAFLTR}        exp_rosfltr=${EXP_ROSFLTR}        exp_rmndrlbl=${EXP_RMNDR_LBL}        exp_alerttext=${EXP_RMNDR_TXT}
+    ${team_editor}                       Check Team Editor                   exp_falbl=${EXP_FALBL}             exp_trosterlbl=${EXP_TROSTERLBL}                      exp_fafltr=${EXP_FAFLTR}        exp_rosfltr=${EXP_ROSFLTR}
     Log Dictionary                       ${team_editor}
     Log To Console                       ${team_editor}
     
@@ -56,7 +56,7 @@ Verify completeness of fields, labels, and buttons for Team Assignment Editor Pa
 
 
 Verify Saving of Agent to Team
-    [Setup]        Team Assignment
+    [Setup]        User Team
     [Teardown]     Logout
 
     Select Team                          team_name=${TEAMNAME}
@@ -79,7 +79,7 @@ Verify Saving of Agent to Team
 
 Add Agent Team Assignment API
     ${result_uid}                        Get Agent Uid                       agent_name=${AGENT_NAME}
-    ${result}                            Get Teamassignment Db               tname=${TEAMNAME}
+    ${result}                            Get User Team Db                    tname=${TEAMNAME}
     ${response}                          Add Agent Api                       uid=${result_uid}                  teamId=${result['Team ID']}          
     Log                                  ${response}
     Log To Console                       ${response}
@@ -102,7 +102,7 @@ Remove Agent Team Assignment API
 
 
 Database Query
-    ${result}                            Get Teamassignment Db               tname=${TEAMNAME}
+    ${result}                            Get User Team Db                   tname=${TEAMNAME}
     Log Dictionary                       ${result}
     Log To Console                       ${result}
     

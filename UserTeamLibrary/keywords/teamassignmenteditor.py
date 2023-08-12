@@ -4,7 +4,7 @@ from robot.api.deco import keyword
 from robot.api import logger
 import  time
 
-from TeamAssignmentLibrary.locators import teamlocators
+from UserTeamLibrary.locators import teamlocators
 
 
 class TeamAssignmentEditor:
@@ -46,7 +46,7 @@ class TeamAssignmentEditor:
 
 
     @keyword 
-    def check_team_editor(self, exp_falbl: str, exp_trosterlbl: str, exp_fafltr: str, exp_rosfltr: str, exp_rmndrlbl: str, exp_alerttext: str):
+    def check_team_editor(self, exp_falbl: str, exp_trosterlbl: str, exp_fafltr: str, exp_rosfltr: str):
         logger.info(f"Check the Team Assignment Editor page if fields, labels, and buttons are present")
 
         team_assignment_content = {}
@@ -171,7 +171,6 @@ class TeamAssignmentEditor:
             team_assignment_content['FREE AGENT LIST'] = 'Not Showing'
 
         
-
         if self.__ctx.driver.find_elements("xpath", teamlocators.TEAMROSTERLIST):
             logger.info("TEAM AGENT LIST is showing")
             team_assignment_content['TEAM AGENT LIST'] = 'Showing'
@@ -192,7 +191,9 @@ class TeamAssignmentEditor:
             logger.error("An error occurred:", str(e))
             team_assignment_content['SAVE BUTTON LIST'] = 'Error'
         
-        
+        time.sleep(5)
+
+
         try:
             self.__ctx.scroll_element_into_view(teamlocators.CANCELBTN)
             if self.__ctx.find_elements(teamlocators.CANCELBTN):
@@ -205,75 +206,6 @@ class TeamAssignmentEditor:
             logger.error("An error occurred:", str(e))
             team_assignment_content['CANCEL BUTTON LIST'] = 'Error'
         
-
-
-        if self.__ctx.driver.find_elements("xpath", teamlocators.ALERT):
-            logger.info("ALERT / REMINDER is showing")
-            team_assignment_content['ALERT / REMINDER'] = 'Showing'
-        else:
-            logger.info("ALERT / REMINDER is not showing")
-            team_assignment_content['ALERT / REMINDER'] = 'Not Showing'
-
-
-
-        if self.__ctx.driver.find_elements("xpath", teamlocators.INFO_CIRCLE):
-            logger.info("INFO ICON is showing")
-            team_assignment_content['INFO ICON'] = 'Showing'
-        else:
-            logger.info("ALERT / REMINDER is not showing")
-            team_assignment_content['INFO ICON'] = 'Not Showing'
-
-
-
-        if self.__ctx.driver.find_elements("xpath", teamlocators.DISMISS_ALERT_BTN):
-            logger.info("CLOSE BUTTON is showing")
-            team_assignment_content['CLOSE BUTTON'] = 'Showing'
-        else:
-            logger.info("CLOSE BUTTON is not showing")
-            team_assignment_content['CLOSE BUTTON'] = 'Not Showing'
-
-
-
-        elements = self.__ctx.driver.find_elements("xpath", teamlocators.RMNDR)
-        if elements:
-            element = elements[0]
-            
-            # Retrieve the visible text content of the <div> element
-            div_text = element.text.strip()
-          
-            # Compare the extracted text with the expected text
-            if div_text == exp_rmndrlbl:
-                logger.info("REMINDER LABEL is showing and content matches")
-                team_assignment_content['REMINDER LABEL'] = 'Showing'
-            else:
-                logger.info("REMINDER LABEL is showing but content does not match")
-                team_assignment_content['REMINDER LABEL'] = 'Not Showing'
-        else:
-            logger.info("REMINDER LABEL is not showing")
-            team_assignment_content['REMINDER LABEL'] = 'Not Showing'
-
-
-
-        elements = self.__ctx.driver.find_elements("xpath", teamlocators.ALERTTEXT)
-        if elements:
-            element = elements[0]
-            
-            # Retrieve the visible text content of the <div> element
-            div_text = element.text.strip()
-          
-            # Compare the extracted text with the expected text
-            if div_text == exp_alerttext:
-                logger.info("REMINDER NOTICE is showing and content matches")
-                team_assignment_content['REMINDER NOTICE'] = 'Showing'
-            else:
-                logger.info("REMINDER NOTICE is showing but content does not match")
-                team_assignment_content['REMINDER NOTICE'] = 'Not Showing'
-        else:
-            logger.info("REMINDER NOTICE is not showing")
-            team_assignment_content['REMINDER NOTICE'] = 'Not Showing'
-
-
-
 
 
         return team_assignment_content

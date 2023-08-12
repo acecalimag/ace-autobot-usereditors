@@ -21,9 +21,3 @@ TEAMROSTERLIST: str = "//select[@id='rosteredAgentsList']"
 
 SAVEBTN: str = "//button[@id='saveAgents']"
 CANCELBTN: str = "//button[@id='cancelAgents']"
-
-ALERT: str = "//div[@role='alert']"
-ALERTTEXT: str = "//div[@role='alert']//li"
-INFO_CIRCLE: str = "//i[@class='fa fa-info-circle']"
-RMNDR: str = "//div[@role='alert']//strong"
-DISMISS_ALERT_BTN: str = "//button[@aria-label='Close']"

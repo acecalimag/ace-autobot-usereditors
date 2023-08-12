@@ -1,91 +1,197 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.0.2 (Python 3.10.6 on win32)" generated="20230811 22:47:23.581" rpa="false" schemaversion="3">
+<robot generator="Robot 6.0.2 (Python 3.10.6 on win32)" generated="20230812 05:32:05.950" rpa="false" schemaversion="3">
 <suite id="s1" name="Team Assignment" source="c:\Users\WONDERS\Documents\Ace\Robot\ace-autobot-usereditors\TeamAssignmentLibrary\Team_Assignment.robot">
-<test id="s1-t1" name="Remove Agent Team Assignment API" line="88">
+<test id="s1-t1" name="Verify completeness of fields, labels, and buttons for Team Assignment Editor Page" line="27">
 <kw name="Team Assignment" type="SETUP">
 <kw name="Open Config In Browser" library="TeamAssignmentLibrary">
-<msg timestamp="20230811 22:47:23.900" level="INFO">Opening browser 'chrome' to base url 'https://qa.letsdochinese.com/KJTCore/resources/userconfigclient/teamassignmenteditor.html'.</msg>
-<msg timestamp="20230811 22:47:23.906" level="INFO">Applicable driver not found; attempting to install with Selenium Manager (Beta)</msg>
-<status status="PASS" starttime="20230811 22:47:23.900" endtime="20230811 22:47:28.546"/>
+<msg timestamp="20230812 05:32:06.294" level="INFO">Opening browser 'chrome' to base url 'https://qa.letsdochinese.com/KJTCore/resources/userconfigclient/teamassignmenteditor.html'.</msg>
+<msg timestamp="20230812 05:32:06.301" level="INFO">Applicable driver not found; attempting to install with Selenium Manager (Beta)</msg>
+<status status="PASS" starttime="20230812 05:32:06.294" endtime="20230812 05:32:11.254"/>
 </kw>
 <kw name="Login" library="TeamAssignmentLibrary">
 <arg>username=${USERNAME}</arg>
 <arg>password=${PASSWORD}</arg>
-<msg timestamp="20230811 22:47:28.547" level="INFO">Logging in using  acalimag and kjt</msg>
-<msg timestamp="20230811 22:47:28.566" level="INFO">Typing text 'acalimag' into text field 'id:username'.</msg>
-<msg timestamp="20230811 22:47:28.623" level="INFO">Typing text 'kjt' into text field 'id:password'.</msg>
-<msg timestamp="20230811 22:47:28.680" level="INFO">Clicking element 'id:login'.</msg>
-<status status="PASS" starttime="20230811 22:47:28.547" endtime="20230811 22:47:28.715"/>
+<msg timestamp="20230812 05:32:11.255" level="INFO">Logging in using  acalimag and kjt</msg>
+<msg timestamp="20230812 05:32:11.278" level="INFO">Typing text 'acalimag' into text field 'id:username'.</msg>
+<msg timestamp="20230812 05:32:11.335" level="INFO">Typing text 'kjt' into text field 'id:password'.</msg>
+<msg timestamp="20230812 05:32:11.392" level="INFO">Clicking element 'id:login'.</msg>
+<status status="PASS" starttime="20230812 05:32:11.255" endtime="20230812 05:32:11.432"/>
 </kw>
 <kw name="Open Team Assignment" library="TeamAssignmentLibrary">
-<msg timestamp="20230811 22:47:28.715" level="INFO">Select configuration for Team Assignment</msg>
-<msg timestamp="20230811 22:47:35.902" level="INFO">Clicking element '//a[@id='ConfigNavbarDropdown']'.</msg>
-<msg timestamp="20230811 22:47:35.957" level="INFO">Clicking element '//a[@id='teamAssignLi']'.</msg>
-<status status="PASS" starttime="20230811 22:47:28.715" endtime="20230811 22:47:38.481"/>
+<msg timestamp="20230812 05:32:11.433" level="INFO">Select configuration for Team Assignment</msg>
+<msg timestamp="20230812 05:32:17.554" level="INFO">Clicking element '//a[@id='ConfigNavbarDropdown']'.</msg>
+<msg timestamp="20230812 05:32:17.609" level="INFO">Clicking element '//a[@id='teamAssignLi']'.</msg>
+<status status="PASS" starttime="20230812 05:32:11.432" endtime="20230812 05:32:18.245"/>
 </kw>
-<status status="PASS" starttime="20230811 22:47:23.900" endtime="20230811 22:47:38.482"/>
+<status status="PASS" starttime="20230812 05:32:06.293" endtime="20230812 05:32:18.245"/>
+</kw>
+<kw name="Select Team" library="TeamAssignmentLibrary">
+<arg>team_name=${TEAMNAME}</arg>
+<status status="PASS" starttime="20230812 05:32:18.246" endtime="20230812 05:32:20.072"/>
+</kw>
+<kw name="Check Team Details" library="TeamAssignmentLibrary">
+<var>${team_details}</var>
+<arg>exp_name=${TEAMNAME}</arg>
+<arg>exp_lead=${EXP_NAME}</arg>
+<arg>exp_loc=${EXP_LOC}</arg>
+<msg timestamp="20230812 05:32:20.073" level="INFO">Check the details using  Xrp, Adam Warlock and DGT</msg>
+<msg timestamp="20230812 05:32:20.090" level="INFO">got_act: Xrp</msg>
+<msg timestamp="20230812 05:32:20.104" level="INFO">got_act: Adam Warlock</msg>
+<msg timestamp="20230812 05:32:20.118" level="INFO">got_act: DGT</msg>
+<msg timestamp="20230812 05:32:20.118" level="INFO">${team_details} = {'Team Name': 'Xrp', 'Team Lead': 'Adam Warlock', 'Team Location': 'DGT'}</msg>
+<status status="PASS" starttime="20230812 05:32:20.072" endtime="20230812 05:32:20.118"/>
+</kw>
+<kw name="Log Dictionary" library="Collections">
+<arg>${team_details}</arg>
+<doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
+<msg timestamp="20230812 05:32:20.119" level="INFO">Dictionary size is 3 and it contains following items:
+Team Lead: Adam Warlock
+Team Location: DGT
+Team Name: Xrp</msg>
+<status status="PASS" starttime="20230812 05:32:20.119" endtime="20230812 05:32:20.119"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${team_details}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230812 05:32:20.120" endtime="20230812 05:32:20.120"/>
+</kw>
+<kw name="Get Teamassignment Db" library="TeamAssignmentLibrary.DatabaseLibrary">
+<var>${result}</var>
+<arg>tname=${TEAMNAME}</arg>
+<doc>TODO: Create a database query to retrieve the Team Assignment Details.</doc>
+<msg timestamp="20230812 05:32:20.122" level="INFO">Creating a new connection.</msg>
+<msg timestamp="20230812 05:32:22.947" level="INFO">Executing query. SELECT  ut.name as Team_Name, ut.utid as Team_ID, u.name as Team_Lead, ul.code as Team_Location FROM kjt.userteam AS ut JOIN kjt.user AS u ON ut.teamLead = u.uid JOIN kjt.userlocation AS ul ON ut.location = ul.lid WHERE ut.name = %s;</msg>
+<msg timestamp="20230812 05:32:23.505" level="INFO">${result} = {'Team Name': 'Xrp', 'Team ID': '73632860-76ab-455e-9eb0-44bc0ae313b9', 'Team Lead': 'Adam Warlock', 'Team Location': 'DGT'}</msg>
+<status status="PASS" starttime="20230812 05:32:20.120" endtime="20230812 05:32:23.506"/>
+</kw>
+<kw name="Log Dictionary" library="Collections">
+<arg>${result}</arg>
+<doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
+<msg timestamp="20230812 05:32:23.507" level="INFO">Dictionary size is 4 and it contains following items:
+Team ID: 73632860-76ab-455e-9eb0-44bc0ae313b9
+Team Lead: Adam Warlock
+Team Location: DGT
+Team Name: Xrp</msg>
+<status status="PASS" starttime="20230812 05:32:23.507" endtime="20230812 05:32:23.509"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${result}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230812 05:32:23.510" endtime="20230812 05:32:23.511"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${team_details['Team Name']}</arg>
+<arg>${result['Team Name']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230812 05:32:23.512" endtime="20230812 05:32:23.515"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${team_details['Team Lead']}</arg>
+<arg>${result['Team Lead']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230812 05:32:23.517" endtime="20230812 05:32:23.520"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${team_details['Team Location']}</arg>
+<arg>${result['Team Location']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230812 05:32:23.520" endtime="20230812 05:32:23.522"/>
 </kw>
 <kw name="Get Agent Uid" library="TeamAssignmentLibrary.DatabaseLibrary">
 <var>${result_uid}</var>
 <arg>agent_name=${AGENT_NAME}</arg>
 <doc>TODO: Create a database query to retrieve the Agent's UID.</doc>
-<msg timestamp="20230811 22:47:38.483" level="INFO">Creating a new connection.</msg>
-<msg timestamp="20230811 22:47:41.343" level="INFO">Executing query. select * from kjt.user where name = %s;</msg>
-<msg timestamp="20230811 22:47:41.909" level="INFO">${result_uid} = 4e0052e4-c04b-49b4-b4c9-a8b42b8182f7</msg>
-<status status="PASS" starttime="20230811 22:47:38.482" endtime="20230811 22:47:41.910"/>
+<msg timestamp="20230812 05:32:23.523" level="INFO">Using an existing connection &lt;mysql.connector.connection_cext.CMySQLConnection object at 0x000001CF0990A770&gt;.</msg>
+<msg timestamp="20230812 05:32:23.524" level="INFO">Executing query. select * from kjt.user where name = %s;</msg>
+<msg timestamp="20230812 05:32:24.079" level="INFO">${result_uid} = 4e0052e4-c04b-49b4-b4c9-a8b42b8182f7</msg>
+<status status="PASS" starttime="20230812 05:32:23.523" endtime="20230812 05:32:24.079"/>
 </kw>
-<kw name="Remove Agent Api" library="TeamAssignmentLibrary.APILibrary">
-<var>${response}</var>
-<arg>uid=${result_uid}</arg>
-<msg timestamp="20230811 22:47:43.060" level="INFO">Empty response content</msg>
-<msg timestamp="20230811 22:47:43.061" level="INFO">${response} = 200</msg>
-<status status="PASS" starttime="20230811 22:47:41.911" endtime="20230811 22:47:43.061"/>
-</kw>
-<kw name="Log" library="BuiltIn">
-<arg>${response}</arg>
-<doc>Logs the given message with the given level.</doc>
-<msg timestamp="20230811 22:47:43.063" level="INFO">200</msg>
-<status status="PASS" starttime="20230811 22:47:43.062" endtime="20230811 22:47:43.064"/>
-</kw>
-<kw name="Log To Console" library="BuiltIn">
-<arg>${response}</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" starttime="20230811 22:47:43.065" endtime="20230811 22:47:43.066"/>
-</kw>
-<kw name="Get Agent Team" library="TeamAssignmentLibrary.DatabaseLibrary">
-<var>${result}</var>
+<kw name="Select Agent" library="TeamAssignmentLibrary">
 <arg>agent_name=${AGENT_NAME}</arg>
-<doc>TODO: Create a database query to retrieve the Agent's Team Assignment Details.</doc>
-<msg timestamp="20230811 22:47:43.069" level="INFO">Using an existing connection &lt;mysql.connector.connection_cext.CMySQLConnection object at 0x000001D473331FC0&gt;.</msg>
-<msg timestamp="20230811 22:47:43.069" level="INFO">Executing query. SELECT  u.uid as Agent_UID, u.name as Agent_Name, ut.utid as Team_ID, ut.name as Team_Name FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userteam AS ut ON um.teamId = ut.utid WHERE u.name = %s; </msg>
-<msg timestamp="20230811 22:47:43.623" level="INFO">${result} = {'message': 'Agent is not assigned to a team.'}</msg>
-<status status="PASS" starttime="20230811 22:47:43.067" endtime="20230811 22:47:43.624"/>
+<arg>agent_uid=${result_uid}</arg>
+<msg timestamp="20230812 05:32:24.101" level="INFO">Clicking element '//input[@id='filterFreeAgents']'.</msg>
+<msg timestamp="20230812 05:32:24.132" level="INFO">Typing text 'kleo4 test' into text field '//input[@id='filterFreeAgents']'.</msg>
+<msg timestamp="20230812 05:32:24.228" level="INFO">Clicking element 'xpath://option[@value='4e0052e4-c04b-49b4-b4c9-a8b42b8182f7']'.</msg>
+<msg timestamp="20230812 05:32:24.266" level="INFO">true</msg>
+<msg timestamp="20230812 05:32:24.266" level="INFO">Clicking button '//button[@id='freeAgentMoveSelected']'.</msg>
+<status status="PASS" starttime="20230812 05:32:24.080" endtime="20230812 05:32:24.311"/>
+</kw>
+<kw name="Check Team Editor" library="TeamAssignmentLibrary">
+<var>${team_editor}</var>
+<arg>exp_falbl=${EXP_FALBL}</arg>
+<arg>exp_trosterlbl=${EXP_TROSTERLBL}</arg>
+<arg>exp_fafltr=${EXP_FAFLTR}</arg>
+<arg>exp_rosfltr=${EXP_ROSFLTR}</arg>
+<arg>exp_rmndrlbl=${EXP_RMNDR_LBL}</arg>
+<arg>exp_alerttext=${EXP_RMNDR_TXT}</arg>
+<msg timestamp="20230812 05:32:24.313" level="INFO">Check the Team Assignment Editor page if fields, labels, and buttons are present</msg>
+<msg timestamp="20230812 05:32:24.327" level="INFO">FREE AGENTS Label is showing and text matches: Free Agents</msg>
+<msg timestamp="20230812 05:32:24.340" level="INFO">TEAM ROSTER Label is showing but text does not match. Actual: Xrp Roster, Expected: ${result['Team Name']} Roster</msg>
+<msg timestamp="20230812 05:32:24.354" level="INFO">FREE AGENTS Filter is showing and placeholder matches: Filter Free Agents</msg>
+<msg timestamp="20230812 05:32:24.368" level="INFO">TEAM ROSTER Filter is showing and placeholder matches: Filter Rostered Agents</msg>
+<msg timestamp="20230812 05:32:24.373" level="INFO">MOVE SELECTED Button is showing</msg>
+<msg timestamp="20230812 05:32:24.381" level="INFO">MOVE ALL Button is showing</msg>
+<msg timestamp="20230812 05:32:24.389" level="INFO">REMOVE SELECTED Button is showing</msg>
+<msg timestamp="20230812 05:32:24.398" level="INFO">REMOVE ALL Button is showing</msg>
+<msg timestamp="20230812 05:32:24.403" level="INFO">FREE AGENT LIST is showing</msg>
+<msg timestamp="20230812 05:32:24.419" level="INFO">TEAM AGENT LIST is showing</msg>
+<msg timestamp="20230812 05:32:24.731" level="INFO">SAVE BUTTON is showing</msg>
+<msg timestamp="20230812 05:32:25.012" level="INFO">CANCEL BUTTON is showing</msg>
+<msg timestamp="20230812 05:32:25.018" level="INFO">ALERT / REMINDER is showing</msg>
+<msg timestamp="20230812 05:32:25.026" level="INFO">INFO ICON is showing</msg>
+<msg timestamp="20230812 05:32:25.033" level="INFO">CLOSE BUTTON is showing</msg>
+<msg timestamp="20230812 05:32:25.045" level="INFO">REMINDER LABEL is showing and content matches</msg>
+<msg timestamp="20230812 05:32:25.055" level="INFO">REMINDER NOTICE is showing and content matches</msg>
+<msg timestamp="20230812 05:32:25.056" level="INFO">${team_editor} = {'Free Agents Label': 'Showing', 'TEAM ROSTER Label': 'Not Showing', 'FREE AGENTS Filter': 'Showing', 'TEAM ROSTER Filter': 'Showing', 'MOVE SELECTED Button': 'Showing', 'MOVE ALL Button': 'Showing', ...</msg>
+<status status="PASS" starttime="20230812 05:32:24.312" endtime="20230812 05:32:25.056"/>
 </kw>
 <kw name="Log Dictionary" library="Collections">
-<arg>${result}</arg>
+<arg>${team_editor}</arg>
 <doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
-<msg timestamp="20230811 22:47:43.626" level="INFO">Dictionary has one item:
-message: Agent is not assigned to a team.</msg>
-<status status="PASS" starttime="20230811 22:47:43.625" endtime="20230811 22:47:43.627"/>
+<msg timestamp="20230812 05:32:25.057" level="INFO">Dictionary size is 17 and it contains following items:
+ALERT / REMINDER: Showing
+CANCEL BUTTON LIST: Showing
+CLOSE BUTTON: Showing
+FREE AGENT LIST: Showing
+FREE AGENTS Filter: Showing
+Free Agents Label: Showing
+INFO ICON: Showing
+MOVE ALL Button: Showing
+MOVE SELECTED Button: Showing
+REMINDER LABEL: Showing
+REMINDER NOTICE: Showing
+REMOVE ALL Button: Showing
+REMOVE SELECTED Button: Showing
+SAVE BUTTON LIST: Showing
+TEAM AGENT LIST: Showing
+TEAM ROSTER Filter: Showing
+TEAM ROSTER Label: Not Showing</msg>
+<status status="PASS" starttime="20230812 05:32:25.056" endtime="20230812 05:32:25.057"/>
 </kw>
 <kw name="Log To Console" library="BuiltIn">
-<arg>${result}</arg>
+<arg>${team_editor}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" starttime="20230811 22:47:43.628" endtime="20230811 22:47:43.630"/>
+<status status="PASS" starttime="20230812 05:32:25.057" endtime="20230812 05:32:25.059"/>
+</kw>
+<kw name="Unselect Agent" library="TeamAssignmentLibrary">
+<arg>agent_uid=${result_uid}</arg>
+<msg timestamp="20230812 05:32:25.074" level="INFO">Clicking element 'xpath://option[@value='4e0052e4-c04b-49b4-b4c9-a8b42b8182f7']'.</msg>
+<msg timestamp="20230812 05:32:25.096" level="INFO">Clicking button '//button[@id='rosteredAgentRemoveAll']'.</msg>
+<status status="PASS" starttime="20230812 05:32:25.059" endtime="20230812 05:32:25.156"/>
 </kw>
 <kw name="Logout" type="TEARDOWN">
 <kw name="Logout To System" library="TeamAssignmentLibrary">
-<msg timestamp="20230811 22:47:43.633" level="INFO">Logging out of the system</msg>
-<msg timestamp="20230811 22:47:43.634" level="INFO">Clicking element '//div[@class='ucc-nav-account-menu-popover-icon mr-3']'.</msg>
-<msg timestamp="20230811 22:47:43.687" level="INFO">Clicking element '//div[@class='popover-body']//li[@id='navbar-logout']'.</msg>
-<msg timestamp="20230811 22:47:43.949" level="INFO">Clicking element '//button[@id='confirm-ucc-logout-btn']'.</msg>
-<status status="PASS" starttime="20230811 22:47:43.633" endtime="20230811 22:47:47.935"/>
+<msg timestamp="20230812 05:32:25.158" level="INFO">Logging out of the system</msg>
+<msg timestamp="20230812 05:32:25.158" level="INFO">Clicking element '//div[@class='ucc-nav-account-menu-popover-icon mr-3']'.</msg>
+<msg timestamp="20230812 05:32:25.483" level="INFO">Clicking element '//div[@class='popover-body']//li[@id='navbar-logout']'.</msg>
+<msg timestamp="20230812 05:32:25.743" level="INFO">Clicking element '//button[@id='confirm-ucc-logout-btn']'.</msg>
+<status status="PASS" starttime="20230812 05:32:25.157" endtime="20230812 05:32:29.238"/>
 </kw>
-<status status="PASS" starttime="20230811 22:47:43.632" endtime="20230811 22:47:47.935"/>
+<status status="PASS" starttime="20230812 05:32:25.157" endtime="20230812 05:32:29.239"/>
 </kw>
-<status status="PASS" starttime="20230811 22:47:23.899" endtime="20230811 22:47:47.937"/>
+<status status="PASS" starttime="20230812 05:32:06.292" endtime="20230812 05:32:29.240"/>
 </test>
-<status status="PASS" starttime="20230811 22:47:23.588" endtime="20230811 22:47:47.940"/>
+<status status="PASS" starttime="20230812 05:32:05.955" endtime="20230812 05:32:29.243"/>
 </suite>
 <statistics>
 <total>
