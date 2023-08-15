@@ -1,5 +1,5 @@
 
-from UserTeamLibrary.locators import pagelocators
+from UserTeamsLibrary.locators import pagelocators
 from SeleniumLibrary import SeleniumLibrary
 from robot.api.deco import keyword
 from robot.api import logger

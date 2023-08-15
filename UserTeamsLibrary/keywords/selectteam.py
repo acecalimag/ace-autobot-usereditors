@@ -4,7 +4,7 @@ from robot.api.deco import keyword
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from UserTeamLibrary.locators import userteamlocators
+from UserTeamsLibrary.locators import userteamslocators
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
@@ -19,11 +19,11 @@ class SelectTeam:
     def search_and_click_next(self, team_name):
         driver = self.__ctx.driver  # Assuming self.__ctx.driver is the WebDriver instance
 
-        self.__ctx.wait_until_element_is_visible(locator=userteamlocators.TEAMLIST)
+        self.__ctx.wait_until_element_is_visible(locator=userteamslocators.TEAMLIST)
 
-        locator = userteamlocators.TEAMLIST
+        locator = userteamslocators.TEAMLIST
         team_locator = f"//tr[@data-name='{team_name}']"
-        next_btn = userteamlocators.NEXTBTN
+        next_btn = userteamslocators.NEXTBTN
 
         while True:
             # Scroll down the page

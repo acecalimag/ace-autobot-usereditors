@@ -2,7 +2,7 @@ from robotlibcore import DynamicCore
 from robot.api.deco import library
 from autocore.Database import Database
 
-from UserTeamLibrary.DatabaseLibrary.UserTeamDB import UserTeamDB
+from UserTeamsLibrary.DatabaseLibrary.UserTeamDB import UserTeamDB
 
 
 

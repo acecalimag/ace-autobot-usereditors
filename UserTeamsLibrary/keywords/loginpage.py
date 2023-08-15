@@ -1,7 +1,7 @@
 
 from SeleniumLibrary import SeleniumLibrary
 from robot.api.deco import keyword
-from UserTeamLibrary.locators import loginlocators
+from UserTeamsLibrary.locators import loginlocators
 from robot.api import logger
 
 

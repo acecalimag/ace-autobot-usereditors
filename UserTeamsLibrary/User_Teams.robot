@@ -1,7 +1,7 @@
 *** Settings ***
-Library    UserTeamLibrary
-Library    UserTeamLibrary.DatabaseLibrary
-Library    UserTeamLibrary.APILibrary
+Library    UserTeamsLibrary
+Library    UserTeamsLibrary.DatabaseLibrary
+Library    UserTeamsLibrary.APILibrary
 Library    RequestsLibrary
 Library    SeleniumLibrary
 Library    Collections

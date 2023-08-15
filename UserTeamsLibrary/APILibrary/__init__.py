@@ -4,8 +4,8 @@ import requests
 from RequestsLibrary.SessionKeywords import SessionKeywords
 from robotlibcore import DynamicCore
 
-from UserTeamLibrary.APILibrary.AddAgentTA import AddAgentTA
-from UserTeamLibrary.APILibrary.RemoveAgentTA import RemoveAgentTA
+from UserTeamsLibrary.APILibrary.AddAgentTA import AddAgentTA
+from UserTeamsLibrary.APILibrary.RemoveAgentTA import RemoveAgentTA
 
 
 @library
