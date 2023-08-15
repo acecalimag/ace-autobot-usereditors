@@ -4,26 +4,26 @@ from robot.api.deco import keyword
 from robot.api import logger
 import  time
 
-from UserTeamLibrary.locators import teamlocators
+from UserTeamLibrary.locators import userteamlocators
 
 
-class TeamAssignmentEditor:
+class UserTeamEditor:
     
     def __init__(self, ctx: SeleniumLibrary) -> None:
         self.__ctx = ctx
 
     @keyword 
     def select_agent(self, agent_name: str, agent_uid: str):
-        self.__ctx.wait_until_element_is_visible(locator=teamlocators.FREEAGENTSLIST)
-        self.__ctx.click_element(locator=teamlocators.FREEAGENTSFLTR)
-        self.__ctx.input_text(locator=teamlocators.FREEAGENTSFLTR, text=agent_name)  
+        self.__ctx.wait_until_element_is_visible(locator=userteamlocators.FREEAGENTSLIST)
+        self.__ctx.click_element(locator=userteamlocators.FREEAGENTSFLTR)
+        self.__ctx.input_text(locator=userteamlocators.FREEAGENTSFLTR, text=agent_name)  
         
         option_locator = self.get_option_value(agent_uid)
         self.__ctx.wait_until_element_is_visible(locator=option_locator)
         self.__ctx.click_element(locator=option_locator)
         selected = self.__ctx.get_element_attribute(locator=option_locator, attribute="selected")
         logger.info(f"{selected}")
-        self.__ctx.click_button(locator=teamlocators.MOVESLCBTN)
+        self.__ctx.click_button(locator=userteamlocators.MOVESLCBTN)
 
     def get_option_value(self, agent_uid):
         option_locator = f"xpath://option[@value='{agent_uid}']"
@@ -33,11 +33,11 @@ class TeamAssignmentEditor:
 
     @keyword 
     def unselect_agent(self, agent_uid: str):
-        self.__ctx.wait_until_element_is_visible(locator=teamlocators.TEAMROSTERLIST)
+        self.__ctx.wait_until_element_is_visible(locator=userteamlocators.TEAMROSTERLIST)
 
         option_locator = self.get_option_value(agent_uid)
         self.__ctx.click_element(locator=option_locator)
-        self.__ctx.click_button(locator=teamlocators.REMOVEALLBTN)
+        self.__ctx.click_button(locator=userteamlocators.REMOVEALLBTN)
 
     def get_option_value(self, agent_uid):
         option_locator = f"xpath://option[@value='{agent_uid}']"
@@ -46,12 +46,12 @@ class TeamAssignmentEditor:
 
 
     @keyword 
-    def check_team_editor(self, exp_falbl: str, exp_trosterlbl: str, exp_fafltr: str, exp_rosfltr: str):
+    def check_team_editor(self, exp_falbl: str, exp_trosterlbl: str, exp_fafltr: str, exp_rosfltr: str, exp_rmndrlbl: str, exp_alerttext: str):
         logger.info(f"Check the Team Assignment Editor page if fields, labels, and buttons are present")
 
         team_assignment_content = {}
         
-        elements = self.__ctx.driver.find_elements("xpath", teamlocators.FREEAGENTSLBL)
+        elements = self.__ctx.driver.find_elements("xpath", userteamlocators.FREEAGENTSLBL)
         if elements:
             element = elements[0]
             act_falbl = element.text
@@ -69,7 +69,7 @@ class TeamAssignmentEditor:
         
 
 
-        elements = self.__ctx.driver.find_elements("xpath", teamlocators.TEAMROSTERLBL)
+        elements = self.__ctx.driver.find_elements("xpath", userteamlocators.TEAMROSTERLBL)
         if elements:
             element = elements[0]
             act_trosterlbl = element.text
@@ -87,7 +87,7 @@ class TeamAssignmentEditor:
             
         
 
-        elements = self.__ctx.driver.find_elements("xpath", teamlocators.FREEAGENTSFLTR)
+        elements = self.__ctx.driver.find_elements("xpath", userteamlocators.FREEAGENTSFLTR)
         if elements:
             element = elements[0]
             
@@ -107,7 +107,7 @@ class TeamAssignmentEditor:
 
 
 
-        elements = self.__ctx.driver.find_elements("xpath", teamlocators.TEAMROSTERFLTR)
+        elements = self.__ctx.driver.find_elements("xpath", userteamlocators.TEAMROSTERFLTR)
         if elements:
             element = elements[0]
             
@@ -127,7 +127,7 @@ class TeamAssignmentEditor:
 
 
 
-        if self.__ctx.driver.find_elements("xpath", teamlocators.MOVESLCBTN):
+        if self.__ctx.driver.find_elements("xpath", userteamlocators.MOVESLCBTN):
             logger.info("MOVE SELECTED Button is showing")
             team_assignment_content['MOVE SELECTED Button'] = 'Showing'
         else:
@@ -136,7 +136,7 @@ class TeamAssignmentEditor:
 
 
 
-        if self.__ctx.driver.find_elements("xpath", teamlocators.MOVEALLBTN):
+        if self.__ctx.driver.find_elements("xpath", userteamlocators.MOVEALLBTN):
             logger.info("MOVE ALL Button is showing")
             team_assignment_content['MOVE ALL Button'] = 'Showing'
         else:
@@ -145,7 +145,7 @@ class TeamAssignmentEditor:
 
 
 
-        if self.__ctx.driver.find_elements("xpath", teamlocators.REMOVESLCBTN):
+        if self.__ctx.driver.find_elements("xpath", userteamlocators.REMOVESLCBTN):
             logger.info("REMOVE SELECTED Button is showing")
             team_assignment_content['REMOVE SELECTED Button'] = 'Showing'
         else:
@@ -154,7 +154,7 @@ class TeamAssignmentEditor:
 
 
 
-        if self.__ctx.driver.find_elements("xpath", teamlocators.REMOVEALLBTN):
+        if self.__ctx.driver.find_elements("xpath", userteamlocators.REMOVEALLBTN):
             logger.info("REMOVE ALL Button is showing")
             team_assignment_content['REMOVE ALL Button'] = 'Showing'
         else:
@@ -163,7 +163,7 @@ class TeamAssignmentEditor:
 
 
 
-        if self.__ctx.driver.find_elements("xpath", teamlocators.FREEAGENTSLIST):
+        if self.__ctx.driver.find_elements("xpath", userteamlocators.FREEAGENTSLIST):
             logger.info("FREE AGENT LIST is showing")
             team_assignment_content['FREE AGENT LIST'] = 'Showing'
         else:
@@ -171,7 +171,8 @@ class TeamAssignmentEditor:
             team_assignment_content['FREE AGENT LIST'] = 'Not Showing'
 
         
-        if self.__ctx.driver.find_elements("xpath", teamlocators.TEAMROSTERLIST):
+
+        if self.__ctx.driver.find_elements("xpath", userteamlocators.TEAMROSTERLIST):
             logger.info("TEAM AGENT LIST is showing")
             team_assignment_content['TEAM AGENT LIST'] = 'Showing'
         else:
@@ -180,8 +181,8 @@ class TeamAssignmentEditor:
 
 
         try:
-            self.__ctx.scroll_element_into_view(teamlocators.SAVEBTN)
-            if self.__ctx.find_element(teamlocators.SAVEBTN):
+            self.__ctx.scroll_element_into_view(userteamlocators.SAVEBTN)
+            if self.__ctx.find_element(userteamlocators.SAVEBTN):
                 logger.info("SAVE BUTTON is showing")
                 team_assignment_content['SAVE BUTTON LIST'] = 'Showing'
             else:
@@ -191,12 +192,10 @@ class TeamAssignmentEditor:
             logger.error("An error occurred:", str(e))
             team_assignment_content['SAVE BUTTON LIST'] = 'Error'
         
-        time.sleep(5)
-
-
+        
         try:
-            self.__ctx.scroll_element_into_view(teamlocators.CANCELBTN)
-            if self.__ctx.find_elements(teamlocators.CANCELBTN):
+            self.__ctx.scroll_element_into_view(userteamlocators.CANCELBTN)
+            if self.__ctx.find_elements(userteamlocators.CANCELBTN):
                 logger.info("CANCEL BUTTON is showing")
                 team_assignment_content['CANCEL BUTTON LIST'] = 'Showing'
             else:
@@ -208,64 +207,67 @@ class TeamAssignmentEditor:
         
 
 
+        if self.__ctx.driver.find_elements("xpath", userteamlocators.ALERT):
+            logger.info("ALERT / REMINDER is showing")
+            team_assignment_content['ALERT / REMINDER'] = 'Showing'
+        else:
+            logger.info("ALERT / REMINDER is not showing")
+            team_assignment_content['ALERT / REMINDER'] = 'Not Showing'
+
+
+
+        if self.__ctx.driver.find_elements("xpath", userteamlocators.INFO_CIRCLE):
+            logger.info("INFO ICON is showing")
+            team_assignment_content['INFO ICON'] = 'Showing'
+        else:
+            logger.info("ALERT / REMINDER is not showing")
+            team_assignment_content['INFO ICON'] = 'Not Showing'
+
+
+
+        if self.__ctx.driver.find_elements("xpath", userteamlocators.DISMISS_ALERT_BTN):
+            logger.info("CLOSE BUTTON is showing")
+            team_assignment_content['CLOSE BUTTON'] = 'Showing'
+        else:
+            logger.info("CLOSE BUTTON is not showing")
+            team_assignment_content['CLOSE BUTTON'] = 'Not Showing'
+
+
+
+        elements = self.__ctx.driver.find_elements("xpath", userteamlocators.RMNDR)
+        if elements:
+            element = elements[0]
+            
+            div_text = element.text.strip()
+          
+            if div_text == exp_rmndrlbl:
+                logger.info("REMINDER LABEL is showing and content matches")
+                team_assignment_content['REMINDER LABEL'] = 'Showing'
+            else:
+                logger.info("REMINDER LABEL is showing but content does not match")
+                team_assignment_content['REMINDER LABEL'] = 'Not Showing'
+        else:
+            logger.info("REMINDER LABEL is not showing")
+            team_assignment_content['REMINDER LABEL'] = 'Not Showing'
+
+
+
+        elements = self.__ctx.driver.find_elements("xpath", userteamlocators.ALERTTEXT)
+        if elements:
+            element = elements[0]
+            
+            div_text = element.text.strip()
+          
+            if div_text == exp_alerttext:
+                logger.info("REMINDER NOTICE is showing and content matches")
+                team_assignment_content['REMINDER NOTICE'] = 'Showing'
+            else:
+                logger.info("REMINDER NOTICE is showing but content does not match")
+                team_assignment_content['REMINDER NOTICE'] = 'Not Showing'
+        else:
+            logger.info("REMINDER NOTICE is not showing")
+            team_assignment_content['REMINDER NOTICE'] = 'Not Showing'
+
+
+
         return team_assignment_content
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        # if self.__ctx.driver.find_elements("xpath", teamlocators.FREEAGENTSFLTR):
-        #     logger.info("FREE AGENTS Filter is showing")
-        #     team_assignment_content['Free Agents Filter'] = 'Showing'
-        # else:
-        #     logger.info("FREE AGENTS Filter is not showing")
-        #     team_assignment_content['Free Agents Filter'] = 'Not Showing'
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        # Return the dictionary containing the results of element checks
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        
-        # You can perform similar checks for other elements
-        
-        # Return the dictionary containing the results of element checks
-        return team_assignment_content
-
-
-
-
-

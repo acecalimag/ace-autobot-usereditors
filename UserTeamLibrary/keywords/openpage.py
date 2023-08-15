@@ -1,5 +1,5 @@
 
-from TeamAssignmentLibrary.locators import pagelocators
+from UserTeamLibrary.locators import pagelocators
 from SeleniumLibrary import SeleniumLibrary
 from robot.api.deco import keyword
 from robot.api import logger
@@ -15,7 +15,7 @@ class OpenPage:
         self.__ctx.wait_until_element_is_visible(locator=pagelocators.CONFNAV)
         self.__ctx.click_element(locator=pagelocators.EDITORDROPDOWN)
         
-        self.__ctx.wait_until_element_is_visible(locator=pagelocators.TEAMASSIGNMENT)
-        self.__ctx.click_element(locator=pagelocators.TEAMASSIGNMENT)
+        self.__ctx.wait_until_element_is_visible(locator=pagelocators.USERTEAM)
+        self.__ctx.click_element(locator=pagelocators.USERTEAM)
         
         

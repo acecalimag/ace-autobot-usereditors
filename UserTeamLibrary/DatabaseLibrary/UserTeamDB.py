@@ -59,7 +59,25 @@ class UserTeamDB:
             return {
                 'message': "Agent is not assigned to a team."
             }
-        
+
+
+
+    @keyword
+    def get_lead_uid(self, lead_name: str):
+        """ TODO: Create a database query to retrieve the Team Leads's UID."""
+        query = "select * from kjt.user where name = %s;"
+         
+        return self.__db.execute(query, (lead_name,))[0]['uid']
+
+
+
+    @keyword
+    def get_loc_code(self, loc_code: str):
+        """ TODO: Create a database query to retrieve the Team Leads's UID."""
+        query = "select * from kjt.userlocation where code = %s;"
+         
+        return self.__db.execute(query, (loc_code,))[0]['lid']
+
 
 
 # QA_DB_CREDS = {

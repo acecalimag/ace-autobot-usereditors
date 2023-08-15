@@ -7,7 +7,7 @@ from UserTeamLibrary.keywords.loginpage import LoginPage
 from UserTeamLibrary.keywords.openpage import OpenPage
 from UserTeamLibrary.keywords.selectteam import SelectTeam
 from UserTeamLibrary.keywords.teamdetails import TeamDetails
-from UserTeamLibrary.keywords.teamassignmenteditor import TeamAssignmentEditor
+from UserTeamLibrary.keywords.userteameditor import UserTeamEditor
 from UserTeamLibrary.keywords.assignagenttoteam import AssignAgenttoTeam
 from UserTeamLibrary.keywords.removeagenttoteam import RemoveAgenttoTeam
 
@@ -23,7 +23,7 @@ class UserTeamLibrary(DynamicCore):
             OpenPage(ctx=ctx),
             SelectTeam(ctx=ctx), 
             TeamDetails(ctx=ctx), 
-            TeamAssignmentEditor(ctx=ctx),
+            UserTeamEditor(ctx=ctx),
             AssignAgenttoTeam(ctx=ctx),
             RemoveAgenttoTeam(ctx=ctx)
 

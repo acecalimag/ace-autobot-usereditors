@@ -1,6 +1,6 @@
 CONFNAV: str = "//li[@id='configurationnavbar']"
 EDITORDROPDOWN: str = "//a[@id='ConfigNavbarDropdown']"
-TEAMASSIGNMENT: str = "//a[@id='teamAssignLi']"
+USERTEAM: str = "//a[@id='userTeamLi']"
 # EDITORDRITM: str = "//a[@class='dropdown-item'"
 
 

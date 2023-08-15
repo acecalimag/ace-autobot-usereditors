@@ -238,10 +238,8 @@ class TeamAssignmentEditor:
         if elements:
             element = elements[0]
             
-            # Retrieve the visible text content of the <div> element
             div_text = element.text.strip()
           
-            # Compare the extracted text with the expected text
             if div_text == exp_rmndrlbl:
                 logger.info("REMINDER LABEL is showing and content matches")
                 team_assignment_content['REMINDER LABEL'] = 'Showing'
@@ -258,10 +256,8 @@ class TeamAssignmentEditor:
         if elements:
             element = elements[0]
             
-            # Retrieve the visible text content of the <div> element
             div_text = element.text.strip()
           
-            # Compare the extracted text with the expected text
             if div_text == exp_alerttext:
                 logger.info("REMINDER NOTICE is showing and content matches")
                 team_assignment_content['REMINDER NOTICE'] = 'Showing'
@@ -274,66 +270,5 @@ class TeamAssignmentEditor:
 
 
 
-
-
         return team_assignment_content
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        # if self.__ctx.driver.find_elements("xpath", teamlocators.FREEAGENTSFLTR):
-        #     logger.info("FREE AGENTS Filter is showing")
-        #     team_assignment_content['Free Agents Filter'] = 'Showing'
-        # else:
-        #     logger.info("FREE AGENTS Filter is not showing")
-        #     team_assignment_content['Free Agents Filter'] = 'Not Showing'
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        # Return the dictionary containing the results of element checks
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        
-        # You can perform similar checks for other elements
-        
-        # Return the dictionary containing the results of element checks
-        return team_assignment_content
-
-
-
-
 
