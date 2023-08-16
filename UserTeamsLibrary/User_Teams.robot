@@ -24,17 +24,49 @@ Logout
 
 *** Test Cases ***
 
-Verify completeness of fields, labels, and buttons for Team Assignment Editor Page
+Verify the Team Details
     [Setup]        User Team
     [Teardown]     Logout
     
-    ${result_tlead_uid}                  Get Lead Uid                         lead_name=${EXP_TLNAME}
-    ${result_loc_code}                   Get Loc Code                         loc_code=${EXP_LOC}    
+    # ${result_tlead_uid}                  Get Lead Uid                         lead_name=${EXP_TLNAME}
+    # ${result_loc_code}                   Get Loc Code                         loc_code=${EXP_LOC}    
     Search And Click Next                team_name=${TEAMNAME}
-    ${team_details}                      Check Team Details                   exp_name=${TEAMNAME}    exp_desc=Test Team    exp_lead=${EXP_TLNAME}    exp_lead_uid=${result_tlead_uid}    exp_loc=${EXP_LOC}    exp_loc_code=${result_loc_code}    exp_type=${EXP_TYPE}    exp_last_upd=${EXT_LAST_UPD}
+    ${team_details}                      Check Team Details                   exp_name=${TEAMNAME}    exp_desc=${EXP_DESC}    exp_lead=${EXP_TLNAME}    exp_loc=${EXP_LOC}    exp_type=${EXP_TYPE}    exp_last_upd=${EXT_LAST_UPD}
     Log Dictionary                       ${team_details}
     Log To Console                       ${team_details}
     
+    ${result}                            Get User Team Db                     tname=${TEAMNAME}
+    Log Dictionary                       ${result}
+    Log To Console                       ${result}
+
+    # Comparison between UI and DB
+    Should Be Equal As Strings           ${team_details['Team Name']}                ${result['Team Name']}
+    Should Be Equal As Strings           ${team_details['Team Description']}         ${result['Team Description']}
+    Should Be Equal As Strings           ${team_details['Team Lead']}                ${result['Team Lead']}
+    Should Be Equal As Strings           ${team_details['Team Location']}            ${result['Team Location']}
+    Should Be Equal As Strings           ${team_details['Team Type']}                ${result['Team Type']}
+    Should Be Equal As Strings           ${team_details['Team Status']}              ${result['Team Status']}
+
+
+
+
+Verify completeness of fields, labels, and buttons for User Teams Editor Page
+    [Setup]        User Team
+    [Teardown]     Logout
+    
+    Check Team List Table                exp_tllbl=${EXP_TLLBL}        exp_namelbl=${EXP_TBL_NAMELBL}        exp_leadlbl=${EXP_TBL_TLLBL}        exp_loclbl=${EXP_TBL_LOCLBL}        exp_typelbl=${EXP_TBL_TYPELBL}        exp_statuslbl=${EXP_TBL_STATUSLBL}        exp_lupdlbl=${EXP_TBL_LSTUPDLBL}
+    Search And Click Next                team_name=${TEAMNAME}
+    Check View Update Section            exp_vulbl=${EXP_VULBL}        exp_vu_namelbl=${EXP_VU_NAMELBL}      exp_vu_tdlbl=${EXP_VU_TDLBL}        exp_vu_tllbl=${EXP_VU_TLLBL}        exp_vu_loclbl=${EXP_VU_LOCLBL}        exp_vu_typelbl=${EXP_VU_TYPELBL}        exp_vu_statuslbl=${EXP_VU_STATUSLBL}        exp_vu_lstupdlbl=${EXP_VU_LSTUPDLBL}
+
+
+
+
+
+
+    
+
+
+
     # ${result}                            Get Lead Uid                         lead_name=${EXP_TLNAME}
 #     Log Dictionary                       ${result}
 #     Log To Console                       ${result}
@@ -103,10 +135,10 @@ Verify completeness of fields, labels, and buttons for Team Assignment Editor Pa
 #     Log To Console                       ${result}
 
 
-# Database Query
-#     ${result}                            Get User Team Db                   tname=${TEAMNAME}
-#     Log Dictionary                       ${result}
-#     Log To Console                       ${result}
+Database Query
+    ${result}                            Get User Team Db                   tname=${TEAMNAME}
+    Log Dictionary                       ${result}
+    Log To Console                       ${result}
     
 #     ${result}                            Get Agent Team                      agent_name=${AGENT_NAME} 
 #     Log Dictionary                       ${result}

@@ -17,7 +17,7 @@ class SelectTeam:
 
     @keyword
     def search_and_click_next(self, team_name):
-        driver = self.__ctx.driver  # Assuming self.__ctx.driver is the WebDriver instance
+        driver = self.__ctx.driver
 
         self.__ctx.wait_until_element_is_visible(locator=userteamslocators.TEAMLIST)
 
@@ -53,3 +53,6 @@ class SelectTeam:
                 except:
                     print("Next link not found or clickable, exiting loop.")
                     break  # Exit the loop if Next link is not found or not clickable
+
+            # Scroll up the page
+            driver.execute_script("window.scrollTo(0, 0);")

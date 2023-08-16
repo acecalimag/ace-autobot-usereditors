@@ -1,111 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.0.2 (Python 3.10.6 on win32)" generated="20230815 06:28:05.731" rpa="false" schemaversion="3">
+<robot generator="Robot 6.0.2 (Python 3.10.6 on win32)" generated="20230816 05:06:00.992" rpa="false" schemaversion="3">
 <suite id="s1" name="User Teams" source="c:\Users\WONDERS\Documents\Ace\Robot\ace-autobot-usereditors\UserTeamsLibrary\User_Teams.robot">
-<test id="s1-t1" name="Verify completeness of fields, labels, and buttons for Team Assignment Editor Page" line="27">
+<test id="s1-t1" name="Verify completeness of fields, labels, and buttons for User Teams Editor Page" line="53">
 <kw name="User Team" type="SETUP">
 <kw name="Open Config In Browser" library="UserTeamsLibrary">
-<msg timestamp="20230815 06:28:06.077" level="INFO">Opening browser 'chrome' to base url 'https://qa.letsdochinese.com/KJTCore/resources/userconfigclient/userteameditor.html'.</msg>
-<msg timestamp="20230815 06:28:06.084" level="INFO">Applicable driver not found; attempting to install with Selenium Manager (Beta)</msg>
-<status status="PASS" starttime="20230815 06:28:06.077" endtime="20230815 06:28:15.297"/>
+<msg timestamp="20230816 05:06:01.331" level="INFO">Opening browser 'chrome' to base url 'https://qa.letsdochinese.com/KJTCore/resources/userconfigclient/userteameditor.html'.</msg>
+<msg timestamp="20230816 05:06:01.336" level="INFO">Applicable driver not found; attempting to install with Selenium Manager (Beta)</msg>
+<status status="PASS" starttime="20230816 05:06:01.330" endtime="20230816 05:06:12.190"/>
 </kw>
 <kw name="Login" library="UserTeamsLibrary">
 <arg>username=${USERNAME}</arg>
 <arg>password=${PASSWORD}</arg>
-<msg timestamp="20230815 06:28:15.298" level="INFO">Logging in using  acalimag and kjt</msg>
-<msg timestamp="20230815 06:28:15.329" level="INFO">Typing text 'acalimag' into text field 'id:username'.</msg>
-<msg timestamp="20230815 06:28:15.393" level="INFO">Typing text 'kjt' into text field 'id:password'.</msg>
-<msg timestamp="20230815 06:28:15.453" level="INFO">Clicking element 'id:login'.</msg>
-<status status="PASS" starttime="20230815 06:28:15.297" endtime="20230815 06:28:15.492"/>
+<msg timestamp="20230816 05:06:12.192" level="INFO">Logging in using  acalimag and kjt</msg>
+<msg timestamp="20230816 05:06:12.229" level="INFO">Typing text 'acalimag' into text field 'id:username'.</msg>
+<msg timestamp="20230816 05:06:12.291" level="INFO">Typing text 'kjt' into text field 'id:password'.</msg>
+<msg timestamp="20230816 05:06:12.348" level="INFO">Clicking element 'id:login'.</msg>
+<status status="PASS" starttime="20230816 05:06:12.191" endtime="20230816 05:06:12.386"/>
 </kw>
 <kw name="Open User Team" library="UserTeamsLibrary">
-<msg timestamp="20230815 06:28:15.493" level="INFO">Select configuration for User Team</msg>
-<msg timestamp="20230815 06:28:23.365" level="INFO">Clicking element '//a[@id='ConfigNavbarDropdown']'.</msg>
-<msg timestamp="20230815 06:28:23.426" level="INFO">Clicking element '//a[@id='userTeamLi']'.</msg>
-<status status="PASS" starttime="20230815 06:28:15.493" endtime="20230815 06:28:24.015"/>
+<msg timestamp="20230816 05:06:12.387" level="INFO">Select configuration for User Team</msg>
+<msg timestamp="20230816 05:06:19.030" level="INFO">Clicking element '//a[@id='ConfigNavbarDropdown']'.</msg>
+<msg timestamp="20230816 05:06:19.088" level="INFO">Clicking element '//a[@id='userTeamLi']'.</msg>
+<status status="PASS" starttime="20230816 05:06:12.387" endtime="20230816 05:06:19.680"/>
 </kw>
-<status status="PASS" starttime="20230815 06:28:06.077" endtime="20230815 06:28:24.015"/>
+<status status="PASS" starttime="20230816 05:06:01.330" endtime="20230816 05:06:19.680"/>
 </kw>
-<kw name="Get Lead Uid" library="UserTeamsLibrary.DatabaseLibrary">
-<var>${result_tlead_uid}</var>
-<arg>lead_name=${EXP_TLNAME}</arg>
-<doc>TODO: Create a database query to retrieve the Team Leads's UID.</doc>
-<msg timestamp="20230815 06:28:24.017" level="INFO">Creating a new connection.</msg>
-<msg timestamp="20230815 06:28:26.706" level="INFO">Executing query. select * from kjt.user where name = %s;</msg>
-<msg timestamp="20230815 06:28:27.226" level="INFO">${result_tlead_uid} = ada97b38-0416-4834-8275-385499eaa8d6</msg>
-<status status="PASS" starttime="20230815 06:28:24.016" endtime="20230815 06:28:27.226"/>
-</kw>
-<kw name="Get Loc Code" library="UserTeamsLibrary.DatabaseLibrary">
-<var>${result_loc_code}</var>
-<arg>loc_code=${EXP_LOC}</arg>
-<doc>TODO: Create a database query to retrieve the Team Leads's UID.</doc>
-<msg timestamp="20230815 06:28:27.227" level="INFO">Using an existing connection &lt;mysql.connector.connection_cext.CMySQLConnection object at 0x000001F0A0DB7700&gt;.</msg>
-<msg timestamp="20230815 06:28:27.227" level="INFO">Executing query. select * from kjt.userlocation where code = %s;</msg>
-<msg timestamp="20230815 06:28:27.740" level="INFO">${result_loc_code} = 730240a5-54de-11eb-abd0-0ae171fa66a9</msg>
-<status status="PASS" starttime="20230815 06:28:27.227" endtime="20230815 06:28:27.741"/>
+<kw name="Check Team List Table" library="UserTeamsLibrary">
+<arg>exp_tllbl=${EXP_TLLBL}</arg>
+<arg>exp_namelbl=${EXP_TBL_NAMELBL}</arg>
+<arg>exp_leadlbl=${EXP_TBL_TLLBL}</arg>
+<arg>exp_loclbl=${EXP_TBL_LOCLBL}</arg>
+<arg>exp_typelbl=${EXP_TBL_TYPELBL}</arg>
+<arg>exp_statuslbl=${EXP_TBL_STATUSLBL}</arg>
+<arg>exp_lupdlbl=${EXP_TBL_LSTUPDLBL}</arg>
+<msg timestamp="20230816 05:06:19.682" level="INFO">Check the Team List Table if fields, labels, and buttons are present</msg>
+<msg timestamp="20230816 05:06:19.701" level="INFO">TEAM LIST Label is showing and text matches: TEAM LIST</msg>
+<msg timestamp="20230816 05:06:19.723" level="INFO">Name Label in Team List Table is showing and text matches: Name</msg>
+<msg timestamp="20230816 05:06:19.736" level="INFO">Team Lead Label in Team List Table is showing and text matches: Team Lead</msg>
+<msg timestamp="20230816 05:06:19.747" level="INFO">Location Label in Team List Table is showing and text matches: Location</msg>
+<msg timestamp="20230816 05:06:19.758" level="INFO">Type Label in Team List Table is showing and text matches: Type</msg>
+<msg timestamp="20230816 05:06:19.773" level="INFO">Status Label in Team List Table is showing and text matches: Status</msg>
+<msg timestamp="20230816 05:06:19.787" level="INFO">Last Updated Label in Team List Table is showing and text matches: Last Updated</msg>
+<status status="PASS" starttime="20230816 05:06:19.681" endtime="20230816 05:06:19.787"/>
 </kw>
 <kw name="Search And Click Next" library="UserTeamsLibrary">
 <arg>team_name=${TEAMNAME}</arg>
-<msg timestamp="20230815 06:28:38.430" level="INFO">Clicked on 'Next'
+<msg timestamp="20230816 05:06:30.485" level="INFO">Clicked on 'Next'
 Clicked on 'Next'
 Clicked on 'Next'
 Clicked on 'Next'
 Clicked on 'Next'
 Clicked on: Xrp Adam Warlock DGT Operational Enabled Aug 15, 2023 5:50 AM</msg>
-<status status="PASS" starttime="20230815 06:28:27.741" endtime="20230815 06:28:38.430"/>
+<status status="PASS" starttime="20230816 05:06:19.788" endtime="20230816 05:06:30.486"/>
 </kw>
-<kw name="Check Team Details" library="UserTeamsLibrary">
-<var>${team_details}</var>
-<arg>exp_name=${TEAMNAME}</arg>
-<arg>exp_desc=Test Team</arg>
-<arg>exp_lead=${EXP_TLNAME}</arg>
-<arg>exp_lead_uid=${result_tlead_uid}</arg>
-<arg>exp_loc=${EXP_LOC}</arg>
-<arg>exp_loc_code=${result_loc_code}</arg>
-<arg>exp_type=${EXP_TYPE}</arg>
-<arg>exp_last_upd=${EXT_LAST_UPD}</arg>
-<msg timestamp="20230815 06:28:38.431" level="INFO">Check the details using  Xrp, Test Team, Adam Warlock, DGT, operational and Aug 15, 2023 5:50 AM</msg>
-<msg timestamp="20230815 06:28:38.448" level="INFO">got_act: Xrp</msg>
-<msg timestamp="20230815 06:28:38.462" level="INFO">got_act: Adam Warlock</msg>
-<msg timestamp="20230815 06:28:38.476" level="INFO">got_act: ada97b38-0416-4834-8275-385499eaa8d6</msg>
-<msg timestamp="20230815 06:28:38.492" level="INFO">got_act: DGT</msg>
-<msg timestamp="20230815 06:28:38.505" level="INFO">got_act: 730240a5-54de-11eb-abd0-0ae171fa66a9</msg>
-<msg timestamp="20230815 06:28:38.519" level="INFO">got_act: operational</msg>
-<msg timestamp="20230815 06:28:38.577" level="INFO">ENABLE BUTTON IS SELECTED - TEAM STATUS is Enabled</msg>
-<msg timestamp="20230815 06:28:38.577" level="INFO">DISABLE BUTTON IS NOT SELECTED - TEAM STATUS is Enabled</msg>
-<msg timestamp="20230815 06:28:38.591" level="INFO">got_act: Aug 15, 2023 5:50 AM</msg>
-<msg timestamp="20230815 06:28:38.591" level="INFO">${team_details} = {'Team Name': 'Aug 15, 2023 5:50 AM', 'Team Lead Name': 'Adam Warlock', 'Team Lead UID': 'ada97b38-0416-4834-8275-385499eaa8d6', 'Team Location': 'DGT', 'Team Location Code': '730240a5-54de-11eb-abd0-...</msg>
-<status status="PASS" starttime="20230815 06:28:38.430" endtime="20230815 06:28:38.591"/>
-</kw>
-<kw name="Log Dictionary" library="Collections">
-<arg>${team_details}</arg>
-<doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
-<msg timestamp="20230815 06:28:38.592" level="INFO">Dictionary size is 6 and it contains following items:
-Team Lead Name: Adam Warlock
-Team Lead UID: ada97b38-0416-4834-8275-385499eaa8d6
-Team Location: DGT
-Team Location Code: 730240a5-54de-11eb-abd0-0ae171fa66a9
-Team Name: Aug 15, 2023 5:50 AM
-Team Type: operational</msg>
-<status status="PASS" starttime="20230815 06:28:38.592" endtime="20230815 06:28:38.593"/>
-</kw>
-<kw name="Log To Console" library="BuiltIn">
-<arg>${team_details}</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" starttime="20230815 06:28:38.593" endtime="20230815 06:28:38.594"/>
+<kw name="Check View Update Section" library="UserTeamsLibrary">
+<arg>exp_vulbl=${EXP_VULBL}</arg>
+<arg>exp_vu_namelbl=${EXP_VU_NAMELBL}</arg>
+<arg>exp_vu_tdlbl=${EXP_VU_TDLBL}</arg>
+<arg>exp_vu_tllbl=${EXP_VU_TLLBL}</arg>
+<arg>exp_vu_loclbl=${EXP_VU_LOCLBL}</arg>
+<arg>exp_vu_typelbl=${EXP_VU_TYPELBL}</arg>
+<arg>exp_vu_statuslbl=${EXP_VU_STATUSLBL}</arg>
+<arg>exp_vu_lstupdlbl=${EXP_VU_LSTUPDLBL}</arg>
+<msg timestamp="20230816 05:06:30.487" level="INFO">Check the View/Update Section if fields, labels, and buttons are present</msg>
+<msg timestamp="20230816 05:06:30.499" level="INFO">View/Update Label is showing and text matches: View/Update</msg>
+<msg timestamp="20230816 05:06:30.513" level="INFO">Name Label in View/Update Section is showing and text matches: Name *</msg>
+<msg timestamp="20230816 05:06:30.524" level="INFO">Description Label in View/Update Section is showing and text matches: Description</msg>
+<msg timestamp="20230816 05:06:30.535" level="INFO">Team Lead Label in View/Update Section is showing but text does not match. Actual: Description, Expected: Team Lead</msg>
+<msg timestamp="20230816 05:06:30.548" level="INFO">Location Label in View/Update Section is showing and text matches: Location *</msg>
+<msg timestamp="20230816 05:06:30.563" level="INFO">Type Label in View/Update Section is showing and text matches: Type *</msg>
+<msg timestamp="20230816 05:06:30.575" level="INFO">Status Label in View/Update Section is showing and text matches: Status</msg>
+<msg timestamp="20230816 05:06:30.586" level="INFO">Last Updated Label in View/Update Section is showing and text matches: Last Updated</msg>
+<msg timestamp="20230816 05:06:30.880" level="INFO">SAVE BUTTON is showing</msg>
+<msg timestamp="20230816 05:06:31.167" level="INFO">CANCEL BUTTON is showing</msg>
+<status status="PASS" starttime="20230816 05:06:30.486" endtime="20230816 05:06:31.167"/>
 </kw>
 <kw name="Logout" type="TEARDOWN">
 <kw name="Logout To System" library="UserTeamsLibrary">
-<msg timestamp="20230815 06:28:38.595" level="INFO">Logging out of the system</msg>
-<msg timestamp="20230815 06:28:38.595" level="INFO">Clicking element '//div[@class='ucc-nav-account-menu-popover-icon mr-3']'.</msg>
-<msg timestamp="20230815 06:28:38.652" level="INFO">Clicking element '//div[@class='popover-body']//li[@id='navbar-logout']'.</msg>
-<msg timestamp="20230815 06:28:38.918" level="INFO">Clicking element '//button[@id='confirm-ucc-logout-btn']'.</msg>
-<status status="PASS" starttime="20230815 06:28:38.594" endtime="20230815 06:28:42.755"/>
+<msg timestamp="20230816 05:06:31.168" level="INFO">Logging out of the system</msg>
+<msg timestamp="20230816 05:06:31.169" level="INFO">Clicking element '//div[@class='ucc-nav-account-menu-popover-icon mr-3']'.</msg>
+<msg timestamp="20230816 05:06:31.215" level="INFO">Clicking element '//div[@class='popover-body']//li[@id='navbar-logout']'.</msg>
+<msg timestamp="20230816 05:06:31.477" level="INFO">Clicking element '//button[@id='confirm-ucc-logout-btn']'.</msg>
+<status status="PASS" starttime="20230816 05:06:31.168" endtime="20230816 05:06:35.246"/>
 </kw>
-<status status="PASS" starttime="20230815 06:28:38.594" endtime="20230815 06:28:42.757"/>
+<status status="PASS" starttime="20230816 05:06:31.168" endtime="20230816 05:06:35.246"/>
 </kw>
-<status status="PASS" starttime="20230815 06:28:06.076" endtime="20230815 06:28:42.758"/>
+<status status="PASS" starttime="20230816 05:06:01.329" endtime="20230816 05:06:35.247"/>
 </test>
-<status status="PASS" starttime="20230815 06:28:05.736" endtime="20230815 06:28:42.762"/>
+<status status="PASS" starttime="20230816 05:06:00.999" endtime="20230816 05:06:35.248"/>
 </suite>
 <statistics>
 <total>

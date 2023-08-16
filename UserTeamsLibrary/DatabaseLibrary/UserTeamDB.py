@@ -13,18 +13,20 @@ class UserTeamDB:
 
     @keyword
     def get_user_team_db(self, tname: str):
-        """ TODO: Create a database query to retrieve the Team Assignment Details."""
-        query = "SELECT  ut.name as Team_Name, ut.utid as Team_ID, u.name as Team_Lead, ul.code as Team_Location FROM kjt.userteam AS ut JOIN kjt.user AS u ON ut.teamLead = u.uid JOIN kjt.userlocation AS ul ON ut.location = ul.lid WHERE ut.name = %s;"
+        """ TODO: Create a database query to retrieve the User Team Details."""
+        query = "SELECT ut.name as Team_Name, ut.description as Team_Description, u.name as Team_Lead, ul.code as Team_Location, ut.type as Team_Type, ut.status as Team_Status, ut.updateTime as Last_Updated FROM kjt.userteam AS ut JOIN kjt.user AS u ON ut.teamLead = u.uid JOIN kjt.userlocation AS ul ON ut.location = ul.lid WHERE ut.name = %s;"
         
-    
         result = self.__db.execute(query, (tname,))
         if result and len(result) > 0:
             row = result[0]
             return {
                 'Team Name': row['Team_Name'],
-                'Team ID': row['Team_ID'],
+                'Team Description': row['Team_Description'],
                 'Team Lead': row['Team_Lead'],
-                'Team Location': row['Team_Location']
+                'Team Location': row['Team_Location'],
+                'Team Type': row['Team_Type'].capitalize(),
+                'Team Status': row['Team_Status'].capitalize(),
+                'Last Updated': row['Last_Updated']
             }
         else:
             return None

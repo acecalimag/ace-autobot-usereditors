@@ -2,7 +2,9 @@
 from SeleniumLibrary import SeleniumLibrary
 from robot.api.deco import keyword
 from robot.api import logger
-import  time
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 from UserTeamsLibrary.locators import userteamslocators
 
@@ -13,261 +15,362 @@ class UserTeamsEditor:
         self.__ctx = ctx
 
     @keyword 
-    def select_agent(self, agent_name: str, agent_uid: str):
-        self.__ctx.wait_until_element_is_visible(locator=userteamslocators.FREEAGENTSLIST)
-        self.__ctx.click_element(locator=userteamslocators.FREEAGENTSFLTR)
-        self.__ctx.input_text(locator=userteamslocators.FREEAGENTSFLTR, text=agent_name)  
-        
-        option_locator = self.get_option_value(agent_uid)
-        self.__ctx.wait_until_element_is_visible(locator=option_locator)
-        self.__ctx.click_element(locator=option_locator)
-        selected = self.__ctx.get_element_attribute(locator=option_locator, attribute="selected")
-        logger.info(f"{selected}")
-        self.__ctx.click_button(locator=userteamslocators.MOVESLCBTN)
+    def check_team_list_table(self, exp_tllbl: str, exp_namelbl: str, exp_leadlbl: str, exp_loclbl: str, exp_typelbl: str, exp_statuslbl: str, exp_lupdlbl: str):
+        logger.info(f"Check the Team List Table if fields, labels, and buttons are present")
 
-    def get_option_value(self, agent_uid):
-        option_locator = f"xpath://option[@value='{agent_uid}']"
-        self.__ctx.find_element(option_locator)
-        return option_locator
-    
+        team_list_table = {}
 
-    @keyword 
-    def unselect_agent(self, agent_uid: str):
-        self.__ctx.wait_until_element_is_visible(locator=userteamslocators.TEAMROSTERLIST)
-
-        option_locator = self.get_option_value(agent_uid)
-        self.__ctx.click_element(locator=option_locator)
-        self.__ctx.click_button(locator=userteamslocators.REMOVEALLBTN)
-
-    def get_option_value(self, agent_uid):
-        option_locator = f"xpath://option[@value='{agent_uid}']"
-        self.__ctx.find_element(option_locator)
-        return option_locator
-
-
-    @keyword 
-    def check_team_editor(self, exp_falbl: str, exp_trosterlbl: str, exp_fafltr: str, exp_rosfltr: str, exp_rmndrlbl: str, exp_alerttext: str):
-        logger.info(f"Check the Team Assignment Editor page if fields, labels, and buttons are present")
-
-        team_assignment_content = {}
-        
-        elements = self.__ctx.driver.find_elements("xpath", userteamslocators.FREEAGENTSLBL)
+       
+        # Verify the TEAM LIST Label
+        elements = self.__ctx.driver.find_elements("xpath", userteamslocators.TEAM_LIST_LBL)
         if elements:
             element = elements[0]
-            act_falbl = element.text
+            act_tllbl = element.text
             
             # Compare actual_text with expected_text
-            if act_falbl == exp_falbl:
-                logger.info(f"FREE AGENTS Label is showing and text matches: {act_falbl}")
-                team_assignment_content['Free Agents Label'] = 'Showing'
+            if act_tllbl == exp_tllbl:
+                logger.info(f"TEAM LIST Label is showing and text matches: {act_tllbl}")
+                team_list_table['TEAM LIST Label'] = 'Showing'
             else:
-                logger.info(f"FREE AGENTS Label is showing but text does not match. Actual: {act_falbl}, Expected: {exp_falbl}")
-                team_assignment_content['Free Agents Label'] = 'Not Showing'
+                logger.info(f"TEAM LIST Label is showing but text does not match. Actual: {act_tllbl}, Expected: {exp_tllbl}")
+                team_list_table['TEAM LIST Label'] = 'Not Showing'
         else:
-            logger.info("FREE AGENTS Label is not showing")
-            team_assignment_content['Free Agents Label'] = 'Not Showing'
-        
+            logger.info("TEAM LIST Label is not showing")
+            team_list_table['TEAM LIST Label'] = 'Not Showing'
 
 
-        elements = self.__ctx.driver.find_elements("xpath", userteamslocators.TEAMROSTERLBL)
+        # # Verify the TEAM LIST Table Column Labels (Name)
+        # self.__ctx.scroll_element_into_view("xpath", userteamslocators.TBL_NAME_LBL)
+        # elements = self.__ctx.driver.find_elements("xpath", userteamslocators.TBL_NAME_LBL)
+        # if elements:
+        #     element = elements[0]
+        #     act_namelbl = element.text
+            
+        #     # Compare actual_text with expected_text
+        #     if act_namelbl == exp_namelbl:
+        #         logger.info(f"Name Label in Team List Table is showing and text matches: {act_namelbl}")
+        #         team_list_table['Name Label in Team List Table'] = 'Showing'
+        #     else:
+        #         logger.info(f"Name Label is showing but text does not match. Actual: {act_namelbl}, Expected: {exp_namelbl}")
+        #         team_list_table['Name Label in Team List Table'] = 'Not Showing'
+        # else:
+        #     logger.info("Name Label in Team List Table is not showing")
+        #     team_list_table['Name Label in Team List Table'] = 'Not Showing'
+
+
+        # Verify the TEAM LIST Table Column Labels (Name)
+        element_locator = (By.XPATH, userteamslocators.TBL_NAME_LBL)
+        driver = self.__ctx.driver
+
+        # Scroll the element into view using WebDriverWait and JavaScript
+        element = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located(element_locator)
+        )
+        driver.execute_script("arguments[0].scrollIntoView();", element)
+
+        # Find the element again after scrolling
+        elements = driver.find_elements(*element_locator)
+
+        # Your existing code for verification and comparison
         if elements:
             element = elements[0]
-            act_trosterlbl = element.text
+            act_namelbl = element.text
+
+            # Compare actual_text with expected_text
+            if act_namelbl == exp_namelbl:
+                logger.info(f"Name Label in Team List Table is showing and text matches: {act_namelbl}")
+                team_list_table['Name Label in Team List Table'] = 'Showing'
+            else:
+                logger.info(f"Name Label is showing but text does not match. Actual: {act_namelbl}, Expected: {exp_namelbl}")
+                team_list_table['Name Label in Team List Table'] = 'Not Showing'
+        else:
+            logger.info("Name Label in Team List Table is not showing")
+            team_list_table['Name Label in Team List Table'] = 'Not Showing'
+
+
+
+
+
+
+
+        # Verify the TEAM LIST Table Column Labels (Team Lead)
+        elements = self.__ctx.driver.find_elements("xpath", userteamslocators.TBL_TLEAD_LBL)
+        if elements:
+            element = elements[0]
+            act_leadlbl = element.text
             
             # Compare actual_text with expected_text
-            if act_trosterlbl == exp_trosterlbl:
-                logger.info(f"TEAM ROSTER Label is showing and text matches: {act_trosterlbl}")
-                team_assignment_content['TEAM ROSTER Label'] = 'Showing'
+            if act_leadlbl == exp_leadlbl:
+                logger.info(f"Team Lead Label in Team List Table is showing and text matches: {act_leadlbl}")
+                team_list_table['Team Lead Label in Team List Table'] = 'Showing'
             else:
-                logger.info(f"TEAM ROSTER Label is showing but text does not match. Actual: {act_trosterlbl}, Expected: {exp_trosterlbl}")
-                team_assignment_content['TEAM ROSTER Label'] = 'Not Showing'
+                logger.info(f"Team Lead Label is showing but text does not match. Actual: {act_leadlbl}, Expected: {exp_leadlbl}")
+                team_list_table['Team Lead Label in Team List Table'] = 'Not Showing'
         else:
-            logger.info("TEAM ROSTER Label is not showing")
-            team_assignment_content['TEAM ROSTER Label'] = 'Not Showing'
-            
-        
+            logger.info("Team Lead in Team List Table is not showing")
+            team_list_table['Team Lead in Team List Table'] = 'Not Showing'
 
-        elements = self.__ctx.driver.find_elements("xpath", userteamslocators.FREEAGENTSFLTR)
+
+        # Verify the TEAM LIST Table Column Labels (Location)
+        elements = self.__ctx.driver.find_elements("xpath", userteamslocators.TBL_TLOC_LBL)
         if elements:
             element = elements[0]
+            act_loclbl = element.text
             
-            # Retrieve the "placeholder" attribute value
-            act_fafltr_placeholder = element.get_attribute("placeholder")
-            
-            # Compare the placeholder attribute value with the expected value
-            if act_fafltr_placeholder == exp_fafltr:
-                logger.info(f"FREE AGENTS Filter is showing and placeholder matches: {act_fafltr_placeholder}")
-                team_assignment_content['FREE AGENTS Filter'] = 'Showing'
+            # Compare actual_text with expected_text
+            if act_loclbl == exp_loclbl:
+                logger.info(f"Location Label in Team List Table is showing and text matches: {act_loclbl}")
+                team_list_table['Location Label in Team List Table'] = 'Showing'
             else:
-                logger.info(f"FREE AGENTS Filter is showing but placeholder does not match. Actual: {act_fafltr_placeholder}, Expected: {exp_fafltr}")
-                team_assignment_content['FREE AGENTS Filter'] = 'Not Showing'
+                logger.info(f"Location Label is showing but text does not match. Actual: {act_loclbl}, Expected: {exp_loclbl}")
+                team_list_table['Location Label in Team List Table'] = 'Not Showing'
         else:
-            logger.info("FREE AGENTS Filter is not showing")
-            team_assignment_content['FREE AGENTS Filter'] = 'Not Showing'
+            logger.info("Location LABEL in Team List Table is not showing")
+            team_list_table['Location Label in Team List Table'] = 'Not Showing'
 
 
-
-        elements = self.__ctx.driver.find_elements("xpath", userteamslocators.TEAMROSTERFLTR)
+        # Verify the TEAM LIST Table Column Labels (Type)
+        elements = self.__ctx.driver.find_elements("xpath", userteamslocators.TBL_TTYPE_LBL)
         if elements:
             element = elements[0]
+            act_typelbl = element.text
             
-            # Retrieve the "placeholder" attribute value
-            act_rosfltr_placeholder = element.get_attribute("placeholder")
-            
-            # Compare the placeholder attribute value with the expected value
-            if act_rosfltr_placeholder == exp_rosfltr:
-                logger.info(f"TEAM ROSTER Filter is showing and placeholder matches: {act_rosfltr_placeholder}")
-                team_assignment_content['TEAM ROSTER Filter'] = 'Showing'
+            # Compare actual_text with expected_text
+            if act_typelbl == exp_typelbl:
+                logger.info(f"Type Label in Team List Table is showing and text matches: {act_typelbl}")
+                team_list_table['Type Label in Team List Table'] = 'Showing'
             else:
-                logger.info(f"TEAM ROSTER Filter is showing but placeholder does not match. Actual: {act_rosfltr_placeholder}, Expected: {exp_rosfltr}")
-                team_assignment_content['TEAM ROSTER Filter'] = 'Not Showing'
+                logger.info(f"Type Label is showing but text does not match. Actual: {act_typelbl}, Expected: {exp_typelbl}")
+                team_list_table['Type Label in Team List Table'] = 'Not Showing'
         else:
-            logger.info("TEAM ROSTER Filter is not showing")
-            team_assignment_content['TEAM ROSTER Filter'] = 'Not Showing'
+            logger.info("Type Label in Team List Table is not showing")
+            team_list_table['Type Label in Team List Table'] = 'Not Showing'
 
 
-
-        if self.__ctx.driver.find_elements("xpath", userteamslocators.MOVESLCBTN):
-            logger.info("MOVE SELECTED Button is showing")
-            team_assignment_content['MOVE SELECTED Button'] = 'Showing'
+        # Verify the TEAM LIST Table Column Labels (Status)
+        elements = self.__ctx.driver.find_elements("xpath", userteamslocators.TBL_TSTAT_LBL)
+        if elements:
+            element = elements[0]
+            act_statuslbl = element.text
+            
+            # Compare actual_text with expected_text
+            if act_statuslbl == exp_statuslbl:
+                logger.info(f"Status Label in Team List Table is showing and text matches: {act_statuslbl}")
+                team_list_table['Status Label in Team List Table'] = 'Showing'
+            else:
+                logger.info(f"Status Label is showing but text does not match. Actual: {act_statuslbl}, Expected: {exp_statuslbl}")
+                team_list_table['Status Label in Team List Table'] = 'Not Showing'
         else:
-            logger.info("MOVE SELECTED Button is not showing")
-            team_assignment_content['MOVE SELECTED Button'] = 'Not Showing'
+            logger.info("Status Label in Team List Table is not showing")
+            team_list_table['Status Label in Team List Table'] = 'Not Showing'
 
 
 
-        if self.__ctx.driver.find_elements("xpath", userteamslocators.MOVEALLBTN):
-            logger.info("MOVE ALL Button is showing")
-            team_assignment_content['MOVE ALL Button'] = 'Showing'
+        # Verify the TEAM LIST Table Column Labels (Last Updated)
+        elements = self.__ctx.driver.find_elements("xpath", userteamslocators.TBL_TLUPD_LBL)
+        if elements:
+            element = elements[0]
+            act_lupdlbl = element.text
+            
+            # Compare actual_text with expected_text
+            if act_lupdlbl == exp_lupdlbl:
+                logger.info(f"Last Updated Label in Team List Table is showing and text matches: {act_lupdlbl}")
+                team_list_table['Last Updated Label in Team List Table'] = 'Showing'
+            else:
+                logger.info(f"Last Updated Label is showing but text does not match. Actual: {act_lupdlbl}, Expected: {exp_lupdlbl}")
+                team_list_table['Last Updated Label in Team List Table'] = 'Not Showing'
         else:
-            logger.info("MOVE ALL Button is not showing")
-            team_assignment_content['MOVE ALL Button'] = 'Not Showing'
+            logger.info("Last Updated Label in Team List Table is not showing")
+            team_list_table['Last Updated Label in Team List Table'] = 'Not Showing'
 
 
 
-        if self.__ctx.driver.find_elements("xpath", userteamslocators.REMOVESLCBTN):
-            logger.info("REMOVE SELECTED Button is showing")
-            team_assignment_content['REMOVE SELECTED Button'] = 'Showing'
+        return team_list_table
+
+
+
+
+
+    @keyword 
+    def check_view_update_section(self, exp_vulbl: str, exp_vu_namelbl: str, exp_vu_tdlbl: str, exp_vu_tllbl: str, exp_vu_loclbl: str, exp_vu_typelbl: str, exp_vu_statuslbl: str, exp_vu_lstupdlbl: str):
+        logger.info(f"Check the View/Update Section if fields, labels, and buttons are present")
+
+        view_update_section = {}
+
+        # Verify the View/Update Label
+        elements = self.__ctx.driver.find_elements("xpath", userteamslocators.VIEW_UPDATE_LBL)
+        if elements:
+            element = elements[0]
+            act_vulbl = element.text
+            
+            # Compare actual_text with expected_text
+            if act_vulbl == exp_vulbl:
+                logger.info(f"View/Update Label is showing and text matches: {act_vulbl}")
+                view_update_section['View/Update Label'] = 'Showing'
+            else:
+                logger.info(f"View/Update Label is showing but text does not match. Actual: {act_vulbl}, Expected: {exp_vulbl}")
+                view_update_section['View/Update Label'] = 'Not Showing'
         else:
-            logger.info("REMOVE SELECTED Button is not showing")
-            team_assignment_content['REMOVE SELECTED Button'] = 'Not Showing'
-
-
-
-        if self.__ctx.driver.find_elements("xpath", userteamslocators.REMOVEALLBTN):
-            logger.info("REMOVE ALL Button is showing")
-            team_assignment_content['REMOVE ALL Button'] = 'Showing'
-        else:
-            logger.info("REMOVE ALL Button is not showing")
-            team_assignment_content['REMOVE ALL Button'] = 'Not Showing'
-
-
-
-        if self.__ctx.driver.find_elements("xpath", userteamslocators.FREEAGENTSLIST):
-            logger.info("FREE AGENT LIST is showing")
-            team_assignment_content['FREE AGENT LIST'] = 'Showing'
-        else:
-            logger.info("FREE AGENT LIST is not showing")
-            team_assignment_content['FREE AGENT LIST'] = 'Not Showing'
-
+            logger.info("View/Update Label is not showing")
+            view_update_section['View/Update Label'] = 'Not Showing'
         
 
-        if self.__ctx.driver.find_elements("xpath", userteamslocators.TEAMROSTERLIST):
-            logger.info("TEAM AGENT LIST is showing")
-            team_assignment_content['TEAM AGENT LIST'] = 'Showing'
+
+        # Verify the View/Update Section Labels (Name)
+        elements = self.__ctx.driver.find_elements("xpath", userteamslocators.VU_NAMELBL)
+        if elements:
+            element = elements[0]
+            act_vu_namelbl = element.text
+            
+            # Compare actual_text with expected_text
+            if act_vu_namelbl == exp_vu_namelbl:
+                logger.info(f"Name Label in View/Update Section is showing and text matches: {act_vu_namelbl}")
+                view_update_section['Name Label in View/Update Section'] = 'Showing'
+            else:
+                logger.info(f"Name Label in View/Update Section is showing but text does not match. Actual: {act_vu_namelbl}, Expected: {exp_vu_namelbl}")
+                view_update_section['Name Label in View/Update Section'] = 'Not Showing'
         else:
-            logger.info("TEAM AGENT LIST is not showing")
-            team_assignment_content['TEAM AGENT LIST'] = 'Not Showing'
+            logger.info("Name Label in View/Update Section is not showing")
+            view_update_section['Name Label in View/Update Section'] = 'Not Showing'
 
 
+
+        # Verify the View/Update Section Labels (Description)
+        elements = self.__ctx.driver.find_elements("xpath", userteamslocators.VU_TDLBL)
+        if elements:
+            element = elements[0]
+            act_vu_tdlbl = element.text
+            
+            # Compare actual_text with expected_text
+            if act_vu_tdlbl == exp_vu_tdlbl:
+                logger.info(f"Description Label in View/Update Section is showing and text matches: {act_vu_tdlbl}")
+                view_update_section['Description Label in View/Update Section'] = 'Showing'
+            else:
+                logger.info(f"Description Label in View/Update Section is showing but text does not match. Actual: {act_vu_tdlbl}, Expected: {exp_vu_tdlbl}")
+                view_update_section['Description Label in View/Update Section'] = 'Not Showing'
+        else:
+            logger.info("Description Label in View/Update Section is not showing")
+            view_update_section['Description Label in View/Update Section'] = 'Not Showing'
+
+
+        # Verify the View/Update Section Labels (Team Lead)
+        elements = self.__ctx.driver.find_elements("xpath", userteamslocators.VU_TDLBL)
+        if elements:
+            element = elements[0]
+            act_vu_tllbl = element.text
+            
+            # Compare actual_text with expected_text
+            if act_vu_tllbl == exp_vu_tllbl:
+                logger.info(f"Team Lead Label in View/Update Section is showing and text matches: {act_vu_tllbl}")
+                view_update_section['Team Lead Label in View/Update Section'] = 'Showing'
+            else:
+                logger.info(f"Team Lead Label in View/Update Section is showing but text does not match. Actual: {act_vu_tllbl}, Expected: {exp_vu_tllbl}")
+                view_update_section['Team Lead Label in View/Update Section'] = 'Not Showing'
+        else:
+            logger.info("Team Lead Label in View/Update Section is not showing")
+            view_update_section['Team Lead Label in View/Update Section'] = 'Not Showing'
+
+
+        # Verify the View/Update Section Labels (Location)
+        elements = self.__ctx.driver.find_elements("xpath", userteamslocators.VU_LOCLBL)
+        if elements:
+            element = elements[0]
+            act_vu_loclbl = element.text
+            
+            # Compare actual_text with expected_text
+            if act_vu_loclbl == exp_vu_loclbl:
+                logger.info(f"Location Label in View/Update Section is showing and text matches: {act_vu_loclbl}")
+                view_update_section['Location Label in View/Update Section'] = 'Showing'
+            else:
+                logger.info(f"Location Label in View/Update Section is showing but text does not match. Actual: {act_vu_loclbl}, Expected: {exp_vu_loclbl}")
+                view_update_section['Location Label in View/Update Section'] = 'Not Showing'
+        else:
+            logger.info("Location Label in View/Update Section is not showing")
+            view_update_section['Location Label in View/Update Section'] = 'Not Showing'
+
+
+        # Verify the View/Update Section Labels (Type)
+        elements = self.__ctx.driver.find_elements("xpath", userteamslocators.VU_TYPELBL)
+        if elements:
+            element = elements[0]
+            act_vu_typelbl = element.text
+            
+            # Compare actual_text with expected_text
+            if act_vu_typelbl == exp_vu_typelbl:
+                logger.info(f"Type Label in View/Update Section is showing and text matches: {act_vu_typelbl}")
+                view_update_section['Type Label in View/Update Section'] = 'Showing'
+            else:
+                logger.info(f"Type Label in View/Update Section is showing but text does not match. Actual: {act_vu_typelbl}, Expected: {exp_vu_typelbl}")
+                view_update_section['Type Label in View/Update Section'] = 'Not Showing'
+        else:
+            logger.info("Type Label in View/Update Section is not showing")
+            view_update_section['Type Label in View/Update Section'] = 'Not Showing'
+
+
+        # Verify the View/Update Section Labels (Status)
+        elements = self.__ctx.driver.find_elements("xpath", userteamslocators.VU_STATUSLBL)
+        if elements:
+            element = elements[0]
+            act_vu_statuslbl = element.text
+            
+            # Compare actual_text with expected_text
+            if act_vu_statuslbl == exp_vu_statuslbl:
+                logger.info(f"Status Label in View/Update Section is showing and text matches: {act_vu_statuslbl}")
+                view_update_section['Status Label in View/Update Section'] = 'Showing'
+            else:
+                logger.info(f"Status Label in View/Update Section is showing but text does not match. Actual: {act_vu_statuslbl}, Expected: {exp_vu_statuslbl}")
+                view_update_section['Status Label in View/Update Section'] = 'Not Showing'
+        else:
+            logger.info("Status Label in View/Update Section is not showing")
+            view_update_section['Status Label in View/Update Section'] = 'Not Showing'        
+
+
+        # Verify the View/Update Section Labels (Last Updated)
+        elements = self.__ctx.driver.find_elements("xpath", userteamslocators.VU_LSTUPDLBL)
+        if elements:
+            element = elements[0]
+            act_vu_lstupdlbl = element.text
+            
+            # Compare actual_text with expected_text
+            if act_vu_lstupdlbl == exp_vu_lstupdlbl:
+                logger.info(f"Last Updated Label in View/Update Section is showing and text matches: {act_vu_lstupdlbl}")
+                view_update_section['Last Updated Label in View/Update Section'] = 'Showing'
+            else:
+                logger.info(f"Last Updated Label in View/Update Section is showing but text does not match. Actual: {act_vu_lstupdlbl}, Expected: {exp_vu_lstupdlbl}")
+                view_update_section['Last Updated Label in View/Update Section'] = 'Not Showing'
+        else:
+            logger.info("Last Updated Label in View/Update Section is not showing")
+            view_update_section['Last Updated Label in View/Update Section'] = 'Not Showing' 
+
+
+        # Verify Save Button is showing
         try:
             self.__ctx.scroll_element_into_view(userteamslocators.SAVEBTN)
             if self.__ctx.find_element(userteamslocators.SAVEBTN):
                 logger.info("SAVE BUTTON is showing")
-                team_assignment_content['SAVE BUTTON LIST'] = 'Showing'
+                view_update_section['SAVE BUTTON LIST'] = 'Showing'
             else:
                 logger.info("SAVE BUTTON is not showing")
-                team_assignment_content['SAVE BUTTON LIST'] = 'Not Showing'
+                view_update_section['SAVE BUTTON LIST'] = 'Not Showing'
         except Exception as e:
             logger.error("An error occurred:", str(e))
-            team_assignment_content['SAVE BUTTON LIST'] = 'Error'
+            view_update_section['SAVE BUTTON LIST'] = 'Error'
         
-        
+
+        # Verify Cancel Button is showing        
         try:
             self.__ctx.scroll_element_into_view(userteamslocators.CANCELBTN)
             if self.__ctx.find_elements(userteamslocators.CANCELBTN):
                 logger.info("CANCEL BUTTON is showing")
-                team_assignment_content['CANCEL BUTTON LIST'] = 'Showing'
+                view_update_section['CANCEL BUTTON LIST'] = 'Showing'
             else:
                 logger.info("CANCEL BUTTON is not showing")
-                team_assignment_content['CANCEL BUTTON LIST'] = 'Not Showing'
+                view_update_section['CANCEL BUTTON LIST'] = 'Not Showing'
         except Exception as e:
             logger.error("An error occurred:", str(e))
-            team_assignment_content['CANCEL BUTTON LIST'] = 'Error'
-        
+            view_update_section['CANCEL BUTTON LIST'] = 'Error' 
 
 
-        if self.__ctx.driver.find_elements("xpath", userteamslocators.ALERT):
-            logger.info("ALERT / REMINDER is showing")
-            team_assignment_content['ALERT / REMINDER'] = 'Showing'
-        else:
-            logger.info("ALERT / REMINDER is not showing")
-            team_assignment_content['ALERT / REMINDER'] = 'Not Showing'
+        return view_update_section
 
-
-
-        if self.__ctx.driver.find_elements("xpath", userteamslocators.INFO_CIRCLE):
-            logger.info("INFO ICON is showing")
-            team_assignment_content['INFO ICON'] = 'Showing'
-        else:
-            logger.info("ALERT / REMINDER is not showing")
-            team_assignment_content['INFO ICON'] = 'Not Showing'
-
-
-
-        if self.__ctx.driver.find_elements("xpath", userteamslocators.DISMISS_ALERT_BTN):
-            logger.info("CLOSE BUTTON is showing")
-            team_assignment_content['CLOSE BUTTON'] = 'Showing'
-        else:
-            logger.info("CLOSE BUTTON is not showing")
-            team_assignment_content['CLOSE BUTTON'] = 'Not Showing'
-
-
-
-        elements = self.__ctx.driver.find_elements("xpath", userteamslocators.RMNDR)
-        if elements:
-            element = elements[0]
-            
-            div_text = element.text.strip()
-          
-            if div_text == exp_rmndrlbl:
-                logger.info("REMINDER LABEL is showing and content matches")
-                team_assignment_content['REMINDER LABEL'] = 'Showing'
-            else:
-                logger.info("REMINDER LABEL is showing but content does not match")
-                team_assignment_content['REMINDER LABEL'] = 'Not Showing'
-        else:
-            logger.info("REMINDER LABEL is not showing")
-            team_assignment_content['REMINDER LABEL'] = 'Not Showing'
-
-
-
-        elements = self.__ctx.driver.find_elements("xpath", userteamslocators.ALERTTEXT)
-        if elements:
-            element = elements[0]
-            
-            div_text = element.text.strip()
-          
-            if div_text == exp_alerttext:
-                logger.info("REMINDER NOTICE is showing and content matches")
-                team_assignment_content['REMINDER NOTICE'] = 'Showing'
-            else:
-                logger.info("REMINDER NOTICE is showing but content does not match")
-                team_assignment_content['REMINDER NOTICE'] = 'Not Showing'
-        else:
-            logger.info("REMINDER NOTICE is not showing")
-            team_assignment_content['REMINDER NOTICE'] = 'Not Showing'
-
-
-
-        return team_assignment_content
+  
