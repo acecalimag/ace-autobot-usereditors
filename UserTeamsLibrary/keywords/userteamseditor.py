@@ -375,7 +375,7 @@ class UserTeamsEditor:
 
     @keyword 
     def check_reminder_section(self, exp_rmndrlbl: str, exp_alerttext: str):
-        logger.info(f"Check the View/Update Section if fields, labels, and buttons are present")
+        logger.info(f"Check the Reminder Section if fields, labels, and buttons are present")
 
         reminder_section = {}
   

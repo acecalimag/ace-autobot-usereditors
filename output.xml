@@ -1,104 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.0.2 (Python 3.10.6 on win32)" generated="20230816 05:37:22.898" rpa="false" schemaversion="3">
-<suite id="s1" name="User Teams" source="c:\Users\WONDERS\Documents\Ace\Robot\ace-autobot-usereditors\UserTeamsLibrary\User_Teams.robot">
-<test id="s1-t1" name="Verify completeness of fields, labels, and buttons for User Teams Editor Page" line="53">
-<kw name="User Team" type="SETUP">
-<kw name="Open Config In Browser" library="UserTeamsLibrary">
-<msg timestamp="20230816 05:37:23.273" level="INFO">Opening browser 'chrome' to base url 'https://qa.letsdochinese.com/KJTCore/resources/userconfigclient/userteameditor.html'.</msg>
-<msg timestamp="20230816 05:37:23.281" level="INFO">Applicable driver not found; attempting to install with Selenium Manager (Beta)</msg>
-<status status="PASS" starttime="20230816 05:37:23.272" endtime="20230816 05:37:28.692"/>
+<robot generator="Robot 6.0.2 (Python 3.10.6 on win32)" generated="20230816 06:14:28.968" rpa="false" schemaversion="3">
+<suite id="s1" name="Team Assignment" source="c:\Users\WONDERS\Documents\Ace\Robot\ace-autobot-usereditors\TeamAssignmentLibrary\Team_Assignment.robot">
+<test id="s1-t1" name="Remove Agent Team Assignment API" line="97">
+<kw name="Get Agent Uid" library="TeamAssignmentLibrary.DatabaseLibrary">
+<var>${result_uid}</var>
+<arg>agent_name=${AGENT_NAME}</arg>
+<doc>TODO: Create a database query to retrieve the Agent's UID.</doc>
+<msg timestamp="20230816 06:14:29.293" level="INFO">Creating a new connection.</msg>
+<msg timestamp="20230816 06:14:31.920" level="INFO">Executing query. select * from kjt.user where name = %s;</msg>
+<msg timestamp="20230816 06:14:32.441" level="INFO">${result_uid} = 4e0052e4-c04b-49b4-b4c9-a8b42b8182f7</msg>
+<status status="PASS" starttime="20230816 06:14:29.293" endtime="20230816 06:14:32.441"/>
 </kw>
-<kw name="Login" library="UserTeamsLibrary">
-<arg>username=${USERNAME}</arg>
-<arg>password=${PASSWORD}</arg>
-<msg timestamp="20230816 05:37:28.694" level="INFO">Logging in using  acalimag and kjt</msg>
-<msg timestamp="20230816 05:37:28.718" level="INFO">Typing text 'acalimag' into text field 'id:username'.</msg>
-<msg timestamp="20230816 05:37:28.778" level="INFO">Typing text 'kjt' into text field 'id:password'.</msg>
-<msg timestamp="20230816 05:37:28.844" level="INFO">Clicking element 'id:login'.</msg>
-<status status="PASS" starttime="20230816 05:37:28.692" endtime="20230816 05:37:28.881"/>
+<kw name="Remove Agent Api" library="TeamAssignmentLibrary.APILibrary">
+<var>${response}</var>
+<arg>uid=${result_uid}</arg>
+<msg timestamp="20230816 06:14:33.525" level="INFO">Empty response content</msg>
+<msg timestamp="20230816 06:14:33.525" level="INFO">${response} = 200</msg>
+<status status="PASS" starttime="20230816 06:14:32.442" endtime="20230816 06:14:33.525"/>
 </kw>
-<kw name="Open User Team" library="UserTeamsLibrary">
-<msg timestamp="20230816 05:37:28.882" level="INFO">Select configuration for User Team</msg>
-<msg timestamp="20230816 05:37:37.324" level="INFO">Clicking element '//a[@id='ConfigNavbarDropdown']'.</msg>
-<msg timestamp="20230816 05:37:37.381" level="INFO">Clicking element '//a[@id='userTeamLi']'.</msg>
-<status status="PASS" starttime="20230816 05:37:28.881" endtime="20230816 05:37:38.230"/>
+<kw name="Log" library="BuiltIn">
+<arg>${response}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230816 06:14:33.527" level="INFO">200</msg>
+<status status="PASS" starttime="20230816 06:14:33.527" endtime="20230816 06:14:33.527"/>
 </kw>
-<status status="PASS" starttime="20230816 05:37:23.272" endtime="20230816 05:37:38.230"/>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230816 06:14:33.528" endtime="20230816 06:14:33.529"/>
 </kw>
-<kw name="Check Team List Table" library="UserTeamsLibrary">
-<arg>exp_tllbl=${EXP_TLLBL}</arg>
-<arg>exp_namelbl=${EXP_TBL_NAMELBL}</arg>
-<arg>exp_leadlbl=${EXP_TBL_TLLBL}</arg>
-<arg>exp_loclbl=${EXP_TBL_LOCLBL}</arg>
-<arg>exp_typelbl=${EXP_TBL_TYPELBL}</arg>
-<arg>exp_statuslbl=${EXP_TBL_STATUSLBL}</arg>
-<arg>exp_lupdlbl=${EXP_TBL_LSTUPDLBL}</arg>
-<msg timestamp="20230816 05:37:38.233" level="INFO">Check the Team List Table if fields, labels, and buttons are present</msg>
-<msg timestamp="20230816 05:37:38.256" level="INFO">TEAM LIST Label is showing and text matches: TEAM LIST</msg>
-<msg timestamp="20230816 05:37:38.280" level="INFO">Name Label in Team List Table is showing and text matches: Name</msg>
-<msg timestamp="20230816 05:37:38.295" level="INFO">Team Lead Label in Team List Table is showing and text matches: Team Lead</msg>
-<msg timestamp="20230816 05:37:38.311" level="INFO">Location Label in Team List Table is showing and text matches: Location</msg>
-<msg timestamp="20230816 05:37:38.326" level="INFO">Type Label in Team List Table is showing and text matches: Type</msg>
-<msg timestamp="20230816 05:37:38.341" level="INFO">Status Label in Team List Table is showing and text matches: Status</msg>
-<msg timestamp="20230816 05:37:38.356" level="INFO">Last Updated Label in Team List Table is showing and text matches: Last Updated</msg>
-<status status="PASS" starttime="20230816 05:37:38.231" endtime="20230816 05:37:38.356"/>
+<kw name="Get Agent Team" library="TeamAssignmentLibrary.DatabaseLibrary">
+<var>${result}</var>
+<arg>agent_name=${AGENT_NAME}</arg>
+<doc>TODO: Create a database query to retrieve the Agent's Team Assignment Details.</doc>
+<msg timestamp="20230816 06:14:33.530" level="INFO">Using an existing connection &lt;mysql.connector.connection_cext.CMySQLConnection object at 0x0000023C55645030&gt;.</msg>
+<msg timestamp="20230816 06:14:33.530" level="INFO">Executing query. SELECT  u.uid as Agent_UID, u.name as Agent_Name, ut.utid as Team_ID, ut.name as Team_Name FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userteam AS ut ON um.teamId = ut.utid WHERE u.name = %s; </msg>
+<msg timestamp="20230816 06:14:34.044" level="INFO">${result} = {'message': 'Agent is not assigned to a team.'}</msg>
+<status status="PASS" starttime="20230816 06:14:33.529" endtime="20230816 06:14:34.044"/>
 </kw>
-<kw name="Search And Click Next" library="UserTeamsLibrary">
-<arg>team_name=${TEAMNAME}</arg>
-<msg timestamp="20230816 05:37:50.621" level="INFO">Clicked on 'Next'
-Clicked on 'Next'
-Clicked on 'Next'
-Clicked on 'Next'
-Clicked on 'Next'
-Clicked on: Xrp Adam Warlock DGT Operational Enabled Aug 15, 2023 5:50 AM</msg>
-<status status="PASS" starttime="20230816 05:37:38.357" endtime="20230816 05:37:50.621"/>
+<kw name="Log Dictionary" library="Collections">
+<arg>${result}</arg>
+<doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
+<msg timestamp="20230816 06:14:34.045" level="INFO">Dictionary has one item:
+message: Agent is not assigned to a team.</msg>
+<status status="PASS" starttime="20230816 06:14:34.044" endtime="20230816 06:14:34.045"/>
 </kw>
-<kw name="Check Update Section" library="UserTeamsLibrary">
-<arg>exp_vulbl=${EXP_VULBL}</arg>
-<arg>exp_vu_namelbl=${EXP_VU_NAMELBL}</arg>
-<arg>exp_vu_tdlbl=${EXP_VU_TDLBL}</arg>
-<arg>exp_vu_tllbl=${EXP_VU_TLLBL}</arg>
-<arg>exp_vu_loclbl=${EXP_VU_LOCLBL}</arg>
-<arg>exp_vu_typelbl=${EXP_VU_TYPELBL}</arg>
-<arg>exp_vu_statuslbl=${EXP_VU_STATUSLBL}</arg>
-<arg>exp_vu_lstupdlbl=${EXP_VU_LSTUPDLBL}</arg>
-<msg timestamp="20230816 05:37:50.623" level="INFO">Check the View/Update Section if fields, labels, and buttons are present</msg>
-<msg timestamp="20230816 05:37:50.636" level="INFO">View/Update Label is showing and text matches: View/Update</msg>
-<msg timestamp="20230816 05:37:50.650" level="INFO">Name Label in View/Update Section is showing and text matches: Name *</msg>
-<msg timestamp="20230816 05:37:50.692" level="INFO">Description Label in View/Update Section is showing and text matches: Description</msg>
-<msg timestamp="20230816 05:37:50.708" level="INFO">Team Lead Label in View/Update Section is showing but text does not match. Actual: Description, Expected: Team Lead</msg>
-<msg timestamp="20230816 05:37:50.721" level="INFO">Location Label in View/Update Section is showing and text matches: Location *</msg>
-<msg timestamp="20230816 05:37:50.735" level="INFO">Type Label in View/Update Section is showing and text matches: Type *</msg>
-<msg timestamp="20230816 05:37:50.748" level="INFO">Status Label in View/Update Section is showing and text matches: Status</msg>
-<msg timestamp="20230816 05:37:50.766" level="INFO">Last Updated Label in View/Update Section is showing and text matches: Last Updated</msg>
-<msg timestamp="20230816 05:37:51.045" level="INFO">SAVE BUTTON is showing</msg>
-<msg timestamp="20230816 05:37:51.326" level="INFO">CANCEL BUTTON is showing</msg>
-<status status="PASS" starttime="20230816 05:37:50.622" endtime="20230816 05:37:51.327"/>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${result}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230816 06:14:34.045" endtime="20230816 06:14:34.046"/>
 </kw>
-<kw name="Check Reminder Section" library="UserTeamsLibrary">
-<arg>exp_rmndrlbl=${EXP_RMNDR_LBL}</arg>
-<arg>exp_alerttext=${EXP_RMNDR_TXT}</arg>
-<msg timestamp="20230816 05:37:51.328" level="INFO">Check the View/Update Section if fields, labels, and buttons are present</msg>
-<msg timestamp="20230816 05:37:51.338" level="INFO">ALERT / REMINDER is showing</msg>
-<msg timestamp="20230816 05:37:51.345" level="INFO">INFO ICON is showing</msg>
-<msg timestamp="20230816 05:37:51.354" level="INFO">CLOSE BUTTON is showing</msg>
-<msg timestamp="20230816 05:37:51.366" level="INFO">REMINDER LABEL is showing and content matches</msg>
-<msg timestamp="20230816 05:37:51.380" level="INFO">REMINDER NOTICE is showing and content matches</msg>
-<status status="PASS" starttime="20230816 05:37:51.327" endtime="20230816 05:37:51.380"/>
-</kw>
-<kw name="Logout" type="TEARDOWN">
-<kw name="Logout To System" library="UserTeamsLibrary">
-<msg timestamp="20230816 05:37:51.382" level="INFO">Logging out of the system</msg>
-<msg timestamp="20230816 05:37:51.382" level="INFO">Clicking element '//div[@class='ucc-nav-account-menu-popover-icon mr-3']'.</msg>
-<msg timestamp="20230816 05:37:51.437" level="INFO">Clicking element '//div[@class='popover-body']//li[@id='navbar-logout']'.</msg>
-<msg timestamp="20230816 05:37:51.712" level="INFO">Clicking element '//button[@id='confirm-ucc-logout-btn']'.</msg>
-<status status="PASS" starttime="20230816 05:37:51.381" endtime="20230816 05:37:55.308"/>
-</kw>
-<status status="PASS" starttime="20230816 05:37:51.381" endtime="20230816 05:37:55.308"/>
-</kw>
-<status status="PASS" starttime="20230816 05:37:23.271" endtime="20230816 05:37:55.309"/>
+<status status="PASS" starttime="20230816 06:14:29.291" endtime="20230816 06:14:34.046"/>
 </test>
-<status status="PASS" starttime="20230816 05:37:22.905" endtime="20230816 05:37:55.311"/>
+<status status="PASS" starttime="20230816 06:14:28.972" endtime="20230816 06:14:34.047"/>
 </suite>
 <statistics>
 <total>
@@ -107,7 +61,7 @@ Clicked on: Xrp Adam Warlock DGT Operational Enabled Aug 15, 2023 5:50 AM</msg>
 <tag>
 </tag>
 <suite>
-<stat pass="1" fail="0" skip="0" id="s1" name="User Teams">User Teams</stat>
+<stat pass="1" fail="0" skip="0" id="s1" name="Team Assignment">Team Assignment</stat>
 </suite>
 </statistics>
 <errors>

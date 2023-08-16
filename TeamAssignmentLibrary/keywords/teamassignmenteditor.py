@@ -46,7 +46,7 @@ class TeamAssignmentEditor:
 
 
     @keyword 
-    def check_team_editor(self, exp_falbl: str, exp_trosterlbl: str, exp_fafltr: str, exp_rosfltr: str, exp_rmndrlbl: str, exp_alerttext: str):
+    def check_team_editor(self, exp_falbl: str, exp_trosterlbl: str, exp_fafltr: str, exp_rosfltr: str):
         logger.info(f"Check the Team Assignment Editor page if fields, labels, and buttons are present")
 
         team_assignment_content = {}
@@ -206,31 +206,41 @@ class TeamAssignmentEditor:
             team_assignment_content['CANCEL BUTTON LIST'] = 'Error'
         
 
+        return team_assignment_content
+    
+
+
+    @keyword 
+    def check_reminder_section(self, exp_rmndrlbl: str, exp_alerttext: str):
+        logger.info(f"Check the Reminder Section if fields, labels, and buttons are present")
+
+        reminder_section = {}
+  
 
         if self.__ctx.driver.find_elements("xpath", teamlocators.ALERT):
-            logger.info("ALERT / REMINDER is showing")
-            team_assignment_content['ALERT / REMINDER'] = 'Showing'
+                logger.info("ALERT / REMINDER is showing")
+                reminder_section['ALERT / REMINDER'] = 'Showing'
         else:
             logger.info("ALERT / REMINDER is not showing")
-            team_assignment_content['ALERT / REMINDER'] = 'Not Showing'
+            reminder_section['ALERT / REMINDER'] = 'Not Showing'
 
 
 
         if self.__ctx.driver.find_elements("xpath", teamlocators.INFO_CIRCLE):
             logger.info("INFO ICON is showing")
-            team_assignment_content['INFO ICON'] = 'Showing'
+            reminder_section['INFO ICON'] = 'Showing'
         else:
             logger.info("ALERT / REMINDER is not showing")
-            team_assignment_content['INFO ICON'] = 'Not Showing'
+            reminder_section['INFO ICON'] = 'Not Showing'
 
 
 
         if self.__ctx.driver.find_elements("xpath", teamlocators.DISMISS_ALERT_BTN):
             logger.info("CLOSE BUTTON is showing")
-            team_assignment_content['CLOSE BUTTON'] = 'Showing'
+            reminder_section['CLOSE BUTTON'] = 'Showing'
         else:
             logger.info("CLOSE BUTTON is not showing")
-            team_assignment_content['CLOSE BUTTON'] = 'Not Showing'
+            reminder_section['CLOSE BUTTON'] = 'Not Showing'
 
 
 
@@ -242,13 +252,13 @@ class TeamAssignmentEditor:
           
             if div_text == exp_rmndrlbl:
                 logger.info("REMINDER LABEL is showing and content matches")
-                team_assignment_content['REMINDER LABEL'] = 'Showing'
+                reminder_section['REMINDER LABEL'] = 'Showing'
             else:
                 logger.info("REMINDER LABEL is showing but content does not match")
-                team_assignment_content['REMINDER LABEL'] = 'Not Showing'
+                reminder_section['REMINDER LABEL'] = 'Not Showing'
         else:
             logger.info("REMINDER LABEL is not showing")
-            team_assignment_content['REMINDER LABEL'] = 'Not Showing'
+            reminder_section['REMINDER LABEL'] = 'Not Showing'
 
 
 
@@ -260,15 +270,14 @@ class TeamAssignmentEditor:
           
             if div_text == exp_alerttext:
                 logger.info("REMINDER NOTICE is showing and content matches")
-                team_assignment_content['REMINDER NOTICE'] = 'Showing'
+                reminder_section['REMINDER NOTICE'] = 'Showing'
             else:
                 logger.info("REMINDER NOTICE is showing but content does not match")
-                team_assignment_content['REMINDER NOTICE'] = 'Not Showing'
+                reminder_section['REMINDER NOTICE'] = 'Not Showing'
         else:
             logger.info("REMINDER NOTICE is not showing")
-            team_assignment_content['REMINDER NOTICE'] = 'Not Showing'
+            reminder_section['REMINDER NOTICE'] = 'Not Showing'
 
 
-
-        return team_assignment_content
+        return reminder_section  
 
