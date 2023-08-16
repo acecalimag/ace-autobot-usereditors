@@ -27,3 +27,5 @@ EXP_VU_TYPELBL: str = "Type *"
 EXP_VU_STATUSLBL: str = "Status"
 EXP_VU_LSTUPDLBL: str = "Last Updated"
 
+EXP_RMNDR_LBL: str = "Reminder"
+EXP_RMNDR_TXT: str = "Any changes related to the team assignment should only be done after 9AM-3AM (next day)." 

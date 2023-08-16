@@ -89,10 +89,6 @@ class UserTeamsEditor:
 
 
 
-
-
-
-
         # Verify the TEAM LIST Table Column Labels (Team Lead)
         elements = self.__ctx.driver.find_elements("xpath", userteamslocators.TBL_TLEAD_LBL)
         if elements:
@@ -192,10 +188,10 @@ class UserTeamsEditor:
 
 
     @keyword 
-    def check_view_update_section(self, exp_vulbl: str, exp_vu_namelbl: str, exp_vu_tdlbl: str, exp_vu_tllbl: str, exp_vu_loclbl: str, exp_vu_typelbl: str, exp_vu_statuslbl: str, exp_vu_lstupdlbl: str):
+    def check_update_section(self, exp_vulbl: str, exp_vu_namelbl: str, exp_vu_tdlbl: str, exp_vu_tllbl: str, exp_vu_loclbl: str, exp_vu_typelbl: str, exp_vu_statuslbl: str, exp_vu_lstupdlbl: str):
         logger.info(f"Check the View/Update Section if fields, labels, and buttons are present")
 
-        view_update_section = {}
+        update_section = {}
 
         # Verify the View/Update Label
         elements = self.__ctx.driver.find_elements("xpath", userteamslocators.VIEW_UPDATE_LBL)
@@ -206,13 +202,13 @@ class UserTeamsEditor:
             # Compare actual_text with expected_text
             if act_vulbl == exp_vulbl:
                 logger.info(f"View/Update Label is showing and text matches: {act_vulbl}")
-                view_update_section['View/Update Label'] = 'Showing'
+                update_section['View/Update Label'] = 'Showing'
             else:
                 logger.info(f"View/Update Label is showing but text does not match. Actual: {act_vulbl}, Expected: {exp_vulbl}")
-                view_update_section['View/Update Label'] = 'Not Showing'
+                update_section['View/Update Label'] = 'Not Showing'
         else:
             logger.info("View/Update Label is not showing")
-            view_update_section['View/Update Label'] = 'Not Showing'
+            update_section['View/Update Label'] = 'Not Showing'
         
 
 
@@ -225,13 +221,13 @@ class UserTeamsEditor:
             # Compare actual_text with expected_text
             if act_vu_namelbl == exp_vu_namelbl:
                 logger.info(f"Name Label in View/Update Section is showing and text matches: {act_vu_namelbl}")
-                view_update_section['Name Label in View/Update Section'] = 'Showing'
+                update_section['Name Label in View/Update Section'] = 'Showing'
             else:
                 logger.info(f"Name Label in View/Update Section is showing but text does not match. Actual: {act_vu_namelbl}, Expected: {exp_vu_namelbl}")
-                view_update_section['Name Label in View/Update Section'] = 'Not Showing'
+                update_section['Name Label in View/Update Section'] = 'Not Showing'
         else:
             logger.info("Name Label in View/Update Section is not showing")
-            view_update_section['Name Label in View/Update Section'] = 'Not Showing'
+            update_section['Name Label in View/Update Section'] = 'Not Showing'
 
 
 
@@ -244,13 +240,13 @@ class UserTeamsEditor:
             # Compare actual_text with expected_text
             if act_vu_tdlbl == exp_vu_tdlbl:
                 logger.info(f"Description Label in View/Update Section is showing and text matches: {act_vu_tdlbl}")
-                view_update_section['Description Label in View/Update Section'] = 'Showing'
+                update_section['Description Label in View/Update Section'] = 'Showing'
             else:
                 logger.info(f"Description Label in View/Update Section is showing but text does not match. Actual: {act_vu_tdlbl}, Expected: {exp_vu_tdlbl}")
-                view_update_section['Description Label in View/Update Section'] = 'Not Showing'
+                update_section['Description Label in View/Update Section'] = 'Not Showing'
         else:
             logger.info("Description Label in View/Update Section is not showing")
-            view_update_section['Description Label in View/Update Section'] = 'Not Showing'
+            update_section['Description Label in View/Update Section'] = 'Not Showing'
 
 
         # Verify the View/Update Section Labels (Team Lead)
@@ -262,13 +258,13 @@ class UserTeamsEditor:
             # Compare actual_text with expected_text
             if act_vu_tllbl == exp_vu_tllbl:
                 logger.info(f"Team Lead Label in View/Update Section is showing and text matches: {act_vu_tllbl}")
-                view_update_section['Team Lead Label in View/Update Section'] = 'Showing'
+                update_section['Team Lead Label in View/Update Section'] = 'Showing'
             else:
                 logger.info(f"Team Lead Label in View/Update Section is showing but text does not match. Actual: {act_vu_tllbl}, Expected: {exp_vu_tllbl}")
-                view_update_section['Team Lead Label in View/Update Section'] = 'Not Showing'
+                update_section['Team Lead Label in View/Update Section'] = 'Not Showing'
         else:
             logger.info("Team Lead Label in View/Update Section is not showing")
-            view_update_section['Team Lead Label in View/Update Section'] = 'Not Showing'
+            update_section['Team Lead Label in View/Update Section'] = 'Not Showing'
 
 
         # Verify the View/Update Section Labels (Location)
@@ -280,13 +276,13 @@ class UserTeamsEditor:
             # Compare actual_text with expected_text
             if act_vu_loclbl == exp_vu_loclbl:
                 logger.info(f"Location Label in View/Update Section is showing and text matches: {act_vu_loclbl}")
-                view_update_section['Location Label in View/Update Section'] = 'Showing'
+                update_section['Location Label in View/Update Section'] = 'Showing'
             else:
                 logger.info(f"Location Label in View/Update Section is showing but text does not match. Actual: {act_vu_loclbl}, Expected: {exp_vu_loclbl}")
-                view_update_section['Location Label in View/Update Section'] = 'Not Showing'
+                update_section['Location Label in View/Update Section'] = 'Not Showing'
         else:
             logger.info("Location Label in View/Update Section is not showing")
-            view_update_section['Location Label in View/Update Section'] = 'Not Showing'
+            update_section['Location Label in View/Update Section'] = 'Not Showing'
 
 
         # Verify the View/Update Section Labels (Type)
@@ -298,13 +294,13 @@ class UserTeamsEditor:
             # Compare actual_text with expected_text
             if act_vu_typelbl == exp_vu_typelbl:
                 logger.info(f"Type Label in View/Update Section is showing and text matches: {act_vu_typelbl}")
-                view_update_section['Type Label in View/Update Section'] = 'Showing'
+                update_section['Type Label in View/Update Section'] = 'Showing'
             else:
                 logger.info(f"Type Label in View/Update Section is showing but text does not match. Actual: {act_vu_typelbl}, Expected: {exp_vu_typelbl}")
-                view_update_section['Type Label in View/Update Section'] = 'Not Showing'
+                update_section['Type Label in View/Update Section'] = 'Not Showing'
         else:
             logger.info("Type Label in View/Update Section is not showing")
-            view_update_section['Type Label in View/Update Section'] = 'Not Showing'
+            update_section['Type Label in View/Update Section'] = 'Not Showing'
 
 
         # Verify the View/Update Section Labels (Status)
@@ -316,13 +312,13 @@ class UserTeamsEditor:
             # Compare actual_text with expected_text
             if act_vu_statuslbl == exp_vu_statuslbl:
                 logger.info(f"Status Label in View/Update Section is showing and text matches: {act_vu_statuslbl}")
-                view_update_section['Status Label in View/Update Section'] = 'Showing'
+                update_section['Status Label in View/Update Section'] = 'Showing'
             else:
                 logger.info(f"Status Label in View/Update Section is showing but text does not match. Actual: {act_vu_statuslbl}, Expected: {exp_vu_statuslbl}")
-                view_update_section['Status Label in View/Update Section'] = 'Not Showing'
+                update_section['Status Label in View/Update Section'] = 'Not Showing'
         else:
             logger.info("Status Label in View/Update Section is not showing")
-            view_update_section['Status Label in View/Update Section'] = 'Not Showing'        
+            update_section['Status Label in View/Update Section'] = 'Not Showing'        
 
 
         # Verify the View/Update Section Labels (Last Updated)
@@ -334,13 +330,13 @@ class UserTeamsEditor:
             # Compare actual_text with expected_text
             if act_vu_lstupdlbl == exp_vu_lstupdlbl:
                 logger.info(f"Last Updated Label in View/Update Section is showing and text matches: {act_vu_lstupdlbl}")
-                view_update_section['Last Updated Label in View/Update Section'] = 'Showing'
+                update_section['Last Updated Label in View/Update Section'] = 'Showing'
             else:
                 logger.info(f"Last Updated Label in View/Update Section is showing but text does not match. Actual: {act_vu_lstupdlbl}, Expected: {exp_vu_lstupdlbl}")
-                view_update_section['Last Updated Label in View/Update Section'] = 'Not Showing'
+                update_section['Last Updated Label in View/Update Section'] = 'Not Showing'
         else:
             logger.info("Last Updated Label in View/Update Section is not showing")
-            view_update_section['Last Updated Label in View/Update Section'] = 'Not Showing' 
+            update_section['Last Updated Label in View/Update Section'] = 'Not Showing' 
 
 
         # Verify Save Button is showing
@@ -348,13 +344,13 @@ class UserTeamsEditor:
             self.__ctx.scroll_element_into_view(userteamslocators.SAVEBTN)
             if self.__ctx.find_element(userteamslocators.SAVEBTN):
                 logger.info("SAVE BUTTON is showing")
-                view_update_section['SAVE BUTTON LIST'] = 'Showing'
+                update_section['SAVE BUTTON LIST'] = 'Showing'
             else:
                 logger.info("SAVE BUTTON is not showing")
-                view_update_section['SAVE BUTTON LIST'] = 'Not Showing'
+                update_section['SAVE BUTTON LIST'] = 'Not Showing'
         except Exception as e:
             logger.error("An error occurred:", str(e))
-            view_update_section['SAVE BUTTON LIST'] = 'Error'
+            update_section['SAVE BUTTON LIST'] = 'Error'
         
 
         # Verify Cancel Button is showing        
@@ -362,15 +358,88 @@ class UserTeamsEditor:
             self.__ctx.scroll_element_into_view(userteamslocators.CANCELBTN)
             if self.__ctx.find_elements(userteamslocators.CANCELBTN):
                 logger.info("CANCEL BUTTON is showing")
-                view_update_section['CANCEL BUTTON LIST'] = 'Showing'
+                update_section['CANCEL BUTTON LIST'] = 'Showing'
             else:
                 logger.info("CANCEL BUTTON is not showing")
-                view_update_section['CANCEL BUTTON LIST'] = 'Not Showing'
+                update_section['CANCEL BUTTON LIST'] = 'Not Showing'
         except Exception as e:
             logger.error("An error occurred:", str(e))
-            view_update_section['CANCEL BUTTON LIST'] = 'Error' 
+            update_section['CANCEL BUTTON LIST'] = 'Error' 
 
 
-        return view_update_section
+        return update_section
 
+
+
+
+
+    @keyword 
+    def check_reminder_section(self, exp_rmndrlbl: str, exp_alerttext: str):
+        logger.info(f"Check the View/Update Section if fields, labels, and buttons are present")
+
+        reminder_section = {}
   
+
+        if self.__ctx.driver.find_elements("xpath", userteamslocators.ALERT):
+                logger.info("ALERT / REMINDER is showing")
+                reminder_section['ALERT / REMINDER'] = 'Showing'
+        else:
+            logger.info("ALERT / REMINDER is not showing")
+            reminder_section['ALERT / REMINDER'] = 'Not Showing'
+
+
+
+        if self.__ctx.driver.find_elements("xpath", userteamslocators.INFO_CIRCLE):
+            logger.info("INFO ICON is showing")
+            reminder_section['INFO ICON'] = 'Showing'
+        else:
+            logger.info("ALERT / REMINDER is not showing")
+            reminder_section['INFO ICON'] = 'Not Showing'
+
+
+
+        if self.__ctx.driver.find_elements("xpath", userteamslocators.DISMISS_ALERT_BTN):
+            logger.info("CLOSE BUTTON is showing")
+            reminder_section['CLOSE BUTTON'] = 'Showing'
+        else:
+            logger.info("CLOSE BUTTON is not showing")
+            reminder_section['CLOSE BUTTON'] = 'Not Showing'
+
+
+
+        elements = self.__ctx.driver.find_elements("xpath", userteamslocators.RMNDR)
+        if elements:
+            element = elements[0]
+            
+            div_text = element.text.strip()
+          
+            if div_text == exp_rmndrlbl:
+                logger.info("REMINDER LABEL is showing and content matches")
+                reminder_section['REMINDER LABEL'] = 'Showing'
+            else:
+                logger.info("REMINDER LABEL is showing but content does not match")
+                reminder_section['REMINDER LABEL'] = 'Not Showing'
+        else:
+            logger.info("REMINDER LABEL is not showing")
+            reminder_section['REMINDER LABEL'] = 'Not Showing'
+
+
+
+        elements = self.__ctx.driver.find_elements("xpath", userteamslocators.ALERTTEXT)
+        if elements:
+            element = elements[0]
+            
+            div_text = element.text.strip()
+          
+            if div_text == exp_alerttext:
+                logger.info("REMINDER NOTICE is showing and content matches")
+                reminder_section['REMINDER NOTICE'] = 'Showing'
+            else:
+                logger.info("REMINDER NOTICE is showing but content does not match")
+                reminder_section['REMINDER NOTICE'] = 'Not Showing'
+        else:
+            logger.info("REMINDER NOTICE is not showing")
+            reminder_section['REMINDER NOTICE'] = 'Not Showing'
+
+
+        return reminder_section

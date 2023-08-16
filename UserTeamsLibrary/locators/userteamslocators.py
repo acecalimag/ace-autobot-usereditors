@@ -29,6 +29,11 @@ VU_LSTUPDLBL: str = "//label[normalize-space()='Last Updated']"
 SAVEBTN: str = "//button[@id='save']"
 CANCELBTN: str = "//button[@id='cancel']"
 
+ALERT: str = "//div[@role='alert']"
+ALERTTEXT: str = "//div[@role='alert']//li"
+INFO_CIRCLE: str = "//i[@class='fa fa-info-circle']"
+RMNDR: str = "//div[@role='alert']//strong"
+DISMISS_ALERT_BTN: str = "//button[@aria-label='Close']"
 
 
 CR_TEAM_BTN: str = "//button[@id='createTeam']"

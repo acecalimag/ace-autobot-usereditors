@@ -54,38 +54,10 @@ Verify completeness of fields, labels, and buttons for User Teams Editor Page
     [Setup]        User Team
     [Teardown]     Logout
     
-    Check Team List Table                exp_tllbl=${EXP_TLLBL}        exp_namelbl=${EXP_TBL_NAMELBL}        exp_leadlbl=${EXP_TBL_TLLBL}        exp_loclbl=${EXP_TBL_LOCLBL}        exp_typelbl=${EXP_TBL_TYPELBL}        exp_statuslbl=${EXP_TBL_STATUSLBL}        exp_lupdlbl=${EXP_TBL_LSTUPDLBL}
+    Check Team List Table                exp_tllbl=${EXP_TLLBL}                exp_namelbl=${EXP_TBL_NAMELBL}        exp_leadlbl=${EXP_TBL_TLLBL}        exp_loclbl=${EXP_TBL_LOCLBL}        exp_typelbl=${EXP_TBL_TYPELBL}        exp_statuslbl=${EXP_TBL_STATUSLBL}        exp_lupdlbl=${EXP_TBL_LSTUPDLBL}
     Search And Click Next                team_name=${TEAMNAME}
-    Check View Update Section            exp_vulbl=${EXP_VULBL}        exp_vu_namelbl=${EXP_VU_NAMELBL}      exp_vu_tdlbl=${EXP_VU_TDLBL}        exp_vu_tllbl=${EXP_VU_TLLBL}        exp_vu_loclbl=${EXP_VU_LOCLBL}        exp_vu_typelbl=${EXP_VU_TYPELBL}        exp_vu_statuslbl=${EXP_VU_STATUSLBL}        exp_vu_lstupdlbl=${EXP_VU_LSTUPDLBL}
-
-
-
-
-
-
-    
-
-
-
-    # ${result}                            Get Lead Uid                         lead_name=${EXP_TLNAME}
-#     Log Dictionary                       ${result}
-#     Log To Console                       ${result}
-
-
-#     # Comparison between UI and DB
-#     Should Be Equal As Strings           ${team_details['Team Name']}        ${result['Team Name']}
-#     Should Be Equal As Strings           ${team_details['Team Lead']}        ${result['Team Lead']}
-#     Should Be Equal As Strings           ${team_details['Team Location']}    ${result['Team Location']}
-    
-    
-#     ${result_uid}                        Get Agent Uid                       agent_name=${AGENT_NAME} 
-#     Select Agent                         agent_name=${AGENT_NAME}            agent_uid=${result_uid}
-                             
-#     ${team_editor}                       Check Team Editor                   exp_falbl=${EXP_FALBL}             exp_trosterlbl=${EXP_TROSTERLBL}                      exp_fafltr=${EXP_FAFLTR}        exp_rosfltr=${EXP_ROSFLTR}
-#     Log Dictionary                       ${team_editor}
-#     Log To Console                       ${team_editor}
-    
-#     Unselect Agent                       agent_uid=${result_uid}
+    Check Update Section                 exp_vulbl=${EXP_VULBL}                exp_vu_namelbl=${EXP_VU_NAMELBL}      exp_vu_tdlbl=${EXP_VU_TDLBL}        exp_vu_tllbl=${EXP_VU_TLLBL}        exp_vu_loclbl=${EXP_VU_LOCLBL}        exp_vu_typelbl=${EXP_VU_TYPELBL}        exp_vu_statuslbl=${EXP_VU_STATUSLBL}        exp_vu_lstupdlbl=${EXP_VU_LSTUPDLBL}
+    Check Reminder Section               exp_rmndrlbl=${EXP_RMNDR_LBL}         exp_alerttext=${EXP_RMNDR_TXT}
 
 
 
@@ -139,10 +111,7 @@ Database Query
     ${result}                            Get User Team Db                   tname=${TEAMNAME}
     Log Dictionary                       ${result}
     Log To Console                       ${result}
-    
-#     ${result}                            Get Agent Team                      agent_name=${AGENT_NAME} 
-#     Log Dictionary                       ${result}
-#     Log To Console                       ${result}
+
 
 
 
