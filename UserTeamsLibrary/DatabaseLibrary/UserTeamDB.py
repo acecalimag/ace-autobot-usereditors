@@ -1,10 +1,6 @@
 
-from dataclasses import dataclass
-from typing import TypedDict
-from robot.api.deco import keyword, library
+from robot.api.deco import keyword
 from autocore.Database import Database
-
-
 
 class UserTeamDB:
 
@@ -19,12 +15,17 @@ class UserTeamDB:
         result = self.__db.execute(query, (tname,))
         if result and len(result) > 0:
             row = result[0]
+
+            # Convert and format the Team Type
+            team_type = row['Team_Type'].lower()
+            formatted_team_type = team_type.replace('nonoperational', 'Non-Operational').title()
+
             return {
                 'Team Name': row['Team_Name'],
                 'Team Description': row['Team_Description'],
                 'Team Lead': row['Team_Lead'],
                 'Team Location': row['Team_Location'],
-                'Team Type': row['Team_Type'].capitalize(),
+                'Team Type': formatted_team_type,
                 'Team Status': row['Team_Status'].capitalize(),
                 'Last Updated': row['Last_Updated']
             }
@@ -33,52 +34,7 @@ class UserTeamDB:
         
 
 
-    @keyword
-    def get_agent_uid(self, agent_name: str):
-        """ TODO: Create a database query to retrieve the Agent's UID."""
-        query = "select * from kjt.user where name = %s;"
-         
-        return self.__db.execute(query, (agent_name,))[0]['uid']
-
-
-
-    @keyword
-    def get_agent_team(self, agent_name: str):
-        """ TODO: Create a database query to retrieve the Agent's Team Assignment Details."""
-        query = "SELECT  u.uid as Agent_UID, u.name as Agent_Name, ut.utid as Team_ID, ut.name as Team_Name FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userteam AS ut ON um.teamId = ut.utid WHERE u.name = %s; "
-        
-    
-        result = self.__db.execute(query, (agent_name,))
-        if result and len(result) > 0:
-            row = result[0]
-            return {
-                'Agent UID': row['Agent_UID'],
-                'Agent Name': row['Agent_Name'],
-                'Team ID': row['Team_ID'],
-                'Team Name': row['Team_Name']
-            }
-        else:
-            return {
-                'message': "Agent is not assigned to a team."
-            }
-
-
-
-    @keyword
-    def get_lead_uid(self, lead_name: str):
-        """ TODO: Create a database query to retrieve the Team Leads's UID."""
-        query = "select * from kjt.user where name = %s;"
-         
-        return self.__db.execute(query, (lead_name,))[0]['uid']
-
-
-
-    @keyword
-    def get_loc_code(self, loc_code: str):
-        """ TODO: Create a database query to retrieve the Team Leads's UID."""
-        query = "select * from kjt.userlocation where code = %s;"
-         
-        return self.__db.execute(query, (loc_code,))[0]['lid']
+ 
 
 
 
