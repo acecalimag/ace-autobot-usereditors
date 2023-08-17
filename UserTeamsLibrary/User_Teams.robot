@@ -7,7 +7,7 @@ Library    SeleniumLibrary
 Library    Collections
 Variables  resource/variables.py
 
-# Test Setup        Team Assignment
+# Test Setup        User Team
 # Test Teardown     Logout
 
 
@@ -28,8 +28,6 @@ Verify the Team Details
     [Setup]        User Team
     [Teardown]     Logout
     
-    # ${result_tlead_uid}                  Get Lead Uid                         lead_name=${EXP_TLNAME}
-    # ${result_loc_code}                   Get Loc Code                         loc_code=${EXP_LOC}    
     Search And Click Next                team_name=${TEAMNAME}
     ${team_details}                      Check Team Details                   exp_name=${TEAMNAME}    exp_desc=${EXP_DESC}    exp_lead=${EXP_TLNAME}    exp_loc=${EXP_LOC}    exp_type=${EXP_TYPE}    exp_last_upd=${EXT_LAST_UPD}
     Log Dictionary                       ${team_details}
@@ -64,55 +62,58 @@ Verify completeness of fields, labels, and buttons for User Teams Editor Page
     Log Dictionary                       ${update}
     Log To Console                       ${update}
     
-    ${reminder}                          Check Reminder Section               exp_rmndrlbl=${EXP_RMNDR_LBL}          exp_alerttext=${EXP_RMNDR_TXT}
+    ${reminder}                          Check Reminder Section               exp_rmndrlbl=${EXP_RMNDR_LBL}         exp_alerttext=${EXP_RMNDR_TXT}
     Log Dictionary                       ${reminder}
     Log To Console                       ${reminder}
 
 
-# Verify Saving of Agent to Team
-#     [Setup]        User Team
-#     [Teardown]     Logout
+Create New Team
+    [Setup]        User Team
+    [Teardown]     Logout
 
-#     Select Team                          team_name=${TEAMNAME}
-
-#     ${result_uid}                        Get Agent Uid                       agent_name=${AGENT_NAME} 
+    Click Create Team
+    ${form_input}                        Fillout Form                               exp_cntlbl=${EXP_CNTLBL}            in_name=${IN_CNT_NAME}                  in_desc=${IN_CNT_TD}                in_lead=${IN_CNT_TL}                in_loc=${IN_CNT_LOC}                in_type=${IN_CNT_TYPE}              in_status=${IN_CNT_STATUS}
+    Log Dictionary                       ${form_input}
+    Log To Console                       ${form_input}
     
-#     Assign Agent Input                   agent_name=${AGENT_NAME}            agent_uid=${result_uid}
-#     ${result}                            Get Agent Team                      agent_name=${AGENT_NAME} 
-#     Log Dictionary                       ${result}
-#     Log To Console                       ${result}
+    # Click Save
 
-#     Unselect Agent                       agent_uid=${result_uid}
-#     Remove Agent                         agent_name=${AGENT_NAME}            agent_uid=${result_uid}
-#     ${result}                            Get Agent Team                      agent_name=${AGENT_NAME} 
-#     Log Dictionary                       ${result}
-#     Log To Console                       ${result}
+    ${result}                            Get User Team Db                           tname=${IN_CNT_NAME}
+    Log Dictionary                       ${result}
+    Log To Console                       ${result}
+
+    # Comparison between UI and DB
+    Should Be Equal As Strings           ${form_input['Team Name']}                ${result['Team Name']}
+    Should Be Equal As Strings           ${form_input['Team Description']}         ${result['Team Description']}
+    Should Be Equal As Strings           ${form_input['Team Lead']}                ${result['Team Lead']}
+    Should Be Equal As Strings           ${form_input['Team Location']}            ${result['Team Location']}
+    Should Be Equal As Strings           ${form_input['Team Type']}                ${result['Team Type']}
+    Should Be Equal As Strings           ${form_input['Team Status']}              ${result['Team Status']}
 
 
-
-
-# Add Agent Team Assignment API
-#     ${result_uid}                        Get Agent Uid                       agent_name=${AGENT_NAME}
-#     ${result}                            Get User Team Db                    tname=${TEAMNAME}
-#     ${response}                          Add Agent Api                       uid=${result_uid}                  teamId=${result['Team ID']}          
-#     Log                                  ${response}
-#     Log To Console                       ${response}
+Edit / Modify Existing Team
+    [Setup]        User Team
+    [Teardown]     Logout
     
-#     ${result}                            Get Agent Team                      agent_name=${AGENT_NAME} 
-#     Log Dictionary                       ${result}
-#     Log To Console                       ${result}
-
-
-
-# Remove Agent Team Assignment API
-#     ${result_uid}                        Get Agent Uid                       agent_name=${AGENT_NAME}
-#     ${response}                          Remove Agent Api                    uid=${result_uid}        
-#     Log                                  ${response}
-#     Log To Console                       ${response}
+    Search And Click Next                team_name=${TEAMNAME}
+    ${form_edit}                         Edit Team                                exp_vulbl=${EXP_VULBL}        ed_name=${ED_VU_NAME}        ed_desc=${ED_VU_TD}        ed_lead=${ED_VU_TL}        ed_loc=${ED_VU_LOC}        ed_type=${ED_VU_TYPE}        ed_status=${ED_VU_STATUS}
+    Log Dictionary                       ${form_edit}
+    Log To Console                       ${form_edit}
     
-#     ${result}                            Get Agent Team                      agent_name=${AGENT_NAME} 
-#     Log Dictionary                       ${result}
-#     Log To Console                       ${result}
+    # Click Save
+    
+    ${result}                            Get User Team Db                         tname=${ED_VU_NAME}
+    Log Dictionary                       ${result}
+    Log To Console                       ${result}
+
+    # Comparison between UI and DB
+    Should Be Equal As Strings           ${form_edit['Team Name']}                ${result['Team Name']}
+    Should Be Equal As Strings           ${form_edit['Team Description']}         ${result['Team Description']}
+    Should Be Equal As Strings           ${form_edit['Team Lead']}                ${result['Team Lead']}
+    Should Be Equal As Strings           ${form_edit['Team Location']}            ${result['Team Location']}
+    Should Be Equal As Strings           ${form_edit['Team Type']}                ${result['Team Type']}
+    Should Be Equal As Strings           ${form_edit['Team Status']}              ${result['Team Status']}
+
 
 
 Database Query

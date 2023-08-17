@@ -1,58 +1,154 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.0.2 (Python 3.10.6 on win32)" generated="20230816 06:14:28.968" rpa="false" schemaversion="3">
-<suite id="s1" name="Team Assignment" source="c:\Users\WONDERS\Documents\Ace\Robot\ace-autobot-usereditors\TeamAssignmentLibrary\Team_Assignment.robot">
-<test id="s1-t1" name="Remove Agent Team Assignment API" line="97">
-<kw name="Get Agent Uid" library="TeamAssignmentLibrary.DatabaseLibrary">
-<var>${result_uid}</var>
-<arg>agent_name=${AGENT_NAME}</arg>
-<doc>TODO: Create a database query to retrieve the Agent's UID.</doc>
-<msg timestamp="20230816 06:14:29.293" level="INFO">Creating a new connection.</msg>
-<msg timestamp="20230816 06:14:31.920" level="INFO">Executing query. select * from kjt.user where name = %s;</msg>
-<msg timestamp="20230816 06:14:32.441" level="INFO">${result_uid} = 4e0052e4-c04b-49b4-b4c9-a8b42b8182f7</msg>
-<status status="PASS" starttime="20230816 06:14:29.293" endtime="20230816 06:14:32.441"/>
+<robot generator="Robot 6.0.2 (Python 3.10.6 on win32)" generated="20230817 04:53:28.804" rpa="false" schemaversion="3">
+<suite id="s1" name="User Teams" source="c:\Users\WONDERS\Documents\Ace\Robot\ace-autobot-usereditors\UserTeamsLibrary\User_Teams.robot">
+<test id="s1-t1" name="Verify the Team Details" line="27">
+<kw name="User Team" type="SETUP">
+<kw name="Open Config In Browser" library="UserTeamsLibrary">
+<msg timestamp="20230817 04:53:29.204" level="INFO">Opening browser 'chrome' to base url 'https://qa.letsdochinese.com/KJTCore/resources/userconfigclient/userteameditor.html'.</msg>
+<msg timestamp="20230817 04:53:29.210" level="INFO">Applicable driver not found; attempting to install with Selenium Manager (Beta)</msg>
+<status status="PASS" starttime="20230817 04:53:29.204" endtime="20230817 04:53:38.760"/>
 </kw>
-<kw name="Remove Agent Api" library="TeamAssignmentLibrary.APILibrary">
-<var>${response}</var>
-<arg>uid=${result_uid}</arg>
-<msg timestamp="20230816 06:14:33.525" level="INFO">Empty response content</msg>
-<msg timestamp="20230816 06:14:33.525" level="INFO">${response} = 200</msg>
-<status status="PASS" starttime="20230816 06:14:32.442" endtime="20230816 06:14:33.525"/>
+<kw name="Login" library="UserTeamsLibrary">
+<arg>username=${USERNAME}</arg>
+<arg>password=${PASSWORD}</arg>
+<msg timestamp="20230817 04:53:38.763" level="INFO">Logging in using  acalimag and kjt</msg>
+<msg timestamp="20230817 04:53:38.802" level="INFO">Typing text 'acalimag' into text field 'id:username'.</msg>
+<msg timestamp="20230817 04:53:38.871" level="INFO">Typing text 'kjt' into text field 'id:password'.</msg>
+<msg timestamp="20230817 04:53:38.929" level="INFO">Clicking element 'id:login'.</msg>
+<status status="PASS" starttime="20230817 04:53:38.761" endtime="20230817 04:53:38.963"/>
 </kw>
-<kw name="Log" library="BuiltIn">
-<arg>${response}</arg>
-<doc>Logs the given message with the given level.</doc>
-<msg timestamp="20230816 06:14:33.527" level="INFO">200</msg>
-<status status="PASS" starttime="20230816 06:14:33.527" endtime="20230816 06:14:33.527"/>
+<kw name="Open User Team" library="UserTeamsLibrary">
+<msg timestamp="20230817 04:53:38.964" level="INFO">Select configuration for User Team</msg>
+<msg timestamp="20230817 04:53:46.265" level="INFO">Clicking element '//a[@id='ConfigNavbarDropdown']'.</msg>
+<msg timestamp="20230817 04:53:46.334" level="INFO">Clicking element '//a[@id='userTeamLi']'.</msg>
+<status status="PASS" starttime="20230817 04:53:38.963" endtime="20230817 04:53:46.945"/>
+</kw>
+<status status="PASS" starttime="20230817 04:53:29.203" endtime="20230817 04:53:46.946"/>
+</kw>
+<kw name="Search And Click Next" library="UserTeamsLibrary">
+<arg>team_name=${TEAMNAME}</arg>
+<msg timestamp="20230817 04:53:58.116" level="INFO">Clicked on 'Next'
+Clicked on 'Next'
+Clicked on 'Next'
+Clicked on 'Next'
+Clicked on 'Next'
+Clicked on: Xrp Adam Warlock DGT Operational Enabled Aug 15, 2023 5:50 AM</msg>
+<status status="PASS" starttime="20230817 04:53:46.946" endtime="20230817 04:53:58.116"/>
+</kw>
+<kw name="Check Team Details" library="UserTeamsLibrary">
+<var>${team_details}</var>
+<arg>exp_name=${TEAMNAME}</arg>
+<arg>exp_desc=${EXP_DESC}</arg>
+<arg>exp_lead=${EXP_TLNAME}</arg>
+<arg>exp_loc=${EXP_LOC}</arg>
+<arg>exp_type=${EXP_TYPE}</arg>
+<arg>exp_last_upd=${EXT_LAST_UPD}</arg>
+<msg timestamp="20230817 04:53:58.118" level="INFO">Check the details using  Xrp, Test Team, Adam Warlock, DGT, Operational and Aug 15, 2023 5:50 AM</msg>
+<msg timestamp="20230817 04:53:58.133" level="INFO">got_act: Xrp</msg>
+<msg timestamp="20230817 04:53:58.148" level="INFO">got_act: Test Team</msg>
+<msg timestamp="20230817 04:53:58.161" level="INFO">got_act: Adam Warlock</msg>
+<msg timestamp="20230817 04:53:58.179" level="INFO">got_act: DGT</msg>
+<msg timestamp="20230817 04:53:58.193" level="INFO">got_act: Operational</msg>
+<msg timestamp="20230817 04:53:58.224" level="INFO">ENABLE BUTTON IS SELECTED - TEAM STATUS is Enabled</msg>
+<msg timestamp="20230817 04:53:58.225" level="INFO">DISABLE BUTTON IS NOT SELECTED - TEAM STATUS is Enabled</msg>
+<msg timestamp="20230817 04:53:58.238" level="INFO">got_act: Aug 15, 2023 5:50 AM</msg>
+<msg timestamp="20230817 04:53:58.238" level="INFO">${team_details} = {'Team Name': 'Xrp', 'Team Description': 'Test Team', 'Team Lead': 'Adam Warlock', 'Team Location': 'DGT', 'Team Type': 'Operational', 'Team Status': 'Enabled', 'Last Updated': 'Aug 15, 2023 5:50 AM'}</msg>
+<status status="PASS" starttime="20230817 04:53:58.117" endtime="20230817 04:53:58.238"/>
+</kw>
+<kw name="Log Dictionary" library="Collections">
+<arg>${team_details}</arg>
+<doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
+<msg timestamp="20230817 04:53:58.239" level="INFO">Dictionary size is 7 and it contains following items:
+Last Updated: Aug 15, 2023 5:50 AM
+Team Description: Test Team
+Team Lead: Adam Warlock
+Team Location: DGT
+Team Name: Xrp
+Team Status: Enabled
+Team Type: Operational</msg>
+<status status="PASS" starttime="20230817 04:53:58.239" endtime="20230817 04:53:58.239"/>
 </kw>
 <kw name="Log To Console" library="BuiltIn">
-<arg>${response}</arg>
+<arg>${team_details}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" starttime="20230816 06:14:33.528" endtime="20230816 06:14:33.529"/>
+<status status="PASS" starttime="20230817 04:53:58.240" endtime="20230817 04:53:58.240"/>
 </kw>
-<kw name="Get Agent Team" library="TeamAssignmentLibrary.DatabaseLibrary">
+<kw name="Get User Team Db" library="UserTeamsLibrary.DatabaseLibrary">
 <var>${result}</var>
-<arg>agent_name=${AGENT_NAME}</arg>
-<doc>TODO: Create a database query to retrieve the Agent's Team Assignment Details.</doc>
-<msg timestamp="20230816 06:14:33.530" level="INFO">Using an existing connection &lt;mysql.connector.connection_cext.CMySQLConnection object at 0x0000023C55645030&gt;.</msg>
-<msg timestamp="20230816 06:14:33.530" level="INFO">Executing query. SELECT  u.uid as Agent_UID, u.name as Agent_Name, ut.utid as Team_ID, ut.name as Team_Name FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userteam AS ut ON um.teamId = ut.utid WHERE u.name = %s; </msg>
-<msg timestamp="20230816 06:14:34.044" level="INFO">${result} = {'message': 'Agent is not assigned to a team.'}</msg>
-<status status="PASS" starttime="20230816 06:14:33.529" endtime="20230816 06:14:34.044"/>
+<arg>tname=${TEAMNAME}</arg>
+<doc>TODO: Create a database query to retrieve the User Team Details.</doc>
+<msg timestamp="20230817 04:53:58.242" level="INFO">Creating a new connection.</msg>
+<msg timestamp="20230817 04:54:00.948" level="INFO">Executing query. SELECT ut.name as Team_Name, ut.description as Team_Description, u.name as Team_Lead, ul.code as Team_Location, ut.type as Team_Type, ut.status as Team_Status, ut.updateTime as Last_Updated FROM kjt.userteam AS ut JOIN kjt.user AS u ON ut.teamLead = u.uid JOIN kjt.userlocation AS ul ON ut.location = ul.lid WHERE ut.name = %s;</msg>
+<msg timestamp="20230817 04:54:01.484" level="INFO">${result} = {'Team Name': 'Xrp', 'Team Description': 'Test Team', 'Team Lead': 'Adam Warlock', 'Team Location': 'DGT', 'Team Type': 'Operational', 'Team Status': 'Enabled', 'Last Updated': datetime.datetime(2023,...</msg>
+<status status="PASS" starttime="20230817 04:53:58.241" endtime="20230817 04:54:01.484"/>
 </kw>
 <kw name="Log Dictionary" library="Collections">
 <arg>${result}</arg>
 <doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
-<msg timestamp="20230816 06:14:34.045" level="INFO">Dictionary has one item:
-message: Agent is not assigned to a team.</msg>
-<status status="PASS" starttime="20230816 06:14:34.044" endtime="20230816 06:14:34.045"/>
+<msg timestamp="20230817 04:54:01.486" level="INFO">Dictionary size is 7 and it contains following items:
+Last Updated: 2023-08-15 05:50:17
+Team Description: Test Team
+Team Lead: Adam Warlock
+Team Location: DGT
+Team Name: Xrp
+Team Status: Enabled
+Team Type: Operational</msg>
+<status status="PASS" starttime="20230817 04:54:01.485" endtime="20230817 04:54:01.486"/>
 </kw>
 <kw name="Log To Console" library="BuiltIn">
 <arg>${result}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" starttime="20230816 06:14:34.045" endtime="20230816 06:14:34.046"/>
+<status status="PASS" starttime="20230817 04:54:01.487" endtime="20230817 04:54:01.488"/>
 </kw>
-<status status="PASS" starttime="20230816 06:14:29.291" endtime="20230816 06:14:34.046"/>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${team_details['Team Name']}</arg>
+<arg>${result['Team Name']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230817 04:54:01.488" endtime="20230817 04:54:01.491"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${team_details['Team Description']}</arg>
+<arg>${result['Team Description']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230817 04:54:01.491" endtime="20230817 04:54:01.493"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${team_details['Team Lead']}</arg>
+<arg>${result['Team Lead']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230817 04:54:01.493" endtime="20230817 04:54:01.495"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${team_details['Team Location']}</arg>
+<arg>${result['Team Location']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230817 04:54:01.495" endtime="20230817 04:54:01.497"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${team_details['Team Type']}</arg>
+<arg>${result['Team Type']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230817 04:54:01.497" endtime="20230817 04:54:01.499"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${team_details['Team Status']}</arg>
+<arg>${result['Team Status']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230817 04:54:01.499" endtime="20230817 04:54:01.501"/>
+</kw>
+<kw name="Logout" type="TEARDOWN">
+<kw name="Logout To System" library="UserTeamsLibrary">
+<msg timestamp="20230817 04:54:01.502" level="INFO">Logging out of the system</msg>
+<msg timestamp="20230817 04:54:01.502" level="INFO">Clicking element '//div[@class='ucc-nav-account-menu-popover-icon mr-3']'.</msg>
+<msg timestamp="20230817 04:54:01.578" level="INFO">Clicking element '//div[@class='popover-body']//li[@id='navbar-logout']'.</msg>
+<msg timestamp="20230817 04:54:01.848" level="INFO">Clicking element '//button[@id='confirm-ucc-logout-btn']'.</msg>
+<status status="PASS" starttime="20230817 04:54:01.502" endtime="20230817 04:54:05.760"/>
+</kw>
+<status status="PASS" starttime="20230817 04:54:01.501" endtime="20230817 04:54:05.760"/>
+</kw>
+<status status="PASS" starttime="20230817 04:53:29.201" endtime="20230817 04:54:05.762"/>
 </test>
-<status status="PASS" starttime="20230816 06:14:28.972" endtime="20230816 06:14:34.047"/>
+<status status="PASS" starttime="20230817 04:53:28.811" endtime="20230817 04:54:05.766"/>
 </suite>
 <statistics>
 <total>
@@ -61,7 +157,7 @@ message: Agent is not assigned to a team.</msg>
 <tag>
 </tag>
 <suite>
-<stat pass="1" fail="0" skip="0" id="s1" name="Team Assignment">Team Assignment</stat>
+<stat pass="1" fail="0" skip="0" id="s1" name="User Teams">User Teams</stat>
 </suite>
 </statistics>
 <errors>

@@ -3,9 +3,6 @@ NEXTBTN: str = "//a[normalize-space()='Next']"
 
 TNAME: str = "//input[@id='name']"
 TDESC: str = "//textarea[@id='description']"
-
-TSTAT_ENB: str = "//input[@id='enabled']"
-TSTAT_DISB: str = "//input[@id='disabled']"
 UPDTIME: str = "//span[@id='updatetime']"
 
 VIEW_UPDATE_LBL: str = "//h5[@id='formTitle']"
@@ -40,17 +37,23 @@ CR_TEAM_BTN: str = "//button[@id='createTeam']"
 
 
 
-# TLEAD: str = "//select[@id='teamlead']"
+TLEAD: str = "//select[@id='teamlead']"
 def TLEAD_LOC(lead: str):
     return f"xpath://option[text()='{lead}']"
 
 
-# TLOC: str = "//select[@id='location']"
+TLOC: str = "//select[@id='location']"
 def TLOC_LOC(loc: str):
     return f"xpath://option[text()='{loc}']"
 
 
-# TTYPE: str = "//select[@id='type']"
+TTYPE: str = "//select[@id='type']"
 # TTYPE: str = "//option[@value='{}']"
 def TTYPE_LOC(type: str):
     return f"xpath://option[@value='{type}']"
+
+
+TSTAT_ENB: str = "//input[@id='enabled']"
+TSTAT_DISB: str = "//input[@id='disabled']"
+def TSTATUS_LOC(status: str):
+    return f"xpath://input[@id='{status}']"

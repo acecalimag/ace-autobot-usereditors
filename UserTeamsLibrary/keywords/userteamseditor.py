@@ -39,25 +39,6 @@ class UserTeamsEditor:
             team_list_table['TEAM LIST Label'] = 'Not Showing'
 
 
-        # # Verify the TEAM LIST Table Column Labels (Name)
-        # self.__ctx.scroll_element_into_view("xpath", userteamslocators.TBL_NAME_LBL)
-        # elements = self.__ctx.driver.find_elements("xpath", userteamslocators.TBL_NAME_LBL)
-        # if elements:
-        #     element = elements[0]
-        #     act_namelbl = element.text
-            
-        #     # Compare actual_text with expected_text
-        #     if act_namelbl == exp_namelbl:
-        #         logger.info(f"Name Label in Team List Table is showing and text matches: {act_namelbl}")
-        #         team_list_table['Name Label in Team List Table'] = 'Showing'
-        #     else:
-        #         logger.info(f"Name Label is showing but text does not match. Actual: {act_namelbl}, Expected: {exp_namelbl}")
-        #         team_list_table['Name Label in Team List Table'] = 'Not Showing'
-        # else:
-        #     logger.info("Name Label in Team List Table is not showing")
-        #     team_list_table['Name Label in Team List Table'] = 'Not Showing'
-
-
         # Verify the TEAM LIST Table Column Labels (Name)
         element_locator = (By.XPATH, userteamslocators.TBL_NAME_LBL)
         driver = self.__ctx.driver

@@ -29,3 +29,18 @@ EXP_VU_LSTUPDLBL: str = "Last Updated"
 
 EXP_RMNDR_LBL: str = "Reminder"
 EXP_RMNDR_TXT: str = "Any changes related to the team assignment should only be done after 9AM-3AM (next day)." 
+
+EXP_CNTLBL: str = "Create New Team"
+IN_CNT_NAME: str = "Auto_Test_1"
+IN_CNT_TD: str = "Auto_Test_1"
+IN_CNT_TL: str = "Adam Warlock"
+IN_CNT_LOC: str = "MNL"
+IN_CNT_TYPE: str = "Non-Operational"
+IN_CNT_STATUS: str = "Disabled"
+
+ED_VU_NAME: str = "Xrp"
+ED_VU_TD: str = "Test Team1"
+ED_VU_TL: str = "Adam Warlock"
+ED_VU_LOC: str = "MNL"
+ED_VU_TYPE: str = "Operational"
+ED_VU_STATUS: str = "Disabled"

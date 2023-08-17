@@ -8,8 +8,8 @@ from UserTeamsLibrary.keywords.openpage import OpenPage
 from UserTeamsLibrary.keywords.selectteam import SelectTeam
 from UserTeamsLibrary.keywords.teamdetails import TeamDetails
 from UserTeamsLibrary.keywords.userteamseditor import UserTeamsEditor
-from UserTeamsLibrary.keywords.assignagenttoteam import AssignAgenttoTeam
-from UserTeamsLibrary.keywords.removeagenttoteam import RemoveAgenttoTeam
+from UserTeamsLibrary.keywords.createteam import CreateTeam
+from UserTeamsLibrary.keywords.editteam import EditTeam
 
 
 @library(scope='GLOBAL')
@@ -24,8 +24,8 @@ class UserTeamsLibrary(DynamicCore):
             SelectTeam(ctx=ctx), 
             TeamDetails(ctx=ctx), 
             UserTeamsEditor(ctx=ctx),
-            AssignAgenttoTeam(ctx=ctx),
-            RemoveAgenttoTeam(ctx=ctx)
+            CreateTeam(ctx=ctx),
+            EditTeam(ctx=ctx)
 
         ]
         DynamicCore.__init__(self,library_components=components)

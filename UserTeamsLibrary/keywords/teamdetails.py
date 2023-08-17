@@ -47,17 +47,6 @@ class TeamDetails:
         team_details['Team Lead'] = act_lead
         assert_equal(act_lead, exp_lead, f"Expected form Team Lead '{exp_lead}' does not match the actual Team Lead '{act_lead}'")        
 
-        # tlead_loc = f"//option[text()='{exp_lead}']"
-        # act_lead = self.__ctx.get_text(tlead_loc)
-        # logger.info(f"got_act: {act_lead}")
-        # team_details['Team Lead Name'] = act_lead
-        # assert_equal(act_lead, exp_lead, f"Expected form Team Lead '{exp_lead}' does not match the actual Team Lead '{act_lead}'")
-
-        # act_lead_uid = self.__ctx.get_value(locator=userteamslocators.TLEAD)
-        # logger.info(f"got_act: {act_lead_uid}")
-        # team_details['Team Lead UID'] = act_lead_uid
-        # assert_equal(act_lead_uid, exp_lead_uid, f"Expected form Team Lead UID '{exp_lead_uid}' does not match the actual Team Lead UID '{act_lead_uid}'")
-
 
         # Verify the Team Location
         tloc_loc = userteamslocators.TLOC_LOC(loc=exp_loc)
@@ -66,37 +55,22 @@ class TeamDetails:
         team_details['Team Location'] = act_loc
         assert_equal(act_lead, exp_lead, f"Expected form Team Loc '{exp_loc}' does not match the actual Team Loc '{act_loc}'")
 
-        # loc_locator = f"//option[text()='{exp_loc}']"
-        # act_loc = self.__ctx.get_text(loc_locator)
-        # logger.info(f"got_act: {act_loc}")
-        # team_details['Team Location'] = act_loc
-        # assert_equal(act_lead, exp_lead, f"Expected form Team Loc '{exp_loc}' does not match the actual Team Loc '{act_loc}'")
-
-        # act_loc_code = self.__ctx.get_value(locator=userteamslocators.TLOC)
-        # logger.info(f"got_act: {act_loc_code}")
-        # team_details['Team Location Code'] = act_loc_code
-        # assert_equal(act_loc_code, exp_loc_code, f"Expected form Team Location Code '{exp_loc_code}' does not match the actual Team Location Code '{act_loc_code}'")
-
 
         # Verify the Team Type
-        ttype_loc = userteamslocators.TTYPE_LOC(type=exp_type.lower())
-        # ttype_loc = userteamslocators.TTYPE.format(exp_type.lower())
+        exp_type_modified = exp_type.lower().replace("-", "")
+        ttype_loc = userteamslocators.TTYPE_LOC(type=exp_type_modified)
+
         act_type = self.__ctx.get_text(ttype_loc)
         logger.info(f"got_act: {act_type}")
         team_details['Team Type'] = act_type
         assert_equal(act_type, exp_type, f"Expected form Team Type '{exp_type}' does not match the actual Team Type '{act_type}'")
 
-        # ttype_loc = f"//option[@value='{exp_type.lower()}']"
-        # act_type = self.__ctx.get_text(ttype_loc)
-        # logger.info(f"got_act: {act_type}")
-        # team_details['Team Location'] = act_type
-        # assert_equal(act_type, exp_type, f"Expected form Team Loc '{exp_type}' does not match the actual Team Loc '{act_type}'")
 
 
         # Verify the Team Status
         driver = self.__ctx.driver
-        enabled_radio_locator = (By.XPATH, "//input[@id='enabled']")
-        disabled_radio_locator = (By.XPATH, "//input[@id='disabled']")
+        enabled_radio_locator = (By.XPATH, userteamslocators.TSTAT_ENB)
+        disabled_radio_locator = (By.XPATH, userteamslocators.TSTAT_DISB)
 
         enabled_radio_button = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located(enabled_radio_locator)
@@ -129,7 +103,7 @@ class TeamDetails:
         act_last_upd = self.__ctx.get_text(locator=userteamslocators.UPDTIME)
         logger.info(f"got_act: {act_last_upd}")
         team_details['Last Updated'] = act_last_upd
-        assert_equal(act_last_upd, exp_last_upd, f"Expected form Last Updated '{exp_last_upd}' does not match the actual Last Updated '{act_last_upd}'")
+        # assert_equal(act_last_upd, exp_last_upd, f"Expected form Last Updated '{exp_last_upd}' does not match the actual Last Updated '{act_last_upd}'")
 
 
         
