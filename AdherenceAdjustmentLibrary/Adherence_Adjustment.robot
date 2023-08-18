@@ -29,11 +29,16 @@ Verify the Adherence Adjustment Page
     [Teardown]     Logout
     
     ${result}                            Get User Details                     username=${USERNAME}
-    # Log Dictionary                       ${result}
-    ${adhadj_header}                     Check Page Header                    exp_hdr_adhadjlbl=${EXP_HDR_ADADJLBL}        exp_hdr_user=${EXP_HDR_USER}    #${result['username']} - ${result['position']}    #
+    ${adhadj_header}                     Check Page Header                    exp_hdr_adhadjlbl=${EXP_HDR_ADADJLBL}        exp_hdr_user=${result['username']} - ${result['position']}
     Log Dictionary                       ${adhadj_header}
     Log To Console                       ${adhadj_header}
     
+    
+
+
+
+
+
     # ${result}                            Get User Team Db                     tname=${TEAMNAME}
     # Log Dictionary                       ${result}
     # Log To Console                       ${result}
