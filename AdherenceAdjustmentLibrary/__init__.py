@@ -6,7 +6,7 @@ from AdherenceAdjustmentLibrary.keywords.browser import Browser
 from AdherenceAdjustmentLibrary.keywords.loginpage import LoginPage
 from AdherenceAdjustmentLibrary.keywords.openpage import OpenPage
 from AdherenceAdjustmentLibrary.keywords.adhadjpage import AdherenceAdjustmentPage
-from AdherenceAdjustmentLibrary.keywords.teamdetails import TeamDetails
+from AdherenceAdjustmentLibrary.keywords.selectdispute import SelectDispute
 
 
 
@@ -20,7 +20,7 @@ class AdherenceAdjustmentLibrary(DynamicCore):
             LoginPage(ctx=ctx),
             OpenPage(ctx=ctx),
             AdherenceAdjustmentPage(ctx=ctx), 
-            TeamDetails(ctx=ctx)
+            SelectDispute(ctx=ctx)
 
         ]
         DynamicCore.__init__(self,library_components=components)

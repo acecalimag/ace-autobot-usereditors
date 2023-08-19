@@ -33,10 +33,18 @@ Verify the Adherence Adjustment Page
     Log Dictionary                       ${adhadj_header}
     Log To Console                       ${adhadj_header}
     
-    
+    ${dispute_table}                     Check Dispute Table                  exp_rtrlbl=${EXP_TBL_RTR_LBL}                exp_unamelbl=${EXP_TBL_UNAME_LBL}            exp_loclbl=${EXP_TBL_LOC_LBL}            exp_teamlbl=${EXP_TBL_TEAM_LBL}            exp_statuslbl=${EXP_TBL_STAT_LBL}            exp_rvwrlbl=${EXP_TBL_RVWR_LBL}            exp_rvwdatlbl=${EXP_TBL_RVWDAT_LBL}            exp_crtdlbl=${EXP_TBL_CRTD_LBL}
+    Log Dictionary                       ${dispute_table}
+    Log To Console                       ${dispute_table}
 
 
+View Dispute Details
+    [Setup]        Adherence Adjustment
+    [Teardown]     Logout
 
+    Select Dispute Entry                start_date=2023-01-01                end_date=2023-08-01        exp_user=tqa3            exp_post=Engineering
+    Search And Click Next               wfid=10101                           udid=1bf87e01-c345-43fb-91aa-4c5213dd0c5d
+    Sleep    20s
 
 
     # ${result}                            Get User Team Db                     tname=${TEAMNAME}

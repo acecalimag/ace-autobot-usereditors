@@ -66,16 +66,12 @@ class AdherenceAdjustmentPage:
 
     @keyword 
     def check_dispute_table(self, exp_rtrlbl: str, exp_unamelbl: str, exp_loclbl: str, exp_teamlbl: str, exp_statuslbl: str, exp_rvwrlbl: str, exp_rvwdatlbl: str, exp_crtdlbl: str):
-        logger.info(f"Check the Team List Table if fields, labels, and buttons are present")
+        logger.info(f"Check the Dispute Table if fields, labels, and buttons are present")
 
-        team_list_table = {}
+        dispute_table = {}
 
-       
-
-
-
-        # Verify the TEAM LIST Table Column Labels (Name)
-        element_locator = (By.XPATH, adhadjlocators.TBL_NAME_LBL)
+        # Verify the Dispute Table Column Labels (Requested Time Range)
+        element_locator = (By.XPATH, adhadjlocators.TBL_RTR_LBL)
         driver = self.__ctx.driver
 
         # Scroll the element into view using WebDriverWait and JavaScript
@@ -90,114 +86,151 @@ class AdherenceAdjustmentPage:
         # Your existing code for verification and comparison
         if elements:
             element = elements[0]
-            act_namelbl = element.text
+            act_rtrlbl = element.text
 
             # Compare actual_text with expected_text
-            if act_namelbl == exp_namelbl:
-                logger.info(f"Name Label in Team List Table is showing and text matches: {act_namelbl}")
-                team_list_table['Name Label in Team List Table'] = 'Showing'
+            if act_rtrlbl == exp_rtrlbl:
+                logger.info(f"Requested Time Range Label in Dispute Table is showing and text matches: {act_rtrlbl}")
+                dispute_table['Requested Time Range Label in Dispute Table'] = 'Showing'
             else:
-                logger.info(f"Name Label is showing but text does not match. Actual: {act_namelbl}, Expected: {exp_namelbl}")
-                team_list_table['Name Label in Team List Table'] = 'Not Showing'
+                logger.info(f"Requested Time Range Label is showing but text does not match. Actual: {act_rtrlbl}, Expected: {exp_rtrlbl}")
+                dispute_table['Requested Time Range Label in Dispute Table'] = 'Not Showing'
         else:
-            logger.info("Name Label in Team List Table is not showing")
-            team_list_table['Name Label in Team List Table'] = 'Not Showing'
+            logger.info("Requested Time Range Label in Dispute Table is not showing")
+            dispute_table['Requested Time Range Label in Dispute Table'] = 'Not Showing'
 
 
 
-        # Verify the TEAM LIST Table Column Labels (Team Lead)
-        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.TBL_TLEAD_LBL)
+        # Verify the Dispute Table Column Labels (Username)
+        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.TBL_UNAME_LBL)
         if elements:
             element = elements[0]
-            act_leadlbl = element.text
+            act_unamelbl = element.text
             
             # Compare actual_text with expected_text
-            if act_leadlbl == exp_leadlbl:
-                logger.info(f"Team Lead Label in Team List Table is showing and text matches: {act_leadlbl}")
-                team_list_table['Team Lead Label in Team List Table'] = 'Showing'
+            if act_unamelbl == exp_unamelbl:
+                logger.info(f"Username Label in Dispute Table is showing and text matches: {act_unamelbl}")
+                dispute_table['UsernameLabel in Dispute Table'] = 'Showing'
             else:
-                logger.info(f"Team Lead Label is showing but text does not match. Actual: {act_leadlbl}, Expected: {exp_leadlbl}")
-                team_list_table['Team Lead Label in Team List Table'] = 'Not Showing'
+                logger.info(f"Username Label is showing but text does not match. Actual: {act_unamelbl}, Expected: {exp_unamelbl}")
+                dispute_table['Username Label in Dispute Table'] = 'Not Showing'
         else:
-            logger.info("Team Lead in Team List Table is not showing")
-            team_list_table['Team Lead in Team List Table'] = 'Not Showing'
+            logger.info("Username in Dispute Table is not showing")
+            dispute_table['Username in Dispute Table'] = 'Not Showing'
 
 
-        # Verify the TEAM LIST Table Column Labels (Location)
-        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.TBL_TLOC_LBL)
+        # Verify the Dispute Table Column Labels (Location)
+        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.TBL_LOC_LBL)
         if elements:
             element = elements[0]
             act_loclbl = element.text
             
             # Compare actual_text with expected_text
             if act_loclbl == exp_loclbl:
-                logger.info(f"Location Label in Team List Table is showing and text matches: {act_loclbl}")
-                team_list_table['Location Label in Team List Table'] = 'Showing'
+                logger.info(f"Location Label in Dispute Table is showing and text matches: {act_loclbl}")
+                dispute_table['Location Label in Dispute Table'] = 'Showing'
             else:
                 logger.info(f"Location Label is showing but text does not match. Actual: {act_loclbl}, Expected: {exp_loclbl}")
-                team_list_table['Location Label in Team List Table'] = 'Not Showing'
+                dispute_table['Location Label in Dispute Table'] = 'Not Showing'
         else:
-            logger.info("Location LABEL in Team List Table is not showing")
-            team_list_table['Location Label in Team List Table'] = 'Not Showing'
+            logger.info("Location LABEL in Dispute Table is not showing")
+            dispute_table['Location Label in Dispute Table'] = 'Not Showing'
 
 
-        # Verify the TEAM LIST Table Column Labels (Type)
-        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.TBL_TTYPE_LBL)
+        # Verify the Dispute Table Column Labels (Team)
+        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.TBL_TEAM_LBL)
         if elements:
             element = elements[0]
-            act_typelbl = element.text
+            act_teamlbl = element.text
             
             # Compare actual_text with expected_text
-            if act_typelbl == exp_typelbl:
-                logger.info(f"Type Label in Team List Table is showing and text matches: {act_typelbl}")
-                team_list_table['Type Label in Team List Table'] = 'Showing'
+            if act_teamlbl == exp_teamlbl:
+                logger.info(f"Team Label in Dispute Table is showing and text matches: {act_teamlbl}")
+                dispute_table['Team Label in Dispute Table'] = 'Showing'
             else:
-                logger.info(f"Type Label is showing but text does not match. Actual: {act_typelbl}, Expected: {exp_typelbl}")
-                team_list_table['Type Label in Team List Table'] = 'Not Showing'
+                logger.info(f"Team Label is showing but text does not match. Actual: {act_teamlbl}, Expected: {exp_teamlbl}")
+                dispute_table['Team Label in Dispute Table'] = 'Not Showing'
         else:
-            logger.info("Type Label in Team List Table is not showing")
-            team_list_table['Type Label in Team List Table'] = 'Not Showing'
+            logger.info("Team Label in Dispute Table is not showing")
+            dispute_table['Team Label in Dispute Table'] = 'Not Showing'
 
 
-        # Verify the TEAM LIST Table Column Labels (Status)
-        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.TBL_TSTAT_LBL)
+        # Verify the Dispute Table Column Labels (Status)
+        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.TBL_STAT_LBL)
         if elements:
             element = elements[0]
             act_statuslbl = element.text
             
             # Compare actual_text with expected_text
             if act_statuslbl == exp_statuslbl:
-                logger.info(f"Status Label in Team List Table is showing and text matches: {act_statuslbl}")
-                team_list_table['Status Label in Team List Table'] = 'Showing'
+                logger.info(f"Status Label in Dispute Table is showing and text matches: {act_statuslbl}")
+                dispute_table['Status Label in Dispute Table'] = 'Showing'
             else:
                 logger.info(f"Status Label is showing but text does not match. Actual: {act_statuslbl}, Expected: {exp_statuslbl}")
-                team_list_table['Status Label in Team List Table'] = 'Not Showing'
+                dispute_table['Status Label in Dispute Table'] = 'Not Showing'
         else:
-            logger.info("Status Label in Team List Table is not showing")
-            team_list_table['Status Label in Team List Table'] = 'Not Showing'
+            logger.info("Status Label in Dispute Table is not showing")
+            dispute_table['Status Label in Dispute Table'] = 'Not Showing'
 
 
 
-        # Verify the TEAM LIST Table Column Labels (Last Updated)
-        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.TBL_TLUPD_LBL)
+        # Verify the Dispute Table Column Labels (Reviewer)
+        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.TBL_RVWR_LBL)
         if elements:
             element = elements[0]
-            act_lupdlbl = element.text
+            act_rvwrlbl = element.text
             
             # Compare actual_text with expected_text
-            if act_lupdlbl == exp_lupdlbl:
-                logger.info(f"Last Updated Label in Team List Table is showing and text matches: {act_lupdlbl}")
-                team_list_table['Last Updated Label in Team List Table'] = 'Showing'
+            if act_rvwrlbl == exp_rvwrlbl:
+                logger.info(f"Reviewer Label in Dispute Table is showing and text matches: {act_rvwrlbl}")
+                dispute_table['Reviewer Label in Dispute Table'] = 'Showing'
             else:
-                logger.info(f"Last Updated Label is showing but text does not match. Actual: {act_lupdlbl}, Expected: {exp_lupdlbl}")
-                team_list_table['Last Updated Label in Team List Table'] = 'Not Showing'
+                logger.info(f"Reviewer Label is showing but text does not match. Actual: {act_rvwrlbl}, Expected: {exp_rvwrlbl}")
+                dispute_table['Reviewer Label in Dispute Table'] = 'Not Showing'
         else:
-            logger.info("Last Updated Label in Team List Table is not showing")
-            team_list_table['Last Updated Label in Team List Table'] = 'Not Showing'
+            logger.info("Reviewer Label in Dispute Table is not showing")
+            dispute_table['Reviewer Label in Dispute Table'] = 'Not Showing'
 
 
 
-        return team_list_table
+        # Verify the Dispute Table Column Labels (Reviewed At)
+        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.TBL_RVWDAT_LBL)
+        if elements:
+            element = elements[0]
+            act_rvwdatlbl = element.text
+            
+            # Compare actual_text with expected_text
+            if act_rvwdatlbl == exp_rvwdatlbl:
+                logger.info(f"Reviewed At Label in Dispute Table is showing and text matches: {act_rvwdatlbl}")
+                dispute_table['Reviewed At Label in Dispute Table'] = 'Showing'
+            else:
+                logger.info(f"Reviewed At Label is showing but text does not match. Actual: {act_rvwdatlbl}, Expected: {exp_rvwdatlbl}")
+                dispute_table['Reviewed At Label in Dispute Table'] = 'Not Showing'
+        else:
+            logger.info("Reviewed At Label in Dispute Table is not showing")
+            dispute_table['Reviewed At Label in Dispute Table'] = 'Not Showing'
+
+
+        # Verify the Dispute Table Column Labels (Created)
+        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.TBL_CRTD_LBL)
+        if elements:
+            element = elements[0]
+            act_crtdlbl = element.text
+            
+            # Compare actual_text with expected_text
+            if act_crtdlbl == exp_crtdlbl:
+                logger.info(f"Created Label in Dispute Table is showing and text matches: {act_crtdlbl}")
+                dispute_table['Created Label in Dispute Table'] = 'Showing'
+            else:
+                logger.info(f"Created Label is showing but text does not match. Actual: {act_crtdlbl}, Expected: {exp_crtdlbl}")
+                dispute_table['Created Label in Dispute Table'] = 'Not Showing'
+        else:
+            logger.info("Created Label in Dispute Table is not showing")
+            dispute_table['Created Label in Dispute Table'] = 'Not Showing'
+
+
+
+        return dispute_table
 
 
 
