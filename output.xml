@@ -1,39 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.0.2 (Python 3.10.6 on win32)" generated="20230819 06:07:51.288" rpa="false" schemaversion="3">
+<robot generator="Robot 6.0.2 (Python 3.10.6 on win32)" generated="20230819 06:18:51.196" rpa="false" schemaversion="3">
 <suite id="s1" name="Adherence Adjustment" source="c:\Users\WONDERS\Documents\Ace\Robot\ace-autobot-usereditors\AdherenceAdjustmentLibrary\Adherence_Adjustment.robot">
 <test id="s1-t1" name="View Dispute Details" line="41">
 <kw name="Adherence Adjustment" type="SETUP">
 <kw name="Open Config In Browser" library="AdherenceAdjustmentLibrary">
-<msg timestamp="20230819 06:07:51.615" level="INFO">Opening browser 'chrome' to base url 'https://qa.letsdochinese.com/KJTCore/resources/adherenceadjustment.html'.</msg>
-<status status="PASS" starttime="20230819 06:07:51.614" endtime="20230819 06:07:57.535"/>
+<msg timestamp="20230819 06:18:51.524" level="INFO">Opening browser 'chrome' to base url 'https://qa.letsdochinese.com/KJTCore/resources/adherenceadjustment.html'.</msg>
+<status status="PASS" starttime="20230819 06:18:51.524" endtime="20230819 06:18:55.719"/>
 </kw>
 <kw name="Login And Redirect" library="AdherenceAdjustmentLibrary">
 <arg>username=${USERNAME}</arg>
 <arg>password=${PASSWORD}</arg>
 <arg>redirect_url=${EXP_URL}</arg>
-<msg timestamp="20230819 06:07:57.536" level="INFO">Logging in using  acalimag and kjt</msg>
-<msg timestamp="20230819 06:07:59.472" level="INFO">Typing text 'acalimag' into text field 'id:username'.</msg>
-<msg timestamp="20230819 06:07:59.530" level="INFO">Typing text 'kjt' into text field 'id:password'.</msg>
-<msg timestamp="20230819 06:07:59.584" level="INFO">Clicking element 'id:login'.</msg>
-<msg timestamp="20230819 06:08:04.634" level="INFO">Opening url 'https://qa.letsdochinese.com/KJTCore/resources/adherenceadjustment.html'</msg>
-<status status="PASS" starttime="20230819 06:07:57.535" endtime="20230819 06:08:04.752"/>
+<msg timestamp="20230819 06:18:55.722" level="INFO">Logging in using  acalimag and kjt</msg>
+<msg timestamp="20230819 06:18:58.414" level="INFO">Suppressing StaleElementReferenceException from Selenium.</msg>
+<msg timestamp="20230819 06:18:58.647" level="INFO">Typing text 'acalimag' into text field 'id:username'.</msg>
+<msg timestamp="20230819 06:18:58.707" level="INFO">Typing text 'kjt' into text field 'id:password'.</msg>
+<msg timestamp="20230819 06:18:58.766" level="INFO">Clicking element 'id:login'.</msg>
+<msg timestamp="20230819 06:19:03.813" level="INFO">Opening url 'https://qa.letsdochinese.com/KJTCore/resources/adherenceadjustment.html'</msg>
+<status status="PASS" starttime="20230819 06:18:55.719" endtime="20230819 06:19:03.954"/>
 </kw>
-<status status="PASS" starttime="20230819 06:07:51.614" endtime="20230819 06:08:04.754"/>
+<status status="PASS" starttime="20230819 06:18:51.523" endtime="20230819 06:19:03.956"/>
+</kw>
+<kw name="Get User Details" library="AdherenceAdjustmentLibrary.DatabaseLibrary">
+<var>${result}</var>
+<arg>username=tqa3</arg>
+<doc>TODO: Create a database query to retrieve the Agent's UID.</doc>
+<msg timestamp="20230819 06:19:03.959" level="INFO">Creating a new connection.</msg>
+<msg timestamp="20230819 06:19:06.730" level="INFO">Executing query. SELECT u.username, um.position, ul.code, um.workforceid FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userlocation AS ul ON um.lid = ul.lid WHERE u.username = %s;</msg>
+<msg timestamp="20230819 06:19:07.249" level="INFO">${result} = {'username': 'TQA3', 'position': 'ENGINEERING', 'location': 'MNL', 'workforceid': '99007'}</msg>
+<status status="PASS" starttime="20230819 06:19:03.956" endtime="20230819 06:19:07.249"/>
 </kw>
 <kw name="Select Dispute Entry" library="AdherenceAdjustmentLibrary">
 <arg>start_date=2023-01-01</arg>
 <arg>end_date=2023-08-01</arg>
 <arg>exp_user=tqa3</arg>
 <arg>exp_post=Engineering</arg>
-<msg timestamp="20230819 06:08:04.756" level="INFO">Modify the filters to select a dispute entry</msg>
-<msg timestamp="20230819 06:08:04.772" level="INFO">Clicking element '//input[@id='startDate']'.</msg>
-<msg timestamp="20230819 06:08:23.584" level="INFO">Clicking element '//input[@id='endDate']'.</msg>
-<msg timestamp="20230819 06:08:25.826" level="INFO">Clicking element '//button[@data-id='position-select']'.</msg>
-<msg timestamp="20230819 06:08:25.880" level="INFO">Clicking element 'xpath://div[@aria-expanded='true']//span[@class='text'][normalize-space()='Engineering']'.</msg>
-<msg timestamp="20230819 06:08:25.932" level="INFO">Clicking element '//button[@data-id='status-select']'.</msg>
-<msg timestamp="20230819 06:08:25.971" level="INFO">Clicking element '//div[@class='dropdown-menu show']//button[@type='button'][normalize-space()='Select All']'.</msg>
-<msg timestamp="20230819 06:08:26.004" level="INFO">Clicking element '//button[@id='display-requests-btn']'.</msg>
-<msg timestamp="20230819 06:08:26.038" level="INFO">Clicked on 'Prev'
+<msg timestamp="20230819 06:19:07.252" level="INFO">Modify the filters to select a dispute entry</msg>
+<msg timestamp="20230819 06:19:07.272" level="INFO">Clicking element '//input[@id='startDate']'.</msg>
+<msg timestamp="20230819 06:19:22.306" level="INFO">Clicking element '//input[@id='endDate']'.</msg>
+<msg timestamp="20230819 06:19:24.558" level="INFO">Clicking element '//button[@data-id='position-select']'.</msg>
+<msg timestamp="20230819 06:19:24.606" level="INFO">Clicking element 'xpath://div[@aria-expanded='true']//span[@class='text'][normalize-space()='Engineering']'.</msg>
+<msg timestamp="20230819 06:19:24.655" level="INFO">Clicking element '//button[@data-id='status-select']'.</msg>
+<msg timestamp="20230819 06:19:24.693" level="INFO">Clicking element '//div[@class='dropdown-menu show']//button[@type='button'][normalize-space()='Select All']'.</msg>
+<msg timestamp="20230819 06:19:24.728" level="INFO">Clicking element '//button[@id='display-requests-btn']'.</msg>
+<msg timestamp="20230819 06:19:24.763" level="INFO">Clicked on 'Prev'
+Clicked on 'Prev'
 Clicked on 'Prev'
 Clicked on 'Prev'
 Clicked on 'Prev'
@@ -44,33 +55,34 @@ Clicked on 'Prev'
 Previous button not found or clickable, exiting loop.
 Clicked on 'Prev'
 Previous button not found or clickable, exiting loop.</msg>
-<status status="PASS" starttime="20230819 06:08:04.755" endtime="20230819 06:08:26.038"/>
+<status status="PASS" starttime="20230819 06:19:07.251" endtime="20230819 06:19:24.763"/>
 </kw>
 <kw name="Search And Click Next" library="AdherenceAdjustmentLibrary">
-<arg>wfid=10101</arg>
-<arg>udid=1bf87e01-c345-43fb-91aa-4c5213dd0c5d</arg>
-<msg timestamp="20230819 06:08:30.450" level="INFO">Clicked on 'Next'
+<arg>wfid=${result['workforceid']}</arg>
+<arg>udid=10623919-cb46-412f-bba5-69ce21a8db6e</arg>
+<msg timestamp="20230819 06:19:31.357" level="INFO">Clicked on 'Next'
 Clicked on 'Next'
-Clicked on: May 17, 2023 12:00 AM -
-May 17, 2023 12:00 AM wmaximoff MNL Boston Confirmed May 29, 2023 11:35 PM</msg>
-<status status="PASS" starttime="20230819 06:08:26.039" endtime="20230819 06:08:30.450"/>
+Clicked on 'Next'
+Clicked on: May 22, 2023 12:00 AM -
+May 22, 2023 12:00 AM tqa3 MNL sample team 1 Confirmed Jun 02, 2023 3:47 AM</msg>
+<status status="PASS" starttime="20230819 06:19:24.764" endtime="20230819 06:19:31.357"/>
 </kw>
 <kw name="Sleep" library="BuiltIn">
 <arg>20s</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<msg timestamp="20230819 06:08:50.465" level="INFO">Slept 20 seconds</msg>
-<status status="PASS" starttime="20230819 06:08:30.451" endtime="20230819 06:08:50.466"/>
+<msg timestamp="20230819 06:19:51.365" level="INFO">Slept 20 seconds</msg>
+<status status="PASS" starttime="20230819 06:19:31.358" endtime="20230819 06:19:51.365"/>
 </kw>
 <kw name="Logout" type="TEARDOWN">
 <kw name="Logout To System" library="AdherenceAdjustmentLibrary">
-<msg timestamp="20230819 06:08:50.471" level="INFO">Logging out of the system</msg>
-<status status="PASS" starttime="20230819 06:08:50.470" endtime="20230819 06:08:52.940"/>
+<msg timestamp="20230819 06:19:51.370" level="INFO">Logging out of the system</msg>
+<status status="PASS" starttime="20230819 06:19:51.369" endtime="20230819 06:19:53.923"/>
 </kw>
-<status status="PASS" starttime="20230819 06:08:50.468" endtime="20230819 06:08:52.941"/>
+<status status="PASS" starttime="20230819 06:19:51.368" endtime="20230819 06:19:53.924"/>
 </kw>
-<status status="PASS" starttime="20230819 06:07:51.613" endtime="20230819 06:08:52.942"/>
+<status status="PASS" starttime="20230819 06:18:51.523" endtime="20230819 06:19:53.926"/>
 </test>
-<status status="PASS" starttime="20230819 06:07:51.294" endtime="20230819 06:08:52.945"/>
+<status status="PASS" starttime="20230819 06:18:51.199" endtime="20230819 06:19:53.932"/>
 </suite>
 <statistics>
 <total>
@@ -83,6 +95,6 @@ May 17, 2023 12:00 AM wmaximoff MNL Boston Confirmed May 29, 2023 11:35 PM</msg>
 </suite>
 </statistics>
 <errors>
-<msg timestamp="20230819 06:07:51.503" level="WARN">Imported library 'AdherenceAdjustmentLibrary.APILibrary' contains no keywords.</msg>
+<msg timestamp="20230819 06:18:51.414" level="WARN">Imported library 'AdherenceAdjustmentLibrary.APILibrary' contains no keywords.</msg>
 </errors>
 </robot>
