@@ -26,7 +26,7 @@ class SelectDispute:
 
 
     @keyword
-    def select_dispute_entry(self, start_date:str, end_date: str, exp_user: str, exp_post: str):
+    def select_filters(self, start_date:str, end_date: str, exp_user: str, exp_team: str, exp_post: str):
         logger.info(f"Modify the filters to select a dispute entry")
         driver = self.__ctx.driver
 
@@ -106,7 +106,7 @@ class SelectDispute:
                     break  # Exit the loop if Next link is not found or not clickable
 
 
-        # # Selecting the User
+        # # Selecting the User/s
         # self.__ctx.wait_until_element_is_visible(adhadjlocators.FLTR_USERS_DRPDWN)
         # self.__ctx.click_element(adhadjlocators.FLTR_USERS_DRPDWN)
         # time.sleep(5)
@@ -114,6 +114,16 @@ class SelectDispute:
         # self.__ctx.wait_until_element_is_visible(adhadjlocators.FLTR_USERS_RSLT)
         # self.__ctx.click_element(adhadjlocators.FLTR_USERS_RSLT)
                               
+
+        # Selecting the Team/s
+        self.__ctx.wait_until_element_is_visible(adhadjlocators.FLTR_TEAM_DRPDWN)
+        self.__ctx.click_element(adhadjlocators.FLTR_TEAM_DRPDWN)
+        time.sleep(5)
+        self.__ctx.input_text(adhadjlocators.FLTR_TEAM_SRCH, text=exp_team)
+        self.__ctx.wait_until_element_is_visible(adhadjlocators.FLTR_TEAM_RSLT)
+        self.__ctx.click_element(adhadjlocators.FLTR_TEAM_RSLT)
+
+
 
         # Selecting the Position/s
         self.__ctx.wait_until_element_is_visible(locator=adhadjlocators.FLTR_POST_DRPDWN)
@@ -134,7 +144,7 @@ class SelectDispute:
 
 
     @keyword
-    def search_and_click_next(self, wfid: str, udid: str):
+    def select_dispute_entry(self, wfid: str, udid: str):
         driver = self.__ctx.driver
 
         self.__ctx.wait_until_element_is_visible(locator=adhadjlocators.DSPT_LIST)

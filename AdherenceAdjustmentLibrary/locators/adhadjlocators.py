@@ -37,10 +37,13 @@ TBL_CRTD_LBL: str = "//th[@class='sorting'][normalize-space()='Created']"
 
 FLTR_SD_LBL: str = "//label[normalize-space()='Start Date:']"
 FLTR_SD_INP: str = "//input[@id='startDate']"
+FLTR_SD_PLHDR: str = "//div[@class='picker__day picker__day--infocus picker__day--selected picker__day--highlighted']"
+
+
 FLTR_ED_LBL: str = "//label[normalize-space()='End Date:']"
 FLTR_ED_INP: str = "//input[@id='endDate']"
+
 FLTR_LOC_DRPDWN: str = "//button[@data-id='location-select']"
-FLTR_TEAM_DRPDWN: str = "//button[@data-id='team-select']"
 
 FLTR_STAT_DRPDWN: str = "//button[@data-id='status-select']"
 FLTR_STAT_SALL: str = "//div[@class='dropdown-menu show']//button[@type='button'][normalize-space()='Select All']"
@@ -65,6 +68,13 @@ FLTR_USERS_SRCH: str= "//div[@class='dropdown-menu show']//input[@aria-label='Se
 FLTR_USERS_RSLT: str= "//a[@class='dropdown-item active']"
 def USER_LOCATOR(user: str):
     return f"xpath://a[contains(., {user}')]"
+
+
+FLTR_TEAM_DRPDWN: str = "//button[@data-id='team-select']"
+FLTR_TEAM_SRCH: str= "//div[@class='dropdown-menu show']//input[@aria-label='Search']"
+FLTR_TEAM_RSLT: str= "//a[@class='dropdown-item active']"
+
+
 
 
 FLTR_POST_DRPDWN: str = "//button[@data-id='position-select']"

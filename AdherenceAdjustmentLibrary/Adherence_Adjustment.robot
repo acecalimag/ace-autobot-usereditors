@@ -36,13 +36,13 @@ Verify completeness of fields, labels, and buttons for Adherence Adjustment Page
     
 
     # Verify Adherence Adjustment Filters and its Placeholders Details
-
+    
 
 
     # Select a Dispute Entry
     ${result}                           Get User Details                     username=tqa3
-    Select Dispute Entry                start_date=2023-01-01                end_date=2023-08-01        exp_user=tqa3            exp_post=Engineering
-    Search And Click Next               wfid=${result['workforceid']}        udid=10623919-cb46-412f-bba5-69ce21a8db6e
+    Select Filters                      start_date=2023-01-01                end_date=2023-08-01        exp_user=tqa3        exp_team=Xrp            exp_post=Engineering
+    Select Dispute Entry                wfid=${result['workforceid']}        udid=10623919-cb46-412f-bba5-69ce21a8db6e
     
 
     # Verify the column names in the Dispute Table
@@ -61,12 +61,19 @@ View Dispute Details
 
     # Verify the Adherence/Dispute Information
 
-    ${result}                           Get User Details                     username=tqa3
-    Select Dispute Entry                start_date=2023-01-01                end_date=2023-08-01        exp_user=tqa3            exp_post=Engineering
-    Search And Click Next               wfid=${result['workforceid']}        udid=10623919-cb46-412f-bba5-69ce21a8db6e
+    # ${result}                           Get User Details                     username=tqa3
+    Select Filters                      start_date=2023-01-01                end_date=2023-08-01        exp_user=tqa3        exp_team=Xrp            exp_post=Engineering
+    Select Dispute Entry                wfid=99007        udid=10623919-cb46-412f-bba5-69ce21a8db6e
+    # ${result['workforceid']}
     Sleep    20s
+    
+    
 
+Testing the Filters
+    [Setup]        Adherence Adjustment
+    [Teardown]     Logout
 
+    Check Filter Section                exp_fltr_sdlbl=${EXP_FLTR_SDLBL}    exp_fltr_sdplhdr=${EXP_FLTR_SDPLHDR}
 
 
 

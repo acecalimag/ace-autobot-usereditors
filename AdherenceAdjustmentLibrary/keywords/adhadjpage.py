@@ -5,6 +5,8 @@ from robot.api import logger
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from datetime import datetime, timedelta
+
 
 from AdherenceAdjustmentLibrary.locators import adhadjlocators
 
@@ -234,261 +236,343 @@ class AdherenceAdjustmentPage:
 
 
 
-
-
-    @keyword 
-    def check_update_section(self, exp_vulbl: str, exp_vu_namelbl: str, exp_vu_tdlbl: str, exp_vu_tllbl: str, exp_vu_loclbl: str, exp_vu_typelbl: str, exp_vu_statuslbl: str, exp_vu_lstupdlbl: str):
-        logger.info(f"Check the View/Update Section if fields, labels, and buttons are present")
-
-        update_section = {}
-
-        # Verify the View/Update Label
-        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.VIEW_UPDATE_LBL)
-        if elements:
-            element = elements[0]
-            act_vulbl = element.text
-            
-            # Compare actual_text with expected_text
-            if act_vulbl == exp_vulbl:
-                logger.info(f"View/Update Label is showing and text matches: {act_vulbl}")
-                update_section['View/Update Label'] = 'Showing'
-            else:
-                logger.info(f"View/Update Label is showing but text does not match. Actual: {act_vulbl}, Expected: {exp_vulbl}")
-                update_section['View/Update Label'] = 'Not Showing'
-        else:
-            logger.info("View/Update Label is not showing")
-            update_section['View/Update Label'] = 'Not Showing'
-        
-
-
-        # Verify the View/Update Section Labels (Name)
-        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.VU_NAMELBL)
-        if elements:
-            element = elements[0]
-            act_vu_namelbl = element.text
-            
-            # Compare actual_text with expected_text
-            if act_vu_namelbl == exp_vu_namelbl:
-                logger.info(f"Name Label in View/Update Section is showing and text matches: {act_vu_namelbl}")
-                update_section['Name Label in View/Update Section'] = 'Showing'
-            else:
-                logger.info(f"Name Label in View/Update Section is showing but text does not match. Actual: {act_vu_namelbl}, Expected: {exp_vu_namelbl}")
-                update_section['Name Label in View/Update Section'] = 'Not Showing'
-        else:
-            logger.info("Name Label in View/Update Section is not showing")
-            update_section['Name Label in View/Update Section'] = 'Not Showing'
-
-
-
-        # Verify the View/Update Section Labels (Description)
-        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.VU_TDLBL)
-        if elements:
-            element = elements[0]
-            act_vu_tdlbl = element.text
-            
-            # Compare actual_text with expected_text
-            if act_vu_tdlbl == exp_vu_tdlbl:
-                logger.info(f"Description Label in View/Update Section is showing and text matches: {act_vu_tdlbl}")
-                update_section['Description Label in View/Update Section'] = 'Showing'
-            else:
-                logger.info(f"Description Label in View/Update Section is showing but text does not match. Actual: {act_vu_tdlbl}, Expected: {exp_vu_tdlbl}")
-                update_section['Description Label in View/Update Section'] = 'Not Showing'
-        else:
-            logger.info("Description Label in View/Update Section is not showing")
-            update_section['Description Label in View/Update Section'] = 'Not Showing'
-
-
-        # Verify the View/Update Section Labels (Team Lead)
-        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.VU_TDLBL)
-        if elements:
-            element = elements[0]
-            act_vu_tllbl = element.text
-            
-            # Compare actual_text with expected_text
-            if act_vu_tllbl == exp_vu_tllbl:
-                logger.info(f"Team Lead Label in View/Update Section is showing and text matches: {act_vu_tllbl}")
-                update_section['Team Lead Label in View/Update Section'] = 'Showing'
-            else:
-                logger.info(f"Team Lead Label in View/Update Section is showing but text does not match. Actual: {act_vu_tllbl}, Expected: {exp_vu_tllbl}")
-                update_section['Team Lead Label in View/Update Section'] = 'Not Showing'
-        else:
-            logger.info("Team Lead Label in View/Update Section is not showing")
-            update_section['Team Lead Label in View/Update Section'] = 'Not Showing'
-
-
-        # Verify the View/Update Section Labels (Location)
-        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.VU_LOCLBL)
-        if elements:
-            element = elements[0]
-            act_vu_loclbl = element.text
-            
-            # Compare actual_text with expected_text
-            if act_vu_loclbl == exp_vu_loclbl:
-                logger.info(f"Location Label in View/Update Section is showing and text matches: {act_vu_loclbl}")
-                update_section['Location Label in View/Update Section'] = 'Showing'
-            else:
-                logger.info(f"Location Label in View/Update Section is showing but text does not match. Actual: {act_vu_loclbl}, Expected: {exp_vu_loclbl}")
-                update_section['Location Label in View/Update Section'] = 'Not Showing'
-        else:
-            logger.info("Location Label in View/Update Section is not showing")
-            update_section['Location Label in View/Update Section'] = 'Not Showing'
-
-
-        # Verify the View/Update Section Labels (Type)
-        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.VU_TYPELBL)
-        if elements:
-            element = elements[0]
-            act_vu_typelbl = element.text
-            
-            # Compare actual_text with expected_text
-            if act_vu_typelbl == exp_vu_typelbl:
-                logger.info(f"Type Label in View/Update Section is showing and text matches: {act_vu_typelbl}")
-                update_section['Type Label in View/Update Section'] = 'Showing'
-            else:
-                logger.info(f"Type Label in View/Update Section is showing but text does not match. Actual: {act_vu_typelbl}, Expected: {exp_vu_typelbl}")
-                update_section['Type Label in View/Update Section'] = 'Not Showing'
-        else:
-            logger.info("Type Label in View/Update Section is not showing")
-            update_section['Type Label in View/Update Section'] = 'Not Showing'
-
-
-        # Verify the View/Update Section Labels (Status)
-        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.VU_STATUSLBL)
-        if elements:
-            element = elements[0]
-            act_vu_statuslbl = element.text
-            
-            # Compare actual_text with expected_text
-            if act_vu_statuslbl == exp_vu_statuslbl:
-                logger.info(f"Status Label in View/Update Section is showing and text matches: {act_vu_statuslbl}")
-                update_section['Status Label in View/Update Section'] = 'Showing'
-            else:
-                logger.info(f"Status Label in View/Update Section is showing but text does not match. Actual: {act_vu_statuslbl}, Expected: {exp_vu_statuslbl}")
-                update_section['Status Label in View/Update Section'] = 'Not Showing'
-        else:
-            logger.info("Status Label in View/Update Section is not showing")
-            update_section['Status Label in View/Update Section'] = 'Not Showing'        
-
-
-        # Verify the View/Update Section Labels (Last Updated)
-        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.VU_LSTUPDLBL)
-        if elements:
-            element = elements[0]
-            act_vu_lstupdlbl = element.text
-            
-            # Compare actual_text with expected_text
-            if act_vu_lstupdlbl == exp_vu_lstupdlbl:
-                logger.info(f"Last Updated Label in View/Update Section is showing and text matches: {act_vu_lstupdlbl}")
-                update_section['Last Updated Label in View/Update Section'] = 'Showing'
-            else:
-                logger.info(f"Last Updated Label in View/Update Section is showing but text does not match. Actual: {act_vu_lstupdlbl}, Expected: {exp_vu_lstupdlbl}")
-                update_section['Last Updated Label in View/Update Section'] = 'Not Showing'
-        else:
-            logger.info("Last Updated Label in View/Update Section is not showing")
-            update_section['Last Updated Label in View/Update Section'] = 'Not Showing' 
-
-
-        # Verify Save Button is showing
-        try:
-            self.__ctx.scroll_element_into_view(adhadjlocators.SAVEBTN)
-            if self.__ctx.find_element(adhadjlocators.SAVEBTN):
-                logger.info("SAVE BUTTON is showing")
-                update_section['SAVE BUTTON LIST'] = 'Showing'
-            else:
-                logger.info("SAVE BUTTON is not showing")
-                update_section['SAVE BUTTON LIST'] = 'Not Showing'
-        except Exception as e:
-            logger.error("An error occurred:", str(e))
-            update_section['SAVE BUTTON LIST'] = 'Error'
-        
-
-        # Verify Cancel Button is showing        
-        try:
-            self.__ctx.scroll_element_into_view(adhadjlocators.CANCELBTN)
-            if self.__ctx.find_elements(adhadjlocators.CANCELBTN):
-                logger.info("CANCEL BUTTON is showing")
-                update_section['CANCEL BUTTON LIST'] = 'Showing'
-            else:
-                logger.info("CANCEL BUTTON is not showing")
-                update_section['CANCEL BUTTON LIST'] = 'Not Showing'
-        except Exception as e:
-            logger.error("An error occurred:", str(e))
-            update_section['CANCEL BUTTON LIST'] = 'Error' 
-
-
-        return update_section
-
-
-
-
+# , exp_fltr_edlbl: str, exp_fltr_edplhdr: str, exp_fltr_usersplhdr: str, exp_fltr_locplhdr: str, exp_fltr_teamspldhr: str, exp_fltr_posplhdr: str, exp_fltr_statplhdr: str, exp_fltr_gobtnlbl: str, exp_fltr_extoxlsbtnlbl: str):
 
     @keyword 
-    def check_reminder_section(self, exp_rmndrlbl: str, exp_alerttext: str):
-        logger.info(f"Check the Reminder Section if fields, labels, and buttons are present")
+    def check_filter_section(self, exp_fltr_sdlbl: str, exp_fltr_sdplhdr: str):
+        logger.info(f"Check the Filter Section if fields, labels, and buttons are present")
 
-        reminder_section = {}
+        filter_section = {}
+
+        # Verify the Start Date Label and Placeholder
+        # Label
+
+        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.FLTR_SD_LBL)
+        if elements:
+            element = elements[0]
+            act_fltr_sdlbl = element.text
+            
+            # Compare actual_text with expected_text
+            if act_fltr_sdlbl == exp_fltr_sdlbl:
+                logger.info(f"Start Date Label is showing and text matches: {act_fltr_sdlbl}")
+                filter_section['Start Date Label'] = 'Showing'
+            else:
+                logger.info(f"Start Date Label is showing but text does not match. Actual: {act_fltr_sdlbl}, Expected: {exp_fltr_sdlbl}")
+                filter_section['Start Date Label'] = 'Not Showing'
+        else:
+            logger.info("Start Date Label is not showing")
+            filter_section['Start Date Label'] = 'Not Showing'
+
+
+        # Placeholder
+
+         # Wait for the input field to be visible
+        self.__ctx.wait_until_element_is_visible(locator=adhadjlocators.FLTR_SD_INP)
+
+        # Click on the input field to activate the date picker
+        self.__ctx.click_element(locator=adhadjlocators.FLTR_SD_INP)
+
+        # Locate the highlighted date element
+        highlighted_element = self.__ctx.driver.find_element("xpath", adhadjlocators.FLTR_SD_PLHDR)
+
+        # Retrieve the value of the aria-label attribute
+        act_fltr_sdplhdr = highlighted_element.get_attribute("aria-label")
+
+        # Print the aria-label value for debugging
+        logger.info(f"Highlighted Date Aria-Label: {act_fltr_sdplhdr}")
+
+        # Compare the highlighted aria-label value with the expected value
+        if act_fltr_sdplhdr == exp_fltr_sdplhdr:
+            logger.info(f"Start Date Placeholder is highlighted and matches the expected value: {act_fltr_sdplhdr}")
+            filter_section['Start Date Placeholder'] = 'Highlighted and Matching'
+        else:
+            logger.info(f"Start Date Placeholder is highlighted but does not match the expected value. Highlighted Aria-Label: {act_fltr_sdplhdr}, Expected: {exp_fltr_sdplhdr}")
+            filter_section['Start Date Placeholder'] = 'Highlighted but Not Matching'
+
+ 
   
 
-        if self.__ctx.driver.find_elements("xpath", adhadjlocators.ALERT):
-                logger.info("ALERT / REMINDER is showing")
-                reminder_section['ALERT / REMINDER'] = 'Showing'
-        else:
-            logger.info("ALERT / REMINDER is not showing")
-            reminder_section['ALERT / REMINDER'] = 'Not Showing'
 
 
 
-        if self.__ctx.driver.find_elements("xpath", adhadjlocators.INFO_CIRCLE):
-            logger.info("INFO ICON is showing")
-            reminder_section['INFO ICON'] = 'Showing'
-        else:
-            logger.info("ALERT / REMINDER is not showing")
-            reminder_section['INFO ICON'] = 'Not Showing'
 
 
 
-        if self.__ctx.driver.find_elements("xpath", adhadjlocators.DISMISS_ALERT_BTN):
-            logger.info("CLOSE BUTTON is showing")
-            reminder_section['CLOSE BUTTON'] = 'Showing'
-        else:
-            logger.info("CLOSE BUTTON is not showing")
-            reminder_section['CLOSE BUTTON'] = 'Not Showing'
 
 
 
-        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.RMNDR)
-        if elements:
-            element = elements[0]
+        
+        # elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.FLTR_SD_INP)
+        # if elements:
+        #     element = elements[0]
             
-            div_text = element.text.strip()
-          
-            if div_text == exp_rmndrlbl:
-                logger.info("REMINDER LABEL is showing and content matches")
-                reminder_section['REMINDER LABEL'] = 'Showing'
-            else:
-                logger.info("REMINDER LABEL is showing but content does not match")
-                reminder_section['REMINDER LABEL'] = 'Not Showing'
-        else:
-            logger.info("REMINDER LABEL is not showing")
-            reminder_section['REMINDER LABEL'] = 'Not Showing'
-
-
-
-        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.ALERTTEXT)
-        if elements:
-            element = elements[0]
+        #     # Retrieve the "placeholder" attribute value
+        #     act_rosfltr_placeholder = element.get_attribute("placeholder")
             
-            div_text = element.text.strip()
+        #     # Compare the placeholder attribute value with the expected value
+        #     if act_rosfltr_placeholder == exp_rosfltr:
+        #         logger.info(f"TEAM ROSTER Filter is showing and placeholder matches: {act_rosfltr_placeholder}")
+        #         team_assignment_content['TEAM ROSTER Filter'] = 'Showing'
+        #     else:
+        #         logger.info(f"TEAM ROSTER Filter is showing but placeholder does not match. Actual: {act_rosfltr_placeholder}, Expected: {exp_rosfltr}")
+        #         team_assignment_content['TEAM ROSTER Filter'] = 'Not Showing'
+        # else:
+        #     logger.info("TEAM ROSTER Filter is not showing")
+        #     team_assignment_content['TEAM ROSTER Filter'] = 'Not Showing'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+    #     # Verify the View/Update Section Labels (Name)
+    #     elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.VU_NAMELBL)
+    #     if elements:
+    #         element = elements[0]
+    #         act_vu_namelbl = element.text
+            
+    #         # Compare actual_text with expected_text
+    #         if act_vu_namelbl == exp_vu_namelbl:
+    #             logger.info(f"Name Label in View/Update Section is showing and text matches: {act_vu_namelbl}")
+    #             filter_section['Name Label in View/Update Section'] = 'Showing'
+    #         else:
+    #             logger.info(f"Name Label in View/Update Section is showing but text does not match. Actual: {act_vu_namelbl}, Expected: {exp_vu_namelbl}")
+    #             filter_section['Name Label in View/Update Section'] = 'Not Showing'
+    #     else:
+    #         logger.info("Name Label in View/Update Section is not showing")
+    #         filter_section['Name Label in View/Update Section'] = 'Not Showing'
+
+
+
+    #     # Verify the View/Update Section Labels (Description)
+    #     elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.VU_TDLBL)
+    #     if elements:
+    #         element = elements[0]
+    #         act_vu_tdlbl = element.text
+            
+    #         # Compare actual_text with expected_text
+    #         if act_vu_tdlbl == exp_vu_tdlbl:
+    #             logger.info(f"Description Label in View/Update Section is showing and text matches: {act_vu_tdlbl}")
+    #             filter_section['Description Label in View/Update Section'] = 'Showing'
+    #         else:
+    #             logger.info(f"Description Label in View/Update Section is showing but text does not match. Actual: {act_vu_tdlbl}, Expected: {exp_vu_tdlbl}")
+    #             filter_section['Description Label in View/Update Section'] = 'Not Showing'
+    #     else:
+    #         logger.info("Description Label in View/Update Section is not showing")
+    #         filter_section['Description Label in View/Update Section'] = 'Not Showing'
+
+
+    #     # Verify the View/Update Section Labels (Team Lead)
+    #     elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.VU_TDLBL)
+    #     if elements:
+    #         element = elements[0]
+    #         act_vu_tllbl = element.text
+            
+    #         # Compare actual_text with expected_text
+    #         if act_vu_tllbl == exp_vu_tllbl:
+    #             logger.info(f"Team Lead Label in View/Update Section is showing and text matches: {act_vu_tllbl}")
+    #             filter_section['Team Lead Label in View/Update Section'] = 'Showing'
+    #         else:
+    #             logger.info(f"Team Lead Label in View/Update Section is showing but text does not match. Actual: {act_vu_tllbl}, Expected: {exp_vu_tllbl}")
+    #             filter_section['Team Lead Label in View/Update Section'] = 'Not Showing'
+    #     else:
+    #         logger.info("Team Lead Label in View/Update Section is not showing")
+    #         filter_section['Team Lead Label in View/Update Section'] = 'Not Showing'
+
+
+    #     # Verify the View/Update Section Labels (Location)
+    #     elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.VU_LOCLBL)
+    #     if elements:
+    #         element = elements[0]
+    #         act_vu_loclbl = element.text
+            
+    #         # Compare actual_text with expected_text
+    #         if act_vu_loclbl == exp_vu_loclbl:
+    #             logger.info(f"Location Label in View/Update Section is showing and text matches: {act_vu_loclbl}")
+    #             filter_section['Location Label in View/Update Section'] = 'Showing'
+    #         else:
+    #             logger.info(f"Location Label in View/Update Section is showing but text does not match. Actual: {act_vu_loclbl}, Expected: {exp_vu_loclbl}")
+    #             filter_section['Location Label in View/Update Section'] = 'Not Showing'
+    #     else:
+    #         logger.info("Location Label in View/Update Section is not showing")
+    #         filter_section['Location Label in View/Update Section'] = 'Not Showing'
+
+
+    #     # Verify the View/Update Section Labels (Type)
+    #     elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.VU_TYPELBL)
+    #     if elements:
+    #         element = elements[0]
+    #         act_vu_typelbl = element.text
+            
+    #         # Compare actual_text with expected_text
+    #         if act_vu_typelbl == exp_vu_typelbl:
+    #             logger.info(f"Type Label in View/Update Section is showing and text matches: {act_vu_typelbl}")
+    #             filter_section['Type Label in View/Update Section'] = 'Showing'
+    #         else:
+    #             logger.info(f"Type Label in View/Update Section is showing but text does not match. Actual: {act_vu_typelbl}, Expected: {exp_vu_typelbl}")
+    #             filter_section['Type Label in View/Update Section'] = 'Not Showing'
+    #     else:
+    #         logger.info("Type Label in View/Update Section is not showing")
+    #         filter_section['Type Label in View/Update Section'] = 'Not Showing'
+
+
+    #     # Verify the View/Update Section Labels (Status)
+    #     elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.VU_STATUSLBL)
+    #     if elements:
+    #         element = elements[0]
+    #         act_vu_statuslbl = element.text
+            
+    #         # Compare actual_text with expected_text
+    #         if act_vu_statuslbl == exp_vu_statuslbl:
+    #             logger.info(f"Status Label in View/Update Section is showing and text matches: {act_vu_statuslbl}")
+    #             filter_section['Status Label in View/Update Section'] = 'Showing'
+    #         else:
+    #             logger.info(f"Status Label in View/Update Section is showing but text does not match. Actual: {act_vu_statuslbl}, Expected: {exp_vu_statuslbl}")
+    #             filter_section['Status Label in View/Update Section'] = 'Not Showing'
+    #     else:
+    #         logger.info("Status Label in View/Update Section is not showing")
+    #         filter_section['Status Label in View/Update Section'] = 'Not Showing'        
+
+
+    #     # Verify the View/Update Section Labels (Last Updated)
+    #     elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.VU_LSTUPDLBL)
+    #     if elements:
+    #         element = elements[0]
+    #         act_vu_lstupdlbl = element.text
+            
+    #         # Compare actual_text with expected_text
+    #         if act_vu_lstupdlbl == exp_vu_lstupdlbl:
+    #             logger.info(f"Last Updated Label in View/Update Section is showing and text matches: {act_vu_lstupdlbl}")
+    #             filter_section['Last Updated Label in View/Update Section'] = 'Showing'
+    #         else:
+    #             logger.info(f"Last Updated Label in View/Update Section is showing but text does not match. Actual: {act_vu_lstupdlbl}, Expected: {exp_vu_lstupdlbl}")
+    #             filter_section['Last Updated Label in View/Update Section'] = 'Not Showing'
+    #     else:
+    #         logger.info("Last Updated Label in View/Update Section is not showing")
+    #         filter_section['Last Updated Label in View/Update Section'] = 'Not Showing' 
+
+
+    #     # Verify Save Button is showing
+    #     try:
+    #         self.__ctx.scroll_element_into_view(adhadjlocators.SAVEBTN)
+    #         if self.__ctx.find_element(adhadjlocators.SAVEBTN):
+    #             logger.info("SAVE BUTTON is showing")
+    #             filter_section['SAVE BUTTON LIST'] = 'Showing'
+    #         else:
+    #             logger.info("SAVE BUTTON is not showing")
+    #             filter_section['SAVE BUTTON LIST'] = 'Not Showing'
+    #     except Exception as e:
+    #         logger.error("An error occurred:", str(e))
+    #         filter_section['SAVE BUTTON LIST'] = 'Error'
+        
+
+    #     # Verify Cancel Button is showing        
+    #     try:
+    #         self.__ctx.scroll_element_into_view(adhadjlocators.CANCELBTN)
+    #         if self.__ctx.find_elements(adhadjlocators.CANCELBTN):
+    #             logger.info("CANCEL BUTTON is showing")
+    #             filter_section['CANCEL BUTTON LIST'] = 'Showing'
+    #         else:
+    #             logger.info("CANCEL BUTTON is not showing")
+    #             filter_section['CANCEL BUTTON LIST'] = 'Not Showing'
+    #     except Exception as e:
+    #         logger.error("An error occurred:", str(e))
+    #         filter_section['CANCEL BUTTON LIST'] = 'Error' 
+
+
+        return filter_section
+
+
+
+
+
+    # @keyword 
+    # def check_reminder_section(self, exp_rmndrlbl: str, exp_alerttext: str):
+    #     logger.info(f"Check the Reminder Section if fields, labels, and buttons are present")
+
+    #     reminder_section = {}
+  
+
+    #     if self.__ctx.driver.find_elements("xpath", adhadjlocators.ALERT):
+    #             logger.info("ALERT / REMINDER is showing")
+    #             reminder_section['ALERT / REMINDER'] = 'Showing'
+    #     else:
+    #         logger.info("ALERT / REMINDER is not showing")
+    #         reminder_section['ALERT / REMINDER'] = 'Not Showing'
+
+
+
+    #     if self.__ctx.driver.find_elements("xpath", adhadjlocators.INFO_CIRCLE):
+    #         logger.info("INFO ICON is showing")
+    #         reminder_section['INFO ICON'] = 'Showing'
+    #     else:
+    #         logger.info("ALERT / REMINDER is not showing")
+    #         reminder_section['INFO ICON'] = 'Not Showing'
+
+
+
+    #     if self.__ctx.driver.find_elements("xpath", adhadjlocators.DISMISS_ALERT_BTN):
+    #         logger.info("CLOSE BUTTON is showing")
+    #         reminder_section['CLOSE BUTTON'] = 'Showing'
+    #     else:
+    #         logger.info("CLOSE BUTTON is not showing")
+    #         reminder_section['CLOSE BUTTON'] = 'Not Showing'
+
+
+
+    #     elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.RMNDR)
+    #     if elements:
+    #         element = elements[0]
+            
+    #         div_text = element.text.strip()
           
-            if div_text == exp_alerttext:
-                logger.info("REMINDER NOTICE is showing and content matches")
-                reminder_section['REMINDER NOTICE'] = 'Showing'
-            else:
-                logger.info("REMINDER NOTICE is showing but content does not match")
-                reminder_section['REMINDER NOTICE'] = 'Not Showing'
-        else:
-            logger.info("REMINDER NOTICE is not showing")
-            reminder_section['REMINDER NOTICE'] = 'Not Showing'
+    #         if div_text == exp_rmndrlbl:
+    #             logger.info("REMINDER LABEL is showing and content matches")
+    #             reminder_section['REMINDER LABEL'] = 'Showing'
+    #         else:
+    #             logger.info("REMINDER LABEL is showing but content does not match")
+    #             reminder_section['REMINDER LABEL'] = 'Not Showing'
+    #     else:
+    #         logger.info("REMINDER LABEL is not showing")
+    #         reminder_section['REMINDER LABEL'] = 'Not Showing'
 
 
-        return reminder_section
+
+    #     elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.ALERTTEXT)
+    #     if elements:
+    #         element = elements[0]
+            
+    #         div_text = element.text.strip()
+          
+    #         if div_text == exp_alerttext:
+    #             logger.info("REMINDER NOTICE is showing and content matches")
+    #             reminder_section['REMINDER NOTICE'] = 'Showing'
+    #         else:
+    #             logger.info("REMINDER NOTICE is showing but content does not match")
+    #             reminder_section['REMINDER NOTICE'] = 'Not Showing'
+    #     else:
+    #         logger.info("REMINDER NOTICE is not showing")
+    #         reminder_section['REMINDER NOTICE'] = 'Not Showing'
+
+
+    #     return reminder_section

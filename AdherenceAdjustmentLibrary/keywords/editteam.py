@@ -1,138 +1,283 @@
- 
-from robot.api import logger
+
 from SeleniumLibrary import SeleniumLibrary
 from robot.api.deco import keyword
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from lxml import html
+from robot.api import logger
+import  time
 
 from AdherenceAdjustmentLibrary.locators import adhadjlocators
-import time
 
 
-class EditTeam:
+class TeamAssignmentEditor:
     
     def __init__(self, ctx: SeleniumLibrary) -> None:
         self.__ctx = ctx
-        
 
     @keyword 
-    def edit_team(self, exp_vulbl: str, ed_name: str, ed_desc: str, ed_lead: str, ed_loc: str, ed_type: str, ed_status: str):
-        logger.info(f"Fillout the form using to create new team")
+    def select_agent(self, agent_name: str, agent_uid: str):
+        self.__ctx.wait_until_element_is_visible(locator=teamlocators.FREEAGENTSLIST)
+        self.__ctx.click_element(locator=teamlocators.FREEAGENTSFLTR)
+        self.__ctx.input_text(locator=teamlocators.FREEAGENTSFLTR, text=agent_name)  
+        
+        option_locator = self.get_option_value(agent_uid)
+        self.__ctx.wait_until_element_is_visible(locator=option_locator)
+        self.__ctx.click_element(locator=option_locator)
+        selected = self.__ctx.get_element_attribute(locator=option_locator, attribute="selected")
+        logger.info(f"{selected}")
+        self.__ctx.click_button(locator=teamlocators.MOVESLCBTN)
 
-        driver = self.__ctx.driver
-        edit_team = {}
+    def get_option_value(self, agent_uid):
+        option_locator = f"xpath://option[@value='{agent_uid}']"
+        self.__ctx.find_element(option_locator)
+        return option_locator
+    
 
-        # Verify the View/Update Label
-        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.VIEW_UPDATE_LBL)
+    @keyword 
+    def unselect_agent(self, agent_uid: str):
+        self.__ctx.wait_until_element_is_visible(locator=teamlocators.TEAMROSTERLIST)
+
+        option_locator = self.get_option_value(agent_uid)
+        self.__ctx.click_element(locator=option_locator)
+        self.__ctx.click_button(locator=teamlocators.REMOVEALLBTN)
+
+    def get_option_value(self, agent_uid):
+        option_locator = f"xpath://option[@value='{agent_uid}']"
+        self.__ctx.find_element(option_locator)
+        return option_locator
+
+
+    @keyword 
+    def check_team_editor(self, exp_falbl: str, exp_trosterlbl: str, exp_fafltr: str, exp_rosfltr: str):
+        logger.info(f"Check the Team Assignment Editor page if fields, labels, and buttons are present")
+
+        team_assignment_content = {}
+        
+        elements = self.__ctx.driver.find_elements("xpath", teamlocators.FREEAGENTSLBL)
         if elements:
             element = elements[0]
-            act_vulbl = element.text
+            act_falbl = element.text
             
             # Compare actual_text with expected_text
-            if act_vulbl == exp_vulbl:
-                logger.info(f"View/Update Label is showing and text matches: {act_vulbl}")
-                edit_team['View/Update Label'] = 'Showing'
+            if act_falbl == exp_falbl:
+                logger.info(f"FREE AGENTS Label is showing and text matches: {act_falbl}")
+                team_assignment_content['Free Agents Label'] = 'Showing'
             else:
-                logger.info(f"View/Update Label is showing but text does not match. Actual: {act_vulbl}, Expected: {exp_vulbl}")
-                edit_team['View/Update Label'] = 'Not Showing'
+                logger.info(f"FREE AGENTS Label is showing but text does not match. Actual: {act_falbl}, Expected: {exp_falbl}")
+                team_assignment_content['Free Agents Label'] = 'Not Showing'
         else:
-            logger.info("View/Update Label is not showing")
-            edit_team['View/Update Label'] = 'Not Showing'
+            logger.info("FREE AGENTS Label is not showing")
+            team_assignment_content['Free Agents Label'] = 'Not Showing'
+        
 
 
+        elements = self.__ctx.driver.find_elements("xpath", teamlocators.TEAMROSTERLBL)
+        if elements:
+            element = elements[0]
+            act_trosterlbl = element.text
+            
+            # Compare actual_text with expected_text
+            if act_trosterlbl == exp_trosterlbl:
+                logger.info(f"TEAM ROSTER Label is showing and text matches: {act_trosterlbl}")
+                team_assignment_content['TEAM ROSTER Label'] = 'Showing'
+            else:
+                logger.info(f"TEAM ROSTER Label is showing but text does not match. Actual: {act_trosterlbl}, Expected: {exp_trosterlbl}")
+                team_assignment_content['TEAM ROSTER Label'] = 'Not Showing'
+        else:
+            logger.info("TEAM ROSTER Label is not showing")
+            team_assignment_content['TEAM ROSTER Label'] = 'Not Showing'
+            
+        
+
+        elements = self.__ctx.driver.find_elements("xpath", teamlocators.FREEAGENTSFLTR)
+        if elements:
+            element = elements[0]
+            
+            # Retrieve the "placeholder" attribute value
+            act_fafltr_placeholder = element.get_attribute("placeholder")
+            
+            # Compare the placeholder attribute value with the expected value
+            if act_fafltr_placeholder == exp_fafltr:
+                logger.info(f"FREE AGENTS Filter is showing and placeholder matches: {act_fafltr_placeholder}")
+                team_assignment_content['FREE AGENTS Filter'] = 'Showing'
+            else:
+                logger.info(f"FREE AGENTS Filter is showing but placeholder does not match. Actual: {act_fafltr_placeholder}, Expected: {exp_fafltr}")
+                team_assignment_content['FREE AGENTS Filter'] = 'Not Showing'
+        else:
+            logger.info("FREE AGENTS Filter is not showing")
+            team_assignment_content['FREE AGENTS Filter'] = 'Not Showing'
+
+
+
+        elements = self.__ctx.driver.find_elements("xpath", teamlocators.TEAMROSTERFLTR)
+        if elements:
+            element = elements[0]
+            
+            # Retrieve the "placeholder" attribute value
+            act_rosfltr_placeholder = element.get_attribute("placeholder")
+            
+            # Compare the placeholder attribute value with the expected value
+            if act_rosfltr_placeholder == exp_rosfltr:
+                logger.info(f"TEAM ROSTER Filter is showing and placeholder matches: {act_rosfltr_placeholder}")
+                team_assignment_content['TEAM ROSTER Filter'] = 'Showing'
+            else:
+                logger.info(f"TEAM ROSTER Filter is showing but placeholder does not match. Actual: {act_rosfltr_placeholder}, Expected: {exp_rosfltr}")
+                team_assignment_content['TEAM ROSTER Filter'] = 'Not Showing'
+        else:
+            logger.info("TEAM ROSTER Filter is not showing")
+            team_assignment_content['TEAM ROSTER Filter'] = 'Not Showing'
+
+
+
+        if self.__ctx.driver.find_elements("xpath", teamlocators.MOVESLCBTN):
+            logger.info("MOVE SELECTED Button is showing")
+            team_assignment_content['MOVE SELECTED Button'] = 'Showing'
+        else:
+            logger.info("MOVE SELECTED Button is not showing")
+            team_assignment_content['MOVE SELECTED Button'] = 'Not Showing'
+
+
+
+        if self.__ctx.driver.find_elements("xpath", teamlocators.MOVEALLBTN):
+            logger.info("MOVE ALL Button is showing")
+            team_assignment_content['MOVE ALL Button'] = 'Showing'
+        else:
+            logger.info("MOVE ALL Button is not showing")
+            team_assignment_content['MOVE ALL Button'] = 'Not Showing'
+
+
+
+        if self.__ctx.driver.find_elements("xpath", teamlocators.REMOVESLCBTN):
+            logger.info("REMOVE SELECTED Button is showing")
+            team_assignment_content['REMOVE SELECTED Button'] = 'Showing'
+        else:
+            logger.info("REMOVE SELECTED Button is not showing")
+            team_assignment_content['REMOVE SELECTED Button'] = 'Not Showing'
+
+
+
+        if self.__ctx.driver.find_elements("xpath", teamlocators.REMOVEALLBTN):
+            logger.info("REMOVE ALL Button is showing")
+            team_assignment_content['REMOVE ALL Button'] = 'Showing'
+        else:
+            logger.info("REMOVE ALL Button is not showing")
+            team_assignment_content['REMOVE ALL Button'] = 'Not Showing'
+
+
+
+        if self.__ctx.driver.find_elements("xpath", teamlocators.FREEAGENTSLIST):
+            logger.info("FREE AGENT LIST is showing")
+            team_assignment_content['FREE AGENT LIST'] = 'Showing'
+        else:
+            logger.info("FREE AGENT LIST is not showing")
+            team_assignment_content['FREE AGENT LIST'] = 'Not Showing'
+
+        
+
+        if self.__ctx.driver.find_elements("xpath", teamlocators.TEAMROSTERLIST):
+            logger.info("TEAM AGENT LIST is showing")
+            team_assignment_content['TEAM AGENT LIST'] = 'Showing'
+        else:
+            logger.info("TEAM AGENT LIST is not showing")
+            team_assignment_content['TEAM AGENT LIST'] = 'Not Showing'
+
+
+        try:
+            self.__ctx.scroll_element_into_view(teamlocators.SAVEBTN)
+            if self.__ctx.find_element(teamlocators.SAVEBTN):
+                logger.info("SAVE BUTTON is showing")
+                team_assignment_content['SAVE BUTTON LIST'] = 'Showing'
+            else:
+                logger.info("SAVE BUTTON is not showing")
+                team_assignment_content['SAVE BUTTON LIST'] = 'Not Showing'
+        except Exception as e:
+            logger.error("An error occurred:", str(e))
+            team_assignment_content['SAVE BUTTON LIST'] = 'Error'
+        
+        
+        try:
+            self.__ctx.scroll_element_into_view(teamlocators.CANCELBTN)
+            if self.__ctx.find_elements(teamlocators.CANCELBTN):
+                logger.info("CANCEL BUTTON is showing")
+                team_assignment_content['CANCEL BUTTON LIST'] = 'Showing'
+            else:
+                logger.info("CANCEL BUTTON is not showing")
+                team_assignment_content['CANCEL BUTTON LIST'] = 'Not Showing'
+        except Exception as e:
+            logger.error("An error occurred:", str(e))
+            team_assignment_content['CANCEL BUTTON LIST'] = 'Error'
+        
+
+        return team_assignment_content
     
-        # Fillout the form to create new team
-        
-        # Enter the Name
-        self.__ctx.clear_element_text(locator=adhadjlocators.TNAME)
-        self.__ctx.input_text(locator=adhadjlocators.TNAME, text=ed_name)
-        
-        act_ed_name = self.__ctx.get_value(locator=adhadjlocators.TNAME)
-        logger.info(f"got_act: {act_ed_name}")
-        edit_team['Team Name'] = act_ed_name
 
 
-        # Enter the Description
-        self.__ctx.clear_element_text(locator=adhadjlocators.TDESC)
-        self.__ctx.input_text(locator=adhadjlocators.TDESC, text=ed_desc)
-        
-        act_ed_desc = self.__ctx.get_value(locator=adhadjlocators.TDESC)
-        logger.info(f"got_act: {act_ed_desc}")
-        edit_team['Team Description'] = act_ed_desc
+    @keyword 
+    def check_reminder_section(self, exp_rmndrlbl: str, exp_alerttext: str):
+        logger.info(f"Check the Reminder Section if fields, labels, and buttons are present")
 
+        reminder_section = {}
+  
 
-        # Select Team Lead
-        tlead_loc = adhadjlocators.TLEAD_LOC(lead=ed_lead)
-        self.__ctx.click_element(locator=adhadjlocators.TLEAD)
-        # time.sleep(5)
-        self.__ctx.wait_until_element_is_visible(tlead_loc)
-        self.__ctx.click_element(tlead_loc)
-        
-        act_ed_lead = self.__ctx.get_text(tlead_loc)
-        logger.info(f"got_act: {act_ed_lead}")
-        edit_team['Team Lead'] = act_ed_lead
-
-
-        # Select Location
-        tloc_loc = adhadjlocators.TLOC_LOC(loc=ed_loc)
-        self.__ctx.click_element(locator=adhadjlocators.TLOC)
-        # time.sleep(5)
-        self.__ctx.wait_until_element_is_visible(tloc_loc)
-        self.__ctx.click_element(tloc_loc)
-
-        act_ed_loc = self.__ctx.get_text(tloc_loc)
-        logger.info(f"got_act: {act_ed_loc}")
-        edit_team['Team Location'] = act_ed_loc
-
-
-        # Select Type
-        ed_type_modified = ed_type.lower().replace("-", "")
-        ttype_loc = adhadjlocators.TTYPE_LOC(type=ed_type_modified)
-        self.__ctx.click_element(locator=adhadjlocators.TTYPE)
-        self.__ctx.wait_until_element_is_visible(ttype_loc)
-        self.__ctx.click_element(locator=ttype_loc)
-
-        act_ed_type = self.__ctx.get_text(ttype_loc)
-        logger.info(f"got_act: {act_ed_type}")
-        edit_team['Team Type'] = act_ed_type
-
-
-        # Select Status
-        tstatus_loc = adhadjlocators.TSTATUS_LOC(status=ed_status.lower())
-        self.__ctx.click_element(tstatus_loc)
-
-        driver = self.__ctx.driver
-        enabled_radio_locator = (By.XPATH, adhadjlocators.TSTAT_ENB)
-        disabled_radio_locator = (By.XPATH, adhadjlocators.TSTAT_DISB)
-
-        enabled_radio_button = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located(enabled_radio_locator)
-        )
-        is_enabled_selected = enabled_radio_button.is_selected()
-        is_enabled_enabled = enabled_radio_button.is_enabled()
-
-        disabled_radio_button = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located(disabled_radio_locator)
-        )
-        is_disabled_selected = disabled_radio_button.is_selected()
-        is_disabled_enabled = disabled_radio_button.is_enabled()
-
-        if is_enabled_selected and is_enabled_enabled:
-            logger.info("ENABLE BUTTON IS SELECTED - TEAM STATUS is Enabled")
-            edit_team['Team Status'] = 'Enabled'
+        if self.__ctx.driver.find_elements("xpath", teamlocators.ALERT):
+                logger.info("ALERT / REMINDER is showing")
+                reminder_section['ALERT / REMINDER'] = 'Showing'
         else:
-            logger.info("ENABLE BUTTON IS NOT SELECTED - TEAM STATUS is Disabled")
-            edit_team['Team Status'] = 'Disabled'
+            logger.info("ALERT / REMINDER is not showing")
+            reminder_section['ALERT / REMINDER'] = 'Not Showing'
 
-        if is_disabled_selected and is_disabled_enabled:
-            logger.info("DISABLE BUTTON IS SELECTED - TEAM STATUS is Disabled")
-            edit_team['Team Status'] = 'Disabled'
+
+
+        if self.__ctx.driver.find_elements("xpath", teamlocators.INFO_CIRCLE):
+            logger.info("INFO ICON is showing")
+            reminder_section['INFO ICON'] = 'Showing'
         else:
-            logger.info("DISABLE BUTTON IS NOT SELECTED - TEAM STATUS is Enabled")
-            edit_team['Team Status'] = 'Enabled'
+            logger.info("ALERT / REMINDER is not showing")
+            reminder_section['INFO ICON'] = 'Not Showing'
 
 
-        return edit_team
+
+        if self.__ctx.driver.find_elements("xpath", teamlocators.DISMISS_ALERT_BTN):
+            logger.info("CLOSE BUTTON is showing")
+            reminder_section['CLOSE BUTTON'] = 'Showing'
+        else:
+            logger.info("CLOSE BUTTON is not showing")
+            reminder_section['CLOSE BUTTON'] = 'Not Showing'
+
+
+
+        elements = self.__ctx.driver.find_elements("xpath", teamlocators.RMNDR)
+        if elements:
+            element = elements[0]
+            
+            div_text = element.text.strip()
+          
+            if div_text == exp_rmndrlbl:
+                logger.info("REMINDER LABEL is showing and content matches")
+                reminder_section['REMINDER LABEL'] = 'Showing'
+            else:
+                logger.info("REMINDER LABEL is showing but content does not match")
+                reminder_section['REMINDER LABEL'] = 'Not Showing'
+        else:
+            logger.info("REMINDER LABEL is not showing")
+            reminder_section['REMINDER LABEL'] = 'Not Showing'
+
+
+
+        elements = self.__ctx.driver.find_elements("xpath", teamlocators.ALERTTEXT)
+        if elements:
+            element = elements[0]
+            
+            div_text = element.text.strip()
+          
+            if div_text == exp_alerttext:
+                logger.info("REMINDER NOTICE is showing and content matches")
+                reminder_section['REMINDER NOTICE'] = 'Showing'
+            else:
+                logger.info("REMINDER NOTICE is showing but content does not match")
+                reminder_section['REMINDER NOTICE'] = 'Not Showing'
+        else:
+            logger.info("REMINDER NOTICE is not showing")
+            reminder_section['REMINDER NOTICE'] = 'Not Showing'
+
+
+        return reminder_section  
 

@@ -1,3 +1,15 @@
+from datetime import datetime, timedelta
+
+# Start Date
+today = datetime.now()
+two_weeks_ago = today - timedelta(weeks=2)
+days_until_previous_monday = (two_weeks_ago.weekday() - 0) % 7
+previous_monday = two_weeks_ago - timedelta(days=days_until_previous_monday)
+EXP_FLTR_SDPLHDR = previous_monday.strftime("%Y-%m-%d")
+EXP_FLTR_SDLBL: str = "Start Date:"
+
+
+
 
 USERNAME: str = "acalimag"
 PASSWORD: str = "kjt"
