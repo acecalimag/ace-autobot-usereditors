@@ -9,9 +9,9 @@ class AdherenceAdjustmentDB:
         self.__db = db
 
     @keyword
-    def get_user_details(self, username: str):
+    def get_user_details_headers(self, username: str):
         """ TODO: Create a database query to retrieve the Agent's UID."""
-        query = "SELECT u.username, um.position, ul.code, ul.location, um.workforceid FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userlocation AS ul ON um.lid = ul.lid WHERE u.username = %s;"
+        query = "SELECT u.username, um.position, ul.code, ul.location, um.workforceid, ut.name as team FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userlocation AS ul ON um.lid = ul.lid JOIN kjt.userteam AS ut ON um.teamId = ut.utid  WHERE u.username = %s;"
          
         result = self.__db.execute(query, (username,))
         if result and len(result) > 0:
@@ -21,7 +21,27 @@ class AdherenceAdjustmentDB:
                 'position': row['position'].upper(),
                 'location_code': row['code'].upper(),
                 'location': row['location'], 
-                'workforceid': row['workforceid']
+                'workforceid': row['workforceid'],
+                'team': row['team']
+            }
+        else:
+            return None
+    
+    @keyword
+    def get_user_details(self, username: str):
+        """ TODO: Create a database query to retrieve the Agent's UID."""
+        query = "SELECT u.username, um.position, ul.code, ul.location, um.workforceid, ut.name as team FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userlocation AS ul ON um.lid = ul.lid JOIN kjt.userteam AS ut ON um.teamId = ut.utid  WHERE u.username = %s;"
+         
+        result = self.__db.execute(query, (username,))
+        if result and len(result) > 0:
+            row = result[0]
+            return {
+                'username': row['username'],
+                'position': row['position'],
+                'location_code': row['code'],
+                'location': row['location'], 
+                'workforceid': row['workforceid'],
+                'team': row['team']
             }
         else:
             return None

@@ -107,12 +107,12 @@ class SelectDispute:
 
 
         # # Selecting the User/s
-        # self.__ctx.wait_until_element_is_visible(adhadjlocators.FLTR_USERS_DRPDWN)
-        # self.__ctx.click_element(adhadjlocators.FLTR_USERS_DRPDWN)
-        # time.sleep(5)
-        # self.__ctx.input_text(adhadjlocators.FLTR_USERS_SRCH, text=exp_user)
-        # self.__ctx.wait_until_element_is_visible(adhadjlocators.FLTR_USERS_RSLT)
-        # self.__ctx.click_element(adhadjlocators.FLTR_USERS_RSLT)
+        self.__ctx.wait_until_element_is_visible(adhadjlocators.FLTR_USERS_DRPDWN)
+        self.__ctx.click_element(adhadjlocators.FLTR_USERS_DRPDWN)
+        time.sleep(5)
+        self.__ctx.input_text(adhadjlocators.FLTR_USERS_SRCH, text=exp_user)
+        self.__ctx.wait_until_element_is_visible(adhadjlocators.FLTR_USERS_RSLT)
+        self.__ctx.click_element(adhadjlocators.FLTR_USERS_RSLT)
                               
 
         # Selecting the Team/s

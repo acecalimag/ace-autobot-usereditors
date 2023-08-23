@@ -29,8 +29,8 @@ Verify completeness of fields, labels, and buttons for Adherence Adjustment Page
     [Teardown]     Logout
     
     # Verify Adherence Adjustment Page Headers
-    ${result}                            Get User Details                     username=${USERNAME}
-    ${adhadj_header}                     Check Page Header                    exp_hdr_adhadjlbl=${EXP_HDR_ADADJLBL}        exp_hdr_user=${result['username']} - ${result['position']}
+    ${result_hdrs}                       Get User Details Headers             username=${USERNAME}
+    ${adhadj_header}                     Check Page Header                    exp_hdr_adhadjlbl=${EXP_HDR_ADADJLBL}        exp_hdr_user=${result_hdrs['username']} - ${result_hdrs['position']}
     Log Dictionary                       ${adhadj_header}
     Log To Console                       ${adhadj_header}
     
@@ -42,9 +42,9 @@ Verify completeness of fields, labels, and buttons for Adherence Adjustment Page
 
 
     # Select a Dispute Entry
-    ${result}                           Get User Details                     username=tqa3
-    Select Filters                      start_date=2023-01-01                end_date=2023-08-01        exp_user=tqa4        exp_team=Cleveland            exp_post=Engineering
-    Select Dispute Entry                wfid=${result['workforceid']}        udid=10623919-cb46-412f-bba5-69ce21a8db6e
+    ${result}                           Get User Details                     username=tqa4
+    Select Filters                      start_date=2023-01-01                end_date=2023-08-01        exp_user=${result['username']}        exp_team=${result['team']}            exp_post=${result['position']}
+    Select Dispute Entry                wfid=${result['workforceid']}        udid=271cf76b-cab5-4964-8e19-7ef10aa84f11
     
 
     # Verify the column names in the Dispute Table
@@ -63,11 +63,10 @@ View Dispute Details
 
     # Verify the Adherence/Dispute Information
 
-    # ${result}                           Get User Details                     username=tqa3
-    Select Filters                      start_date=2023-01-01                end_date=2023-08-01        exp_user=tqa3        exp_team=Xrp            exp_post=Engineering
-    Select Dispute Entry                wfid=99007                           udid=10623919-cb46-412f-bba5-69ce21a8db6e
-    # ${result['workforceid']}
-    Sleep    20s
+    ${result}                           Get User Details                     username=tqa4
+    Select Filters                      start_date=2023-01-01                end_date=2023-08-01        exp_user=${result['username']}        exp_team=${result['team']}           exp_post=${result['position']}
+    Select Dispute Entry                wfid=${result['workforceid']}        udid=271cf76b-cab5-4964-8e19-7ef10aa84f11
+    Sleep    5s
     
     
 
@@ -83,8 +82,9 @@ Testing the Filters
 
 
 Database Query User Details
-    ${result}                            Get User Details                            username=${USERNAME}
-    Log To Console                       ${result['location']}
+    ${result}                            Get User Details                            username=tqa4
+    Log Dictionary                       ${result}
+    Log To Console                       ${result}
 
 
 Database Dispute Details

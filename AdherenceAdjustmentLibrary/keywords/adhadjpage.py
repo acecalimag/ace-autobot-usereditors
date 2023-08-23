@@ -113,7 +113,7 @@ class AdherenceAdjustmentPage:
             # Compare actual_text with expected_text
             if act_unamelbl == exp_unamelbl:
                 logger.info(f"Username Label in Dispute Table is showing and text matches: {act_unamelbl}")
-                dispute_table['UsernameLabel in Dispute Table'] = 'Showing'
+                dispute_table['Username Label in Dispute Table'] = 'Showing'
             else:
                 logger.info(f"Username Label is showing but text does not match. Actual: {act_unamelbl}, Expected: {exp_unamelbl}")
                 dispute_table['Username Label in Dispute Table'] = 'Not Showing'
