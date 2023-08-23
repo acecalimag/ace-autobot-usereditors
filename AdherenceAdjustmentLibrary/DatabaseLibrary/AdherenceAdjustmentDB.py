@@ -1,6 +1,7 @@
 
 from robot.api.deco import keyword
 from autocore.Database import Database
+from datetime import datetime
 
 class AdherenceAdjustmentDB:
 
@@ -25,6 +26,129 @@ class AdherenceAdjustmentDB:
         else:
             return None
         
+
+    @keyword
+    def get_dispute_details(self, udid: str):
+        """ TODO: Create a database query to retrieve the dispute details"""
+        query = "SELECT u.username, u.name, ud.status, ud.requestedstarttime, ud.requestedendtime, ud.currentstarttime, ud.currentendtime, ud.workhours, ud.reason, ud.createTime, ul.location, ut.name as Team, ud.currentactivitycode, ud.requestedactivitycode, ud.payhours, ud.reviewcomment, ud.internalnotes, ud.reviewedby, ud.reviewtime, ud.confirmtime FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userlocation AS ul ON um.lid = ul.lid JOIN kjt.userteam AS ut ON um.teamId = ut.utid JOIN wfm.userdispute AS ud ON u.username = ud.username where ud.udid = %s;"
+         
+        result = self.__db.execute(query, (udid,))
+        if result and len(result) > 0:
+            row = result[0]
+            # Full Name
+            full_name = f"{row['name']} ({row['username']})"
+
+            # Requested Time Range:
+            ctr_time_range = ""
+            if row['currentstarttime'] and row['currentendtime']:
+                ctr_formatted_starttime = row['currentstarttime'].strftime("%b %d, %Y %I:%M %p")
+                ctr_formatted_endtime = row['currentendtime'].strftime("%b %d, %Y %I:%M %p")
+                ctr_time_range = f"{ctr_formatted_starttime} - {ctr_formatted_endtime}"
+
+            # Requested Time Range:
+            rtr_time_range = ""
+            if row['requestedstarttime'] and row['requestedendtime']:
+                rtr_formatted_starttime = row['requestedstarttime'].strftime("%b %d, %Y %I:%M %p")
+                rtr_formatted_endtime = row['requestedendtime'].strftime("%b %d, %Y %I:%M %p")
+                rtr_time_range = f"{rtr_formatted_starttime} - {rtr_formatted_endtime}"
+
+            # Create Time
+            ct_time = ""
+            if row['createTime']:
+                reformatted_createtime = row['createTime'].strftime("%b %d, %Y %I:%M %p")
+                ct_time = f"{reformatted_createtime}"
+
+            # Review Time
+            review_time = ""
+            if row['reviewtime']:
+                reformatted_reviewtime = row['reviewtime'].strftime("%b %d, %Y %I:%M %p")
+                review_time = f"{reformatted_reviewtime}"
+
+            # Confirm Time
+            confirm_time = ""
+            if row['confirmtime']:
+                reformatted_confirmtime = row['confirmtime'].strftime("%b %d, %Y %I:%M %p")
+                confirm_time = f"{reformatted_confirmtime}"
+            
+            
+            # Work Hours
+            work_hours = row['workhours']
+            if work_hours is None:
+                work_hours = ''
+            
+            # Reason
+            reason = row['reason']
+            if reason is None:
+                reason = ''
+            
+            # Location
+            location = row['location']
+            if location is None:
+                location = ''
+            
+            # Current Activity
+            currentactivity = row['currentactivitycode']
+            if currentactivity is None:
+                currentactivity = ''
+
+            # Requested Activity
+            requestedactivity = row['requestedactivitycode']
+            if requestedactivity is None:
+                requestedactivity = ''
+
+            # Comment
+            comment = row['reviewcomment']
+            if comment is None:
+                comment = ''
+
+            # Internal Notes
+            internalnotes = row['internalnotes']
+            if internalnotes is None:
+                internalnotes = ''
+
+            # Reviewed By
+            reviewedby = row['reviewedby']
+            if reviewedby is None:
+                reviewedby = ''
+
+            # Team
+            team = row['Team']
+            if team is None:
+                team = ''
+
+            # Status
+            status = row['status']
+            if status is None:
+                status = ''
+            
+            # Pay Hours
+            pay_hours = row['payhours']
+            if pay_hours is None:
+                pay_hours = ''
+            
+
+            return {
+                'Full Name': full_name,
+                'Status': status.capitalize(),
+                'Current Time Range': ctr_time_range,
+                'Requested Time Range': rtr_time_range, 
+                'Work Hours': work_hours,
+                'Reason': reason,
+                'Created Time': ct_time,
+                'Location': location,
+                'Team': team,
+                'Current Activity': currentactivity,
+                'Requested Activity': requestedactivity,
+                'Pay Hours': pay_hours,
+                'Comment': comment,
+                'Internal Notes': internalnotes,
+                'Reviewed By': reviewedby,
+                'Review At': review_time,
+                'Confirm At': confirm_time,
+            }
+        else:
+            return {}
+            
         
         
 

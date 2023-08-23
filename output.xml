@@ -1,68 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.0.2 (Python 3.10.6 on win32)" generated="20230823 00:18:26.904" rpa="false" schemaversion="3">
+<robot generator="Robot 6.0.2 (Python 3.10.6 on win32)" generated="20230823 02:17:48.087" rpa="false" schemaversion="3">
 <suite id="s1" name="Adherence Adjustment" source="c:\Users\WONDERS\Documents\Ace\Robot\ace-autobot-usereditors\AdherenceAdjustmentLibrary\Adherence_Adjustment.robot">
-<test id="s1-t1" name="Testing the Filters" line="72">
-<kw name="Adherence Adjustment" type="SETUP">
-<kw name="Open Config In Browser" library="AdherenceAdjustmentLibrary">
-<msg timestamp="20230823 00:18:27.229" level="INFO">Opening browser 'chrome' to base url 'https://qa.letsdochinese.com/KJTCore/resources/adherenceadjustment.html'.</msg>
-<status status="PASS" starttime="20230823 00:18:27.229" endtime="20230823 00:18:31.617"/>
-</kw>
-<kw name="Login And Redirect" library="AdherenceAdjustmentLibrary">
-<arg>username=${USERNAME}</arg>
-<arg>password=${PASSWORD}</arg>
-<arg>redirect_url=${EXP_URL}</arg>
-<msg timestamp="20230823 00:18:31.618" level="INFO">Logging in using  acalimag and kjt</msg>
-<msg timestamp="20230823 00:18:37.719" level="INFO">Typing text 'acalimag' into text field 'id:username'.</msg>
-<msg timestamp="20230823 00:18:37.774" level="INFO">Typing text 'kjt' into text field 'id:password'.</msg>
-<msg timestamp="20230823 00:18:37.824" level="INFO">Clicking element 'id:login'.</msg>
-<msg timestamp="20230823 00:18:42.863" level="INFO">Opening url 'https://qa.letsdochinese.com/KJTCore/resources/adherenceadjustment.html'</msg>
-<status status="PASS" starttime="20230823 00:18:31.618" endtime="20230823 00:18:42.996"/>
-</kw>
-<status status="PASS" starttime="20230823 00:18:27.229" endtime="20230823 00:18:42.997"/>
-</kw>
-<kw name="Get User Details" library="AdherenceAdjustmentLibrary.DatabaseLibrary">
+<test id="s1-t1" name="Database Dispute Details" line="90">
+<kw name="Get Dispute Details" library="AdherenceAdjustmentLibrary.DatabaseLibrary">
 <var>${result}</var>
-<arg>username=${USERNAME}</arg>
-<doc>TODO: Create a database query to retrieve the Agent's UID.</doc>
-<msg timestamp="20230823 00:18:43.000" level="INFO">Creating a new connection.</msg>
-<msg timestamp="20230823 00:18:45.712" level="INFO">Executing query. SELECT u.username, um.position, ul.code, ul.location, um.workforceid FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userlocation AS ul ON um.lid = ul.lid WHERE u.username = %s;</msg>
-<msg timestamp="20230823 00:18:46.236" level="INFO">${result} = {'username': 'ACALIMAG', 'position': 'ENGINEERING', 'location_code': 'MNL', 'location': 'Manila', 'workforceid': '12061'}</msg>
-<status status="PASS" starttime="20230823 00:18:42.997" endtime="20230823 00:18:46.236"/>
+<arg>udid=271cf76b-cab5-4964-8e19-7ef10aa84f11</arg>
+<doc>TODO: Create a database query to retrieve the dispute details</doc>
+<msg timestamp="20230823 02:17:48.429" level="INFO">Creating a new connection.</msg>
+<msg timestamp="20230823 02:17:51.255" level="INFO">Executing query. SELECT u.username, u.name, ud.status, ud.requestedstarttime, ud.requestedendtime, ud.currentstarttime, ud.currentendtime, ud.workhours, ud.reason, ud.createTime, ul.location, ut.name as Team, ud.currentactivitycode, ud.requestedactivitycode, ud.payhours, ud.reviewcomment, ud.internalnotes, ud.reviewedby, ud.reviewtime, ud.confirmtime FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userlocation AS ul ON um.lid = ul.lid JOIN kjt.userteam AS ut ON um.teamId = ut.utid JOIN wfm.userdispute AS ud ON u.username = ud.username where ud.udid = %s;</msg>
+<msg timestamp="20230823 02:17:51.805" level="INFO">${result} = {'Full Name': 'TQA4 (tqa4)', 'Status': 'Approved', 'Current Time Range': 'Jun 05, 2023 05:00 PM - Jun 05, 2023 07:00 PM', 'Requested Time Range': 'Jun 05, 2023 04:00 PM - Jun 05, 2023 07:00 PM', 'Work...</msg>
+<status status="PASS" starttime="20230823 02:17:48.428" endtime="20230823 02:17:51.805"/>
 </kw>
-<kw name="Check Filter Section" library="AdherenceAdjustmentLibrary">
-<arg>exp_fltr_sdlbl=${EXP_FLTR_SDLBL}</arg>
-<arg>exp_fltr_sdplhdr=${EXP_FLTR_SDPLHDR}</arg>
-<arg>exp_fltr_edlbl=${EXP_FLTR_EDLBL}</arg>
-<arg>exp_fltr_edplhdr=${EXP_FLTR_EDPLHDR}</arg>
-<arg>exp_fltr_usersplhdr=Select users</arg>
-<arg>exp_fltr_locplhdr=${result['location']}</arg>
-<arg>exp_fltr_teamspldhr=Select teams</arg>
-<arg>exp_fltr_posplhdr=Select Positions</arg>
-<msg timestamp="20230823 00:18:46.240" level="INFO">Check the Filter Section if fields, labels, and buttons are present</msg>
-<msg timestamp="20230823 00:18:46.281" level="INFO">Start Date Label is showing and text matches: Start Date:</msg>
-<msg timestamp="20230823 00:18:46.552" level="INFO">Start Date Placeholder is showing and text matches: 2023-08-07</msg>
-<msg timestamp="20230823 00:18:46.564" level="INFO">End Date Label is showing and text matches: End Date:</msg>
-<msg timestamp="20230823 00:18:46.849" level="INFO">End Date Placeholder is showing and text matches: 2023-08-23</msg>
-<msg timestamp="20230823 00:18:46.861" level="INFO">User/s Placeholder is showing and text matches: Select users</msg>
-<msg timestamp="20230823 00:18:46.873" level="INFO">Location Placeholder is showing and text matches: Manila</msg>
-<msg timestamp="20230823 00:18:46.886" level="INFO">Team: Select teams</msg>
-<msg timestamp="20230823 00:18:46.886" level="INFO">Team Placeholder is showing and text matches: Select teams</msg>
-<msg timestamp="20230823 00:18:46.899" level="INFO">Position: Select Positions</msg>
-<msg timestamp="20230823 00:18:46.900" level="INFO">Position Placeholder is showing and text matches: Select Positions</msg>
-<msg timestamp="20230823 00:18:47.216" level="INFO">GO BUTTON is showing</msg>
-<msg timestamp="20230823 00:18:47.503" level="INFO">Export to xls BUTTON is showing</msg>
-<status status="PASS" starttime="20230823 00:18:46.237" endtime="20230823 00:18:47.504"/>
+<kw name="Log Dictionary" library="Collections">
+<arg>${result}</arg>
+<doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
+<msg timestamp="20230823 02:17:51.807" level="INFO">Dictionary size is 17 and it contains following items:
+Comment: approve test
+Confirm At: 
+Created Time: Jun 16, 2023 09:06 PM
+Current Activity: Phone Time
+Current Time Range: Jun 05, 2023 05:00 PM - Jun 05, 2023 07:00 PM
+Full Name: TQA4 (tqa4)
+Internal Notes: approve test
+Location: Manila
+Pay Hours: 
+Reason: testing
+Requested Activity: Phone Time
+Requested Time Range: Jun 05, 2023 04:00 PM - Jun 05, 2023 07:00 PM
+Review At: Jun 16, 2023 09:09 PM
+Reviewed By: acalimag
+Status: Approved
+Team: Cleveland
+Work Hours: </msg>
+<status status="PASS" starttime="20230823 02:17:51.806" endtime="20230823 02:17:51.807"/>
 </kw>
-<kw name="Logout" type="TEARDOWN">
-<kw name="Logout To System" library="AdherenceAdjustmentLibrary">
-<msg timestamp="20230823 00:18:47.506" level="INFO">Logging out of the system</msg>
-<status status="PASS" starttime="20230823 00:18:47.506" endtime="20230823 00:18:50.021"/>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${result}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230823 02:17:51.807" endtime="20230823 02:17:51.808"/>
 </kw>
-<status status="PASS" starttime="20230823 00:18:47.505" endtime="20230823 00:18:50.022"/>
-</kw>
-<status status="PASS" starttime="20230823 00:18:27.227" endtime="20230823 00:18:50.024"/>
+<status status="PASS" starttime="20230823 02:17:48.427" endtime="20230823 02:17:51.808"/>
 </test>
-<status status="PASS" starttime="20230823 00:18:26.908" endtime="20230823 00:18:50.028"/>
+<status status="PASS" starttime="20230823 02:17:48.091" endtime="20230823 02:17:51.809"/>
 </suite>
 <statistics>
 <total>
@@ -75,6 +54,5 @@
 </suite>
 </statistics>
 <errors>
-<msg timestamp="20230823 00:18:27.119" level="WARN">Imported library 'AdherenceAdjustmentLibrary.APILibrary' contains no keywords.</msg>
 </errors>
 </robot>

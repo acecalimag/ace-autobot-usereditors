@@ -1,7 +1,7 @@
 *** Settings ***
 Library    AdherenceAdjustmentLibrary
 Library    AdherenceAdjustmentLibrary.DatabaseLibrary
-Library    AdherenceAdjustmentLibrary.APILibrary
+# Library    AdherenceAdjustmentLibrary.APILibrary
 Library    RequestsLibrary
 Library    SeleniumLibrary
 Library    Collections
@@ -35,13 +35,15 @@ Verify completeness of fields, labels, and buttons for Adherence Adjustment Page
     Log To Console                       ${adhadj_header}
     
 
-    # Verify Adherence Adjustment Filters and its Placeholders Details
-    
+    # Verify Adherence Adjustment Filters and its Placeholders
+    ${result}                           Get User Details                    username=${USERNAME}
+    Check Filter Section                exp_fltr_sdlbl=${EXP_FLTR_SDLBL}    exp_fltr_sdplhdr=${EXP_FLTR_SDPLHDR}        exp_fltr_edlbl=${EXP_FLTR_EDLBL}    exp_fltr_edplhdr=${EXP_FLTR_EDPLHDR}        exp_fltr_usersplhdr=Select users        exp_fltr_locplhdr=${result['location']}        exp_fltr_teamspldhr=Select teams        exp_fltr_posplhdr=Select Positions
+
 
 
     # Select a Dispute Entry
     ${result}                           Get User Details                     username=tqa3
-    Select Filters                      start_date=2023-01-01                end_date=2023-08-01        exp_user=tqa3        exp_team=Xrp            exp_post=Engineering
+    Select Filters                      start_date=2023-01-01                end_date=2023-08-01        exp_user=tqa4        exp_team=Cleveland            exp_post=Engineering
     Select Dispute Entry                wfid=${result['workforceid']}        udid=10623919-cb46-412f-bba5-69ce21a8db6e
     
 
@@ -63,7 +65,7 @@ View Dispute Details
 
     # ${result}                           Get User Details                     username=tqa3
     Select Filters                      start_date=2023-01-01                end_date=2023-08-01        exp_user=tqa3        exp_team=Xrp            exp_post=Engineering
-    Select Dispute Entry                wfid=99007        udid=10623919-cb46-412f-bba5-69ce21a8db6e
+    Select Dispute Entry                wfid=99007                           udid=10623919-cb46-412f-bba5-69ce21a8db6e
     # ${result['workforceid']}
     Sleep    20s
     
@@ -80,11 +82,15 @@ Testing the Filters
 
 
 
-Database Query
+Database Query User Details
     ${result}                            Get User Details                            username=${USERNAME}
     Log To Console                       ${result['location']}
 
 
+Database Dispute Details
+    ${result}                            Get Dispute Details                         udid=271cf76b-cab5-4964-8e19-7ef10aa84f11
+    Log Dictionary                       ${result}
+    Log To Console                       ${result}
 
 
 
