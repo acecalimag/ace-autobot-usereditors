@@ -73,7 +73,8 @@ Testing the Filters
     [Setup]        Adherence Adjustment
     [Teardown]     Logout
 
-    Check Filter Section                exp_fltr_sdlbl=${EXP_FLTR_SDLBL}    exp_fltr_sdplhdr=${EXP_FLTR_SDPLHDR}        exp_fltr_edlbl=${EXP_FLTR_EDLBL}    exp_fltr_edplhdr=${EXP_FLTR_EDPLHDR}
+    ${result}                           Get User Details                    username=${USERNAME}
+    Check Filter Section                exp_fltr_sdlbl=${EXP_FLTR_SDLBL}    exp_fltr_sdplhdr=${EXP_FLTR_SDPLHDR}        exp_fltr_edlbl=${EXP_FLTR_EDLBL}    exp_fltr_edplhdr=${EXP_FLTR_EDPLHDR}        exp_fltr_usersplhdr=Select users        exp_fltr_locplhdr=${result['location']}        exp_fltr_teamspldhr=Select teams        exp_fltr_posplhdr=Select Positions
 
 
 
@@ -81,7 +82,7 @@ Testing the Filters
 
 Database Query
     ${result}                            Get User Details                            username=${USERNAME}
-    Log To Console                       ${result}
+    Log To Console                       ${result['location']}
 
 
 

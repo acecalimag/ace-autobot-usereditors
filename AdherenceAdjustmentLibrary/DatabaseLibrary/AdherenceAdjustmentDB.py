@@ -10,7 +10,7 @@ class AdherenceAdjustmentDB:
     @keyword
     def get_user_details(self, username: str):
         """ TODO: Create a database query to retrieve the Agent's UID."""
-        query = "SELECT u.username, um.position, ul.code, um.workforceid FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userlocation AS ul ON um.lid = ul.lid WHERE u.username = %s;"
+        query = "SELECT u.username, um.position, ul.code, ul.location, um.workforceid FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userlocation AS ul ON um.lid = ul.lid WHERE u.username = %s;"
          
         result = self.__db.execute(query, (username,))
         if result and len(result) > 0:
@@ -18,7 +18,8 @@ class AdherenceAdjustmentDB:
             return {
                 'username': row['username'].upper(),
                 'position': row['position'].upper(),
-                'location': row['code'].upper(), 
+                'location_code': row['code'].upper(),
+                'location': row['location'], 
                 'workforceid': row['workforceid']
             }
         else:

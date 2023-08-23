@@ -69,16 +69,22 @@ DISMISS_ALERT_BTN: str = "//button[@aria-label='Close']"
 
 FLTR_USERS_DRPDWN: str = "//button[@data-id='user-select']"
 # "//button[@data-id='user-select']"
-FLTR_USERS_SRCH: str= "//div[@class='dropdown-menu show']//input[@aria-label='Search']"
-FLTR_USERS_RSLT: str= "//a[@class='dropdown-item active']"
-def USER_LOCATOR(user: str):
-    return f"xpath://a[contains(., {user}')]"
+FLTR_USERS_SRCH: str = "//div[@class='dropdown-menu show']//input[@aria-label='Search']"
+FLTR_USERS_RSLT: str = "//a[@class='dropdown-item active']"
+def FLTR_USERS_PLHDR(user: str):
+    return f"//button[@data-id='user-select' and @title='{user}']"
+
+
+FLTR_LOC_DRPDWN: str = "//button[@data-id='location-select']"
+def FLTR_LOC_PLHDR(loc: str):
+    return f"//button[@data-id='location-select' and @title='{loc}']"
 
 
 FLTR_TEAM_DRPDWN: str = "//button[@data-id='team-select']"
 FLTR_TEAM_SRCH: str= "//div[@class='dropdown-menu show']//input[@aria-label='Search']"
 FLTR_TEAM_RSLT: str= "//a[@class='dropdown-item active']"
-
+def FLTR_TEAM_PLHDR(team: str):
+    return f"//button[@data-id='team-select' and @title='{team}']"
 
 
 
@@ -86,7 +92,8 @@ FLTR_POST_DRPDWN: str = "//button[@data-id='position-select']"
 def POST_LOCATOR(position: str):
     return f"xpath://div[@aria-expanded='true']//span[@class='text'][normalize-space()='{position}']"
 
-
+def FLTR_POST_PLHDR(position: str):
+    return f"//button[@data-id='position-select' and @title='{position}']"
 
 
 # sd_locator = f"//div[@aria-label='{start_date}']"
@@ -119,3 +126,6 @@ TSTAT_ENB: str = "//input[@id='enabled']"
 TSTAT_DISB: str = "//input[@id='disabled']"
 def TSTATUS_LOC(status: str):
     return f"xpath://input[@id='{status}']"
+
+
+
