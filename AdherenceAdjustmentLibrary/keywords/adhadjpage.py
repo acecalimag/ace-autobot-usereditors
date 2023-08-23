@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime, timedelta
+import time
 
 
 from AdherenceAdjustmentLibrary.locators import adhadjlocators
@@ -236,10 +237,10 @@ class AdherenceAdjustmentPage:
 
 
 
-# , exp_fltr_edlbl: str, exp_fltr_edplhdr: str, exp_fltr_usersplhdr: str, exp_fltr_locplhdr: str, exp_fltr_teamspldhr: str, exp_fltr_posplhdr: str, exp_fltr_statplhdr: str, exp_fltr_gobtnlbl: str, exp_fltr_extoxlsbtnlbl: str):
+# , exp_fltr_usersplhdr: str, exp_fltr_locplhdr: str, exp_fltr_teamspldhr: str, exp_fltr_posplhdr: str, exp_fltr_statplhdr: str, exp_fltr_gobtnlbl: str, exp_fltr_extoxlsbtnlbl: str):
 
     @keyword 
-    def check_filter_section(self, exp_fltr_sdlbl: str, exp_fltr_sdplhdr: str):
+    def check_filter_section(self, exp_fltr_sdlbl: str, exp_fltr_sdplhdr: str, exp_fltr_edlbl: str, exp_fltr_edplhdr: str):
         logger.info(f"Check the Filter Section if fields, labels, and buttons are present")
 
         filter_section = {}
@@ -252,7 +253,6 @@ class AdherenceAdjustmentPage:
             element = elements[0]
             act_fltr_sdlbl = element.text
             
-            # Compare actual_text with expected_text
             if act_fltr_sdlbl == exp_fltr_sdlbl:
                 logger.info(f"Start Date Label is showing and text matches: {act_fltr_sdlbl}")
                 filter_section['Start Date Label'] = 'Showing'
@@ -266,28 +266,70 @@ class AdherenceAdjustmentPage:
 
         # Placeholder
 
-         # Wait for the input field to be visible
-        self.__ctx.wait_until_element_is_visible(locator=adhadjlocators.FLTR_SD_INP)
+        input_element = self.__ctx.driver.find_element("xpath", adhadjlocators.FLTR_SD_INP)
+        self.__ctx.driver.execute_script("arguments[0].click();", input_element)
+        self.__ctx.wait_until_element_is_visible(locator=adhadjlocators.FLTR_SD_PLHDR)
+        elements = self.__ctx.driver.find_elements("xpath", f"{adhadjlocators.FLTR_SD_PLHDR}")
 
-        # Click on the input field to activate the date picker
-        self.__ctx.click_element(locator=adhadjlocators.FLTR_SD_INP)
+        if elements:
+            element = elements[0]
 
-        # Locate the highlighted date element
-        highlighted_element = self.__ctx.driver.find_element("xpath", adhadjlocators.FLTR_SD_PLHDR)
+            act_fltr_sdplhdr = element.get_attribute("aria-label")
+            logger.info(f"Highlighted Date Aria-Label: {act_fltr_sdplhdr}") # For checking
 
-        # Retrieve the value of the aria-label attribute
-        act_fltr_sdplhdr = highlighted_element.get_attribute("aria-label")
-
-        # Print the aria-label value for debugging
-        logger.info(f"Highlighted Date Aria-Label: {act_fltr_sdplhdr}")
-
-        # Compare the highlighted aria-label value with the expected value
-        if act_fltr_sdplhdr == exp_fltr_sdplhdr:
-            logger.info(f"Start Date Placeholder is highlighted and matches the expected value: {act_fltr_sdplhdr}")
-            filter_section['Start Date Placeholder'] = 'Highlighted and Matching'
+            if act_fltr_sdplhdr == exp_fltr_sdplhdr:
+                logger.info(f"Start Date Placeholder is showing and text matches: {act_fltr_sdplhdr}")
+                filter_section['Start Date Placeholder'] = 'Showing'
+            else:
+                logger.info(f"Start Date Placeholder is showing but text does not match. Actual: {act_fltr_sdplhdr}, Expected: {exp_fltr_sdplhdr}")
+                filter_section['Start Date Placeholder'] = 'Not Showing'
         else:
-            logger.info(f"Start Date Placeholder is highlighted but does not match the expected value. Highlighted Aria-Label: {act_fltr_sdplhdr}, Expected: {exp_fltr_sdplhdr}")
-            filter_section['Start Date Placeholder'] = 'Highlighted but Not Matching'
+            logger.info("Start Date Placeholder is not showing")
+            filter_section['Start Date Placeholder'] = 'Not Showing'
+
+
+        # Verify the End Date Label and Placeholder
+        # Label
+
+        elements = self.__ctx.driver.find_elements("xpath", adhadjlocators.FLTR_ED_LBL)
+        if elements:
+            element = elements[0]
+            act_fltr_edlbl = element.text
+            
+            if act_fltr_edlbl == exp_fltr_edlbl:
+                logger.info(f"End Date Label is showing and text matches: {act_fltr_edlbl}")
+                filter_section['End Date Label'] = 'Showing'
+            else:
+                logger.info(f"End Date Label is showing but text does not match. Actual: {act_fltr_edlbl}, Expected: {exp_fltr_edlbl}")
+                filter_section['End Date Label'] = 'Not Showing'
+        else:
+            logger.info("End Date Label is not showing")
+            filter_section['End Date Label'] = 'Not Showing'
+
+
+        # Placeholder
+
+        input_element = self.__ctx.driver.find_element("xpath", adhadjlocators.FLTR_ED_INP)
+        self.__ctx.driver.execute_script("arguments[0].click();", input_element)
+        self.__ctx.wait_until_element_is_visible(locator=adhadjlocators.FLTR_ED_PLHDR)
+        elements = self.__ctx.driver.find_elements("xpath", f"{adhadjlocators.FLTR_ED_PLHDR}")
+
+        if elements:
+            element = elements[0]
+
+            act_fltr_edplhdr = element.get_attribute("aria-label")
+            logger.info(f"Highlighted Date Aria-Label: {act_fltr_edplhdr}") # For checking
+
+            if act_fltr_edplhdr == exp_fltr_edplhdr:
+                logger.info(f"End Date Placeholder is showing and text matches: {act_fltr_edplhdr}")
+                filter_section['End Date Placeholder'] = 'Showing'
+            else:
+                logger.info(f"End Date Placeholder is showing but text does not match. Actual: {act_fltr_edplhdr}, Expected: {exp_fltr_edplhdr}")
+                filter_section['End Date Placeholder'] = 'Not Showing'
+        else:
+            logger.info("End Date Placeholder is not showing")
+            filter_section['End Date Placeholder'] = 'Not Showing'
+
 
  
   

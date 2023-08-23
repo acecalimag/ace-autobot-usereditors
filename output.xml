@@ -1,45 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.0.2 (Python 3.10.6 on win32)" generated="20230822 04:16:14.986" rpa="false" schemaversion="3">
+<robot generator="Robot 6.0.2 (Python 3.10.6 on win32)" generated="20230822 22:35:50.755" rpa="false" schemaversion="3">
 <suite id="s1" name="Adherence Adjustment" source="c:\Users\WONDERS\Documents\Ace\Robot\ace-autobot-usereditors\AdherenceAdjustmentLibrary\Adherence_Adjustment.robot">
-<test id="s1-t1" name="Testing the Filters" line="72">
-<kw name="Adherence Adjustment" type="SETUP">
-<kw name="Open Config In Browser" library="AdherenceAdjustmentLibrary">
-<msg timestamp="20230822 04:16:15.315" level="INFO">Opening browser 'chrome' to base url 'https://qa.letsdochinese.com/KJTCore/resources/adherenceadjustment.html'.</msg>
-<status status="PASS" starttime="20230822 04:16:15.314" endtime="20230822 04:16:19.701"/>
-</kw>
-<kw name="Login And Redirect" library="AdherenceAdjustmentLibrary">
+<test id="s1-t1" name="Database Query" line="82">
+<kw name="Get User Details" library="AdherenceAdjustmentLibrary.DatabaseLibrary">
+<var>${result}</var>
 <arg>username=${USERNAME}</arg>
-<arg>password=${PASSWORD}</arg>
-<arg>redirect_url=${EXP_URL}</arg>
-<msg timestamp="20230822 04:16:19.702" level="INFO">Logging in using  acalimag and kjt</msg>
-<msg timestamp="20230822 04:16:22.565" level="INFO">Typing text 'acalimag' into text field 'id:username'.</msg>
-<msg timestamp="20230822 04:16:22.618" level="INFO">Typing text 'kjt' into text field 'id:password'.</msg>
-<msg timestamp="20230822 04:16:22.670" level="INFO">Clicking element 'id:login'.</msg>
-<msg timestamp="20230822 04:16:27.704" level="INFO">Opening url 'https://qa.letsdochinese.com/KJTCore/resources/adherenceadjustment.html'</msg>
-<status status="PASS" starttime="20230822 04:16:19.702" endtime="20230822 04:16:27.828"/>
+<doc>TODO: Create a database query to retrieve the Agent's UID.</doc>
+<msg timestamp="20230822 22:35:51.091" level="INFO">Creating a new connection.</msg>
+<msg timestamp="20230822 22:35:53.946" level="INFO">Executing query. SELECT u.username, um.position, ul.code, um.workforceid FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userlocation AS ul ON um.lid = ul.lid WHERE u.username = %s;</msg>
+<msg timestamp="20230822 22:35:54.497" level="INFO">${result} = {'username': 'ACALIMAG', 'position': 'ENGINEERING', 'location': 'MNL', 'workforceid': '12061'}</msg>
+<status status="PASS" starttime="20230822 22:35:51.090" endtime="20230822 22:35:54.497"/>
 </kw>
-<status status="PASS" starttime="20230822 04:16:15.314" endtime="20230822 04:16:27.828"/>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${result}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230822 22:35:54.499" endtime="20230822 22:35:54.501"/>
 </kw>
-<kw name="Check Filter Section" library="AdherenceAdjustmentLibrary">
-<arg>exp_fltr_sdlbl=${EXP_FLTR_SDLBL}</arg>
-<arg>exp_fltr_sdplhdr=${EXP_FLTR_SDPLHDR}</arg>
-<msg timestamp="20230822 04:16:27.830" level="INFO">Check the Filter Section if fields, labels, and buttons are present</msg>
-<msg timestamp="20230822 04:16:27.849" level="INFO">Start Date Label is showing and text matches: Start Date:</msg>
-<msg timestamp="20230822 04:16:27.871" level="INFO">Clicking element '//input[@id='startDate']'.</msg>
-<msg timestamp="20230822 04:16:27.927" level="INFO">Highlighted Date Aria-Label: 2023-08-07</msg>
-<msg timestamp="20230822 04:16:27.927" level="INFO">Start Date Placeholder is highlighted and matches the expected value: 2023-08-07</msg>
-<status status="PASS" starttime="20230822 04:16:27.829" endtime="20230822 04:16:27.927"/>
-</kw>
-<kw name="Logout" type="TEARDOWN">
-<kw name="Logout To System" library="AdherenceAdjustmentLibrary">
-<msg timestamp="20230822 04:16:27.931" level="INFO">Logging out of the system</msg>
-<status status="PASS" starttime="20230822 04:16:27.930" endtime="20230822 04:16:30.433"/>
-</kw>
-<status status="PASS" starttime="20230822 04:16:27.929" endtime="20230822 04:16:30.434"/>
-</kw>
-<status status="PASS" starttime="20230822 04:16:15.313" endtime="20230822 04:16:30.434"/>
+<status status="PASS" starttime="20230822 22:35:51.089" endtime="20230822 22:35:54.502"/>
 </test>
-<status status="PASS" starttime="20230822 04:16:14.991" endtime="20230822 04:16:30.437"/>
+<status status="PASS" starttime="20230822 22:35:50.762" endtime="20230822 22:35:54.505"/>
 </suite>
 <statistics>
 <total>
@@ -52,6 +31,6 @@
 </suite>
 </statistics>
 <errors>
-<msg timestamp="20230822 04:16:15.205" level="WARN">Imported library 'AdherenceAdjustmentLibrary.APILibrary' contains no keywords.</msg>
+<msg timestamp="20230822 22:35:50.983" level="WARN">Imported library 'AdherenceAdjustmentLibrary.APILibrary' contains no keywords.</msg>
 </errors>
 </robot>

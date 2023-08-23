@@ -40,8 +40,13 @@ FLTR_SD_INP: str = "//input[@id='startDate']"
 FLTR_SD_PLHDR: str = "//div[@class='picker__day picker__day--infocus picker__day--selected picker__day--highlighted']"
 
 
+FLTR_SD_PLHDR: str = "(//div[@aria-selected='true'])[1]"
+FLTR_ED_PLHDR: str = "(//div[@aria-selected='true'])[2]"
+
 FLTR_ED_LBL: str = "//label[normalize-space()='End Date:']"
 FLTR_ED_INP: str = "//input[@id='endDate']"
+
+
 
 FLTR_LOC_DRPDWN: str = "//button[@data-id='location-select']"
 

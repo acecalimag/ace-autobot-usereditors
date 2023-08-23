@@ -73,7 +73,7 @@ Testing the Filters
     [Setup]        Adherence Adjustment
     [Teardown]     Logout
 
-    Check Filter Section                exp_fltr_sdlbl=${EXP_FLTR_SDLBL}    exp_fltr_sdplhdr=${EXP_FLTR_SDPLHDR}
+    Check Filter Section                exp_fltr_sdlbl=${EXP_FLTR_SDLBL}    exp_fltr_sdplhdr=${EXP_FLTR_SDPLHDR}        exp_fltr_edlbl=${EXP_FLTR_EDLBL}    exp_fltr_edplhdr=${EXP_FLTR_EDPLHDR}
 
 
 
