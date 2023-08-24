@@ -1,8 +1,13 @@
 TEAMLIST: str = "//*[@id='teamList']"
 
-TNAME: str = "//h3[@class='text-capitalize']//span[@class='teamName']"
+# TNAME: str = "//h3[@class='text-capitalize']//span[@class='teamName']"
+TNAME: str = "//div[@class='col-6 offset-6']//span[@class='teamName']"
 TLEAD: str = "//span[@id='teamLead']"
 TLOC: str = "//span[@id='teamLocation']"
+
+TNAMELBL: str = "//span[normalize-space()='Team Name:']"
+TLEADLBL: str = "//span[normalize-space()='Team Lead:']"
+TLOCLBL: str = "//span[normalize-space()='Team Location:']"
 
 FREEAGENTSLBL: str = "//h5[normalize-space()='Free Agents']"
 TEAMROSTERLBL: str = "//div[2]/h5"

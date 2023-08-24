@@ -46,10 +46,63 @@ class TeamAssignmentEditor:
 
 
     @keyword 
-    def check_team_editor(self, exp_falbl: str, exp_trosterlbl: str, exp_fafltr: str, exp_rosfltr: str):
+    def check_team_editor(self, exp_tnamelbl: str, exp_tleadlbl: str, exp_tloclbl: str, exp_falbl: str, exp_trosterlbl: str, exp_fafltr: str, exp_rosfltr: str):
         logger.info(f"Check the Team Assignment Editor page if fields, labels, and buttons are present")
 
         team_assignment_content = {}
+        
+        
+        elements = self.__ctx.driver.find_elements("xpath", teamlocators.TNAMELBL)
+        if elements:
+            element = elements[0]
+            act_tnamelbl = element.text
+            
+            # Compare actual_text with expected_text
+            if act_tnamelbl == exp_tnamelbl:
+                logger.info(f"Team Name Label is showing and text matches: {act_tnamelbl}")
+                team_assignment_content['Team Name Label'] = 'Showing'
+            else:
+                logger.info(f"Team Name Label is showing but text does not match. Actual: {act_tnamelbl}, Expected: {exp_tnamelbl}")
+                team_assignment_content['Team Name Label'] = 'Not Showing'
+        else:
+            logger.info("Team Name Label is not showing")
+            team_assignment_content['Team Name Label'] = 'Not Showing'
+        
+
+        elements = self.__ctx.driver.find_elements("xpath", teamlocators.TLEADLBL)
+        if elements:
+            element = elements[0]
+            act_tleadlbl = element.text
+            
+            # Compare actual_text with expected_text
+            if act_tleadlbl == exp_tleadlbl:
+                logger.info(f"Team Lead Label is showing and text matches: {act_tleadlbl}")
+                team_assignment_content['Team Lead Label'] = 'Showing'
+            else:
+                logger.info(f"Team Lead Label is showing but text does not match. Actual: {act_tleadlbl}, Expected: {exp_tleadlbl}")
+                team_assignment_content['Team Lead Label'] = 'Not Showing'
+        else:
+            logger.info("Team Lead Label is not showing")
+            team_assignment_content['Team Lead Label'] = 'Not Showing'       
+
+
+        elements = self.__ctx.driver.find_elements("xpath", teamlocators.TLOCLBL)
+        if elements:
+            element = elements[0]
+            act_tloclbl = element.text
+            
+            # Compare actual_text with expected_text
+            if act_tloclbl == exp_tloclbl:
+                logger.info(f"Team Location Label is showing and text matches: {act_tloclbl}")
+                team_assignment_content['Team Location Label'] = 'Showing'
+            else:
+                logger.info(f"Team Location Label is showing but text does not match. Actual: {act_tloclbl}, Expected: {exp_tloclbl}")
+                team_assignment_content['Team Location Label'] = 'Not Showing'
+        else:
+            logger.info("Team Location Label is not showing")
+            team_assignment_content['Team Location Label'] = 'Not Showing' 
+        
+        
         
         elements = self.__ctx.driver.find_elements("xpath", teamlocators.FREEAGENTSLBL)
         if elements:

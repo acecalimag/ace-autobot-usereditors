@@ -47,7 +47,7 @@ Verify completeness of fields, labels, and buttons for Team Assignment Editor Pa
     ${result_uid}                        Get Agent Uid                       agent_name=${AGENT_NAME} 
     Select Agent                         agent_name=${AGENT_NAME}            agent_uid=${result_uid}
                              
-    ${team_editor}                       Check Team Editor                   exp_falbl=${EXP_FALBL}             exp_trosterlbl=${result['Team Name']} Roster                      exp_fafltr=${EXP_FAFLTR}        exp_rosfltr=${EXP_ROSFLTR}
+    ${team_editor}                       Check Team Editor                   exp_tnamelbl=${EXP_TNAMELBL}       exp_tleadlbl=${EXP_TLEADLBL}        exp_tloclbl=${EXP_TLOCLBL}       exp_falbl=${EXP_FALBL}             exp_trosterlbl=${result['Team Name']} Roster                      exp_fafltr=${EXP_FAFLTR}        exp_rosfltr=${EXP_ROSFLTR}
     Log Dictionary                       ${team_editor}
     Log To Console                       ${team_editor}
     
