@@ -14,7 +14,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from AdherenceAdjustmentLibrary.locators import adhadjlocators
 
 
-class TeamDetails:
+class DisputeDetails:
     
     def __init__(self, ctx: SeleniumLibrary) -> None:
         self.__ctx = ctx
