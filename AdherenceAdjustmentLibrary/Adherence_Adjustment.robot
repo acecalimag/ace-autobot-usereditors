@@ -86,6 +86,21 @@ Testing the Adherence Dispute Information Header, Labels and Buttons
     Log To Console                          ${adi_section}
 
 
+Testing Dispute Details
+    [Setup]        Adherence Adjustment
+    [Teardown]     Logout
+
+    ${res_dis}                           Get Dispute Details Db                     udid=${UDID}
+
+    ${result}                            Get User Details                           username=${DISP_AGENT_NAME}
+    Select Filters                       start_date=2023-05-01                      end_date=2023-08-01                           exp_user=${result['username']}                exp_team=${result['team']}                              exp_post=${result['position']}
+    Select Dispute Entry                 wfid=${result['workforceid']}              udid=${UDID}
+    
+    ${dispute_details}                   Check Dispute Details                      exp_ads_fname_dtl=${res_dis['Full Name']}     exp_ads_stat_dtl=${res_dis['Status']}         exp_ads_ctr_dtl=${res_dis['Current Time Range']}        exp_ads_rtr_dtl=${res_dis['Requested Time Range']}          exp_ads_whrs_dtl=${res_dis['Work Hours']}
+    Log Dictionary                       ${dispute_details}
+    Log To Console                       ${dispute_details}
+
+
 
 Database Query User Details
     ${result}                            Get User Details                              username=${DISP_AGENT_NAME}
@@ -94,7 +109,7 @@ Database Query User Details
 
 
 Database Dispute Details
-    ${result}                            Get Dispute Details                         udid=${UDID}
+    ${result}                            Get Dispute Details Db                         udid=${UDID}
     Log Dictionary                       ${result}
     Log To Console                       ${result}
 

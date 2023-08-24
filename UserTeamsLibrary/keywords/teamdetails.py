@@ -37,7 +37,7 @@ class TeamDetails:
         act_desc = self.__ctx.get_value(locator=userteamslocators.TDESC)
         logger.info(f"got_act: {act_desc}")
         team_details['Team Description'] = act_desc
-        assert_equal(act_desc, exp_desc, f"Expected form Team Name '{exp_desc}' does not match the actual Team Name '{act_desc}'")
+        assert_equal(act_desc, exp_desc, f"Expected form Team Description '{exp_desc}' does not match the actual Team Description '{act_desc}'")
 
 
         # Verify the Team Lead Name

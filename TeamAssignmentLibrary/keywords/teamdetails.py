@@ -32,7 +32,7 @@ class TeamDetails:
         act_loc = self.__ctx.get_text(locator=teamlocators.TLOC)
         logger.info(f"got_act: {act_loc}")
         team_details['Team Location'] = act_loc
-        assert_equal(act_loc, exp_loc, f"Expected form type '{exp_loc}' does not match the actual type '{act_loc}'")
+        assert_equal(act_loc, exp_loc, f"Expected form location '{exp_loc}' does not match the actual location '{act_loc}'")
         
         return team_details
 

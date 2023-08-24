@@ -2,6 +2,7 @@
 from robot.api.deco import keyword
 from autocore.Database import Database
 from datetime import datetime
+import arrow
 
 class AdherenceAdjustmentDB:
 
@@ -48,7 +49,7 @@ class AdherenceAdjustmentDB:
         
 
     @keyword
-    def get_dispute_details(self, udid: str):
+    def get_dispute_details_db(self, udid: str):
         """ TODO: Create a database query to retrieve the dispute details"""
         query = "SELECT u.username, u.name, ud.status, ud.requestedstarttime, ud.requestedendtime, ud.currentstarttime, ud.currentendtime, ud.workhours, ud.reason, ud.createTime, ul.location, ut.name as Team, ud.currentactivitycode, ud.requestedactivitycode, ud.payhours, ud.reviewcomment, ud.internalnotes, ud.reviewedby, ud.reviewtime, ud.confirmtime FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userlocation AS ul ON um.lid = ul.lid JOIN kjt.userteam AS ut ON um.teamId = ut.utid JOIN wfm.userdispute AS ud ON u.username = ud.username where ud.udid = %s;"
          
@@ -58,38 +59,65 @@ class AdherenceAdjustmentDB:
             # Full Name
             full_name = f"{row['name']} ({row['username']})"
 
-            # Requested Time Range:
+            # # Current Time Range:
+            # ctr_time_range = ""
+            # if row['currentstarttime'] and row['currentendtime']:
+            #     ctr_formatted_starttime = row['currentstarttime'].strftime("%b %d, %Y %I:%M %p")
+            #     ctr_formatted_endtime = row['currentendtime'].strftime("%b %d, %Y %I:%M %p")
+            #     ctr_time_range = f"{ctr_formatted_starttime} - {ctr_formatted_endtime}"
+
+
+            # # Current Time Range:
+            # ctr_time_range = ""
+            # if row['currentstarttime'] and row['currentendtime']:
+            #     ctr_formatted_starttime = row['currentstarttime'].strftime("%b %d, %Y %I:%M %p")
+            #     ctr_formatted_endtime = row['currentendtime'].strftime("%b %d, %Y %I:%M %p")
+                
+            #     # Remove leading zero from hour if present
+            #     ctr_formatted_starttime = ctr_formatted_starttime.replace(" 0", " ")
+            #     ctr_formatted_endtime = ctr_formatted_endtime.replace(" 0", " ")
+                
+            #     ctr_time_range = f"{ctr_formatted_starttime} - {ctr_formatted_endtime}"
+            
+
+            # Current Time Range:
             ctr_time_range = ""
             if row['currentstarttime'] and row['currentendtime']:
-                ctr_formatted_starttime = row['currentstarttime'].strftime("%b %d, %Y %I:%M %p")
-                ctr_formatted_endtime = row['currentendtime'].strftime("%b %d, %Y %I:%M %p")
+                start_time = arrow.get(row['currentstarttime'])
+                end_time = arrow.get(row['currentendtime'])
+
+                ctr_formatted_starttime = start_time.format("MMM DD, YYYY h:mm A")
+                ctr_formatted_endtime = end_time.format("MMM DD, YYYY h:mm A")
+
                 ctr_time_range = f"{ctr_formatted_starttime} - {ctr_formatted_endtime}"
+
+
 
             # Requested Time Range:
             rtr_time_range = ""
             if row['requestedstarttime'] and row['requestedendtime']:
-                rtr_formatted_starttime = row['requestedstarttime'].strftime("%b %d, %Y %I:%M %p")
-                rtr_formatted_endtime = row['requestedendtime'].strftime("%b %d, %Y %I:%M %p")
+                start_time = arrow.get(row['requestedstarttime'])
+                end_time = arrow.get(row['requestedendtime'])
+
+                rtr_formatted_starttime = start_time.format("MMM DD, YYYY h:mm A")
+                rtr_formatted_endtime = end_time.format("MMM DD, YYYY h:mm A")
+
                 rtr_time_range = f"{rtr_formatted_starttime} - {rtr_formatted_endtime}"
 
             # Create Time
             ct_time = ""
             if row['createTime']:
-                reformatted_createtime = row['createTime'].strftime("%b %d, %Y %I:%M %p")
-                ct_time = f"{reformatted_createtime}"
+                ct_time = arrow.get(row['createTime']).format("MMM DD, YYYY h:mm A")
 
             # Review Time
             review_time = ""
             if row['reviewtime']:
-                reformatted_reviewtime = row['reviewtime'].strftime("%b %d, %Y %I:%M %p")
-                review_time = f"{reformatted_reviewtime}"
+                review_time = arrow.get(row['reviewtime']).format("MMM DD, YYYY h:mm A")
 
             # Confirm Time
             confirm_time = ""
             if row['confirmtime']:
-                reformatted_confirmtime = row['confirmtime'].strftime("%b %d, %Y %I:%M %p")
-                confirm_time = f"{reformatted_confirmtime}"
-            
+                confirm_time = arrow.get(row['confirmtime']).format("MMM DD, YYYY h:mm A")
             
             # Work Hours
             work_hours = row['workhours']

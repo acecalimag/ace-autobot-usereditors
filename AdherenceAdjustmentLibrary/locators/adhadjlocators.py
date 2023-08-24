@@ -165,6 +165,22 @@ ADS_SAVE_BTN: str = "//button[@id='dispute-save-btn']"
 ADS_APRV_BTN: str = "//button[normalize-space()='Approve']"
 
 
-def radio_button_check(self, locator):
-    radio_button = self.__ctx.find_element(*locator)
-    return radio_button.is_enabled()
+ADS_FNAME_DTL: str = "//span[@class='dispute-username']"
+ADS_STAT_DTL: str = "//span[@class='dispute-status']"
+ADS_CTR_ST_DTL: str = "//span[@class='dispute-currentstarttime']"
+ADS_CTR_ET_DTL: str = "//span[@class='dispute-currentendtime']"
+ADS_RTR_ST_DTL: str = "//span[@class='dispute-requestedstarttime']"
+ADS_RTR_ET_DTL: str = "//span[@class='dispute-requestedendtime']"
+ADS_WHRS_DTL: str = "//span[@class='dispute-workhours']"
+ADS_RSN_DTL: str = "//span[@class='dispute-reason']"
+ADS_CRT_DTL: str = "//span[@class='dispute-createtime']"
+ADS_LOC_DTL: str = "//span[@class='dispute-userlocation']"
+ADS_TEAM_DTL: str = "//span[@class='dispute-userteam']"
+ADS_CACT_DTL: str = "//span[@class='dispute-currentactivitycode']"
+ADS_RACT_DTL: str = "//span[@class='dispute-requestedactivitycode']"
+ADS_PHRS_DTL: str = "//span[@class='dispute-payhours']"
+ADS_CMNT_DTL: str = "//textarea[@class='dispute-reviewcomment']"
+ADS_INOTES_DTL: str = "//textarea[@class='dispute-internalnotes']"
+ADS_REVBY_DTL: str = "//span[@class='dispute-reviewedby']"
+ADS_REVAT_DTL: str = "//span[@class='dispute-reviewtime']"
+ADS_CNFRMAT_DTL: str = "//span[@class='dispute-confirmtime']"
