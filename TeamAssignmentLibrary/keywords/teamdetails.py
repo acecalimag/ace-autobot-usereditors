@@ -4,6 +4,7 @@ from robot.api.deco import keyword
 from robot.api import logger
 from asserts import assert_equal
 
+
 from TeamAssignmentLibrary.locators import teamlocators
 
 

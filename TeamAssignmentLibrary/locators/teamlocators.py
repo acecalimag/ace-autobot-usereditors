@@ -1,7 +1,7 @@
 TEAMLIST: str = "//*[@id='teamList']"
 
 # TNAME: str = "//h3[@class='text-capitalize']//span[@class='teamName']"
-TNAME: str = "//div[@class='col-6 offset-6']//span[@class='teamName']"
+TNAME: str = "//span[@id='teamName']"
 TLEAD: str = "//span[@id='teamLead']"
 TLOC: str = "//span[@id='teamLocation']"
 
