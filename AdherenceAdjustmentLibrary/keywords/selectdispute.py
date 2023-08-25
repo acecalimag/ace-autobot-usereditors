@@ -223,7 +223,7 @@ class SelectDispute:
         self.__ctx.wait_until_element_is_visible(locator=adhadjlocators.FLTR_EXPRT_BTN)
         self.__ctx.click_button(locator=adhadjlocators.FLTR_EXPRT_BTN)
 
-        download_directory = r"C:\Users\WONDERS\Downloads"  # Use a raw string with 'r' prefix
+        download_directory = r"C:\Users\WONDERS\Downloads"
         expected_filename = "Adh_Adj_20230101-20230801.xlsx"
 
         # Wait for the file to appear in the download directory
