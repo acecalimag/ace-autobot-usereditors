@@ -182,7 +182,7 @@ class AdherenceAdjustmentDB:
                 'Requested Time Range': rtr_time_range, 
                 'Work Hours': work_hours,
                 'Reason': reason,
-                'Created Time': ct_time,
+                'Created At': ct_time,
                 'Location': location,
                 'Team': team,
                 'Current Activity': currentactivity,
@@ -191,8 +191,8 @@ class AdherenceAdjustmentDB:
                 'Comment': comment,
                 'Internal Notes': internalnotes,
                 'Reviewed By': reviewedby,
-                'Review At': review_time,
-                'Confirm At': confirm_time,
+                'Reviewed At': review_time,
+                'Confirmed At': confirm_time,
             }
         else:
             return {}

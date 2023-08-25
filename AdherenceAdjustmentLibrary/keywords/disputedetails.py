@@ -20,7 +20,7 @@ class DisputeDetails:
         self.__ctx = ctx
 
     @keyword 
-    def check_dispute_details(self, exp_ads_fname_dtl: str, exp_ads_stat_dtl: str, exp_ads_ctr_dtl: str, exp_ads_rtr_dtl: str, exp_ads_whrs_dtl: str):
+    def check_dispute_details(self, exp_ads_fname_dtl: str, exp_ads_stat_dtl: str, exp_ads_ctr_dtl: str, exp_ads_rtr_dtl: str, exp_ads_whrs_dtl: str, exp_ads_rsn_dtl:str, exp_ads_crt_dtl:str, exp_ads_loc_dtl:str, exp_ads_team_dtl: str, exp_ads_cact_dtl: str, exp_ads_ract_dtl:str, exp_ads_phrs_dtl: str, exp_ads_cmnt_dtl: str, exp_ads_inotes_dtl: str, exp_ads_revby_dtl: str, exp_ads_revat_dtl: str, exp_ads_cnfrmat_dtl: str):
         logger.info(f"Check the filed dispute details of an Agent")
         
         dispute_details = {}
@@ -30,7 +30,7 @@ class DisputeDetails:
         act_ads_fname_dtl = self.__ctx.get_text(locator=adhadjlocators.ADS_FNAME_DTL)
         logger.info(f"got_act: {act_ads_fname_dtl}")
         dispute_details['Full Name'] = act_ads_fname_dtl
-        assert_equal(act_ads_fname_dtl, exp_ads_fname_dtl, f"Expected form Team Name '{exp_ads_fname_dtl}' does not match the actual Full Name '{act_ads_fname_dtl}'")
+        assert_equal(act_ads_fname_dtl, exp_ads_fname_dtl, f"Expected form Full Name '{exp_ads_fname_dtl}' does not match the actual Full Name '{act_ads_fname_dtl}'")
 
 
         # Verify the Status
@@ -61,51 +61,94 @@ class DisputeDetails:
         # Verify the Work Hours
         act_ads_whrs_dtl = self.__ctx.get_text(locator=adhadjlocators.ADS_WHRS_DTL)
         logger.info(f"got_act: {act_ads_whrs_dtl}")
-        dispute_details['Status'] = act_ads_whrs_dtl
-        assert_equal(act_ads_whrs_dtl, exp_ads_whrs_dtl, f"Expected form Status '{exp_ads_whrs_dtl}' does not match the actual Status '{act_ads_whrs_dtl}'")
+        dispute_details['Work Hours'] = act_ads_whrs_dtl
+        assert_equal(act_ads_whrs_dtl, exp_ads_whrs_dtl, f"Expected form Work Hours '{exp_ads_whrs_dtl}' does not match the actual Work Hours '{act_ads_whrs_dtl}'")
 
 
-
-        # # Verify the Team Status
-        # driver = self.__ctx.driver
-        # enabled_radio_locator = (By.XPATH, adhadjlocators.TSTAT_ENB)
-        # disabled_radio_locator = (By.XPATH, adhadjlocators.TSTAT_DISB)
-
-        # enabled_radio_button = WebDriverWait(driver, 10).until(
-        #     EC.presence_of_element_located(enabled_radio_locator)
-        # )
-        # is_enabled_selected = enabled_radio_button.is_selected()
-        # is_enabled_enabled = enabled_radio_button.is_enabled()
-
-        # disabled_radio_button = WebDriverWait(driver, 10).until(
-        #     EC.presence_of_element_located(disabled_radio_locator)
-        # )
-        # is_disabled_selected = disabled_radio_button.is_selected()
-        # is_disabled_enabled = disabled_radio_button.is_enabled()
-
-        # if is_enabled_selected and is_enabled_enabled:
-        #     logger.info("ENABLE BUTTON IS SELECTED - TEAM STATUS is Enabled")
-        #     dispute_details['Team Status'] = 'Enabled'
-        # else:
-        #     logger.info("ENABLE BUTTON IS NOT SELECTED - TEAM STATUS is Disabled")
-        #     dispute_details['Team Status'] = 'Disabled'
-
-        # if is_disabled_selected and is_disabled_enabled:
-        #     logger.info("DISABLE BUTTON IS SELECTED - TEAM STATUS is Disabled")
-        #     dispute_details['Team Status'] = 'Disabled'
-        # else:
-        #     logger.info("DISABLE BUTTON IS NOT SELECTED - TEAM STATUS is Enabled")
-        #     dispute_details['Team Status'] = 'Enabled'
+        # Verify the Reason
+        act_ads_rsn_dtl = self.__ctx.get_text(locator=adhadjlocators.ADS_RSN_DTL)
+        logger.info(f"got_act: {act_ads_rsn_dtl}")
+        dispute_details['Reason'] = act_ads_rsn_dtl
+        assert_equal(act_ads_rsn_dtl, exp_ads_rsn_dtl, f"Expected form Reason '{exp_ads_rsn_dtl}' does not match the actual Reason '{act_ads_rsn_dtl}'")
 
 
-        # # Verify the Last Updated Details
-        # act_last_upd = self.__ctx.get_text(locator=adhadjlocators.UPDTIME)
-        # logger.info(f"got_act: {act_last_upd}")
-        # dispute_details['Last Updated'] = act_last_upd
-        # # assert_equal(act_last_upd, exp_last_upd, f"Expected form Last Updated '{exp_last_upd}' does not match the actual Last Updated '{act_last_upd}'")
+        # Verify the Created At
+        act_ads_crt_dtl = self.__ctx.get_text(locator=adhadjlocators.ADS_CRT_DTL)
+        logger.info(f"got_act: {act_ads_crt_dtl}")
+        dispute_details['Created At'] = act_ads_crt_dtl
+        assert_equal(act_ads_crt_dtl, exp_ads_crt_dtl, f"Expected form Created At '{exp_ads_crt_dtl}' does not match the actual Created At '{act_ads_crt_dtl}'")
 
 
-        
+        # Verify the Location
+        act_ads_loc_dtl = self.__ctx.get_text(locator=adhadjlocators.ADS_LOC_DTL)
+        logger.info(f"got_act: {act_ads_loc_dtl}")
+        dispute_details['Location'] = act_ads_loc_dtl
+        assert_equal(act_ads_loc_dtl, exp_ads_loc_dtl, f"Expected form Location '{exp_ads_loc_dtl}' does not match the actual Location '{act_ads_loc_dtl}'")
+
+
+        # Verify the Team
+        act_ads_team_dtl = self.__ctx.get_text(locator=adhadjlocators.ADS_TEAM_DTL)
+        logger.info(f"got_act: {act_ads_team_dtl}")
+        dispute_details['Team'] = act_ads_team_dtl
+        assert_equal(act_ads_team_dtl, exp_ads_team_dtl, f"Expected form Team '{exp_ads_team_dtl}' does not match the actual Team '{act_ads_team_dtl}'")
+
+
+        # Verify the Current Activity
+        act_ads_cact_dtl = self.__ctx.get_text(locator=adhadjlocators.ADS_CACT_DTL)
+        logger.info(f"got_act: {act_ads_cact_dtl}")
+        dispute_details['Current Activity'] = act_ads_cact_dtl
+        assert_equal(act_ads_cact_dtl, exp_ads_cact_dtl, f"Expected form Current Activity '{exp_ads_cact_dtl}' does not match the actual Current Activity '{act_ads_cact_dtl}'")
+
+
+        # Verify the Requested Activity
+        act_ads_ract_dtl = self.__ctx.get_text(locator=adhadjlocators.ADS_RACT_DTL)
+        logger.info(f"got_act: {act_ads_ract_dtl}")
+        dispute_details['Requested Activity'] = act_ads_ract_dtl
+        assert_equal(act_ads_ract_dtl, exp_ads_ract_dtl, f"Expected form Requested Activity '{exp_ads_ract_dtl}' does not match the actual Requested Activity '{act_ads_ract_dtl}'")
+
+
+        # Verify the Pay Hours
+        act_ads_phrs_dtl = self.__ctx.get_text(locator=adhadjlocators.ADS_PHRS_DTL)
+        logger.info(f"got_act: {act_ads_phrs_dtl}")
+        dispute_details['Pay Hours'] = act_ads_phrs_dtl
+        assert_equal(act_ads_phrs_dtl, exp_ads_phrs_dtl, f"Expected form Pay Hours '{exp_ads_phrs_dtl}' does not match the actual Pay Hours '{act_ads_phrs_dtl}'")
+
+
+        # Verify the Comment
+        act_ads_cmnt_dtl = self.__ctx.get_value(locator=adhadjlocators.ADS_CMNT_DTL)
+        logger.info(f"got_act: {act_ads_cmnt_dtl}")
+        dispute_details['Comment'] = act_ads_cmnt_dtl
+        assert_equal(act_ads_cmnt_dtl, exp_ads_cmnt_dtl, f"Expected form Comment '{exp_ads_cmnt_dtl}' does not match the actual Comment '{act_ads_cmnt_dtl}'")
+
+
+        # Verify the Internal Notes
+        act_ads_inotes_dtl = self.__ctx.get_value(locator=adhadjlocators.ADS_INOTES_DTL)
+        logger.info(f"got_act: {act_ads_inotes_dtl}")
+        dispute_details['Internal Notes'] = act_ads_inotes_dtl
+        assert_equal(act_ads_inotes_dtl, exp_ads_inotes_dtl, f"Expected form Internal Notes '{exp_ads_inotes_dtl}' does not match the actual Internal Notes '{act_ads_inotes_dtl}'")
+
+
+        # Verify the Reviewed By
+        act_ads_revby_dtl = self.__ctx.get_text(locator=adhadjlocators.ADS_REVBY_DTL)
+        logger.info(f"got_act: {act_ads_revby_dtl}")
+        dispute_details['Reviewed By'] = act_ads_revby_dtl
+        assert_equal(act_ads_revby_dtl, exp_ads_revby_dtl, f"Expected form Reviewed By '{exp_ads_revby_dtl}' does not match the actual Reviewed By '{act_ads_revby_dtl}'")
+
+
+        # Verify the Reviewed At
+        act_ads_revat_dtl = self.__ctx.get_text(locator=adhadjlocators.ADS_REVAT_DTL)
+        logger.info(f"got_act: {act_ads_revat_dtl}")
+        dispute_details['Reviewed At'] = act_ads_revat_dtl
+        assert_equal(act_ads_revat_dtl, exp_ads_revat_dtl, f"Expected form Reviewed At '{exp_ads_revat_dtl}' does not match the actual Reviewed At '{act_ads_revat_dtl}'")
+
+
+        # Verify the Confirmed At
+        act_ads_cnfrmat_dtl = self.__ctx.get_text(locator=adhadjlocators.ADS_CNFRMAT_DTL)
+        logger.info(f"got_act: {act_ads_cnfrmat_dtl}")
+        dispute_details['Confirmed At'] = act_ads_cnfrmat_dtl
+        assert_equal(act_ads_cnfrmat_dtl, exp_ads_cnfrmat_dtl, f"Expected form Confirmed At '{exp_ads_cnfrmat_dtl}' does not match the actual Confirmed At '{act_ads_cnfrmat_dtl}'")
+
+
         return dispute_details
 
 

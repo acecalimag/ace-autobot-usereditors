@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.0.2 (Python 3.10.6 on win32)" generated="20230824 10:35:38.758" rpa="false" schemaversion="3">
+<robot generator="Robot 6.0.2 (Python 3.10.6 on win32)" generated="20230825 00:14:18.227" rpa="false" schemaversion="3">
 <suite id="s1" name="Adherence Adjustment" source="c:\Users\WONDERS\Documents\Ace\Robot\ace-autobot-usereditors\AdherenceAdjustmentLibrary\Adherence_Adjustment.robot">
 <test id="s1-t1" name="Testing Dispute Details" line="89">
 <kw name="Adherence Adjustment" type="SETUP">
 <kw name="Open Config In Browser" library="AdherenceAdjustmentLibrary">
-<msg timestamp="20230824 10:35:39.084" level="INFO">Opening browser 'chrome' to base url 'https://qa.letsdochinese.com/KJTCore/resources/adherenceadjustment.html'.</msg>
-<status status="PASS" starttime="20230824 10:35:39.084" endtime="20230824 10:35:43.899"/>
+<msg timestamp="20230825 00:14:18.577" level="INFO">Opening browser 'chrome' to base url 'https://qa.letsdochinese.com/KJTCore/resources/adherenceadjustment.html'.</msg>
+<status status="PASS" starttime="20230825 00:14:18.576" endtime="20230825 00:14:23.122"/>
 </kw>
 <kw name="Login And Redirect" library="AdherenceAdjustmentLibrary">
 <arg>username=${USERNAME}</arg>
 <arg>password=${PASSWORD}</arg>
 <arg>redirect_url=${EXP_URL}</arg>
-<msg timestamp="20230824 10:35:43.900" level="INFO">Logging in using  acalimag and kjt</msg>
-<msg timestamp="20230824 10:35:47.937" level="INFO">Typing text 'acalimag' into text field 'id:username'.</msg>
-<msg timestamp="20230824 10:35:47.990" level="INFO">Typing text 'kjt' into text field 'id:password'.</msg>
-<msg timestamp="20230824 10:35:48.044" level="INFO">Clicking element 'id:login'.</msg>
-<msg timestamp="20230824 10:35:53.081" level="INFO">Opening url 'https://qa.letsdochinese.com/KJTCore/resources/adherenceadjustment.html'</msg>
-<status status="PASS" starttime="20230824 10:35:43.900" endtime="20230824 10:35:53.221"/>
+<msg timestamp="20230825 00:14:23.123" level="INFO">Logging in using  acalimag and kjt</msg>
+<msg timestamp="20230825 00:14:25.665" level="INFO">Typing text 'acalimag' into text field 'id:username'.</msg>
+<msg timestamp="20230825 00:14:25.718" level="INFO">Typing text 'kjt' into text field 'id:password'.</msg>
+<msg timestamp="20230825 00:14:25.769" level="INFO">Clicking element 'id:login'.</msg>
+<msg timestamp="20230825 00:14:30.887" level="INFO">Opening url 'https://qa.letsdochinese.com/KJTCore/resources/adherenceadjustment.html'</msg>
+<status status="PASS" starttime="20230825 00:14:23.122" endtime="20230825 00:14:31.023"/>
 </kw>
-<status status="PASS" starttime="20230824 10:35:39.083" endtime="20230824 10:35:53.221"/>
+<status status="PASS" starttime="20230825 00:14:18.576" endtime="20230825 00:14:31.024"/>
 </kw>
 <kw name="Get Dispute Details Db" library="AdherenceAdjustmentLibrary.DatabaseLibrary">
 <var>${res_dis}</var>
 <arg>udid=${UDID}</arg>
 <doc>TODO: Create a database query to retrieve the dispute details</doc>
-<msg timestamp="20230824 10:35:53.224" level="INFO">Creating a new connection.</msg>
-<msg timestamp="20230824 10:35:55.894" level="INFO">Executing query. SELECT u.username, u.name, ud.status, ud.requestedstarttime, ud.requestedendtime, ud.currentstarttime, ud.currentendtime, ud.workhours, ud.reason, ud.createTime, ul.location, ut.name as Team, ud.currentactivitycode, ud.requestedactivitycode, ud.payhours, ud.reviewcomment, ud.internalnotes, ud.reviewedby, ud.reviewtime, ud.confirmtime FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userlocation AS ul ON um.lid = ul.lid JOIN kjt.userteam AS ut ON um.teamId = ut.utid JOIN wfm.userdispute AS ud ON u.username = ud.username where ud.udid = %s;</msg>
-<msg timestamp="20230824 10:35:56.412" level="INFO">${res_dis} = {'Full Name': 'TQA4 (tqa4)', 'Status': 'Approved', 'Current Time Range': 'Jun 05, 2023 5:00 PM - Jun 05, 2023 10:00 PM', 'Requested Time Range': 'Jun 05, 2023 4:00 PM - Jun 05, 2023 11:00 PM', 'Work H...</msg>
-<status status="PASS" starttime="20230824 10:35:53.221" endtime="20230824 10:35:56.412"/>
+<msg timestamp="20230825 00:14:31.027" level="INFO">Creating a new connection.</msg>
+<msg timestamp="20230825 00:14:33.853" level="INFO">Executing query. SELECT u.username, u.name, ud.status, ud.requestedstarttime, ud.requestedendtime, ud.currentstarttime, ud.currentendtime, ud.workhours, ud.reason, ud.createTime, ul.location, ut.name as Team, ud.currentactivitycode, ud.requestedactivitycode, ud.payhours, ud.reviewcomment, ud.internalnotes, ud.reviewedby, ud.reviewtime, ud.confirmtime FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userlocation AS ul ON um.lid = ul.lid JOIN kjt.userteam AS ut ON um.teamId = ut.utid JOIN wfm.userdispute AS ud ON u.username = ud.username where ud.udid = %s;</msg>
+<msg timestamp="20230825 00:14:34.402" level="INFO">${res_dis} = {'Full Name': 'TQA4 (tqa4)', 'Status': 'Approved', 'Current Time Range': 'Jun 05, 2023 5:00 PM - Jun 05, 2023 10:00 PM', 'Requested Time Range': 'Jun 05, 2023 4:00 PM - Jun 05, 2023 11:00 PM', 'Work H...</msg>
+<status status="PASS" starttime="20230825 00:14:31.024" endtime="20230825 00:14:34.402"/>
 </kw>
 <kw name="Get User Details" library="AdherenceAdjustmentLibrary.DatabaseLibrary">
 <var>${result}</var>
 <arg>username=${DISP_AGENT_NAME}</arg>
 <doc>TODO: Create a database query to retrieve the Agent's UID.</doc>
-<msg timestamp="20230824 10:35:56.413" level="INFO">Using an existing connection &lt;mysql.connector.connection_cext.CMySQLConnection object at 0x00000200FBEDFD30&gt;.</msg>
-<msg timestamp="20230824 10:35:56.413" level="INFO">Executing query. SELECT u.username, um.position, ul.code, ul.location, um.workforceid, ut.name as team FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userlocation AS ul ON um.lid = ul.lid JOIN kjt.userteam AS ut ON um.teamId = ut.utid  WHERE u.username = %s;</msg>
-<msg timestamp="20230824 10:35:56.936" level="INFO">${result} = {'username': 'tqa4', 'position': 'Tier II CSR', 'location_code': 'MNL', 'location': 'Manila', 'workforceid': '90004', 'team': 'Cleveland'}</msg>
-<status status="PASS" starttime="20230824 10:35:56.413" endtime="20230824 10:35:56.936"/>
+<msg timestamp="20230825 00:14:34.405" level="INFO">Using an existing connection &lt;mysql.connector.connection_cext.CMySQLConnection object at 0x000001E1188386A0&gt;.</msg>
+<msg timestamp="20230825 00:14:34.405" level="INFO">Executing query. SELECT u.username, um.position, ul.code, ul.location, um.workforceid, ut.name as team FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userlocation AS ul ON um.lid = ul.lid JOIN kjt.userteam AS ut ON um.teamId = ut.utid  WHERE u.username = %s;</msg>
+<msg timestamp="20230825 00:14:34.957" level="INFO">${result} = {'username': 'tqa4', 'position': 'Tier II CSR', 'location_code': 'MNL', 'location': 'Manila', 'workforceid': '90004', 'team': 'Cleveland'}</msg>
+<status status="PASS" starttime="20230825 00:14:34.403" endtime="20230825 00:14:34.957"/>
 </kw>
 <kw name="Select Filters" library="AdherenceAdjustmentLibrary">
 <arg>start_date=2023-05-01</arg>
@@ -44,78 +44,216 @@
 <arg>exp_user=${result['username']}</arg>
 <arg>exp_team=${result['team']}</arg>
 <arg>exp_post=${result['position']}</arg>
-<msg timestamp="20230824 10:35:56.939" level="INFO">Modify the filters to select a dispute entry</msg>
-<msg timestamp="20230824 10:35:56.954" level="INFO">Clicking element '//input[@id='startDate']'.</msg>
-<msg timestamp="20230824 10:36:03.514" level="INFO">Clicking element '//input[@id='endDate']'.</msg>
-<msg timestamp="20230824 10:36:05.762" level="INFO">Clicking element '//button[@data-id='user-select']'.</msg>
-<msg timestamp="20230824 10:36:07.808" level="INFO">Typing text 'tqa4' into text field '//div[@class='dropdown-menu show']//input[@aria-label='Search']'.</msg>
-<msg timestamp="20230824 10:36:07.871" level="INFO">Clicking element '//a[@class='dropdown-item active']'.</msg>
-<msg timestamp="20230824 10:36:07.911" level="INFO">Clicking element '//button[@data-id='team-select']'.</msg>
-<msg timestamp="20230824 10:36:09.952" level="INFO">Typing text 'Cleveland' into text field '//div[@class='dropdown-menu show']//input[@aria-label='Search']'.</msg>
-<msg timestamp="20230824 10:36:10.028" level="INFO">Clicking element '//a[@class='dropdown-item active']'.</msg>
-<msg timestamp="20230824 10:36:10.072" level="INFO">Clicking element '//button[@data-id='position-select']'.</msg>
-<msg timestamp="20230824 10:36:10.122" level="INFO">Clicking element 'xpath://div[@aria-expanded='true']//span[@class='text'][normalize-space()='Tier II CSR']'.</msg>
-<msg timestamp="20230824 10:36:10.173" level="INFO">Clicking element '//button[@data-id='status-select']'.</msg>
-<msg timestamp="20230824 10:36:10.208" level="INFO">Clicking element '//div[@class='dropdown-menu show']//button[@type='button'][normalize-space()='Select All']'.</msg>
-<msg timestamp="20230824 10:36:10.246" level="INFO">Clicking element '//button[@id='display-requests-btn']'.</msg>
-<msg timestamp="20230824 10:36:10.285" level="INFO">Clicked on 'Prev'
+<msg timestamp="20230825 00:14:34.965" level="INFO">Modify the filters to select a dispute entry</msg>
+<msg timestamp="20230825 00:14:34.989" level="INFO">Clicking element '//input[@id='startDate']'.</msg>
+<msg timestamp="20230825 00:14:41.578" level="INFO">Clicking element '//input[@id='endDate']'.</msg>
+<msg timestamp="20230825 00:14:43.736" level="INFO">Clicking element '//button[@data-id='user-select']'.</msg>
+<msg timestamp="20230825 00:14:45.782" level="INFO">Typing text 'tqa4' into text field '//div[@class='dropdown-menu show']//input[@aria-label='Search']'.</msg>
+<msg timestamp="20230825 00:14:45.849" level="INFO">Clicking element '//a[@class='dropdown-item active']'.</msg>
+<msg timestamp="20230825 00:14:45.891" level="INFO">Clicking element '//button[@data-id='team-select']'.</msg>
+<msg timestamp="20230825 00:14:47.932" level="INFO">Typing text 'Cleveland' into text field '//div[@class='dropdown-menu show']//input[@aria-label='Search']'.</msg>
+<msg timestamp="20230825 00:14:48.011" level="INFO">Clicking element '//a[@class='dropdown-item active']'.</msg>
+<msg timestamp="20230825 00:14:48.051" level="INFO">Clicking element '//button[@data-id='position-select']'.</msg>
+<msg timestamp="20230825 00:14:48.095" level="INFO">Clicking element 'xpath://div[@aria-expanded='true']//span[@class='text'][normalize-space()='Tier II CSR']'.</msg>
+<msg timestamp="20230825 00:14:48.142" level="INFO">Clicking element '//button[@data-id='status-select']'.</msg>
+<msg timestamp="20230825 00:14:48.176" level="INFO">Clicking element '//div[@class='dropdown-menu show']//button[@type='button'][normalize-space()='Select All']'.</msg>
+<msg timestamp="20230825 00:14:48.209" level="INFO">Clicking element '//button[@id='display-requests-btn']'.</msg>
+<msg timestamp="20230825 00:14:48.242" level="INFO">Clicked on 'Prev'
 Clicked on 'Prev'
 Clicked on 'Prev'
 Clicked on 'Prev'
 Clicked on 'Prev'
 Previous button not found or clickable, exiting loop.
-Clicked on 'Prev'
 Previous button not found or clickable, exiting loop.</msg>
-<status status="PASS" starttime="20230824 10:35:56.936" endtime="20230824 10:36:10.285"/>
+<status status="PASS" starttime="20230825 00:14:34.959" endtime="20230825 00:14:48.242"/>
 </kw>
 <kw name="Select Dispute Entry" library="AdherenceAdjustmentLibrary">
 <arg>wfid=${result['workforceid']}</arg>
 <arg>udid=${UDID}</arg>
-<msg timestamp="20230824 10:36:11.390" level="INFO">Clicked on: Jun 05, 2023 4:00 PM -
+<msg timestamp="20230825 00:14:49.333" level="INFO">Clicked on: Jun 05, 2023 4:00 PM -
 Jun 05, 2023 11:00 PM tqa4 MNL Cleveland Approved acalimag Jun 16, 2023 10:09 PM Jun 16, 2023 10:06 PM</msg>
-<status status="PASS" starttime="20230824 10:36:10.286" endtime="20230824 10:36:11.390"/>
+<status status="PASS" starttime="20230825 00:14:48.243" endtime="20230825 00:14:49.333"/>
 </kw>
 <kw name="Check Dispute Details" library="AdherenceAdjustmentLibrary">
-<var>${dispute_details}</var>
+<var>${dis_dtls}</var>
 <arg>exp_ads_fname_dtl=${res_dis['Full Name']}</arg>
 <arg>exp_ads_stat_dtl=${res_dis['Status']}</arg>
 <arg>exp_ads_ctr_dtl=${res_dis['Current Time Range']}</arg>
 <arg>exp_ads_rtr_dtl=${res_dis['Requested Time Range']}</arg>
 <arg>exp_ads_whrs_dtl=${res_dis['Work Hours']}</arg>
-<msg timestamp="20230824 10:36:11.396" level="INFO">Check the filed dispute details of an Agent</msg>
-<msg timestamp="20230824 10:36:11.413" level="INFO">got_act: TQA4 (tqa4)</msg>
-<msg timestamp="20230824 10:36:11.432" level="INFO">got_act: Approved</msg>
-<msg timestamp="20230824 10:36:11.469" level="INFO">got_act: Jun 05, 2023 5:00 PM - Jun 05, 2023 10:00 PM</msg>
-<msg timestamp="20230824 10:36:11.500" level="INFO">got_act: Jun 05, 2023 4:00 PM - Jun 05, 2023 11:00 PM</msg>
-<msg timestamp="20230824 10:36:11.515" level="INFO">got_act: </msg>
-<msg timestamp="20230824 10:36:11.515" level="INFO">${dispute_details} = {'Full Name': 'TQA4 (tqa4)', 'Status': '', 'Current Time Range': 'Jun 05, 2023 5:00 PM - Jun 05, 2023 10:00 PM', 'Requested Time Range': 'Jun 05, 2023 4:00 PM - Jun 05, 2023 11:00 PM'}</msg>
-<status status="PASS" starttime="20230824 10:36:11.391" endtime="20230824 10:36:11.515"/>
+<arg>exp_ads_rsn_dtl=${res_dis['Reason']}</arg>
+<arg>exp_ads_crt_dtl=${res_dis['Created At']}</arg>
+<arg>exp_ads_loc_dtl=${res_dis['Location']}</arg>
+<arg>exp_ads_team_dtl=${res_dis['Team']}</arg>
+<arg>exp_ads_cact_dtl=${res_dis['Current Activity']}</arg>
+<arg>exp_ads_ract_dtl=${res_dis['Requested Activity']}</arg>
+<arg>exp_ads_phrs_dtl=${res_dis['Pay Hours']}</arg>
+<arg>exp_ads_cmnt_dtl=${res_dis['Comment']}</arg>
+<arg>exp_ads_inotes_dtl=${res_dis['Internal Notes']}</arg>
+<arg>exp_ads_revby_dtl=${res_dis['Reviewed By']}</arg>
+<arg>exp_ads_revat_dtl=${res_dis['Reviewed At']}</arg>
+<arg>exp_ads_cnfrmat_dtl=${res_dis['Confirmed At']}</arg>
+<msg timestamp="20230825 00:14:49.344" level="INFO">Check the filed dispute details of an Agent</msg>
+<msg timestamp="20230825 00:14:49.360" level="INFO">got_act: TQA4 (tqa4)</msg>
+<msg timestamp="20230825 00:14:49.373" level="INFO">got_act: Approved</msg>
+<msg timestamp="20230825 00:14:49.403" level="INFO">got_act: Jun 05, 2023 5:00 PM - Jun 05, 2023 10:00 PM</msg>
+<msg timestamp="20230825 00:14:49.430" level="INFO">got_act: Jun 05, 2023 4:00 PM - Jun 05, 2023 11:00 PM</msg>
+<msg timestamp="20230825 00:14:49.444" level="INFO">got_act: </msg>
+<msg timestamp="20230825 00:14:49.456" level="INFO">got_act: testing</msg>
+<msg timestamp="20230825 00:14:49.469" level="INFO">got_act: Jun 16, 2023 10:06 PM</msg>
+<msg timestamp="20230825 00:14:49.483" level="INFO">got_act: Manila</msg>
+<msg timestamp="20230825 00:14:49.496" level="INFO">got_act: Cleveland</msg>
+<msg timestamp="20230825 00:14:49.508" level="INFO">got_act: Phone Time</msg>
+<msg timestamp="20230825 00:14:49.519" level="INFO">got_act: Phone Time</msg>
+<msg timestamp="20230825 00:14:49.532" level="INFO">got_act: </msg>
+<msg timestamp="20230825 00:14:49.549" level="INFO">got_act: approve test</msg>
+<msg timestamp="20230825 00:14:49.604" level="INFO">got_act: approve test</msg>
+<msg timestamp="20230825 00:14:49.625" level="INFO">got_act: acalimag</msg>
+<msg timestamp="20230825 00:14:49.641" level="INFO">got_act: Jun 16, 2023 10:09 PM</msg>
+<msg timestamp="20230825 00:14:49.653" level="INFO">got_act: </msg>
+<msg timestamp="20230825 00:14:49.654" level="INFO">${dis_dtls} = {'Full Name': 'TQA4 (tqa4)', 'Status': 'Approved', 'Current Time Range': 'Jun 05, 2023 5:00 PM - Jun 05, 2023 10:00 PM', 'Requested Time Range': 'Jun 05, 2023 4:00 PM - Jun 05, 2023 11:00 PM', 'Work H...</msg>
+<status status="PASS" starttime="20230825 00:14:49.334" endtime="20230825 00:14:49.654"/>
 </kw>
 <kw name="Log Dictionary" library="Collections">
-<arg>${dispute_details}</arg>
+<arg>${dis_dtls}</arg>
 <doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
-<msg timestamp="20230824 10:36:11.516" level="INFO">Dictionary size is 4 and it contains following items:
+<msg timestamp="20230825 00:14:49.655" level="INFO">Dictionary size is 17 and it contains following items:
+Comment: approve test
+Confirmed At: 
+Created At: Jun 16, 2023 10:06 PM
+Current Activity: Phone Time
 Current Time Range: Jun 05, 2023 5:00 PM - Jun 05, 2023 10:00 PM
 Full Name: TQA4 (tqa4)
+Internal Notes: approve test
+Location: Manila
+Pay Hours: 
+Reason: testing
+Requested Activity: Phone Time
 Requested Time Range: Jun 05, 2023 4:00 PM - Jun 05, 2023 11:00 PM
-Status: </msg>
-<status status="PASS" starttime="20230824 10:36:11.516" endtime="20230824 10:36:11.517"/>
+Reviewed At: Jun 16, 2023 10:09 PM
+Reviewed By: acalimag
+Status: Approved
+Team: Cleveland
+Work Hours: </msg>
+<status status="PASS" starttime="20230825 00:14:49.655" endtime="20230825 00:14:49.656"/>
 </kw>
 <kw name="Log To Console" library="BuiltIn">
-<arg>${dispute_details}</arg>
+<arg>${dis_dtls}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" starttime="20230824 10:36:11.517" endtime="20230824 10:36:11.518"/>
+<status status="PASS" starttime="20230825 00:14:49.656" endtime="20230825 00:14:49.657"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${dis_dtls['Full Name']}</arg>
+<arg>${res_dis['Full Name']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230825 00:14:49.657" endtime="20230825 00:14:49.659"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${dis_dtls['Status']}</arg>
+<arg>${res_dis['Status']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230825 00:14:49.660" endtime="20230825 00:14:49.661"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${dis_dtls['Current Time Range']}</arg>
+<arg>${res_dis['Current Time Range']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230825 00:14:49.662" endtime="20230825 00:14:49.663"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${dis_dtls['Requested Time Range']}</arg>
+<arg>${res_dis['Requested Time Range']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230825 00:14:49.664" endtime="20230825 00:14:49.665"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${dis_dtls['Work Hours']}</arg>
+<arg>${res_dis['Work Hours']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230825 00:14:49.666" endtime="20230825 00:14:49.667"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${dis_dtls['Reason']}</arg>
+<arg>${res_dis['Reason']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230825 00:14:49.668" endtime="20230825 00:14:49.669"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${dis_dtls['Created At']}</arg>
+<arg>${res_dis['Created At']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230825 00:14:49.670" endtime="20230825 00:14:49.672"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${dis_dtls['Location']}</arg>
+<arg>${res_dis['Location']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230825 00:14:49.672" endtime="20230825 00:14:49.674"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${dis_dtls['Team']}</arg>
+<arg>${res_dis['Team']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230825 00:14:49.675" endtime="20230825 00:14:49.677"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${dis_dtls['Current Activity']}</arg>
+<arg>${res_dis['Current Activity']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230825 00:14:49.678" endtime="20230825 00:14:49.679"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${dis_dtls['Requested Activity']}</arg>
+<arg>${res_dis['Requested Activity']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230825 00:14:49.680" endtime="20230825 00:14:49.682"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${dis_dtls['Pay Hours']}</arg>
+<arg>${res_dis['Pay Hours']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230825 00:14:49.682" endtime="20230825 00:14:49.684"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${dis_dtls['Comment']}</arg>
+<arg>${res_dis['Comment']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230825 00:14:49.684" endtime="20230825 00:14:49.686"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${dis_dtls['Internal Notes']}</arg>
+<arg>${res_dis['Internal Notes']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230825 00:14:49.686" endtime="20230825 00:14:49.688"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${dis_dtls['Reviewed By']}</arg>
+<arg>${res_dis['Reviewed By']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230825 00:14:49.688" endtime="20230825 00:14:49.689"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${dis_dtls['Reviewed At']}</arg>
+<arg>${res_dis['Reviewed At']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230825 00:14:49.690" endtime="20230825 00:14:49.691"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${dis_dtls['Confirmed At']}</arg>
+<arg>${res_dis['Confirmed At']}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230825 00:14:49.691" endtime="20230825 00:14:49.693"/>
 </kw>
 <kw name="Logout" type="TEARDOWN">
 <kw name="Logout To System" library="AdherenceAdjustmentLibrary">
-<msg timestamp="20230824 10:36:11.519" level="INFO">Logging out of the system</msg>
-<status status="PASS" starttime="20230824 10:36:11.519" endtime="20230824 10:36:14.144"/>
+<msg timestamp="20230825 00:14:49.694" level="INFO">Logging out of the system</msg>
+<status status="PASS" starttime="20230825 00:14:49.694" endtime="20230825 00:14:52.137"/>
 </kw>
-<status status="PASS" starttime="20230824 10:36:11.518" endtime="20230824 10:36:14.145"/>
+<status status="PASS" starttime="20230825 00:14:49.693" endtime="20230825 00:14:52.138"/>
 </kw>
-<status status="PASS" starttime="20230824 10:35:39.083" endtime="20230824 10:36:14.147"/>
+<status status="PASS" starttime="20230825 00:14:18.575" endtime="20230825 00:14:52.139"/>
 </test>
-<status status="PASS" starttime="20230824 10:35:38.764" endtime="20230824 10:36:14.151"/>
+<status status="PASS" starttime="20230825 00:14:18.231" endtime="20230825 00:14:52.142"/>
 </suite>
 <statistics>
 <total>

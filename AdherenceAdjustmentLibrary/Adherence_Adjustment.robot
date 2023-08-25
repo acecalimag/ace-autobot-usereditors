@@ -96,9 +96,30 @@ Testing Dispute Details
     Select Filters                       start_date=2023-05-01                      end_date=2023-08-01                           exp_user=${result['username']}                exp_team=${result['team']}                              exp_post=${result['position']}
     Select Dispute Entry                 wfid=${result['workforceid']}              udid=${UDID}
     
-    ${dispute_details}                   Check Dispute Details                      exp_ads_fname_dtl=${res_dis['Full Name']}     exp_ads_stat_dtl=${res_dis['Status']}         exp_ads_ctr_dtl=${res_dis['Current Time Range']}        exp_ads_rtr_dtl=${res_dis['Requested Time Range']}          exp_ads_whrs_dtl=${res_dis['Work Hours']}
-    Log Dictionary                       ${dispute_details}
-    Log To Console                       ${dispute_details}
+    ${dis_dtls}                          Check Dispute Details                      exp_ads_fname_dtl=${res_dis['Full Name']}     exp_ads_stat_dtl=${res_dis['Status']}         exp_ads_ctr_dtl=${res_dis['Current Time Range']}        exp_ads_rtr_dtl=${res_dis['Requested Time Range']}          exp_ads_whrs_dtl=${res_dis['Work Hours']}        exp_ads_rsn_dtl=${res_dis['Reason']}        exp_ads_crt_dtl=${res_dis['Created At']}        exp_ads_loc_dtl=${res_dis['Location']}        exp_ads_team_dtl=${res_dis['Team']}        exp_ads_cact_dtl=${res_dis['Current Activity']}        exp_ads_ract_dtl=${res_dis['Requested Activity']}        exp_ads_phrs_dtl=${res_dis['Pay Hours']}        exp_ads_cmnt_dtl=${res_dis['Comment']}        exp_ads_inotes_dtl=${res_dis['Internal Notes']}        exp_ads_revby_dtl=${res_dis['Reviewed By']}        exp_ads_revat_dtl=${res_dis['Reviewed At']}        exp_ads_cnfrmat_dtl=${res_dis['Confirmed At']}
+    Log Dictionary                       ${dis_dtls}
+    Log To Console                       ${dis_dtls}
+
+    # Comparison between UI and DB
+    Should Be Equal As Strings           ${dis_dtls['Full Name']}                  ${res_dis['Full Name']}
+    Should Be Equal As Strings           ${dis_dtls['Status']}                     ${res_dis['Status']}
+    Should Be Equal As Strings           ${dis_dtls['Current Time Range']}         ${res_dis['Current Time Range']}
+    Should Be Equal As Strings           ${dis_dtls['Requested Time Range']}       ${res_dis['Requested Time Range']}
+    Should Be Equal As Strings           ${dis_dtls['Work Hours']}                 ${res_dis['Work Hours']}
+    Should Be Equal As Strings           ${dis_dtls['Reason']}                     ${res_dis['Reason']}
+    Should Be Equal As Strings           ${dis_dtls['Created At']}                 ${res_dis['Created At']}
+    Should Be Equal As Strings           ${dis_dtls['Location']}                   ${res_dis['Location']}
+    Should Be Equal As Strings           ${dis_dtls['Team']}                       ${res_dis['Team']}
+    Should Be Equal As Strings           ${dis_dtls['Current Activity']}           ${res_dis['Current Activity']}
+    Should Be Equal As Strings           ${dis_dtls['Requested Activity']}         ${res_dis['Requested Activity']}
+    Should Be Equal As Strings           ${dis_dtls['Pay Hours']}                  ${res_dis['Pay Hours']}
+    Should Be Equal As Strings           ${dis_dtls['Comment']}                    ${res_dis['Comment']}
+    Should Be Equal As Strings           ${dis_dtls['Internal Notes']}             ${res_dis['Internal Notes']}
+    Should Be Equal As Strings           ${dis_dtls['Reviewed By']}                ${res_dis['Reviewed By']}
+    Should Be Equal As Strings           ${dis_dtls['Reviewed At']}                ${res_dis['Reviewed At']}
+    Should Be Equal As Strings           ${dis_dtls['Confirmed At']}               ${res_dis['Confirmed At']}
+
+
 
 
 
