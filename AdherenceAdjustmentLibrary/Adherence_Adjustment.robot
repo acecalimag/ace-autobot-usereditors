@@ -43,7 +43,6 @@ Verify completeness of fields, labels, and buttons for Adherence Adjustment Page
     # Select a Dispute Entry
     ${result}                           Get User Details                              username=${DISP_AGENT_NAME}
     Select Filters                      start_date=2023-01-01                         end_date=2023-08-01                            exp_user=${result['username']}        exp_team=${result['team']}            exp_post=${result['position']}
-    # Sleep                               5s
     Click Export To Xls Button
     Select Dispute Entry                wfid=${result['workforceid']}                 udid=${UDID}
 
