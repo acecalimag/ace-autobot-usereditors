@@ -62,7 +62,6 @@ def FLTR_STAT_PLHDR(status: str):
 FLTR_GO_BTN: str = "//button[@id='display-requests-btn']"
 FLTR_EXPRT_BTN: str = "//button[@id='export-to-xls']"
 
-
 SAVEBTN: str = "//button[@id='save']"
 CANCELBTN: str = "//button[@id='cancel']"
 

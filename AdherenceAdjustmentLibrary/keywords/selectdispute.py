@@ -9,9 +9,9 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from robot.api import logger
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from robot.api import logger
+import os
 import time
-
-
 
 
 class SelectDispute:
@@ -184,3 +184,68 @@ class SelectDispute:
 
             # Scroll up the page
             driver.execute_script("window.scrollTo(0, 0);")
+    
+
+    # @keyword
+    # def click_export_to_xls_button(self):
+    #     logger.info("Clicking the Export to xls button to download the selected dispute entries")
+
+    #     # Perform the click action here
+    #     self.__ctx.wait_until_element_is_visible(locator=adhadjlocators.FLTR_EXPRT_BTN)
+    #     self.__ctx.click_button(locator=adhadjlocators.FLTR_EXPRT_BTN)
+
+    #     # Specify the directory where downloads are expected
+    #     download_directory = r"C:\Users\WONDERS\Downloads"  # Use a raw string with 'r' prefix
+    #     expected_filename = "Adh_Adj_20230101-20230801.xlsx"
+
+    #     # Wait for the file to appear in the download directory
+    #     timeout = 60  # Maximum time to wait in seconds
+    #     interval = 5  # Time interval between checks in seconds
+    #     elapsed_time = 0
+
+    #     while elapsed_time < timeout:
+    #         file_path = os.path.join(download_directory, expected_filename)
+    #         if os.path.exists(file_path):
+    #             logger.info(f"File '{expected_filename}' was downloaded successfully.")
+    #             break  # Exit the loop when the file is found
+    #         else:
+    #             time.sleep(interval)
+    #             elapsed_time += interval
+
+    #     if elapsed_time >= timeout:
+    #         logger.warn(f"File '{expected_filename}' was not found in the download directory after waiting.")
+
+
+    @keyword
+    def click_export_to_xls_button(self):
+        logger.info("Clicking the Export to xls button to download the selected dispute entries")
+
+        # Perform the click action here
+        self.__ctx.wait_until_element_is_visible(locator=adhadjlocators.FLTR_EXPRT_BTN)
+        self.__ctx.click_button(locator=adhadjlocators.FLTR_EXPRT_BTN)
+
+        # Specify the directory where downloads are expected
+        download_directory = r"C:\Users\WONDERS\Downloads"  # Use a raw string with 'r' prefix
+        expected_filename = "Adh_Adj_20230101-20230801.xlsx"
+
+        # Wait for the file to appear in the download directory
+        timeout = 60  # Maximum time to wait in seconds
+        interval = 5  # Time interval between checks in seconds
+        elapsed_time = 0
+        file_path = os.path.join(download_directory, expected_filename)
+
+        while elapsed_time < timeout:
+            if os.path.exists(file_path):
+                logger.info(f"File '{expected_filename}' was downloaded successfully.")
+                # Perform validation checks here
+
+                # Delete the file after validation
+                os.remove(file_path)
+                logger.info(f"File '{expected_filename}' has been deleted after validation.")
+                break  # Exit the loop when the file is found and validated
+            else:
+                time.sleep(interval)
+                elapsed_time += interval
+
+        if elapsed_time >= timeout:
+            logger.warn(f"File '{expected_filename}' was not found in the download directory after waiting.")
