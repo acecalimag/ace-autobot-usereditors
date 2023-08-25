@@ -3,9 +3,6 @@ from SeleniumLibrary import SeleniumLibrary
 from robot.api.deco import keyword
 from robot.api import logger
 from asserts import assert_equal
-from selenium import webdriver
-from selenium.webdriver.support.ui import Select
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -14,19 +11,19 @@ from selenium.webdriver.support import expected_conditions as EC
 from UserTeamsLibrary.locators import userteamslocators
 
 
-class TeamDetails:
+class UserTeamDetails:
     
     def __init__(self, ctx: SeleniumLibrary) -> None:
         self.__ctx = ctx
 
     @keyword 
-    def check_team_details(self, exp_name: str, exp_desc: str, exp_lead: str, exp_loc: str, exp_type: str, exp_last_upd: str):
-        logger.info(f"Check the details using  {exp_name}, {exp_desc}, {exp_lead}, {exp_loc}, {exp_type} and {exp_last_upd}")
+    def check_team_details(self, exp_name: str, exp_desc: str, exp_lead: str, exp_loc: str, exp_type: str, exp_stat: str, exp_last_upd: str):
+        logger.info(f"Check the details using  {exp_name}, {exp_desc}, {exp_lead}, {exp_loc}, {exp_type}, {exp_stat} and {exp_last_upd}")
         
         team_details = {}
         
-
         # Verify the Team Name
+        self.__ctx.wait_until_element_is_visible(locator=userteamslocators.TNAME)
         act_name = self.__ctx.get_value(locator=userteamslocators.TNAME)
         logger.info(f"got_act: {act_name}")
         team_details['Team Name'] = act_name
@@ -87,26 +84,33 @@ class TeamDetails:
         if is_enabled_selected and is_enabled_enabled:
             logger.info("ENABLE BUTTON IS SELECTED - TEAM STATUS is Enabled")
             team_details['Team Status'] = 'Enabled'
+            act_stat = 'Enabled'
         else:
             logger.info("ENABLE BUTTON IS NOT SELECTED - TEAM STATUS is Disabled")
             team_details['Team Status'] = 'Disabled'
+            act_stat = 'Disabled'
 
         if is_disabled_selected and is_disabled_enabled:
             logger.info("DISABLE BUTTON IS SELECTED - TEAM STATUS is Disabled")
             team_details['Team Status'] = 'Disabled'
+            act_stat = 'Disabled'
         else:
             logger.info("DISABLE BUTTON IS NOT SELECTED - TEAM STATUS is Enabled")
             team_details['Team Status'] = 'Enabled'
+            act_stat = 'Enabled'
+        
+        logger.info(f"got_act: {act_stat}")
+        team_details['Team Status'] = act_stat
+        assert_equal(act_stat, exp_stat, f"Expected form Team Status '{exp_stat}' does not match the actual Team Status '{act_stat}'")
 
 
         # Verify the Last Updated Details
         act_last_upd = self.__ctx.get_text(locator=userteamslocators.UPDTIME)
         logger.info(f"got_act: {act_last_upd}")
         team_details['Last Updated'] = act_last_upd
-        # assert_equal(act_last_upd, exp_last_upd, f"Expected form Last Updated '{exp_last_upd}' does not match the actual Last Updated '{act_last_upd}'")
+        assert_equal(act_last_upd, exp_last_upd, f"Expected form Last Updated '{exp_last_upd}' does not match the actual Last Updated '{act_last_upd}'")
 
 
-        
         return team_details
 
 

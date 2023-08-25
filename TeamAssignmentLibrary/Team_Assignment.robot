@@ -28,15 +28,15 @@ Verify completeness of fields, labels, and buttons for Team Assignment Editor Pa
     [Setup]        Team Assignment
     [Teardown]     Logout
     
-    Select Team                          team_name=${TEAMNAME}
-    ${team_details}                      Check Team Details                   exp_name=${TEAMNAME}             exp_lead=${EXP_NAME}             exp_loc=${EXP_LOC}
-    Log Dictionary                       ${team_details}
-    Log To Console                       ${team_details}
-    
     ${result}                            Get Teamassignment Db                tname=${TEAMNAME}
     Log Dictionary                       ${result}
     Log To Console                       ${result}
 
+    Select Team                          team_name=${TEAMNAME}
+    ${team_details}                      Check Team Details                   exp_name=${result['Team Name']}             exp_lead=${result['Team Lead']}             exp_loc=${result['Team Location']}
+    Log Dictionary                       ${team_details}
+    Log To Console                       ${team_details}
+    
 
     # Comparison between UI and DB
     Should Be Equal As Strings           ${team_details['Team Name']}        ${result['Team Name']}

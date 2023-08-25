@@ -5,8 +5,6 @@ from robot.api.deco import keyword
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from lxml import html
-
 from UserTeamsLibrary.locators import userteamslocators
 import time
 
@@ -122,16 +120,23 @@ class EditTeam:
         if is_enabled_selected and is_enabled_enabled:
             logger.info("ENABLE BUTTON IS SELECTED - TEAM STATUS is Enabled")
             edit_team['Team Status'] = 'Enabled'
+            act_ed_stat = 'Enabled'
         else:
             logger.info("ENABLE BUTTON IS NOT SELECTED - TEAM STATUS is Disabled")
             edit_team['Team Status'] = 'Disabled'
+            act_ed_stat = 'Disabled'
 
         if is_disabled_selected and is_disabled_enabled:
             logger.info("DISABLE BUTTON IS SELECTED - TEAM STATUS is Disabled")
             edit_team['Team Status'] = 'Disabled'
+            act_ed_stat = 'Disabled'
         else:
             logger.info("DISABLE BUTTON IS NOT SELECTED - TEAM STATUS is Enabled")
             edit_team['Team Status'] = 'Enabled'
+            act_ed_stat = 'Enabled'
+        
+        logger.info(f"got_act: {act_ed_stat}")
+        edit_team['Team Status'] = act_ed_stat
 
 
         return edit_team

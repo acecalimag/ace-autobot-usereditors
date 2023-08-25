@@ -24,18 +24,20 @@ Logout
 
 *** Test Cases ***
 
-Verify the Team Details
+Verify the User Team Details
     [Setup]        User Team
     [Teardown]     Logout
-    
-    Search And Click Next                team_name=${TEAMNAME}
-    ${team_details}                      Check Team Details                   exp_name=${TEAMNAME}    exp_desc=${EXP_DESC}    exp_lead=${EXP_TLNAME}    exp_loc=${EXP_LOC}    exp_type=${EXP_TYPE}    exp_last_upd=${EXT_LAST_UPD}
+
+    ${result}                            Get User Team Db                            tname=${TEAMNAME}
+    Log Dictionary                       ${result}
+    Log To Console                       ${result}
+
+
+    Search And Click Next                team_name=${result['Team Name']} 
+    ${team_details}                      Check Team Details                          exp_name=${result['Team Name']}        exp_desc=${result['Team Description']}        exp_lead=${result['Team Lead']}    exp_loc=${result['Team Location']}    exp_type=${result['Team Type']}    exp_stat=${result['Team Status']}        exp_last_upd=${result['Last Updated']}
     Log Dictionary                       ${team_details}
     Log To Console                       ${team_details}
     
-    ${result}                            Get User Team Db                     tname=${TEAMNAME}
-    Log Dictionary                       ${result}
-    Log To Console                       ${result}
 
     # Comparison between UI and DB
     Should Be Equal As Strings           ${team_details['Team Name']}                ${result['Team Name']}
@@ -44,11 +46,11 @@ Verify the Team Details
     Should Be Equal As Strings           ${team_details['Team Location']}            ${result['Team Location']}
     Should Be Equal As Strings           ${team_details['Team Type']}                ${result['Team Type']}
     Should Be Equal As Strings           ${team_details['Team Status']}              ${result['Team Status']}
+    Should Be Equal As Strings           ${team_details['Last Updated']}             ${result['Last Updated']}
 
 
 
-
-Verify completeness of fields, labels, and buttons for User Teams Editor Page
+Verify the completeness of fields, labels, and buttons for User Teams Editor Page
     [Setup]        User Team
     [Teardown]     Logout
     
@@ -67,52 +69,67 @@ Verify completeness of fields, labels, and buttons for User Teams Editor Page
     Log To Console                       ${reminder}
 
 
-Create New Team
+Verify the Creation of New Team
     [Setup]        User Team
     [Teardown]     Logout
 
     Click Create Team
-    ${form_input}                        Fillout Form                               exp_cntlbl=${EXP_CNTLBL}            in_name=${IN_CNT_NAME}                  in_desc=${IN_CNT_TD}                in_lead=${IN_CNT_TL}                in_loc=${IN_CNT_LOC}                in_type=${IN_CNT_TYPE}              in_status=${IN_CNT_STATUS}
+    ${form_input}                        Fillout Form                                exp_cntlbl=${EXP_CNTLBL}            in_name=${IN_CNT_NAME}                  in_desc=${IN_CNT_TD}                in_lead=${IN_CNT_TL}                in_loc=${IN_CNT_LOC}                in_type=${IN_CNT_TYPE}              in_status=${IN_CNT_STATUS}
     Log Dictionary                       ${form_input}
     Log To Console                       ${form_input}
     
-    # Click Save
+    Click Create Button
 
-    ${result}                            Get User Team Db                           tname=${IN_CNT_NAME}
+    ${result}                            Get User Team Db                            tname=${IN_CNT_NAME}
     Log Dictionary                       ${result}
     Log To Console                       ${result}
 
+    Search And Click Next                team_name=${result['Team Name']} 
+    ${team_details}                      Check Team Details                          exp_name=${result['Team Name']}        exp_desc=${result['Team Description']}        exp_lead=${result['Team Lead']}    exp_loc=${result['Team Location']}    exp_type=${result['Team Type']}    exp_stat=${result['Team Status']}        exp_last_upd=${result['Last Updated']}
+    Log Dictionary                       ${team_details}
+    Log To Console                       ${team_details}
+
+
     # Comparison between UI and DB
-    Should Be Equal As Strings           ${form_input['Team Name']}                ${result['Team Name']}
-    Should Be Equal As Strings           ${form_input['Team Description']}         ${result['Team Description']}
-    Should Be Equal As Strings           ${form_input['Team Lead']}                ${result['Team Lead']}
-    Should Be Equal As Strings           ${form_input['Team Location']}            ${result['Team Location']}
-    Should Be Equal As Strings           ${form_input['Team Type']}                ${result['Team Type']}
-    Should Be Equal As Strings           ${form_input['Team Status']}              ${result['Team Status']}
+    Should Be Equal As Strings           ${team_details['Team Name']}                ${result['Team Name']}                ${form_input['Team Name']}
+    Should Be Equal As Strings           ${team_details['Team Description']}         ${result['Team Description']}         ${form_input['Team Description']}
+    Should Be Equal As Strings           ${team_details['Team Lead']}                ${result['Team Lead']}                ${form_input['Team Lead']}
+    Should Be Equal As Strings           ${team_details['Team Location']}            ${result['Team Location']}            ${form_input['Team Location']}
+    Should Be Equal As Strings           ${team_details['Team Type']}                ${result['Team Type']}                ${form_input['Team Type']}
+    Should Be Equal As Strings           ${team_details['Team Status']}              ${result['Team Status']}              ${form_input['Team Status']}
+    Should Be Equal As Strings           ${team_details['Last Updated']}             ${result['Last Updated']}             
 
 
-Edit / Modify Existing Team
+Verify Edit / Modify Existing Team
     [Setup]        User Team
     [Teardown]     Logout
     
+
     Search And Click Next                team_name=${TEAMNAME}
     ${form_edit}                         Edit Team                                exp_vulbl=${EXP_VULBL}        ed_name=${ED_VU_NAME}        ed_desc=${ED_VU_TD}        ed_lead=${ED_VU_TL}        ed_loc=${ED_VU_LOC}        ed_type=${ED_VU_TYPE}        ed_status=${ED_VU_STATUS}
     Log Dictionary                       ${form_edit}
     Log To Console                       ${form_edit}
     
-    # Click Save
+    Click Save Button
     
-    ${result}                            Get User Team Db                         tname=${ED_VU_NAME}
+    ${result}                            Get User Team Db                            tname=${ED_VU_NAME}
     Log Dictionary                       ${result}
     Log To Console                       ${result}
 
+
+    Search And Click Next                team_name=${result['Team Name']} 
+    ${team_details}                      Check Team Details                          exp_name=${result['Team Name']}        exp_desc=${result['Team Description']}        exp_lead=${result['Team Lead']}    exp_loc=${result['Team Location']}    exp_type=${result['Team Type']}    exp_stat=${result['Team Status']}        exp_last_upd=${result['Last Updated']}
+    Log Dictionary                       ${team_details}
+    Log To Console                       ${team_details}
+
     # Comparison between UI and DB
-    Should Be Equal As Strings           ${form_edit['Team Name']}                ${result['Team Name']}
-    Should Be Equal As Strings           ${form_edit['Team Description']}         ${result['Team Description']}
-    Should Be Equal As Strings           ${form_edit['Team Lead']}                ${result['Team Lead']}
-    Should Be Equal As Strings           ${form_edit['Team Location']}            ${result['Team Location']}
-    Should Be Equal As Strings           ${form_edit['Team Type']}                ${result['Team Type']}
-    Should Be Equal As Strings           ${form_edit['Team Status']}              ${result['Team Status']}
+    Should Be Equal As Strings           ${team_details['Team Name']}                ${result['Team Name']}                ${form_edit['Team Name']} 
+    Should Be Equal As Strings           ${team_details['Team Description']}         ${result['Team Description']}         ${form_edit['Team Description']}
+    Should Be Equal As Strings           ${team_details['Team Lead']}                ${result['Team Lead']}                ${form_edit['Team Lead']}
+    Should Be Equal As Strings           ${team_details['Team Location']}            ${result['Team Location']}            ${form_edit['Team Location']}
+    Should Be Equal As Strings           ${team_details['Team Type']}                ${result['Team Type']}                ${form_edit['Team Type']}
+    Should Be Equal As Strings           ${team_details['Team Status']}              ${result['Team Status']}              ${form_edit['Team Status']}
+    Should Be Equal As Strings           ${team_details['Last Updated']}             ${result['Last Updated']}
 
 
 

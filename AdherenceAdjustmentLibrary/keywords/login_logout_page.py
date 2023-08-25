@@ -26,6 +26,11 @@ class LoginPage:
         # self.__ctx.click_element(locator=loginlocators.LOGIN_BTN)
 
 
+class LogoutPage:
+    
+    def __init__(self, ctx: SeleniumLibrary) -> None:
+        self.__ctx = ctx
+
     @keyword
     def logout_to_system(self):
         logger.info("Logging out of the system")

@@ -1,7 +1,7 @@
 
 from SeleniumLibrary import SeleniumLibrary
 from robot.api.deco import keyword
-from UserTeamsLibrary.locators import loginlocators
+from TeamAssignmentLibrary.locators import loginlocators
 from robot.api import logger
 
 
@@ -18,6 +18,11 @@ class LoginPage:
         self.__ctx.input_text(locator=loginlocators.PASSWORD_FLD, text=password)
         self.__ctx.click_element(locator=loginlocators.LOGIN_BTN)
         
+
+class LogoutPage:
+    
+    def __init__(self, ctx: SeleniumLibrary) -> None:
+        self.__ctx = ctx
 
     @keyword
     def logout_to_system(self):

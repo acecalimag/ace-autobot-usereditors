@@ -1,6 +1,7 @@
 
 from robot.api.deco import keyword
 from autocore.Database import Database
+import arrow
 
 class UserTeamDB:
 
@@ -12,6 +13,7 @@ class UserTeamDB:
         """ TODO: Create a database query to retrieve the User Team Details."""
         query = "SELECT ut.name as Team_Name, ut.description as Team_Description, u.name as Team_Lead, ul.code as Team_Location, ut.type as Team_Type, ut.status as Team_Status, ut.updateTime as Last_Updated FROM kjt.userteam AS ut JOIN kjt.user AS u ON ut.teamLead = u.uid JOIN kjt.userlocation AS ul ON ut.location = ul.lid WHERE ut.name = %s;"
         
+        
         result = self.__db.execute(query, (tname,))
         if result and len(result) > 0:
             row = result[0]
@@ -20,6 +22,11 @@ class UserTeamDB:
             team_type = row['Team_Type'].lower()
             formatted_team_type = team_type.replace('nonoperational', 'Non-Operational').title()
 
+            # Last Updated
+            last_updated = ""
+            if row['Last_Updated']:
+                last_updated = arrow.get(row['Last_Updated']).format("MMM DD, YYYY h:mm A")
+
             return {
                 'Team Name': row['Team_Name'],
                 'Team Description': row['Team_Description'],
@@ -27,7 +34,7 @@ class UserTeamDB:
                 'Team Location': row['Team_Location'],
                 'Team Type': formatted_team_type,
                 'Team Status': row['Team_Status'].capitalize(),
-                'Last Updated': row['Last_Updated']
+                'Last Updated': last_updated
             }
         else:
             return None

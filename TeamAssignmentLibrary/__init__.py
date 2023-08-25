@@ -1,9 +1,9 @@
 from SeleniumLibrary import SeleniumLibrary
 from robot.api.deco import library
 from robotlibcore import DynamicCore
-
 from TeamAssignmentLibrary.keywords.browser import Browser
-from TeamAssignmentLibrary.keywords.loginpage import LoginPage
+from TeamAssignmentLibrary.keywords.login_logout_page import LoginPage
+from TeamAssignmentLibrary.keywords.login_logout_page import LogoutPage
 from TeamAssignmentLibrary.keywords.openpage import OpenPage
 from TeamAssignmentLibrary.keywords.selectteam import SelectTeam
 from TeamAssignmentLibrary.keywords.teamdetails import TeamDetails
@@ -25,7 +25,7 @@ class TeamAssignmentLibrary(DynamicCore):
             TeamDetails(ctx=ctx), 
             TeamAssignmentEditor(ctx=ctx),
             AssignAgenttoTeam(ctx=ctx),
-            RemoveAgenttoTeam(ctx=ctx)
-
+            RemoveAgenttoTeam(ctx=ctx),
+            LogoutPage(ctx=ctx)
         ]
         DynamicCore.__init__(self,library_components=components)

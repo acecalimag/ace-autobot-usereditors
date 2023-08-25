@@ -125,23 +125,35 @@ class CreateTeam:
         if is_enabled_selected and is_enabled_enabled:
             logger.info("ENABLE BUTTON IS SELECTED - TEAM STATUS is Enabled")
             create_new_team['Team Status'] = 'Enabled'
+            act_in_stat = 'Enabled'
         else:
             logger.info("ENABLE BUTTON IS NOT SELECTED - TEAM STATUS is Disabled")
             create_new_team['Team Status'] = 'Disabled'
+            act_in_stat = 'Disabled'
 
         if is_disabled_selected and is_disabled_enabled:
             logger.info("DISABLE BUTTON IS SELECTED - TEAM STATUS is Disabled")
             create_new_team['Team Status'] = 'Disabled'
+            act_in_stat = 'Disabled'
         else:
             logger.info("DISABLE BUTTON IS NOT SELECTED - TEAM STATUS is Enabled")
             create_new_team['Team Status'] = 'Enabled'
-
+            act_in_stat = 'Enabled'
+        
+        logger.info(f"got_act: {act_in_stat}")
+        create_new_team['Team Status'] = act_in_stat
 
         return create_new_team
 
 
 
     @keyword 
-    def click_save(self):
+    def click_save_button(self):
         self.__ctx.scroll_element_into_view(locator=userteamslocators.SAVEBTN)
         self.__ctx.click_button(locator=userteamslocators.SAVEBTN)
+
+
+    @keyword 
+    def click_create_button(self):
+        self.__ctx.scroll_element_into_view(locator=userteamslocators.CRTBTN)
+        self.__ctx.click_button(locator=userteamslocators.CRTBTN)

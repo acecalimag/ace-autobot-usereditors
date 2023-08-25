@@ -24,6 +24,7 @@ VU_STATUSLBL: str = "//label[normalize-space()='Status']"
 VU_LSTUPDLBL: str = "//label[normalize-space()='Last Updated']"
 
 SAVEBTN: str = "//button[@id='save']"
+CRTBTN: str = "//button[@id='create']"
 CANCELBTN: str = "//button[@id='cancel']"
 
 ALERT: str = "//div[@role='alert']"
