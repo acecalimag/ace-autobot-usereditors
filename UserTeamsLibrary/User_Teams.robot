@@ -5,6 +5,7 @@ Library    UserTeamsLibrary.APILibrary
 Library    RequestsLibrary
 Library    SeleniumLibrary
 Library    Collections
+Library    UserTeamsLibrary.APILibrary
 Variables  resource/variables.py
 
 # Test Setup        User Team
@@ -100,13 +101,14 @@ Verify the Creation of New Team
     Should Be Equal As Strings           ${team_details['Last Updated']}             ${result['Last Updated']}             
 
 
+
 Verify Edit / Modify Existing Team
     [Setup]        User Team
     [Teardown]     Logout
     
 
     Search And Click Next                team_name=${TEAMNAME}
-    ${form_edit}                         Edit Team                                exp_vulbl=${EXP_VULBL}        ed_name=${ED_VU_NAME}        ed_desc=${ED_VU_TD}        ed_lead=${ED_VU_TL}        ed_loc=${ED_VU_LOC}        ed_type=${ED_VU_TYPE}        ed_status=${ED_VU_STATUS}
+    ${form_edit}                         Edit Team                                   exp_vulbl=${EXP_VULBL}                ed_name=${ED_VU_NAME}                ed_desc=${ED_VU_TD}                ed_lead=${ED_VU_TL}                ed_loc=${ED_VU_LOC}                ed_type=${ED_VU_TYPE}                ed_status=${ED_VU_STATUS}
     Log Dictionary                       ${form_edit}
     Log To Console                       ${form_edit}
     
@@ -133,13 +135,62 @@ Verify Edit / Modify Existing Team
 
 
 
+Verify Create User Team via API
+    ${tl_loc_db}                         Get Lead Loc                              lname=${IN_CNT_TL}
+    Log Dictionary                       ${tl_loc_db}
+    Log To Console                       ${tl_loc_db}
+
+    ${create_api}                        Create User Team Api                      name=${IN_CNT_NAME}                desc=${IN_CNT_TD}            teamlead=${tl_loc_db["lead_uid"]}            loc=${tl_loc_db["loc_id"]}            type=${API_CNT_NOPTYPE}            status=${IN_CNT_STATUS}
+    Log Dictionary                       ${create_api}
+    Log To Console                       ${create_api}
+
+    # Check if the User Team was successfully created
+    ${result}                            Get User Team Raw Db                      tname=${IN_CNT_NAME}
+    Log Dictionary                       ${result}
+    Log To Console                       ${result}
+
+    # Comparison Input API and DB
+    Should Be Equal As Strings           ${create_api['name']}                     ${result['Team Name']}
+    Should Be Equal As Strings           ${create_api['description']}              ${result['Team Description']}
+    Should Be Equal As Strings           ${create_api['teamlead']}                 ${result['Team Lead']}
+    Should Be Equal As Strings           ${create_api['location']}                 ${result['Team Location']}
+    Should Be Equal As Strings           ${create_api['type']}                     ${result['Team Type']}
+    Should Be Equal As Strings           ${create_api['status']}                   ${result['Team Status']}
+
+
+Verify Edit / Modify User Team via API
+    ${tl_loc_db}                         Get Lead Loc                              lname=${IN_CNT_TL}
+    Log Dictionary                       ${tl_loc_db}
+    Log To Console                       ${tl_loc_db}
+
+    ${result}                            Get User Team Raw Db                      tname=${TEAMNAME}
+    Log Dictionary                       ${result}
+    Log To Console                       ${result}
+
+    ${mod_api}                           Modify User Team Api                      utid=${result["Team UTID"]}                   name=${ED_VU_NAME}                desc=${ED_VU_TD}            teamlead=${tl_loc_db["lead_uid"]}            loc=${tl_loc_db["loc_id"]}            type=${API_CNT_NOPTYPE}            status=${IN_CNT_STATUS}
+    Log Dictionary                       ${mod_api}
+    Log To Console                       ${mod_api}
+
+    # Check if the User Team was successfully created
+    ${result}                            Get User Team Raw Db                      tname=${ED_VU_NAME}
+    Log Dictionary                       ${result}
+    Log To Console                       ${result}
+
+    # Comparison Input API and DB
+    Should Be Equal As Strings           ${mod_api['utid']}                        ${result['Team UTID']}
+    Should Be Equal As Strings           ${mod_api['name']}                        ${result['Team Name']}
+    Should Be Equal As Strings           ${mod_api['description']}                 ${result['Team Description']}
+    Should Be Equal As Strings           ${mod_api['teamlead']}                    ${result['Team Lead']}
+    Should Be Equal As Strings           ${mod_api['location']}                    ${result['Team Location']}
+    Should Be Equal As Strings           ${mod_api['type']}                        ${result['Team Type']}
+    Should Be Equal As Strings           ${mod_api['status']}                      ${result['Team Status']}
+
+
+
 Database Query
     ${result}                            Get User Team Db                   tname=${TEAMNAME}
     Log Dictionary                       ${result}
     Log To Console                       ${result}
-
-
-
 
 
 

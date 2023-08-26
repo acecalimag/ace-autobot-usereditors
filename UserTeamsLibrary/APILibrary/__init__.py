@@ -4,8 +4,8 @@ import requests
 from RequestsLibrary.SessionKeywords import SessionKeywords
 from robotlibcore import DynamicCore
 
-from UserTeamsLibrary.APILibrary.AddAgentTA import AddAgentTA
-from UserTeamsLibrary.APILibrary.RemoveAgentTA import RemoveAgentTA
+from UserTeamsLibrary.APILibrary.createuserteam import CreateUserTeam
+from UserTeamsLibrary.APILibrary.modifyuserteam import ModifyUserTeam
 
 
 @library
@@ -14,8 +14,8 @@ class APILibrary(DynamicCore):
     def __init__(self):
         
         components = [
-            AddAgentTA(),
-            RemoveAgentTA() 
+            CreateUserTeam(),
+            ModifyUserTeam() 
 
         ]
         
