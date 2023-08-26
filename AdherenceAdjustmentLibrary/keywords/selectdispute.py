@@ -8,8 +8,8 @@ from AdherenceAdjustmentLibrary.locators import adhadjlocators
 from robot.api import logger
 from robot.api import logger
 from datetime import datetime
-import os
 import time
+import os
 
 
 class SelectDispute:
