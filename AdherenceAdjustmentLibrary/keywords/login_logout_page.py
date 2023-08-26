@@ -20,10 +20,6 @@ class LoginPage:
         self.__ctx.click_element(locator=loginlocators.LOGIN_BTN)
         time.sleep(5)
         self.__ctx.go_to(redirect_url)
-        # self.__ctx.wait_until_element_is_visible(locator=loginlocators.USERNAME_FLD)
-        # self.__ctx.input_text(locator=loginlocators.USERNAME_FLD, text=username)
-        # self.__ctx.input_text(locator=loginlocators.PASSWORD_FLD, text=password)
-        # self.__ctx.click_element(locator=loginlocators.LOGIN_BTN)
 
 
 class LogoutPage:
