@@ -42,9 +42,10 @@ Verify completeness of fields, labels, and buttons for Adherence Adjustment Page
 
     # Select a Dispute Entry
     ${result}                           Get User Details                             username=${DISP_AGENT_NAME}
+    ${res_dis}                          Get Dispute Details Db                       udid=${UDID}
     Select Filters                      start_date=${EXP_FLTR_SDATE}                 end_date=${EXP_FLTR_EDATE}                            exp_user=${result['username']}        exp_team=${result['team']}            exp_post=${result['position']}
     Click Export To Xls Button          start_date=${EXP_FLTR_SDATE}                 end_date=${EXP_FLTR_EDATE}
-    Select Dispute Entry                wfid=${result['workforceid']}                udid=${UDID}
+    Select Dispute Entry                wfid=${result['workforceid']}                udid=${res_dis['UDID']}
 
     # Verify the column names in the Dispute Table
     ${dispute_table}                    Check Dispute Table                          exp_rtrlbl=${EXP_TBL_RTR_LBL}                  exp_unamelbl=${EXP_TBL_UNAME_LBL}            exp_loclbl=${EXP_TBL_LOC_LBL}            exp_teamlbl=${EXP_TBL_TEAM_LBL}            exp_statuslbl=${EXP_TBL_STAT_LBL}            exp_rvwrlbl=${EXP_TBL_RVWR_LBL}            exp_rvwdatlbl=${EXP_TBL_RVWDAT_LBL}            exp_crtdlbl=${EXP_TBL_CRTD_LBL}
@@ -101,11 +102,10 @@ Testing the Adherence Dispute Information Header, Labels and Buttons
     [Teardown]     Logout
 
     ${result}                               Get User Details                        username=${DISP_AGENT_NAME}
+    ${res_dis}                              Get Dispute Details Db                  udid=${UDID}
     Select Filters                          start_date=${EXP_FLTR_SDATE}            end_date=${EXP_FLTR_EDATE}                    exp_user=${result['username']}                exp_team=${result['team']}                exp_post=${result['position']}
-    Select Dispute Entry                    wfid=${result['workforceid']}           udid=${UDID}
+    Select Dispute Entry                    wfid=${result['workforceid']}           udid=${res_dis['UDID']}
     
-    
-
     ${adi_section}                          Check Adherence Dispute Info Section    exp_ads_hdr=${EXP_ADS_HDR}                    exp_ads_fname_lbl=${EXP_ADS_FNAME_LBL}        exp_ads_stat_lbl=${EXP_ADS_STAT_LBL}          exp_ads_ctr_lbl=${EXP_ADS_CTR_LBL}        exp_ads_rtr_lbl=${EXP_ADS_RTR_LBL}        exp_ads_whrs_lbl=${EXP_ADS_WHRS_LBL}        exp_ads_rsn_lbl=${EXP_ADS_RSN_LBL}        exp_ads_crt_lbl=${EXP_ADS_CRT_LBL}        exp_ads_loc_lbl=${EXP_ADS_LOC_LBL}        exp_ads_team_lbl=${EXP_ADS_TEAM_LBL}        exp_ads_cact_lbl=${EXP_ADS_CACT_LBL}        exp_ads_ract_lbl=${EXP_ADS_RACT_LBL}        exp_ads_phrs_lbl=${EXP_ADS_PHRS_LBL}        exp_ads_revsec_lbl=${EXP_ADS_REVSEC_LBL}        exp_ads_cmnt_lbl=${EXP_ADS_CMNT_LBL}        exp_ads_inotes_lbl=${EXP_ADS_INOTES_LBL}        exp_ads_revby_lbl=${EXP_ADS_REVBY_LBL}        exp_ads_revat_lbl=${EXP_ADS_REVAT_LBL}        exp_ads_cnfrmat_lbl=${EXP_ADS_CNFRMAT_LBL}        exp_ads_aupsched_lbl=${EXP_ADS_AUPSCHED_LBL}        exp_ads_auact_lbl=${EXP_ADS_AUACT_LBL}        exp_ads_manup_lbl=${EXP_ADS_MANUP_LBL}
     Log Dictionary                          ${adi_section}
     Log To Console                          ${adi_section}
