@@ -51,7 +51,7 @@ class AdherenceAdjustmentDB:
     @keyword
     def get_dispute_details_db(self, udid: str):
         """ TODO: Create a database query to retrieve the dispute details"""
-        query = "SELECT u.username, u.name, ud.status, ud.requestedstarttime, ud.requestedendtime, ud.currentstarttime, ud.currentendtime, ud.workhours, ud.reason, ud.createTime, ul.location, ut.name as Team, ud.currentactivitycode, ud.requestedactivitycode, ud.payhours, ud.reviewcomment, ud.internalnotes, ud.reviewedby, ud.reviewtime, ud.confirmtime FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userlocation AS ul ON um.lid = ul.lid JOIN kjt.userteam AS ut ON um.teamId = ut.utid JOIN wfm.userdispute AS ud ON u.username = ud.username where ud.udid = %s;"
+        query = "SELECT u.username, u.name, ud.status, ud.udid, ud.requestedstarttime, ud.requestedendtime, ud.currentstarttime, ud.currentendtime, ud.workhours, ud.reason, ud.createTime, ul.location, ut.name as Team, ud.currentactivitycode, ud.requestedactivitycode, ud.payhours, ud.reviewcomment, ud.internalnotes, ud.reviewedby, ud.reviewtime, ud.confirmtime FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userlocation AS ul ON um.lid = ul.lid JOIN kjt.userteam AS ut ON um.teamId = ut.utid JOIN wfm.userdispute AS ud ON u.username = ud.username where ud.udid = %s;"
          
         result = self.__db.execute(query, (udid,))
         if result and len(result) > 0:
@@ -193,6 +193,7 @@ class AdherenceAdjustmentDB:
                 'Reviewed By': reviewedby,
                 'Reviewed At': review_time,
                 'Confirmed At': confirm_time,
+                'UDID': row['udid']
             }
         else:
             return {}
