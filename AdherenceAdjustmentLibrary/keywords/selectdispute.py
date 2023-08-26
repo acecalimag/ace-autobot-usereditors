@@ -227,7 +227,8 @@ class SelectDispute:
         output_sdate = input_sdate.strftime("%Y%m%d")
         output_edate = input_edate.strftime("%Y%m%d")
         
-        download_directory = r"C:\Users\WONDERS\Downloads"
+        # download_directory = r"C:\Users\WONDERS\Downloads"
+        download_directory = r"C:\Users\jhaca\Downloads"
         expected_filename = f"Adh_Adj_{output_sdate}-{output_edate}.xlsx"
 
         # Wait for the file to appear in the download directory

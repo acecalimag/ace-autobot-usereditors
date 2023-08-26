@@ -1,10 +1,21 @@
+// {
+//     "robot.pythonpath": [
+//             "C:/Users/WONDERS/Documents/Ace/Robot/ace-autobot-usereditors"
+//     ],
+//     "robot.language-server.python": "C:\\Users\\WONDERS\\Documents\\Ace\\Robot\\ace-autobot-usereditors\\.venv\\Scripts\\python.exe",
+//     // "python.formatting.provider": "none",
+//     "terminal.integrated.env.windows": {
+//     "PYTHONPATH": "C:\\Users\\WONDERS\\Documents\\Ace\\Robot\\ace-autobot-usereditors"
+//     }
+// }
+
+
 {
+    "robot.language-server.python": "C:\\Users\\jhaca\\Documents\\Ace\\Robot\\ace-autobot-usereditors\\.venv\\Scripts\\python.exe",
     "robot.pythonpath": [
-            "C:/Users/WONDERS/Documents/Ace/Robot/ace-autobot-usereditors"
+        "C:/Users/jhaca/Documents/Ace/Robot/ace-autobot-usereditors"
     ],
-    "robot.language-server.python": "C:\\Users\\WONDERS\\Documents\\Ace\\Robot\\ace-autobot-usereditors\\.venv\\Scripts\\python.exe",
-    // "python.formatting.provider": "none",
     "terminal.integrated.env.windows": {
-    "PYTHONPATH": "C:\\Users\\WONDERS\\Documents\\Ace\\Robot\\ace-autobot-usereditors"
+        "PYTHONPATH": "C:\\Users\\jhaca\\Documents\\Ace\\Robot\\ace-autobot-usereditors"
     }
 }
