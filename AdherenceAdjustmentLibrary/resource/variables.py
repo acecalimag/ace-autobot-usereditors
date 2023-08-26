@@ -20,6 +20,8 @@ PASSWORD: str = "kjt"
 DISP_AGENT_NAME: str = "tqa4"
 UDID: str = "271cf76b-cab5-4964-8e19-7ef10aa84f11"
 
+EXP_FLTR_SDATE: str = "2023-01-01"
+EXP_FLTR_EDATE: str = "2023-08-01"
 
 EXP_HDR_ADADJLBL: str = "Adherence Adjustment"
 EXP_HDR_USER: str = "${result['username']} - ${result['position']}"

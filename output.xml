@@ -1,65 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.0.2 (Python 3.10.6 on win32)" generated="20230825 05:45:00.848" rpa="false" schemaversion="3">
+<robot generator="Robot 6.0.2 (Python 3.10.6 on win32)" generated="20230825 21:12:33.732" rpa="false" schemaversion="3">
 <suite id="s1" name="Adherence Adjustment" source="c:\Users\WONDERS\Documents\Ace\Robot\ace-autobot-usereditors\AdherenceAdjustmentLibrary\Adherence_Adjustment.robot">
 <test id="s1-t1" name="Verify completeness of fields, labels, and buttons for Adherence Adjustment Page" line="27">
 <kw name="Adherence Adjustment" type="SETUP">
 <kw name="Open Config In Browser" library="AdherenceAdjustmentLibrary">
-<msg timestamp="20230825 05:45:01.308" level="INFO">Opening browser 'chrome' to base url 'https://qa.letsdochinese.com/KJTCore/resources/adherenceadjustment.html'.</msg>
-<status status="PASS" starttime="20230825 05:45:01.307" endtime="20230825 05:45:11.949"/>
+<msg timestamp="20230825 21:12:34.114" level="INFO">Opening browser 'chrome' to base url 'https://qa.letsdochinese.com/KJTCore/resources/adherenceadjustment.html'.</msg>
+<status status="PASS" starttime="20230825 21:12:34.114" endtime="20230825 21:12:40.270"/>
 </kw>
 <kw name="Login And Redirect" library="AdherenceAdjustmentLibrary">
 <arg>username=${USERNAME}</arg>
 <arg>password=${PASSWORD}</arg>
 <arg>redirect_url=${EXP_URL}</arg>
-<msg timestamp="20230825 05:45:11.950" level="INFO">Logging in using  acalimag and kjt</msg>
-<msg timestamp="20230825 05:45:15.448" level="INFO">Typing text 'acalimag' into text field 'id:username'.</msg>
-<msg timestamp="20230825 05:45:15.545" level="INFO">Typing text 'kjt' into text field 'id:password'.</msg>
-<msg timestamp="20230825 05:45:15.624" level="INFO">Clicking element 'id:login'.</msg>
-<msg timestamp="20230825 05:45:20.693" level="INFO">Opening url 'https://qa.letsdochinese.com/KJTCore/resources/adherenceadjustment.html'</msg>
-<status status="PASS" starttime="20230825 05:45:11.950" endtime="20230825 05:45:20.854"/>
+<msg timestamp="20230825 21:12:40.271" level="INFO">Logging in using  acalimag and kjt</msg>
+<msg timestamp="20230825 21:12:43.773" level="INFO">Typing text 'acalimag' into text field 'id:username'.</msg>
+<msg timestamp="20230825 21:12:43.829" level="INFO">Typing text 'kjt' into text field 'id:password'.</msg>
+<msg timestamp="20230825 21:12:43.886" level="INFO">Clicking element 'id:login'.</msg>
+<msg timestamp="20230825 21:12:48.933" level="INFO">Opening url 'https://qa.letsdochinese.com/KJTCore/resources/adherenceadjustment.html'</msg>
+<status status="PASS" starttime="20230825 21:12:40.271" endtime="20230825 21:12:49.067"/>
 </kw>
-<status status="PASS" starttime="20230825 05:45:01.307" endtime="20230825 05:45:20.854"/>
+<status status="PASS" starttime="20230825 21:12:34.114" endtime="20230825 21:12:49.068"/>
 </kw>
 <kw name="Get User Details Headers" library="AdherenceAdjustmentLibrary.DatabaseLibrary">
 <var>${result_hdrs}</var>
 <arg>username=${USERNAME}</arg>
 <doc>TODO: Create a database query to retrieve the Agent's UID.</doc>
-<msg timestamp="20230825 05:45:20.856" level="INFO">Creating a new connection.</msg>
-<msg timestamp="20230825 05:45:23.749" level="INFO">Executing query. SELECT u.username, um.position, ul.code, ul.location, um.workforceid, ut.name as team FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userlocation AS ul ON um.lid = ul.lid JOIN kjt.userteam AS ut ON um.teamId = ut.utid  WHERE u.username = %s;</msg>
-<msg timestamp="20230825 05:45:24.292" level="INFO">${result_hdrs} = {'username': 'ACALIMAG', 'position': 'ENGINEERING', 'location_code': 'MNL', 'location': 'Manila', 'workforceid': '12061', 'team': 'sample team 1'}</msg>
-<status status="PASS" starttime="20230825 05:45:20.854" endtime="20230825 05:45:24.292"/>
+<msg timestamp="20230825 21:12:49.069" level="INFO">Creating a new connection.</msg>
+<msg timestamp="20230825 21:12:51.947" level="INFO">Executing query. SELECT u.username, um.position, ul.code, ul.location, um.workforceid, ut.name as team FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userlocation AS ul ON um.lid = ul.lid JOIN kjt.userteam AS ut ON um.teamId = ut.utid  WHERE u.username = %s;</msg>
+<msg timestamp="20230825 21:12:52.515" level="INFO">${result_hdrs} = {'username': 'ACALIMAG', 'position': 'ENGINEERING', 'location_code': 'MNL', 'location': 'Manila', 'workforceid': '12061', 'team': 'sample team 1'}</msg>
+<status status="PASS" starttime="20230825 21:12:49.068" endtime="20230825 21:12:52.515"/>
 </kw>
 <kw name="Check Page Header" library="AdherenceAdjustmentLibrary">
 <var>${adhadj_header}</var>
 <arg>exp_hdr_adhadjlbl=${EXP_HDR_ADADJLBL}</arg>
 <arg>exp_hdr_user=${result_hdrs['username']} - ${result_hdrs['position']}</arg>
-<msg timestamp="20230825 05:45:24.295" level="INFO">Check the Adherence Adjustment Headers Details</msg>
-<msg timestamp="20230825 05:45:24.328" level="INFO">Adherence Adjustment Label is showing and text matches: Adherence Adjustment</msg>
-<msg timestamp="20230825 05:45:24.358" level="INFO">User Header Label is showing and text matches: ACALIMAG - ENGINEERING</msg>
-<msg timestamp="20230825 05:45:24.359" level="INFO">${adhadj_header} = {'Adherence Adjustment Label': 'Showing', 'User Header Label': 'Showing'}</msg>
-<status status="PASS" starttime="20230825 05:45:24.292" endtime="20230825 05:45:24.359"/>
+<msg timestamp="20230825 21:12:52.517" level="INFO">Check the Adherence Adjustment Headers Details</msg>
+<msg timestamp="20230825 21:12:55.581" level="INFO">Adherence Adjustment Label is showing and text matches: Adherence Adjustment</msg>
+<msg timestamp="20230825 21:12:55.603" level="INFO">User Header Label is showing and text matches: ACALIMAG - ENGINEERING</msg>
+<msg timestamp="20230825 21:12:55.603" level="INFO">${adhadj_header} = {'Adherence Adjustment Label': 'Showing', 'User Header Label': 'Showing'}</msg>
+<status status="PASS" starttime="20230825 21:12:52.516" endtime="20230825 21:12:55.603"/>
 </kw>
 <kw name="Log Dictionary" library="Collections">
 <arg>${adhadj_header}</arg>
 <doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
-<msg timestamp="20230825 05:45:24.360" level="INFO">Dictionary size is 2 and it contains following items:
+<msg timestamp="20230825 21:12:55.604" level="INFO">Dictionary size is 2 and it contains following items:
 Adherence Adjustment Label: Showing
 User Header Label: Showing</msg>
-<status status="PASS" starttime="20230825 05:45:24.359" endtime="20230825 05:45:24.360"/>
+<status status="PASS" starttime="20230825 21:12:55.604" endtime="20230825 21:12:55.604"/>
 </kw>
 <kw name="Log To Console" library="BuiltIn">
 <arg>${adhadj_header}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" starttime="20230825 05:45:24.361" endtime="20230825 05:45:24.361"/>
+<status status="PASS" starttime="20230825 21:12:55.604" endtime="20230825 21:12:55.605"/>
 </kw>
 <kw name="Get User Details" library="AdherenceAdjustmentLibrary.DatabaseLibrary">
 <var>${result}</var>
 <arg>username=${USERNAME}</arg>
 <doc>TODO: Create a database query to retrieve the Agent's UID.</doc>
-<msg timestamp="20230825 05:45:24.362" level="INFO">Using an existing connection &lt;mysql.connector.connection_cext.CMySQLConnection object at 0x0000027BD56B4790&gt;.</msg>
-<msg timestamp="20230825 05:45:24.362" level="INFO">Executing query. SELECT u.username, um.position, ul.code, ul.location, um.workforceid, ut.name as team FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userlocation AS ul ON um.lid = ul.lid JOIN kjt.userteam AS ut ON um.teamId = ut.utid  WHERE u.username = %s;</msg>
-<msg timestamp="20230825 05:45:24.906" level="INFO">${result} = {'username': 'acalimag', 'position': 'Engineering', 'location_code': 'MNL', 'location': 'Manila', 'workforceid': '12061', 'team': 'sample team 1'}</msg>
-<status status="PASS" starttime="20230825 05:45:24.361" endtime="20230825 05:45:24.906"/>
+<msg timestamp="20230825 21:12:55.606" level="INFO">Using an existing connection &lt;mysql.connector.connection_cext.CMySQLConnection object at 0x00000134DE404730&gt;.</msg>
+<msg timestamp="20230825 21:12:55.606" level="INFO">Executing query. SELECT u.username, um.position, ul.code, ul.location, um.workforceid, ut.name as team FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userlocation AS ul ON um.lid = ul.lid JOIN kjt.userteam AS ut ON um.teamId = ut.utid  WHERE u.username = %s;</msg>
+<msg timestamp="20230825 21:12:56.167" level="INFO">${result} = {'username': 'acalimag', 'position': 'Engineering', 'location_code': 'MNL', 'location': 'Manila', 'workforceid': '12061', 'team': 'sample team 1'}</msg>
+<status status="PASS" starttime="20230825 21:12:55.605" endtime="20230825 21:12:56.168"/>
 </kw>
 <kw name="Check Filter Section" library="AdherenceAdjustmentLibrary">
 <arg>exp_fltr_sdlbl=${EXP_FLTR_SDLBL}</arg>
@@ -71,57 +71,57 @@ User Header Label: Showing</msg>
 <arg>exp_fltr_teamspldhr=Select teams</arg>
 <arg>exp_fltr_posplhdr=Select Positions</arg>
 <arg>exp_fltr_statplhdr=Pending</arg>
-<msg timestamp="20230825 05:45:24.908" level="INFO">Check the Filter Section if fields, labels, and buttons are present</msg>
-<msg timestamp="20230825 05:45:24.925" level="INFO">Start Date Label is showing and text matches: Start Date:</msg>
-<msg timestamp="20230825 05:45:24.992" level="INFO">Start Date: 2023-08-07</msg>
-<msg timestamp="20230825 05:45:24.992" level="INFO">Start Date Placeholder is showing and text matches: 2023-08-07</msg>
-<msg timestamp="20230825 05:45:25.014" level="INFO">End Date Label is showing and text matches: End Date:</msg>
-<msg timestamp="20230825 05:45:25.295" level="INFO">End Date: 2023-08-25</msg>
-<msg timestamp="20230825 05:45:25.295" level="INFO">End Date Placeholder is showing and text matches: 2023-08-25</msg>
-<msg timestamp="20230825 05:45:25.314" level="INFO">Title: Select users</msg>
-<msg timestamp="20230825 05:45:25.314" level="INFO">User/s Placeholder is showing and text matches: Select users</msg>
-<msg timestamp="20230825 05:45:25.333" level="INFO">Location: Manila</msg>
-<msg timestamp="20230825 05:45:25.333" level="INFO">Location Placeholder is showing and text matches: Manila</msg>
-<msg timestamp="20230825 05:45:25.353" level="INFO">Team: Select teams</msg>
-<msg timestamp="20230825 05:45:25.353" level="INFO">Team Placeholder is showing and text matches: Select teams</msg>
-<msg timestamp="20230825 05:45:25.370" level="INFO">Position: Select Positions</msg>
-<msg timestamp="20230825 05:45:25.371" level="INFO">Position Placeholder is showing and text matches: Select Positions</msg>
-<msg timestamp="20230825 05:45:25.392" level="INFO">Status: Pending</msg>
-<msg timestamp="20230825 05:45:25.392" level="INFO">Status Placeholder is showing and text matches: Pending</msg>
-<msg timestamp="20230825 05:45:25.686" level="INFO">GO BUTTON is showing</msg>
-<msg timestamp="20230825 05:45:25.963" level="INFO">Export to xls BUTTON is showing</msg>
-<status status="PASS" starttime="20230825 05:45:24.907" endtime="20230825 05:45:25.964"/>
+<msg timestamp="20230825 21:12:56.170" level="INFO">Check the Filter Section if fields, labels, and buttons are present</msg>
+<msg timestamp="20230825 21:12:56.183" level="INFO">Start Date Label is showing and text matches: Start Date:</msg>
+<msg timestamp="20230825 21:12:56.440" level="INFO">Start Date: 2023-08-07</msg>
+<msg timestamp="20230825 21:12:56.440" level="INFO">Start Date Placeholder is showing and text matches: 2023-08-07</msg>
+<msg timestamp="20230825 21:12:56.452" level="INFO">End Date Label is showing and text matches: End Date:</msg>
+<msg timestamp="20230825 21:12:56.731" level="INFO">End Date: 2023-08-25</msg>
+<msg timestamp="20230825 21:12:56.731" level="INFO">End Date Placeholder is showing and text matches: 2023-08-25</msg>
+<msg timestamp="20230825 21:12:56.744" level="INFO">Title: Select users</msg>
+<msg timestamp="20230825 21:12:56.744" level="INFO">User/s Placeholder is showing and text matches: Select users</msg>
+<msg timestamp="20230825 21:12:56.751" level="INFO">Location Placeholder is not showing</msg>
+<msg timestamp="20230825 21:12:56.764" level="INFO">Team: Select teams</msg>
+<msg timestamp="20230825 21:12:56.765" level="INFO">Team Placeholder is showing and text matches: Select teams</msg>
+<msg timestamp="20230825 21:12:56.778" level="INFO">Position: Select Positions</msg>
+<msg timestamp="20230825 21:12:56.779" level="INFO">Position Placeholder is showing and text matches: Select Positions</msg>
+<msg timestamp="20230825 21:12:56.791" level="INFO">Status: Pending</msg>
+<msg timestamp="20230825 21:12:56.791" level="INFO">Status Placeholder is showing and text matches: Pending</msg>
+<msg timestamp="20230825 21:12:57.075" level="INFO">GO BUTTON is showing</msg>
+<msg timestamp="20230825 21:12:57.362" level="INFO">Export to xls BUTTON is showing</msg>
+<status status="PASS" starttime="20230825 21:12:56.169" endtime="20230825 21:12:57.363"/>
 </kw>
 <kw name="Get User Details" library="AdherenceAdjustmentLibrary.DatabaseLibrary">
 <var>${result}</var>
 <arg>username=${DISP_AGENT_NAME}</arg>
 <doc>TODO: Create a database query to retrieve the Agent's UID.</doc>
-<msg timestamp="20230825 05:45:25.965" level="INFO">Using an existing connection &lt;mysql.connector.connection_cext.CMySQLConnection object at 0x0000027BD56B4790&gt;.</msg>
-<msg timestamp="20230825 05:45:25.965" level="INFO">Executing query. SELECT u.username, um.position, ul.code, ul.location, um.workforceid, ut.name as team FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userlocation AS ul ON um.lid = ul.lid JOIN kjt.userteam AS ut ON um.teamId = ut.utid  WHERE u.username = %s;</msg>
-<msg timestamp="20230825 05:45:26.506" level="INFO">${result} = {'username': 'tqa4', 'position': 'Tier II CSR', 'location_code': 'MNL', 'location': 'Manila', 'workforceid': '90004', 'team': 'Cleveland'}</msg>
-<status status="PASS" starttime="20230825 05:45:25.965" endtime="20230825 05:45:26.506"/>
+<msg timestamp="20230825 21:12:57.364" level="INFO">Using an existing connection &lt;mysql.connector.connection_cext.CMySQLConnection object at 0x00000134DE404730&gt;.</msg>
+<msg timestamp="20230825 21:12:57.364" level="INFO">Executing query. SELECT u.username, um.position, ul.code, ul.location, um.workforceid, ut.name as team FROM kjt.usermeta AS um JOIN kjt.user AS u ON um.uid = u.uid JOIN kjt.userlocation AS ul ON um.lid = ul.lid JOIN kjt.userteam AS ut ON um.teamId = ut.utid  WHERE u.username = %s;</msg>
+<msg timestamp="20230825 21:12:57.929" level="INFO">${result} = {'username': 'tqa4', 'position': 'Tier II CSR', 'location_code': 'MNL', 'location': 'Manila', 'workforceid': '90004', 'team': 'Cleveland'}</msg>
+<status status="PASS" starttime="20230825 21:12:57.363" endtime="20230825 21:12:57.929"/>
 </kw>
 <kw name="Select Filters" library="AdherenceAdjustmentLibrary">
-<arg>start_date=2023-01-01</arg>
-<arg>end_date=2023-08-01</arg>
+<arg>start_date=${EXP_FLTR_SDATE}</arg>
+<arg>end_date=${EXP_FLTR_EDATE}</arg>
 <arg>exp_user=${result['username']}</arg>
 <arg>exp_team=${result['team']}</arg>
 <arg>exp_post=${result['position']}</arg>
-<msg timestamp="20230825 05:45:26.510" level="INFO">Modify the filters to select a dispute entry</msg>
-<msg timestamp="20230825 05:45:26.525" level="INFO">Clicking element '//input[@id='startDate']'.</msg>
-<msg timestamp="20230825 05:45:43.535" level="INFO">Clicking element '//input[@id='endDate']'.</msg>
-<msg timestamp="20230825 05:45:45.808" level="INFO">Clicking element '//button[@data-id='user-select']'.</msg>
-<msg timestamp="20230825 05:45:47.860" level="INFO">Typing text 'tqa4' into text field '//div[@class='dropdown-menu show']//input[@aria-label='Search']'.</msg>
-<msg timestamp="20230825 05:45:47.934" level="INFO">Clicking element '//a[@class='dropdown-item active']'.</msg>
-<msg timestamp="20230825 05:45:47.982" level="INFO">Clicking element '//button[@data-id='team-select']'.</msg>
-<msg timestamp="20230825 05:45:50.031" level="INFO">Typing text 'Cleveland' into text field '//div[@class='dropdown-menu show']//input[@aria-label='Search']'.</msg>
-<msg timestamp="20230825 05:45:50.099" level="INFO">Clicking element '//a[@class='dropdown-item active']'.</msg>
-<msg timestamp="20230825 05:45:50.152" level="INFO">Clicking element '//button[@data-id='position-select']'.</msg>
-<msg timestamp="20230825 05:45:50.208" level="INFO">Clicking element 'xpath://div[@aria-expanded='true']//span[@class='text'][normalize-space()='Tier II CSR']'.</msg>
-<msg timestamp="20230825 05:45:50.267" level="INFO">Clicking element '//button[@data-id='status-select']'.</msg>
-<msg timestamp="20230825 05:45:50.314" level="INFO">Clicking element '//div[@class='dropdown-menu show']//button[@type='button'][normalize-space()='Select All']'.</msg>
-<msg timestamp="20230825 05:45:50.358" level="INFO">Clicking element '//button[@id='display-requests-btn']'.</msg>
-<msg timestamp="20230825 05:45:50.418" level="INFO">Clicked on 'Prev'
+<msg timestamp="20230825 21:12:57.940" level="INFO">Modify the filters to select a dispute entry</msg>
+<msg timestamp="20230825 21:12:57.967" level="INFO">Clicking element '//input[@id='startDate']'.</msg>
+<msg timestamp="20230825 21:13:15.288" level="INFO">Clicking element '//input[@id='endDate']'.</msg>
+<msg timestamp="20230825 21:13:17.611" level="INFO">Clicking element '//button[@data-id='user-select']'.</msg>
+<msg timestamp="20230825 21:13:19.663" level="INFO">Typing text 'tqa4' into text field '//div[@class='dropdown-menu show']//input[@aria-label='Search']'.</msg>
+<msg timestamp="20230825 21:13:19.753" level="INFO">Clicking element '//a[@class='dropdown-item active']'.</msg>
+<msg timestamp="20230825 21:13:19.791" level="INFO">Clicking element '//button[@data-id='team-select']'.</msg>
+<msg timestamp="20230825 21:13:21.824" level="INFO">Typing text 'Cleveland' into text field '//div[@class='dropdown-menu show']//input[@aria-label='Search']'.</msg>
+<msg timestamp="20230825 21:13:21.903" level="INFO">Clicking element '//a[@class='dropdown-item active']'.</msg>
+<msg timestamp="20230825 21:13:21.946" level="INFO">Clicking element '//button[@data-id='position-select']'.</msg>
+<msg timestamp="20230825 21:13:21.990" level="INFO">Clicking element 'xpath://div[@aria-expanded='true']//span[@class='text'][normalize-space()='Tier II CSR']'.</msg>
+<msg timestamp="20230825 21:13:22.035" level="INFO">Clicking element '//button[@data-id='status-select']'.</msg>
+<msg timestamp="20230825 21:13:22.070" level="INFO">Clicking element '//div[@class='dropdown-menu show']//button[@type='button'][normalize-space()='Select All']'.</msg>
+<msg timestamp="20230825 21:13:22.103" level="INFO">Clicking element '//button[@id='display-requests-btn']'.</msg>
+<msg timestamp="20230825 21:13:22.135" level="INFO">Clicked on 'Prev'
+Clicked on 'Prev'
 Clicked on 'Prev'
 Clicked on 'Prev'
 Clicked on 'Prev'
@@ -133,24 +133,26 @@ Clicked on 'Prev'
 Previous button not found or clickable, exiting loop.
 Clicked on 'Prev'
 Previous button not found or clickable, exiting loop.</msg>
-<status status="PASS" starttime="20230825 05:45:26.507" endtime="20230825 05:45:50.418"/>
+<status status="PASS" starttime="20230825 21:12:57.931" endtime="20230825 21:13:22.135"/>
 </kw>
 <kw name="Click Export To Xls Button" library="AdherenceAdjustmentLibrary">
-<msg timestamp="20230825 05:45:50.420" level="INFO">Clicking the Export to xls button to download the selected dispute entries</msg>
-<msg timestamp="20230825 05:45:50.441" level="INFO">Clicking button '//button[@id='export-to-xls']'.</msg>
-<msg timestamp="20230825 05:45:55.528" level="INFO">File 'Adh_Adj_20230101-20230801.xlsx' was downloaded successfully.</msg>
-<msg timestamp="20230825 05:45:55.529" level="INFO">File 'Adh_Adj_20230101-20230801.xlsx' has been deleted after validation.</msg>
-<status status="PASS" starttime="20230825 05:45:50.419" endtime="20230825 05:45:55.529"/>
+<arg>start_date=${EXP_FLTR_SDATE}</arg>
+<arg>end_date=${EXP_FLTR_EDATE}</arg>
+<msg timestamp="20230825 21:13:22.137" level="INFO">Clicking the Export to xls button to download the selected dispute entries</msg>
+<msg timestamp="20230825 21:13:22.149" level="INFO">Clicking button '//button[@id='export-to-xls']'.</msg>
+<msg timestamp="20230825 21:13:27.213" level="INFO">File 'Adh_Adj_20230101-20230801.xlsx' was downloaded successfully.</msg>
+<msg timestamp="20230825 21:13:27.215" level="INFO">File 'Adh_Adj_20230101-20230801.xlsx' has been deleted after validation.</msg>
+<status status="PASS" starttime="20230825 21:13:22.136" endtime="20230825 21:13:27.216"/>
 </kw>
 <kw name="Select Dispute Entry" library="AdherenceAdjustmentLibrary">
 <arg>wfid=${result['workforceid']}</arg>
 <arg>udid=${UDID}</arg>
-<msg timestamp="20230825 05:46:01.972" level="INFO">Clicked on 'Next'
+<msg timestamp="20230825 21:13:33.816" level="INFO">Clicked on 'Next'
 Clicked on 'Next'
 Clicked on 'Next'
 Clicked on: Jun 05, 2023 4:00 PM -
 Jun 05, 2023 11:00 PM tqa4 MNL Cleveland Approved acalimag Jun 16, 2023 10:09 PM Jun 16, 2023 10:06 PM</msg>
-<status status="PASS" starttime="20230825 05:45:55.530" endtime="20230825 05:46:01.972"/>
+<status status="PASS" starttime="20230825 21:13:27.217" endtime="20230825 21:13:33.816"/>
 </kw>
 <kw name="Check Dispute Table" library="AdherenceAdjustmentLibrary">
 <var>${dispute_table}</var>
@@ -162,22 +164,22 @@ Jun 05, 2023 11:00 PM tqa4 MNL Cleveland Approved acalimag Jun 16, 2023 10:09 PM
 <arg>exp_rvwrlbl=${EXP_TBL_RVWR_LBL}</arg>
 <arg>exp_rvwdatlbl=${EXP_TBL_RVWDAT_LBL}</arg>
 <arg>exp_crtdlbl=${EXP_TBL_CRTD_LBL}</arg>
-<msg timestamp="20230825 05:46:01.974" level="INFO">Check the Dispute Table if fields, labels, and buttons are present</msg>
-<msg timestamp="20230825 05:46:02.006" level="INFO">Requested Time Range Label in Dispute Table is showing and text matches: Requested Time Range</msg>
-<msg timestamp="20230825 05:46:02.024" level="INFO">Username Label in Dispute Table is showing and text matches: Username</msg>
-<msg timestamp="20230825 05:46:02.041" level="INFO">Location Label in Dispute Table is showing and text matches: Location</msg>
-<msg timestamp="20230825 05:46:02.065" level="INFO">Team Label in Dispute Table is showing and text matches: Team</msg>
-<msg timestamp="20230825 05:46:02.096" level="INFO">Status Label in Dispute Table is showing and text matches: Status</msg>
-<msg timestamp="20230825 05:46:02.115" level="INFO">Reviewer Label in Dispute Table is showing and text matches: Reviewer</msg>
-<msg timestamp="20230825 05:46:02.134" level="INFO">Reviewed At Label in Dispute Table is showing and text matches: Reviewed At</msg>
-<msg timestamp="20230825 05:46:02.150" level="INFO">Created Label in Dispute Table is showing and text matches: Created</msg>
-<msg timestamp="20230825 05:46:02.150" level="INFO">${dispute_table} = {'Requested Time Range Label in Dispute Table': 'Showing', 'Username Label in Dispute Table': 'Showing', 'Location Label in Dispute Table': 'Showing', 'Team Label in Dispute Table': 'Showing', 'Status...</msg>
-<status status="PASS" starttime="20230825 05:46:01.973" endtime="20230825 05:46:02.151"/>
+<msg timestamp="20230825 21:13:33.817" level="INFO">Check the Dispute Table if fields, labels, and buttons are present</msg>
+<msg timestamp="20230825 21:13:33.844" level="INFO">Requested Time Range Label in Dispute Table is showing and text matches: Requested Time Range</msg>
+<msg timestamp="20230825 21:13:33.856" level="INFO">Username Label in Dispute Table is showing and text matches: Username</msg>
+<msg timestamp="20230825 21:13:33.871" level="INFO">Location Label in Dispute Table is showing and text matches: Location</msg>
+<msg timestamp="20230825 21:13:33.888" level="INFO">Team Label in Dispute Table is showing and text matches: Team</msg>
+<msg timestamp="20230825 21:13:33.901" level="INFO">Status Label in Dispute Table is showing and text matches: Status</msg>
+<msg timestamp="20230825 21:13:33.915" level="INFO">Reviewer Label in Dispute Table is showing and text matches: Reviewer</msg>
+<msg timestamp="20230825 21:13:33.929" level="INFO">Reviewed At Label in Dispute Table is showing and text matches: Reviewed At</msg>
+<msg timestamp="20230825 21:13:33.941" level="INFO">Created Label in Dispute Table is showing and text matches: Created</msg>
+<msg timestamp="20230825 21:13:33.941" level="INFO">${dispute_table} = {'Requested Time Range Label in Dispute Table': 'Showing', 'Username Label in Dispute Table': 'Showing', 'Location Label in Dispute Table': 'Showing', 'Team Label in Dispute Table': 'Showing', 'Status...</msg>
+<status status="PASS" starttime="20230825 21:13:33.816" endtime="20230825 21:13:33.942"/>
 </kw>
 <kw name="Log Dictionary" library="Collections">
 <arg>${dispute_table}</arg>
 <doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
-<msg timestamp="20230825 05:46:02.152" level="INFO">Dictionary size is 8 and it contains following items:
+<msg timestamp="20230825 21:13:33.944" level="INFO">Dictionary size is 8 and it contains following items:
 Created Label in Dispute Table: Showing
 Location Label in Dispute Table: Showing
 Requested Time Range Label in Dispute Table: Showing
@@ -186,12 +188,12 @@ Reviewer Label in Dispute Table: Showing
 Status Label in Dispute Table: Showing
 Team Label in Dispute Table: Showing
 Username Label in Dispute Table: Showing</msg>
-<status status="PASS" starttime="20230825 05:46:02.151" endtime="20230825 05:46:02.152"/>
+<status status="PASS" starttime="20230825 21:13:33.942" endtime="20230825 21:13:33.944"/>
 </kw>
 <kw name="Log To Console" library="BuiltIn">
 <arg>${dispute_table}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" starttime="20230825 05:46:02.153" endtime="20230825 05:46:02.154"/>
+<status status="PASS" starttime="20230825 21:13:33.945" endtime="20230825 21:13:33.946"/>
 </kw>
 <kw name="Check Adherence Dispute Info Section" library="AdherenceAdjustmentLibrary">
 <var>${adi_section}</var>
@@ -217,45 +219,45 @@ Username Label in Dispute Table: Showing</msg>
 <arg>exp_ads_aupsched_lbl=${EXP_ADS_AUPSCHED_LBL}</arg>
 <arg>exp_ads_auact_lbl=${EXP_ADS_AUACT_LBL}</arg>
 <arg>exp_ads_manup_lbl=${EXP_ADS_MANUP_LBL}</arg>
-<msg timestamp="20230825 05:46:02.157" level="INFO">Check the Adherence/Dispute Information Section if fields, labels, and buttons are present</msg>
-<msg timestamp="20230825 05:46:02.174" level="INFO">Adherence/Dispute Information Header is showing and text matches: Adherence/Dispute Information</msg>
-<msg timestamp="20230825 05:46:02.193" level="INFO">Full Name Label is showing but text does not match. Actual: Full Name:, Expected: Full Name:</msg>
-<msg timestamp="20230825 05:46:02.213" level="INFO">Status Label is showing but text does not match. Actual: Status:, Expected: Status:</msg>
-<msg timestamp="20230825 05:46:02.230" level="INFO">Current Time Range Label is showing and text matches: Current Time Range:</msg>
-<msg timestamp="20230825 05:46:02.246" level="INFO">Requested Time Range Label is showing but text does not match. Actual: Requested Time Range:, Expected: Requested Time Range:</msg>
-<msg timestamp="20230825 05:46:02.268" level="INFO">Work Hours Label is showing and text matches: Work Hours:</msg>
-<msg timestamp="20230825 05:46:02.290" level="INFO">Reason Label is showing and text matches: Reason:</msg>
-<msg timestamp="20230825 05:46:02.308" level="INFO">Created At Label is showing and text matches: Created At:</msg>
-<msg timestamp="20230825 05:46:02.362" level="INFO">Location Label is showing and text matches: Location:</msg>
-<msg timestamp="20230825 05:46:02.389" level="INFO">Team Label is showing and text matches: Team:</msg>
-<msg timestamp="20230825 05:46:02.434" level="INFO">Current Activity Label is showing and text matches: Current Activity:</msg>
-<msg timestamp="20230825 05:46:02.454" level="INFO">Requested Activity Label is showing and text matches: Requested Activity:</msg>
-<msg timestamp="20230825 05:46:02.474" level="INFO">Pay Hours Label is showing but text does not match. Actual: Pay Hours:, Expected: Pay Hours:</msg>
-<msg timestamp="20230825 05:46:02.500" level="INFO">Review Section Label is showing and text matches: Review Section</msg>
-<msg timestamp="20230825 05:46:02.524" level="INFO">Comment Label is showing and text matches: Comment:</msg>
-<msg timestamp="20230825 05:46:02.541" level="INFO">Internal Notes Label is showing and text matches: Internal Notes:</msg>
-<msg timestamp="20230825 05:46:02.559" level="INFO">Reviewed By Label is showing and text matches: Reviewed By:</msg>
-<msg timestamp="20230825 05:46:02.577" level="INFO">Reviewed At Label is showing and text matches: Reviewed At:</msg>
-<msg timestamp="20230825 05:46:02.597" level="INFO">Confirmed At Label is showing and text matches: Confirmed At:</msg>
-<msg timestamp="20230825 05:46:02.616" level="INFO">Auto-update Schedule Label is showing and text matches: Auto-update Schedule</msg>
-<msg timestamp="20230825 05:46:02.635" level="INFO">Auto-update Activity Label is showing and text matches: Auto-update Activity</msg>
-<msg timestamp="20230825 05:46:02.654" level="INFO">Manual Update Label is showing and text matches: Manual Update</msg>
-<msg timestamp="20230825 05:46:02.946" level="INFO">Auto-update Schedule Radio button is showing</msg>
-<msg timestamp="20230825 05:46:03.227" level="INFO">Auto-update Schedule Radio button is disabled</msg>
-<msg timestamp="20230825 05:46:03.504" level="INFO">Auto-update Activity Radio button is showing</msg>
-<msg timestamp="20230825 05:46:03.789" level="INFO">Auto-update Activity Radio button is disabled</msg>
-<msg timestamp="20230825 05:46:04.082" level="INFO">Manual Update Radio button is showing</msg>
-<msg timestamp="20230825 05:46:04.367" level="INFO">Manual Update Radio button is disabled</msg>
-<msg timestamp="20230825 05:46:04.656" level="INFO">REJECT BUTTON is showing</msg>
-<msg timestamp="20230825 05:46:04.935" level="INFO">SAVE BUTTON is showing</msg>
-<msg timestamp="20230825 05:46:05.219" level="INFO">APPROVE BUTTON is showing</msg>
-<msg timestamp="20230825 05:46:05.219" level="INFO">${adi_section} = {'Adherence/Dispute Information Header': 'Showing', 'Full Name Label': 'Not Showing', 'Status Label': 'Not Showing', 'Current Time Range Label': 'Showing', 'Requested Time Range Label': 'Not Showing',...</msg>
-<status status="PASS" starttime="20230825 05:46:02.154" endtime="20230825 05:46:05.219"/>
+<msg timestamp="20230825 21:13:33.949" level="INFO">Check the Adherence/Dispute Information Section if fields, labels, and buttons are present</msg>
+<msg timestamp="20230825 21:13:33.964" level="INFO">Adherence/Dispute Information Header is showing and text matches: Adherence/Dispute Information</msg>
+<msg timestamp="20230825 21:13:33.978" level="INFO">Full Name Label is showing but text does not match. Actual: Full Name:, Expected: Full Name:</msg>
+<msg timestamp="20230825 21:13:33.991" level="INFO">Status Label is showing but text does not match. Actual: Status:, Expected: Status:</msg>
+<msg timestamp="20230825 21:13:34.004" level="INFO">Current Time Range Label is showing and text matches: Current Time Range:</msg>
+<msg timestamp="20230825 21:13:34.017" level="INFO">Requested Time Range Label is showing but text does not match. Actual: Requested Time Range:, Expected: Requested Time Range:</msg>
+<msg timestamp="20230825 21:13:34.031" level="INFO">Work Hours Label is showing and text matches: Work Hours:</msg>
+<msg timestamp="20230825 21:13:34.045" level="INFO">Reason Label is showing and text matches: Reason:</msg>
+<msg timestamp="20230825 21:13:34.058" level="INFO">Created At Label is showing and text matches: Created At:</msg>
+<msg timestamp="20230825 21:13:34.071" level="INFO">Location Label is showing and text matches: Location:</msg>
+<msg timestamp="20230825 21:13:34.084" level="INFO">Team Label is showing and text matches: Team:</msg>
+<msg timestamp="20230825 21:13:34.098" level="INFO">Current Activity Label is showing and text matches: Current Activity:</msg>
+<msg timestamp="20230825 21:13:34.137" level="INFO">Requested Activity Label is showing and text matches: Requested Activity:</msg>
+<msg timestamp="20230825 21:13:34.154" level="INFO">Pay Hours Label is showing but text does not match. Actual: Pay Hours:, Expected: Pay Hours:</msg>
+<msg timestamp="20230825 21:13:34.169" level="INFO">Review Section Label is showing and text matches: Review Section</msg>
+<msg timestamp="20230825 21:13:34.182" level="INFO">Comment Label is showing and text matches: Comment:</msg>
+<msg timestamp="20230825 21:13:34.194" level="INFO">Internal Notes Label is showing and text matches: Internal Notes:</msg>
+<msg timestamp="20230825 21:13:34.206" level="INFO">Reviewed By Label is showing and text matches: Reviewed By:</msg>
+<msg timestamp="20230825 21:13:34.220" level="INFO">Reviewed At Label is showing and text matches: Reviewed At:</msg>
+<msg timestamp="20230825 21:13:34.237" level="INFO">Confirmed At Label is showing and text matches: Confirmed At:</msg>
+<msg timestamp="20230825 21:13:34.253" level="INFO">Auto-update Schedule Label is showing and text matches: Auto-update Schedule</msg>
+<msg timestamp="20230825 21:13:34.266" level="INFO">Auto-update Activity Label is showing and text matches: Auto-update Activity</msg>
+<msg timestamp="20230825 21:13:34.278" level="INFO">Manual Update Label is showing and text matches: Manual Update</msg>
+<msg timestamp="20230825 21:13:34.589" level="INFO">Auto-update Schedule Radio button is showing</msg>
+<msg timestamp="20230825 21:13:34.875" level="INFO">Auto-update Schedule Radio button is disabled</msg>
+<msg timestamp="20230825 21:13:35.150" level="INFO">Auto-update Activity Radio button is showing</msg>
+<msg timestamp="20230825 21:13:35.454" level="INFO">Auto-update Activity Radio button is disabled</msg>
+<msg timestamp="20230825 21:13:35.759" level="INFO">Manual Update Radio button is showing</msg>
+<msg timestamp="20230825 21:13:36.064" level="INFO">Manual Update Radio button is disabled</msg>
+<msg timestamp="20230825 21:13:36.356" level="INFO">REJECT BUTTON is showing</msg>
+<msg timestamp="20230825 21:13:36.635" level="INFO">SAVE BUTTON is showing</msg>
+<msg timestamp="20230825 21:13:36.926" level="INFO">APPROVE BUTTON is showing</msg>
+<msg timestamp="20230825 21:13:36.927" level="INFO">${adi_section} = {'Adherence/Dispute Information Header': 'Showing', 'Full Name Label': 'Not Showing', 'Status Label': 'Not Showing', 'Current Time Range Label': 'Showing', 'Requested Time Range Label': 'Not Showing',...</msg>
+<status status="PASS" starttime="20230825 21:13:33.946" endtime="20230825 21:13:36.927"/>
 </kw>
 <kw name="Log Dictionary" library="Collections">
 <arg>${adi_section}</arg>
 <doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
-<msg timestamp="20230825 05:46:05.220" level="INFO">Dictionary size is 28 and it contains following items:
+<msg timestamp="20230825 21:13:36.929" level="INFO">Dictionary size is 28 and it contains following items:
 APPROVE BUTTON LIST: Showing
 Adherence/Dispute Information Header: Showing
 Auto-update Activity Label: Showing
@@ -284,23 +286,23 @@ SAVE BUTTON: Showing
 Status Label: Not Showing
 Team Label: Showing
 Work Hours Label: Showing</msg>
-<status status="PASS" starttime="20230825 05:46:05.220" endtime="20230825 05:46:05.220"/>
+<status status="PASS" starttime="20230825 21:13:36.928" endtime="20230825 21:13:36.929"/>
 </kw>
 <kw name="Log To Console" library="BuiltIn">
 <arg>${adi_section}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" starttime="20230825 05:46:05.220" endtime="20230825 05:46:05.221"/>
+<status status="PASS" starttime="20230825 21:13:36.930" endtime="20230825 21:13:36.934"/>
 </kw>
 <kw name="Logout" type="TEARDOWN">
 <kw name="Logout To System" library="AdherenceAdjustmentLibrary">
-<msg timestamp="20230825 05:46:05.223" level="INFO">Logging out of the system</msg>
-<status status="PASS" starttime="20230825 05:46:05.222" endtime="20230825 05:46:07.858"/>
+<msg timestamp="20230825 21:13:36.938" level="INFO">Logging out of the system</msg>
+<status status="PASS" starttime="20230825 21:13:36.937" endtime="20230825 21:13:39.514"/>
 </kw>
-<status status="PASS" starttime="20230825 05:46:05.222" endtime="20230825 05:46:07.858"/>
+<status status="PASS" starttime="20230825 21:13:36.936" endtime="20230825 21:13:39.514"/>
 </kw>
-<status status="PASS" starttime="20230825 05:45:01.306" endtime="20230825 05:46:07.859"/>
+<status status="PASS" starttime="20230825 21:12:34.113" endtime="20230825 21:13:39.516"/>
 </test>
-<status status="PASS" starttime="20230825 05:45:00.855" endtime="20230825 05:46:07.861"/>
+<status status="PASS" starttime="20230825 21:12:33.736" endtime="20230825 21:13:39.520"/>
 </suite>
 <statistics>
 <total>

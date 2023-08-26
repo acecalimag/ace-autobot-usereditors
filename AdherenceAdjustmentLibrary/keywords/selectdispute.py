@@ -5,11 +5,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from AdherenceAdjustmentLibrary.locators import adhadjlocators
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from robot.api import logger
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from robot.api import logger
+from datetime import datetime
 import os
 import time
 
@@ -217,14 +215,20 @@ class SelectDispute:
 
 
     @keyword
-    def click_export_to_xls_button(self):
+    def click_export_to_xls_button(self, start_date: str, end_date: str):
         logger.info("Clicking the Export to xls button to download the selected dispute entries")
 
         self.__ctx.wait_until_element_is_visible(locator=adhadjlocators.FLTR_EXPRT_BTN)
         self.__ctx.click_button(locator=adhadjlocators.FLTR_EXPRT_BTN)
 
+        input_sdate = datetime.strptime(start_date, "%Y-%m-%d")
+        input_edate = datetime.strptime(end_date, "%Y-%m-%d")
+
+        output_sdate = input_sdate.strftime("%Y%m%d")
+        output_edate = input_edate.strftime("%Y%m%d")
+        
         download_directory = r"C:\Users\WONDERS\Downloads"
-        expected_filename = "Adh_Adj_20230101-20230801.xlsx"
+        expected_filename = f"Adh_Adj_{output_sdate}-{output_edate}.xlsx"
 
         # Wait for the file to appear in the download directory
         timeout = 60

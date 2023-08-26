@@ -42,8 +42,8 @@ Verify completeness of fields, labels, and buttons for Adherence Adjustment Page
 
     # Select a Dispute Entry
     ${result}                           Get User Details                              username=${DISP_AGENT_NAME}
-    Select Filters                      start_date=2023-01-01                         end_date=2023-08-01                            exp_user=${result['username']}        exp_team=${result['team']}            exp_post=${result['position']}
-    Click Export To Xls Button
+    Select Filters                      start_date=${EXP_FLTR_SDATE}                  end_date=${EXP_FLTR_EDATE}                            exp_user=${result['username']}        exp_team=${result['team']}            exp_post=${result['position']}
+    Click Export To Xls Button          start_date=${EXP_FLTR_SDATE}                  end_date=${EXP_FLTR_EDATE}
     Select Dispute Entry                wfid=${result['workforceid']}                 udid=${UDID}
 
     # Verify the column names in the Dispute Table
