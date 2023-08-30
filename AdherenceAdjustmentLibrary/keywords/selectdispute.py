@@ -133,6 +133,12 @@ class SelectDispute:
         # Selecting the Status
         self.__ctx.wait_until_element_is_visible(locator=adhadjlocators.FLTR_STAT_DRPDWN)
         self.__ctx.click_element(locator=adhadjlocators.FLTR_STAT_DRPDWN)
+        self.__ctx.click_element(locator=adhadjlocators.FLTR_STAT_DSALL)
+        self.__ctx.click_element(locator=adhadjlocators.FLTR_STAT_PNDNG)
+        self.__ctx.click_element(locator=adhadjlocators.FLTR_STAT_APPRVD)
+        self.__ctx.click_element(locator=adhadjlocators.FLTR_STAT_RJCTD)
+        self.__ctx.click_element(locator=adhadjlocators.FLTR_STAT_CNFRMD)
+        self.__ctx.click_element(locator=adhadjlocators.FLTR_STAT_DSALL)        
         self.__ctx.click_element(locator=adhadjlocators.FLTR_STAT_SALL)
 
 
