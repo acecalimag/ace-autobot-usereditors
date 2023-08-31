@@ -1,0 +1,1 @@
+CLIENT_TECH_FRAME: str = "id:client-tech-app"

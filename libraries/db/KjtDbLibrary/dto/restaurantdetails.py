@@ -1,0 +1,72 @@
+from datetime import datetime
+from typing import TypedDict
+
+
+class RestaurantDetails(TypedDict, total=True):
+    rid: str | None
+    enName: str | None
+    cnName: str | None
+    exName: str | None
+    status: str | None
+    openTime: datetime | None
+    rejectTime: datetime | None
+    closeTime: datetime | None
+    callCtrRank: int | None
+    disableCallPriority: int | None
+    hasDelivery: int | None
+    hasLunchSpecial: int | None
+    hasDinnerSpecial: int | None
+    hasComboApp: int | None
+    hasCancelOrder: int | None
+    printMethod: str | None
+    dishTax: float | None
+    deliverTax: float | None
+    deliveryFee: float | None
+    convenienceTax: float | None
+    convenienceFee: float | None
+    minimumDelivery: float | None
+    matchMinimumDelivery: int | None
+    travelMode: str | None
+    forwardedPhone: str | None
+    contactPhone1: str | None
+    contactPhone2: str | None
+    contactPhone3: str | None
+    smsPhone: str | None
+    hasSmsEnabled: int | None
+    fax: str | None
+    address1: str | None
+    address2: str | None
+    city: str | None
+    state: str | None
+    zipcode: str | None
+    hourText: str | None
+    website: str | None
+    creditCards: str | None
+    comment: str | None
+    lunchDinnerAppInfo: str | None
+    creditCardsInfo: str | None
+    sizeInfo: str | None
+    creditCardMask: int | None
+    displayMask: int | None
+    languageMask: int | None
+    ccZipCode: int | None
+    ccCvc: int | None
+    ccSplit: int | None
+    ccSwipeInStore: int | None
+    preauthcarate: int | None
+    separateOrder: int | None
+    separateOrderFeeType: str | None
+    separateOrderFeeAmount: float | None
+    etZoneOffset: int | None
+    notes: str | None
+    closingRemark: str | None
+    pickupClosingRemark: str | None
+    deliveryClosingRemark: str | None
+    groupMask: int | None
+    minAssignedAgents: int | None
+    maxBenchedAgents: int | None
+    mistakeRateThreshold: int | None
+    createTime: datetime | None
+    updateTime: datetime | None
+    
+    

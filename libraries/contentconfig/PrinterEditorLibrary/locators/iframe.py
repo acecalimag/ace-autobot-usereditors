@@ -1,0 +1,1 @@
+PRINTER_EDITOR_IFRAME: str = "xpath://body//iframe"

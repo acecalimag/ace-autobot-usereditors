@@ -1,14 +1,7 @@
 from lxml import html
 
-def normalize_string(txt: str) -> str:
-    if "\n" in txt:
-        txt = txt.replace("\n", " ")
-    if "\xa0" in txt:
-        txt = txt.replace("\xa0", " ")
+from autocore.coreutils import normalize_string
 
-    txt_split = txt.split(" ")
-    txt = " ".join([i.replace(" ", "") for i in txt_split if len(i) > 0])
-    return txt
 
 class HTML:
 

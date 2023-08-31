@@ -1,0 +1,1 @@
+POS_RESTAURANT_FRAME = "id:iframe"

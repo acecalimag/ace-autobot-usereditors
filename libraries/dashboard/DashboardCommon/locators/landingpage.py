@@ -1,0 +1,1 @@
+CLIENT_TECH: str = "xpath://a[@href='clienttech.html']//span[text()='CLIENT TECH']"
