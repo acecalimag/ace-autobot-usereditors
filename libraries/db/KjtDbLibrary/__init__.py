@@ -6,8 +6,10 @@ from libraries.db.KjtDbLibrary.keywords.printer import Printer
 from libraries.db.KjtDbLibrary.keywords.printtask import PrintTask
 from libraries.db.KjtDbLibrary.keywords.agent import Agent
 from libraries.db.KjtDbLibrary.keywords.userteams import UserTeams
+from robot.api.deco import library
 
 
+@library(scope='GLOBAL')
 class KjtDbLibrary(DBLibraryBase):
     
     def __init__(self):
@@ -22,3 +24,6 @@ class KjtDbLibrary(DBLibraryBase):
             UserTeams(library=self)
         ]
         self.add_library_components(library_components=components)
+
+
+        

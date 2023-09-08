@@ -5,7 +5,6 @@ Library    UserTeamsLibrary.APILibrary
 Library    RequestsLibrary
 Library    SeleniumLibrary
 Library    Collections
-Library    UserTeamsLibrary.APILibrary
 Variables  resource/variables.py
 
 # Test Setup        User Team
@@ -25,35 +24,11 @@ Logout
 
 *** Test Cases ***
 
-Verify the User Team Details
-    [Setup]        User Team
-    [Teardown]     Logout
-
-    ${result}                            Get User Team Db                            tname=${TEAMNAME}
-    Log Dictionary                       ${result}
-    Log To Console                       ${result}
-
-
-    Search And Click Next                team_name=${result['Team Name']} 
-    ${team_details}                      Check Team Details                          exp_name=${result['Team Name']}        exp_desc=${result['Team Description']}        exp_lead=${result['Team Lead']}    exp_loc=${result['Team Location']}    exp_type=${result['Team Type']}    exp_stat=${result['Team Status']}        exp_last_upd=${result['Last Updated']}
-    Log Dictionary                       ${team_details}
-    Log To Console                       ${team_details}
-    
-
-    # Comparison between UI and DB
-    Should Be Equal As Strings           ${team_details['Team Name']}                ${result['Team Name']}
-    Should Be Equal As Strings           ${team_details['Team Description']}         ${result['Team Description']}
-    Should Be Equal As Strings           ${team_details['Team Lead']}                ${result['Team Lead']}
-    Should Be Equal As Strings           ${team_details['Team Location']}            ${result['Team Location']}
-    Should Be Equal As Strings           ${team_details['Team Type']}                ${result['Team Type']}
-    Should Be Equal As Strings           ${team_details['Team Status']}              ${result['Team Status']}
-    Should Be Equal As Strings           ${team_details['Last Updated']}             ${result['Last Updated']}
-
-
-
-Verify the completeness of fields, labels, and buttons for User Teams Editor Page
-    [Setup]        User Team
-    [Teardown]     Logout
+UserTeams00010 - Verify the completeness of fields, labels, and buttons for User Teams Editor Page
+    [Documentation]    Verify the completeness of fields, labels, and buttons for User Teams Editor Page
+    [Tags]             AUT-1405        UT-Completeness
+    [Setup]            User Team
+    [Teardown]         Logout
     
     ${team_list}                         Check Team List Table                exp_tllbl=${EXP_TLLBL}                exp_namelbl=${EXP_TBL_NAMELBL}        exp_leadlbl=${EXP_TBL_TLLBL}        exp_loclbl=${EXP_TBL_LOCLBL}        exp_typelbl=${EXP_TBL_TYPELBL}        exp_statuslbl=${EXP_TBL_STATUSLBL}        exp_lupdlbl=${EXP_TBL_LSTUPDLBL}
     Log Dictionary                       ${team_list}
@@ -70,9 +45,11 @@ Verify the completeness of fields, labels, and buttons for User Teams Editor Pag
     Log To Console                       ${reminder}
 
 
-Verify the Creation of New Team
-    [Setup]        User Team
-    [Teardown]     Logout
+ UserTeams00020 - Verify the Creation of New Team and Edit/Modify and Existing User Team
+    [Documentation]    Verify the Creation of New Team and Edit/Modify and Existing User Team
+    [Tags]             AUT-2349        UT-Creation-Edit
+    [Setup]            User Team
+    [Teardown]         Logout
 
     Click Create Team
     ${form_input}                        Fillout Form                                exp_cntlbl=${EXP_CNTLBL}            in_name=${IN_CNT_NAME}                  in_desc=${IN_CNT_TD}                in_lead=${IN_CNT_TL}                in_loc=${IN_CNT_LOC}                in_type=${IN_CNT_TYPE}              in_status=${IN_CNT_STATUS}
@@ -102,10 +79,7 @@ Verify the Creation of New Team
 
 
 
-Verify Edit / Modify Existing Team
-    [Setup]        User Team
-    [Teardown]     Logout
-    
+    # Verify Edit / Modify Existing Team  
 
     Search And Click Next                team_name=${TEAMNAME}
     ${form_edit}                         Edit Team                                   exp_vulbl=${EXP_VULBL}                ed_name=${ED_VU_NAME}                ed_desc=${ED_VU_TD}                ed_lead=${ED_VU_TL}                ed_loc=${ED_VU_LOC}                ed_type=${ED_VU_TYPE}                ed_status=${ED_VU_STATUS}
@@ -135,6 +109,31 @@ Verify Edit / Modify Existing Team
 
 
 
+Verify the User Team Details
+    [Setup]        User Team
+    [Teardown]     Logout
+
+    ${result}                            Get User Team Db                            tname=${TEAMNAME}
+    Log Dictionary                       ${result}
+    Log To Console                       ${result}
+
+
+    Search And Click Next                team_name=${result['Team Name']} 
+    ${team_details}                      Check Team Details                          exp_name=${result['Team Name']}        exp_desc=${result['Team Description']}        exp_lead=${result['Team Lead']}    exp_loc=${result['Team Location']}    exp_type=${result['Team Type']}    exp_stat=${result['Team Status']}        exp_last_upd=${result['Last Updated']}
+    Log Dictionary                       ${team_details}
+    Log To Console                       ${team_details}
+    
+
+    # Comparison between UI and DB
+    Should Be Equal As Strings           ${team_details['Team Name']}                ${result['Team Name']}
+    Should Be Equal As Strings           ${team_details['Team Description']}         ${result['Team Description']}
+    Should Be Equal As Strings           ${team_details['Team Lead']}                ${result['Team Lead']}
+    Should Be Equal As Strings           ${team_details['Team Location']}            ${result['Team Location']}
+    Should Be Equal As Strings           ${team_details['Team Type']}                ${result['Team Type']}
+    Should Be Equal As Strings           ${team_details['Team Status']}              ${result['Team Status']}
+    Should Be Equal As Strings           ${team_details['Last Updated']}             ${result['Last Updated']}
+
+
 Verify Create User Team via API
     ${tl_loc_db}                         Get Lead Loc                              lname=${IN_CNT_TL}
     Log Dictionary                       ${tl_loc_db}
@@ -156,6 +155,7 @@ Verify Create User Team via API
     Should Be Equal As Strings           ${create_api['location']}                 ${result['Team Location']}
     Should Be Equal As Strings           ${create_api['type']}                     ${result['Team Type']}
     Should Be Equal As Strings           ${create_api['status']}                   ${result['Team Status']}
+
 
 
 Verify Edit / Modify User Team via API
@@ -191,7 +191,7 @@ Database Query
     ${result}                            Get User Team Db                   tname=${TEAMNAME}
     Log Dictionary                       ${result}
     Log To Console                       ${result}
-
+    
 
 
 

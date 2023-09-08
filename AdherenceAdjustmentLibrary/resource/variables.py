@@ -6,12 +6,19 @@ two_weeks_ago = today - timedelta(weeks=2)
 days_until_previous_monday = (two_weeks_ago.weekday() - 0) % 7
 previous_monday = two_weeks_ago - timedelta(days=days_until_previous_monday)
 EXP_FLTR_SDPLHDR = previous_monday.strftime('%Y-%m-%d')
+
 EXP_FLTR_SDLBL: str = "Start Date:"
 
 # End Date
 current_datetime = datetime.now()
 EXP_FLTR_EDPLHDR = current_datetime.strftime('%Y-%m-%d')
+
 EXP_FLTR_EDLBL: str = "End Date:"
+
+EXP_FLTR_USERSPLHDR: str = "Select users"
+EXP_FLTR_TEAMSPLHDR: str = "Select teams"
+EXP_FLTR_POSPLHDR: str = "Select Positions"
+EXP_FLTR_STATPLHDR: str = "Pending"
 
 
 USERNAME: str = "acalimag"

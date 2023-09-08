@@ -1,10 +1,12 @@
+
+from autocore.bases import WebLibraryComponent
 from libraries.userconfig.UserTeamsLibrary.locators import userteams
 from libraries.userconfig.UserMetaCommon.keywords.landingpage import LandingPageKeywords
 from libraries.db.KjtDbLibrary.keywords.userteams import UserTeams
 from autocore.AssertsLibrary import assert_equal
 from autocore.bases import WebLibraryComponent
 from robot.api.deco import keyword
-from autocore.logger import Logger
+# from autocore.logger import Logger
 
 
 class UserTeamsKeywords(WebLibraryComponent):
@@ -23,16 +25,16 @@ class UserTeamsKeywords(WebLibraryComponent):
                 self.web.is_visible(locator=userteams.TEAM(team=team),timeout=5)
                 self.web.scroll_into_view(userteams.TEAM(team=team))
                 self.web.click(userteams.TEAM(team=team))
-                Logger.info(self, also_console=True, msg=f"Successfully chose: {team}")
+                self.logger.info(also_console=True, msg=f"Successfully chose: {team}")
                 break
                 
             except:
                 try:
                     self.web.scroll_into_view(userteams.USERTEAMS_ELEMENTS["Next"])
                     self.web.click(userteams.USERTEAMS_ELEMENTS["Next"])
-                    Logger.info(self, also_console=True, msg=f"Clicked next")
+                    self.logger.info(also_console=True, msg=f"Clicked next")
                 except:
-                    Logger.info(self, also_console=True, msg=f"Failed to click next")
+                    self.logger.info(also_console=True, msg=f"Failed to click next")
                     break
             
         ACT_TEAM_NAME = self.web.get_value(locator=userteams.TEAM_NAME)
@@ -43,16 +45,15 @@ class UserTeamsKeywords(WebLibraryComponent):
         try:
             self.web.click(userteams.USERTEAMS_ELEMENTS["Type Select"])
             self.web.click(userteams.TEAM_TYPE(type=type))
-            # ACTUAL_TYPE = self.web.get_text(userteams.USERTEAMS_ELEMENTS["Type Select"])
             ACTUAL_TYPE_VALUE = self.web.get_value(userteams.USERTEAMS_ELEMENTS["Type Select"])
-            Logger.info(self, also_console=True, msg=f"Chose type: {ACTUAL_TYPE_VALUE}",)
+            self.logger.info(also_console=True, msg=f"Chose type: {ACTUAL_TYPE_VALUE}",)
             assert_equal(actual=ACTUAL_TYPE_VALUE, exp=type)
         except:
-            Logger.info(self, also_console=True, msg=f"Failed to choose team type: {type}")
+            self.logger.info(also_console=True, msg=f"Failed to choose team type: {type}")
             raise Exception
         self.web.click(userteams.USERTEAMS_ELEMENTS["Save"])
-        Logger.info(self, also_console=True, msg=f"Saved successfully")
-        # UserTeams.user_team_type_should_be(self, name=name, exp_type=type)
+        self.logger.info(also_console=True, msg=f"Saved successfully")
+
        
              
 

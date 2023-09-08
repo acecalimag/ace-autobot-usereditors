@@ -6,7 +6,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from AdherenceAdjustmentLibrary.locators import adhadjlocators
 from robot.api import logger
-from robot.api import logger
 from datetime import datetime
 import time
 import os

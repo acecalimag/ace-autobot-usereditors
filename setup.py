@@ -15,7 +15,7 @@ except Exception:
 
 setup(
     name='autocore',
-    version='1.0.11',
+    version='1.0.13',
     packages=find_packages(),
     install_requires=install_requires
 )
