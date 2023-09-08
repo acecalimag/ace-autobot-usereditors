@@ -66,7 +66,7 @@ class EditTeam(WebLibraryComponent):
 
         # Select Team Lead
         tlead_loc = userteamslocators.TLEAD_LOC(lead=ed_lead)
-        self.web.click_element(locator=userteamslocators.TLEAD)
+        self.web.se_lib.click_element(locator=userteamslocators.TLEAD)
         # time.sleep(5)
         self.web.se_lib.wait_until_element_is_visible(tlead_loc)
         self.web.se_lib.click_element(tlead_loc)

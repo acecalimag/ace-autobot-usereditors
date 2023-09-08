@@ -9,7 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 # from SeleniumLibrary import SeleniumLibrary
 # from robot.api import logger
-# import time
+import time
 
 
 class CreateTeam(WebLibraryComponent):
@@ -153,9 +153,13 @@ class CreateTeam(WebLibraryComponent):
     def click_save_button(self):
         self.web.se_lib.scroll_element_into_view(locator=userteamslocators.SAVEBTN)
         self.web.se_lib.click_button(locator=userteamslocators.SAVEBTN)
+        # time.sleep(5)
 
 
     @keyword 
     def click_create_button(self):
         self.web.se_lib.scroll_element_into_view(locator=userteamslocators.CRTBTN)
         self.web.se_lib.click_button(locator=userteamslocators.CRTBTN)
+        # time.sleep(5)
+        # self.web.se_lib.reload_page
+        # time.sleep(5)

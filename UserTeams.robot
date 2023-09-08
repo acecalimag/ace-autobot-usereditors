@@ -95,7 +95,9 @@ UserTeams00010 - Verify the completeness of fields, labels, and buttons for User
     ...    tname=${IN_CNT_NAME}
     Log Dictionary                       ${result}
     Log To Console                       ${result}
-
+    
+    Open User Team
+    
     Search And Click Next                team_name=${result['Team Name']} 
     ${team_details}                      Check Team Details                          
     ...    exp_name=${result['Team Name']}        
@@ -122,7 +124,7 @@ UserTeams00010 - Verify the completeness of fields, labels, and buttons for User
 
     # Verify Edit / Modify Existing Team  
 
-    Search And Click Next                team_name=${TEAMNAME}
+    Search And Click Next                team_name=${result['Team Name']} 
     ${form_edit}                         Edit Team                                   
     ...    exp_vulbl=${EXP_VULBL}                
     ...    ed_name=${ED_VU_NAME}                
@@ -142,7 +144,7 @@ UserTeams00010 - Verify the completeness of fields, labels, and buttons for User
     Log To Console                       ${result}
 
 
-    Search And Click Next                team_name=${result['Team Name']}
+    # Search And Click Next                team_name=${result['Team Name']}
      
     ${team_details}                      Check Team Details                          
     ...    exp_name=${result['Team Name']}        
@@ -281,7 +283,7 @@ Verify Edit / Modify User Team via API
 
 Database Query
     ${result}                            Get User Team Details Db                   
-    ...    tname=${TEAMNAME}
+    ...    tname=${ED_VU_NAME}
     Log Dictionary                       ${result}
     Log To Console                       ${result}
 

@@ -1,5 +1,7 @@
 TEAMLIST: str = "//table[@id='teams']"
 NEXTBTN: str = "//a[normalize-space()='Next']"
+PREVBTN: str = "//a[normalize-space()='Previous']"
+PAGE1BTN: str = "//a[normalize-space()='1']"
 
 TNAME: str = "//input[@id='name']"
 TDESC: str = "//textarea[@id='description']"
