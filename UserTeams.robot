@@ -7,7 +7,7 @@ Library    Collections
 Library    libraries.db.KjtDbLibrary
 Library    libraries.api.UserTeamsApiLibrary
 Library    libraries.userconfig.UserTeamsLibrary
-Variables  libraries/userconfig/UserTeamsLibrary/resource/variables.py
+Variables  libraries/userconfig/UserTeamsLibrary/resources/variables.py
 
 
 # Test Setup        User Team

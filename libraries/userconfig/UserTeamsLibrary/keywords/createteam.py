@@ -9,7 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 # from SeleniumLibrary import SeleniumLibrary
 # from robot.api import logger
-import time
+# import time
 
 
 class CreateTeam(WebLibraryComponent):

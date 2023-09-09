@@ -37,16 +37,16 @@ class UserTeams(DBLibraryComponent):
 
 
 
-    @keyword
+    @keyword(tags=("kjt", "UserTeams"))
     def get_user_team_details_db(self, tname: str, _: UserTeamsDetails1 = None) -> UserTeamsDetails1:
         """ TODO: Create a database query to retrieve the User Team Details."""
         query = """SELECT ut.utid as Team_UTID, ut.name as Team_Name, ut.description as Team_Description, 
-        u.name as Team_Lead, ul.code as Team_Location, ut.type as Team_Type, ut.status as Team_Status, 
-        ut.updateTime as Last_Updated 
-        FROM kjt.userteam AS ut 
-        JOIN kjt.user AS u ON ut.teamLead = u.uid 
-        JOIN kjt.userlocation AS ul ON ut.location = ul.lid 
-        WHERE ut.name = %s;"""
+                u.name as Team_Lead, ul.code as Team_Location, ut.type as Team_Type, ut.status as Team_Status, 
+                ut.updateTime as Last_Updated 
+                FROM kjt.userteam AS ut 
+                JOIN kjt.user AS u ON ut.teamLead = u.uid 
+                JOIN kjt.userlocation AS ul ON ut.location = ul.lid 
+                WHERE ut.name = %s;"""
         
         
         results = self.db.execute(query, (tname,))

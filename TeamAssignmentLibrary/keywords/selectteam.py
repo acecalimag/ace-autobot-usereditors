@@ -19,6 +19,7 @@ class SelectTeam:
         
         # Combine the suggested scroll and click function here
         def scroll_to_element_and_click(driver, element_text):
+            driver = self.__ctx.driver
             element = driver.find_element(By.XPATH, f"//td[text()='{element_text}']")
             driver.execute_script("arguments[0].scrollIntoView();", element)
             WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, f"//td[text()='{element_text}']"))).click()
