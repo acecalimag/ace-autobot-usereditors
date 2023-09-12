@@ -6,7 +6,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from AdherenceAdjustmentLibrary.locators import adhadjlocators
 from robot.api import logger
-from robot.api import logger
 from datetime import datetime
 import time
 import os
@@ -133,6 +132,12 @@ class SelectDispute:
         # Selecting the Status
         self.__ctx.wait_until_element_is_visible(locator=adhadjlocators.FLTR_STAT_DRPDWN)
         self.__ctx.click_element(locator=adhadjlocators.FLTR_STAT_DRPDWN)
+        self.__ctx.click_element(locator=adhadjlocators.FLTR_STAT_DSALL)
+        self.__ctx.click_element(locator=adhadjlocators.FLTR_STAT_PNDNG)
+        self.__ctx.click_element(locator=adhadjlocators.FLTR_STAT_APPRVD)
+        self.__ctx.click_element(locator=adhadjlocators.FLTR_STAT_RJCTD)
+        self.__ctx.click_element(locator=adhadjlocators.FLTR_STAT_CNFRMD)
+        self.__ctx.click_element(locator=adhadjlocators.FLTR_STAT_DSALL)        
         self.__ctx.click_element(locator=adhadjlocators.FLTR_STAT_SALL)
 
 

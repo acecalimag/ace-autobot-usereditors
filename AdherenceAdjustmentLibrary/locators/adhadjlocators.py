@@ -52,6 +52,13 @@ FLTR_LOC_DRPDWN: str = "//button[@data-id='location-select']"
 
 FLTR_STAT_DRPDWN: str = "//button[@data-id='status-select']"
 FLTR_STAT_SALL: str = "//div[@class='dropdown-menu show']//button[@type='button'][normalize-space()='Select All']"
+FLTR_STAT_DSALL: str = "//div[@class='dropdown-menu show']//button[@type='button'][normalize-space()='Deselect All']"
+
+FLTR_STAT_PNDNG: str = "//a[@role='option']/span[@class='text'][text()='Pending']"
+FLTR_STAT_APPRVD: str = "//a[@role='option']/span[@class='text'][text()='Approved']"
+FLTR_STAT_RJCTD: str = "//a[@role='option']/span[@class='text'][text()='Rejected']"
+FLTR_STAT_CNFRMD: str = "//a[@role='option']/span[@class='text'][text()='Confirmed']"
+
 def FLTR_STAT_PLHDR(status: str):
     return f"//button[@data-id='status-select' and @title='{status}']"
 

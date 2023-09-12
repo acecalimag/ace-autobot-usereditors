@@ -1,0 +1,7 @@
+TITLE: str = "xpath://div[@id='confirmModal']//div[@id='confirmModalHeader']"
+BODY: str = "xpath://div[@id='confirmModal']//div[@id='confirmModalBodyText']"
+BODY_INPUT_FLD: str = "xpath://div[@id='confirmModal']//div[@id='confirmModalBodyText']//input"
+HANGUP_BTN: str = "xpath://div[@id='confirmModal']//button[@id='continueBtn' and text()='Hangup']"
+MODIFY_BTN: str = "xpath://div[@id='confirmModal']//button[@id='cancelBtn' and text()='Modify']"
+CONTINUE_BTN: str = "xpath://div[@id='confirmModal']//button[@id='continueBtn' and text()='Continue']"
+CANCEL_BTN: str = "xpath://div[@id='confirmModal']//button[@id='cancelBtn' and text()='Cancel']"

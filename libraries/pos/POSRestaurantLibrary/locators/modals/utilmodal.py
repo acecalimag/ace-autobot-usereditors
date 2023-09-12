@@ -1,0 +1,6 @@
+HEADER: str = "xpath://div[@id='utilModal']//*[@id='infoModalHeader']"
+BODY: str = "xpath://div[@id='utilModal']//*[@id='infoModalBodyText']"
+YES_BTN: str = "xpath://div[@id='utilModal']//*[@id='continueBtn' and text()='Yes']"
+NO_BTN: str = "xpath://div[@id='utilModal']//*[@id='cancelBtn' and text()='No']"
+CONTINUE_BTN: str = "xpath://div[@id='utilModal']//*[@id='continueBtn' and text()='Continue']"
+CANCEL_BTN: str = "xpath://div[@id='utilModal']//*[@id='cancelBtn' and text()='Cancel']"

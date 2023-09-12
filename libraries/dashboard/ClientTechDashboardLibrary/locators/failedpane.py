@@ -1,0 +1,1 @@
+FAILED_PANE: str = "xpath://div[@class='failed-page']"

@@ -2,7 +2,7 @@
 from dataclasses import dataclass
 from typing import TypedDict
 from robot.api.deco import keyword, library
-from autocore.Database import Database
+from autocore_old.Database import Database
 
 
 
@@ -17,17 +17,17 @@ class TeamAssignmentDB:
         query = "SELECT  ut.name as Team_Name, ut.utid as Team_ID, u.name as Team_Lead, ul.code as Team_Location FROM kjt.userteam AS ut JOIN kjt.user AS u ON ut.teamLead = u.uid JOIN kjt.userlocation AS ul ON ut.location = ul.lid WHERE ut.name = %s;"
         
     
-        result = self.__db.execute(query, (tname,))
-        if result and len(result) > 0:
-            row = result[0]
-            return {
-                'Team Name': row['Team_Name'],
-                'Team ID': row['Team_ID'],
-                'Team Lead': row['Team_Lead'],
-                'Team Location': row['Team_Location']
-            }
-        else:
-            return None
+        results = self.__db.execute(query, (tname,))
+        # if result and len(result) > 0:
+        result = results[0]
+        return {
+            'Team Name': result['Team_Name'],
+            'Team ID': result['Team_ID'],
+            'Team Lead': result['Team_Lead'],
+            'Team Location': result['Team_Location']
+        }
+        # else:
+        #     return None
         
 
 
